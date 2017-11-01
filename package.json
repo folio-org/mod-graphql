@@ -4,15 +4,29 @@
   "description": "Graphql services for OKAPI",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/index"
+    "start": "babel-node --presets=env,stage-2 main.js",
+    "test": "mocha --exit --require tests/babel-test-hook tests"
   },
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@std/esm": "^0.12.5"
+    "apollo-server-express": "^1.2.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "graphql": "^0.11.7",
+    "graphql-tools": "^2.7.0",
+    "lodash": "^4.17.4",
+    "node-fetch": "^1.7.3",
+    "query-string": "^5.0.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^4.0.1"
+    "chai-http": "^3.0.0",
+    "dotenv": "^4.0.0",
+    "mocha": "^4.0.1",
+    "yakbak": "^2.6.0"
   }
 }
