@@ -1,0 +1,18 @@
+{
+  "name": "mod-graphql",
+  "version": "0.1.0",
+  "description": "Graphql services for OKAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/index"
+  },
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "@std/esm": "^0.12.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  }
+}
