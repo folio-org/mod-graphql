@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node --presets=env,stage-2 main.js",
-    "test": "mocha --exit --require tests/babel-test-hook tests"
+    "test": "mocha --exit --require tests/testlib/support tests"
   },
   "license": "Apache-2.0",
   "private": true,

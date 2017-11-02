@@ -1,39 +1,11 @@
-import chai  from 'chai';
-import chaiHttp from 'chai-http';
-import mocha from 'mocha';
-
-chai.use(chaiHttp);
-
-const { expect } = chai;
-const { describe, it, before, after, beforeEach } = mocha;
+import { chai, expect } from './testlib/helper';
+import { describe, it, beforeEach } from './testlib/helper';
+import { OKAPI_TENANT, OKAPI_TOKEN } from './testlib/helper';
 
 import app from '../app';
 
-import dotenv from 'dotenv';
-dotenv.config();
-const OKAPI_URL = process.env['OKAPI_URL'] || 'http://localhost:9130';
-const OKAPI_TENANT = process.env['OKAPI_TENANT'] || 'testing-tenant';
-const OKAPI_TOKEN = process.env['OKAPI_TOKEN'] || 'abc123';
-
 describe('mod-graphql', function() {
   let server;
-  before(function() {
-    var http = require('http');
-    var yakbak = require('yakbak');
-
-    server = http.createServer(yakbak(OKAPI_URL, {
-      dirname: __dirname + '/tapes',
-      // the default hash function is to specific and doesn't let us use the same tape for requests with different headers.
-      // so it requires the token to be in the environment. We'll come up with a better hashing function, but for now,
-      // we'll just use a single string because we have a single request.
-      hash(req, body) {
-        return 'singleton-for-now';
-      }
-    })).listen(9131);
-  });
-  after(function () {
-    server.close();
-  });
 
   describe('the simplest possible query', function() {
     let response;
