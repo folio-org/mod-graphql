@@ -1,14 +1,17 @@
 {
-  "name": "mod-graphql",
+  "name": "@folio/mod-graphql",
   "version": "0.1.0",
   "description": "Graphql services for OKAPI",
+  "repository": "folio-org/mod-graphql",
+  "publishConfig": {
+    "registry": "https://repository.folio.org/repository/npm-folio/"
+  },
   "main": "index.js",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "babel-node --presets=env,stage-2 main.js",
     "test": "mocha --exit --require tests/testlib/support tests"
   },
-  "license": "Apache-2.0",
-  "private": true,
   "dependencies": {
     "apollo-server-express": "^1.2.0",
     "babel-cli": "^6.26.0",
