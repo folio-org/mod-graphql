@@ -1,6 +1,6 @@
 # mod-graphql
 
-[![Build Status](https://travis-ci.org/skomorokh/mod-graphql.svg?branch=master)](https://travis-ci.org/skomorokh/mod-graphql)
+[![Build Status](https://travis-ci.org/folio-org/mod-graphql.svg?branch=master)](https://travis-ci.org/folio-org/mod-graphql)
 
 ## Development
 
