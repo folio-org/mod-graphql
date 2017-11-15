@@ -1,6 +1,6 @@
 @Library('folio_jenkins_shared_libs@modgql-1') _
 
-buildNodejs { 
+buildNodeJs { 
   publishModDescriptor = 'no'
   ModDescriptor = 'ModuleDescriptor.json'
   npmDeploy = 'no'
