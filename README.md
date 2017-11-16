@@ -27,7 +27,7 @@ Add a line in your `Vagrantfile` expose this to the VM at `/mod-graphql`:
 config.vm.synced_folder "/local/path/to/mod-graphql", "/mod-graphql"
 ```
 
-Now when you run `vagrant ssh` to ssh into the VM, you can access the checkout at `/mod-graphql`.
+You'll need to restart your VM for this to take effect if it was already running. Now when you run `vagrant ssh` to ssh into the VM, you can access the checkout at `/mod-graphql`.
 
 ### Registering with Okapi
 
