@@ -27,14 +27,22 @@ Add a line in your `Vagrantfile` expose this to the VM at `/mod-graphql`:
 config.vm.synced_folder "/local/path/to/mod-graphql", "/mod-graphql"
 ```
 
-You'll need to restart your VM for this to take effect if it was already running. Now when you run `vagrant ssh` to ssh into the VM, you can access the checkout at `/mod-graphql`.
+You'll need to restart your VM for this to take effect if it was already running. You can do this using `vagrant halt && vagrant up`. Now when you run `vagrant ssh` to ssh into the VM, you can access the checkout at `/mod-graphql`. Start the GraphQL module:
+```
+host$ vagrant ssh
+guest$ cd /mod-graphql
+guest$ yarn start &
+guest$ ^D
+host$ 
+```
 
 ### Registering with Okapi
 
-This can be done with any tool that can send arbitrary HTTP requests, however [okapi.rb](https://github.com/thefrontside/okapi.rb) is a handy CLI that makes this a bit less fiddly. On most platforms `gem install okapi` should work, provided you have a new enough Ruby. For now the VM doesn't but that's okay as Vagrant forwards port 9130 into it so `localhost:9130` is getting to Okapi from your host machine too.
+This can be done with any tool that can send arbitrary HTTP requests, such as `curl`. However [okapi.rb](https://github.com/thefrontside/okapi.rb) is a handy CLI that makes this a bit less fiddly by understanding Okapi conventions. On most platforms `gem install okapi` should work, provided you have a new enough Ruby. For now the VM doesn't but that's okay as Vagrant forwards port 9130 into it so `localhost:9130` is getting to Okapi from your host machine too.
 
 The commands below do the following:
 
+1. Set up necessary environment variables
 1. login to Okapi and cache the authentication token for subsequent requests
 1. POST the module descriptor that registers mod-graphql and associates `/graphql` with it
 1. POST the deployment descriptor that tells Okapi to just use the service in place at `http://127.0.0.1:3000` rather than attempt to deploy anything
@@ -42,6 +50,7 @@ The commands below do the following:
 
 
 ```
+export OKAPI_URL=http://localhost:9130 OKAPI_TENANT=diku
 okapi login
 cat ModuleDescriptor.json | okapi --no-tenant create /_/proxy/modules
 cat ExternalDeploymentDescriptor.json | okapi create --no-tenant /_/discovery/modules
@@ -52,6 +61,7 @@ To verify this worked, you can try a simple query to list a few users:
 ```
 echo '{"query": "query { users { id, username } }"}' | okapi create /graphql
 ```
+(See [a transcript of this process](doc/running-mod-graphql.txt).)
 
 To reverse the steps and forget the service:
 ```
