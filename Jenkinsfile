@@ -3,7 +3,7 @@
 buildNPM { 
   buildNode = 'jenkins-slave-all'
   npmDeploy = 'no'
-  runLint = 'yes'
+  runLint = 'no'
   runTest = 'yes'
   publishAPI = 'no'
   publishModDescriptor = 'no'
