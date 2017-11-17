@@ -7,7 +7,7 @@ buildNPM {
   runTest = 'yes'
   publishAPI = 'no'
   publishModDescriptor = 'yes'
-  ModDescriptor = 'ModuleDescriptor.json'
+  modDescriptor = 'ModuleDescriptor.json'
   
   doDocker = {
     buildDocker {
