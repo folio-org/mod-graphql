@@ -1,0 +1,188 @@
+bash-3.2$ cd ~/git/folio/other/
+bash-3.2$ git clone git@github.com:folio-org/mod-graphql
+Cloning into 'mod-graphql'...
+remote: Counting objects: 71, done.
+remote: Compressing objects: 100% (51/51), done.
+remote: Total 71 (delta 24), reused 60 (delta 13), pack-reused 0
+Receiving objects: 100% (71/71), 40.77 KiB | 491.00 KiB/s, done.
+Resolving deltas: 100% (24/24), done.
+bash-3.2$ cd mod-graphql/
+bash-3.2$ yarn install
+yarn install v0.24.6
+[1/4] 🔍  Resolving packages...
+[2/4] 🚚  Fetching packages...
+[3/4] 🔗  Linking dependencies...
+[4/4] 📃  Building fresh packages...
+success Saved lockfile.
+✨  Done in 5.81s.
+bash-3.2$ yarn test
+yarn test v0.24.6
+$ mocha --exit --require tests/testlib/support tests 
+
+
+  mod-graphql
+    the simplest possible query
+      ✓ contains a payload with users
+
+
+  1 passing (174ms)
+
+✨  Done in 1.57s.
+bash-3.2$ cd ../folio-testing-backend/
+bash-3.2$ cat Vagrantfile 
+Vagrant.configure("2") do |config|
+  config.vm.box = "folio/testing-backend"
+end
+bash-3.2$ ed Vagrantfile
+81
+2a
+  config.vm.synced_folder "/Users/mike/git/folio/other/mod-graphql", "/mod-graphql"
+.
+w
+165
+q
+bash-3.2$ cat Vagrantfile 
+Vagrant.configure("2") do |config|
+  config.vm.box = "folio/testing-backend"
+  config.vm.synced_folder "/Users/mike/git/folio/other/mod-graphql", "/mod-graphql"
+end
+bash-3.2$ vagrant halt
+==> default: Attempting graceful shutdown of VM...
+bash-3.2$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'folio/testing-backend' is up to date...
+==> default: A newer version of the box 'folio/testing-backend' is available! You currently
+==> default: have version '5.0.0-20171103.212'. The latest is version '5.0.0-20171116.232'. Run
+==> default: `vagrant box update` to update.
+==> default: Clearing any previously set forwarded ports...
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 9130 (guest) => 9130 (host) (adapter 1)
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default: 
+    default: Guest Additions Version: 4.3.36
+    default: VirtualBox Version: 5.0
+==> default: Mounting shared folders...
+    default: /vagrant => /Users/mike/git/folio/other/folio-testing-backend
+    default: /mod-graphql => /Users/mike/git/folio/other/mod-graphql
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+bash-3.2$ vagrant ssh
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Nov 16 16:48:37 2017 from 10.0.2.2
+vagrant@contrib-jessie:~$ cd /mod-graphql
+vagrant@contrib-jessie:/mod-graphql$ yarn start
+yarn run v1.3.2
+$ babel-node --presets=env,stage-2 main.js
+...
+^Z
+[1]+  Stopped                 yarn start
+$ bg
+[1]+ yarn start &
+$ ^D
+bash-3.2$ cd ../mod-graphql
+bash-3.2$ export OKAPI_URL=http://localhost:9130
+bash-3.2$ export OKAPI_TENANT=diku
+bash-3.2$ okapi login
+username: diku_admin
+password: *****
+Login successful. Token saved to /Users/mike/.okapi
+bash-3.2$ cat ModuleDescriptor.json | okapi --no-tenant create /_/proxy/modules
+{
+  "id": "folio_graphql-0.1.0",
+  "name": "GraphQL API for FOLIO",
+  "provides": [
+    {
+      "id": "graphql",
+      "version": "0.0.0",
+      "handlers": [
+        {
+          "methods": [
+            "POST"
+          ],
+          "pathPattern": "/graphql"
+        }
+      ]
+    }
+  ]
+}
+bash-3.2$ cat ExternalDeploymentDescriptor.json | okapi create --no-tenant /_/discovery/modules
+{
+  "instId": "127.0.0.1-3000",
+  "srvcId": "folio_graphql-0.1.0",
+  "url": "http://127.0.0.1:3000"
+}
+bash-3.2$ cat TenantAssociationDescriptor.json | okapi --no-tenant create /_/proxy/tenants/diku/modules
+{
+  "id": "folio_graphql-0.1.0"
+}
+bash-3.2$ echo '{"query": "query { users { id, username } }"}' | okapi create /graphql
+{
+  "data": {
+    "users": [
+      {
+        "id": "1ad737b0-d847-11e6-bf26-cec0c932ce01",
+        "username": "diku_admin"
+      },
+      {
+        "id": "17B39C4D-FFAE-4D62-A75D-1B22F45A081E",
+        "username": "auth_test2"
+      },
+      {
+        "id": "77136CF1-FF93-4C45-B7B5-187BCB711745",
+        "username": "auth_test1"
+      },
+      {
+        "id": "ceb8c41c-e900-4c6f-87b8-69726779aab9",
+        "username": "al"
+      },
+      {
+        "id": "7d6afb2f-efa4-4b9b-8702-0748f682d10c",
+        "username": "marlon"
+      },
+      {
+        "id": "a9f95a30-8a2a-4fae-87fa-0597e7043690",
+        "username": "leora"
+      },
+      {
+        "id": "a04b93e9-e7e5-4e15-8bd1-300529ceaa6e",
+        "username": "chelsie"
+      },
+      {
+        "id": "ae985fcf-625f-4f94-a0bf-99290e9816ea",
+        "username": "joseph"
+      },
+      {
+        "id": "bc55aefb-601e-41cc-80e3-018472f5687b",
+        "username": "mayra"
+      },
+      {
+        "id": "065023e9-f0ea-4a7f-a26a-19c311facae5",
+        "username": "noemie"
+      }
+    ]
+  }
+}
+bash-3.2$ 
