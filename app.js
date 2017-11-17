@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import bodyParser from 'body-parser';
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
@@ -10,7 +9,6 @@ import resolvers from './resolvers';
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default express()
-  .use(cors())
   .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress((request) => ({
     schema,
     context: {
