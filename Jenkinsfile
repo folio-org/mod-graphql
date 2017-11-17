@@ -1,16 +1,17 @@
 @Library('folio_jenkins_shared_libs@modgql-1') _
 
-buildNodeJs { 
-  publishModDescriptor = 'no'
-  ModDescriptor = 'ModuleDescriptor.json'
+buildNPM { 
+  buildNode = 'jenkins-slave-all'
   npmDeploy = 'no'
-  runLint = 'no'
+  runLint = 'yes'
   runTest = 'yes'
   publishAPI = 'no'
+  publishModDescriptor = 'no'
+  ModDescriptor = 'ModuleDescriptor.json'
   
   doDocker = {
     buildDocker {
-      publishMaster = 'no'
+      publishMaster = 'yes'
       healthChk = 'no'
     }
   }
