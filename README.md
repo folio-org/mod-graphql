@@ -65,9 +65,9 @@ echo '{"query": "query { users { id, username } }"}' | okapi create /graphql
 
 To reverse the steps and forget the service:
 ```
-okapi destroy --no-tenant /_/proxy/tenants/diku/modules/folio_graphql-0.1.0
+okapi destroy --no-tenant /_/proxy/tenants/diku/modules/mod-graphql-0.1.0
 okapi destroy --no-tenant /_/discovery/modules/127.0.0.1-3000
-okapi destroy --no-tenant /_/proxy/modules/folio_graphql-0.1.0
+okapi destroy --no-tenant /_/proxy/modules/mod-graphql-0.1.0
 ```
 
 ## Recording Tests

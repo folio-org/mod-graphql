@@ -1,5 +1,5 @@
 {
-  "srvcId": "folio_graphql-0.1.0",
+  "srvcId": "mod-graphql-0.1.0",
   "instId": "127.0.0.1-3000",
   "url" : "http://127.0.0.1:3000"
 }
