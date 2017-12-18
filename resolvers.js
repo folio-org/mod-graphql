@@ -18,7 +18,6 @@ export default {
       let okapi = context.okapi;
       return fetch(`${okapi.url}/groups`, { headers: okapi.headers }).then((response) => {
         return response.json().then(json => {
-          console.log('stuff', json.usergroups[0].metadata);
           return json.usergroups;
         });
       });
@@ -79,12 +78,12 @@ export default {
             }));
         });
     },
-    deleteGroup: (root, { record }, { okapi }) => {
+    deleteGroup: (root, { id }, { okapi }) => {
       let headers = Object.assign({}, okapi.headers, { 'Accept': 'text/plain' })
-      return fetch(`${okapi.url}/groups/${record.id}`,
+      return fetch(`${okapi.url}/groups/${id}`,
                     { headers, method: 'DELETE', })
         .then(res => res.text().then(text => {
-          if (res.status < 400) return record;
+          if (res.status < 400) return id;
           throw new Error(text);
         }));
     },

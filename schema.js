@@ -19,7 +19,7 @@ export default `
     ): Group
     deleteGroup (
       id: ID!
-    ): Group
+    ): ID!
   }
 
   type User {
