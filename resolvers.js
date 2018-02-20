@@ -22,9 +22,9 @@ export default {
         });
       });
     },
-    instances: (root, args, context) => {
+    instances: (root, { cql }, context) => {
       let okapi = context.okapi;
-      return fetch(`${okapi.url}/instance-storage/instances`, { headers: okapi.headers }).then((response) => {
+      return fetch(`${okapi.url}/instance-storage/instances` + (cql ? `?query=${cql}` : ''), { headers: okapi.headers }).then((response) => {
         return response.json().then(json => {
           return json.instances;
         });
