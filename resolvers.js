@@ -30,6 +30,14 @@ export default {
         });
       });
     },
+    instance: (root, { id }, context) => {
+      let okapi = context.okapi;
+      return fetch(`${okapi.url}/instance-storage/instances/${id}`, { headers: okapi.headers }).then((response) => {
+        return response.json().then(json => {
+          return json;
+        });
+      });
+    },
   },
 
   Metadata: {

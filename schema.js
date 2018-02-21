@@ -4,6 +4,7 @@ export default `
     users(cql: String):[User]
     groups:[Group]
     instances(cql: String):[Instance]
+    instance(id: String):Instance
   }
 
   type Mutation {
