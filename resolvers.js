@@ -22,6 +22,22 @@ export default {
         });
       });
     },
+    instances: (root, { cql }, context) => {
+      let okapi = context.okapi;
+      return fetch(`${okapi.url}/instance-storage/instances` + (cql ? `?query=${cql}` : ''), { headers: okapi.headers }).then((response) => {
+        return response.json().then(json => {
+          return json.instances;
+        });
+      });
+    },
+    instance: (root, { id }, context) => {
+      let okapi = context.okapi;
+      return fetch(`${okapi.url}/instance-storage/instances/${id}`, { headers: okapi.headers }).then((response) => {
+        return response.json().then(json => {
+          return json;
+        });
+      });
+    },
   },
 
   Metadata: {
@@ -39,6 +55,65 @@ export default {
       })),
   },
 
+  Instance: {
+    instanceType: (obj, args, { okapi }) => fetch(`${okapi.url}/instance-types/${obj.instanceTypeId}`,
+      { headers:okapi.headers })
+      .then(res => res.text().then(text => {
+        if (res.status < 400) return JSON.parse(text);
+        throw new Error(text);
+      })),
+    instanceFormat: (obj, args, { okapi }) => {
+      if (obj.instanceFormatId)
+        return fetch(`${okapi.url}/instance-formats/${obj.instanceFormatId}`,
+                      { headers:okapi.headers })
+                      .then(res => res.text().then(text => {
+                        if (res.status < 400) return JSON.parse(text);
+                        throw new Error(text);
+                      }))
+    }
+  },
+
+  Identifier: {
+    identifierType: (obj, args, { okapi }) => fetch(`${okapi.url}/identifier-types/${obj.identifierTypeId}`,
+      { headers:okapi.headers })
+      .then(res => res.text().then(text => {
+        if (res.status < 400) return JSON.parse(text);
+        throw new Error(text);
+      })),
+  },
+
+  Contributor: {
+    contributorType: (obj, args, { okapi }) => {
+      if (obj.contributorTypeId)
+        return fetch(`${okapi.url}/contributor-types/${obj.contributorTypeId}`,
+          { headers:okapi.headers })
+          .then(res => res.text().then(text => {
+            if (res.status < 400) return JSON.parse(text);
+            throw new Error(text);
+          }))
+    },
+    contributorNameType: (obj, args, { okapi }) => {
+      if (obj.contributorNameTypeId) 
+        return fetch(`${okapi.url}/contributor-name-types/${obj.contributorNameTypeId}`,
+          { headers:okapi.headers })
+          .then(res => res.text().then(text => {
+            if (res.status < 400) return JSON.parse(text);
+            throw new Error(text);
+          }))
+    },
+  },
+
+  Classification: {
+    classificationType: (obj, args, { okapi }) => {
+      if (obj.classificationTypeId)
+        return fetch(`${okapi.url}/classification-types/${obj.classificationTypeId}`,
+          { headers:okapi.headers })
+          .then(res => res.text().then(text => {
+            if (res.status < 400) return JSON.parse(text);
+            throw new Error(text);
+          }))
+    },
+  },
 
   Mutation: {
     updateUser: (root, updated) => {
