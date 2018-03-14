@@ -61,6 +61,10 @@ To verify this worked, you can try a simple query to list a few users:
 ```
 echo '{"query": "query { users { id, username } }"}' | okapi create /graphql
 ```
+Or to search the users with CQL:
+```
+echo '{"query": "query { users(cql: \"username=al*\") { id, username } }"}' | okapi create /graphql
+```
 (See [a transcript of this process](doc/running-mod-graphql.txt).)
 
 To reverse the steps and forget the service:
