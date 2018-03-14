@@ -26,7 +26,10 @@ export default {
       let okapi = context.okapi;
       return fetch(`${okapi.url}/instance-storage/instances` + (cql ? `?query=${cql}` : ''), { headers: okapi.headers }).then((response) => {
         return response.json().then(json => {
-          return json.instances;
+          return {
+            records: json.instances,
+            totalCount: json.totalRecords,
+          };
         });
       });
     },
