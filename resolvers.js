@@ -9,9 +9,9 @@ export default {
       let okapi = context.okapi;
       return fetch(`${okapi.url}/users` + (cql ? `?query=${cql}` : ''),
                    { headers: okapi.headers }).then((response) => {
-	return response.json().then(json => {
-	  return json.users;
-	});
+        return response.json().then(json => {
+          return json.users;
+        });
       });
     },
     groups: (root, args, context) => {
