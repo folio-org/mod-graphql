@@ -33,7 +33,7 @@ host$ vagrant ssh
 guest$ cd /mod-graphql
 guest$ yarn start &
 guest$ ^D
-host$ 
+host$
 ```
 
 ### Registering with Okapi

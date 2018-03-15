@@ -96,7 +96,7 @@ export default {
           }))
     },
     contributorNameType: (obj, args, { okapi }) => {
-      if (obj.contributorNameTypeId) 
+      if (obj.contributorNameTypeId)
         return fetch(`${okapi.url}/contributor-name-types/${obj.contributorNameTypeId}`,
           { headers:okapi.headers })
           .then(res => res.text().then(text => {
