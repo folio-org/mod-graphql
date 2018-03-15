@@ -1,4 +1,4 @@
-# Unstalling a running module
+# Uninstalling a running module
 
 In order to develop a back-end module in the context of a running FOLIO system -- most likely a `folio-testing-backend` Vagrant box -- it's necessary to remove the version of the same module that's already installed and running in the box. Typically, when doing this, we do not know any of the module or deployment IDs, only the module _name_.
 
@@ -18,7 +18,7 @@ $
 
 ## Disassociate the module from the tenants that are using it
 
-In practice, we currently use only the the `diku` tenant, so it suffices to ask Okapi for the ID of our module within that tenant, and remove it.
+In practice, we currently use only the `diku` tenant, so it suffices to ask Okapi for the ID of our module within that tenant, and remove it.
 
 ```
 $ okapi show /_/proxy/tenants/diku/modules | grep mod-graphql
