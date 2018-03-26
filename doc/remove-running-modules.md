@@ -1,4 +1,4 @@
-# Unstalling a running module
+# Uninstalling a running module
 
 In order to develop a back-end module in the context of a running FOLIO system -- most likely a `folio-testing-backend` Vagrant box -- it's necessary to remove the version of the same module that's already installed and running in the box. Typically, when doing this, we do not know any of the module or deployment IDs, only the module _name_.
 
@@ -13,12 +13,12 @@ $ okapi login
 username: diku_admin
 password: ****************
 Login successful. Token saved to /Users/mike/.okapi
-$ 
+$
 ```
 
 ## Disassociate the module from the tenants that are using it
 
-In practice, we currently use only the the `diku` tenant, so it suffices to ask Okapi for the ID of our module within that tenant, and remove it.
+In practice, we currently use only the `diku` tenant, so it suffices to ask Okapi for the ID of our module within that tenant, and remove it.
 
 ```
 $ okapi show /_/proxy/tenants/diku/modules | grep mod-graphql
@@ -41,7 +41,7 @@ $ okapi show /_/discovery/modules | grep --context=2 mod-graphql-
     "url": "http://10.0.2.15:9145",
 $ okapi destroy --no-tenant /_/discovery/modules/mod-graphql-0.1.100020/319d06e6-b4b7-4d35-8b97-ea7232681d11
 Net::HTTPNotFound: 319d06e6-b4b7-4d35-8b97-ea7232681d11
-$ 
+$
 ```
 
 Although this `Net::HTTPNotFound` message looks like an error report, it seems to be indicating success: `vagrant ssh -- ps auxw | grep -i graphql` shows that no GraphQL module is running any more, and repeating the `okapi destroy` command results in a different error, confirming that the state has changed.
@@ -55,7 +55,7 @@ $ okapi show /_/proxy/modules | grep graphql
     "id": "mod-graphql-0.1.100020",
 $ okapi destroy --no-tenant /_/proxy/modules/mod-graphql-0.1.100020
 Successfully deleted /_/proxy/modules/mod-graphql-0.1.100020
-$ 
+$
 ```
 
 Now we are ready to [insert the local copy of our module](https://github.com/folio-org/mod-graphql/blob/master/README.md).

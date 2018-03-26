@@ -17,7 +17,7 @@ success Saved lockfile.
 ✨  Done in 5.81s.
 bash-3.2$ yarn test
 yarn test v0.24.6
-$ mocha --exit --require tests/testlib/support tests 
+$ mocha --exit --require tests/testlib/support tests
 
 
   mod-graphql
@@ -29,7 +29,7 @@ $ mocha --exit --require tests/testlib/support tests
 
 ✨  Done in 1.57s.
 bash-3.2$ cd ../folio-testing-backend/
-bash-3.2$ cat Vagrantfile 
+bash-3.2$ cat Vagrantfile
 Vagrant.configure("2") do |config|
   config.vm.box = "folio/testing-backend"
 end
@@ -41,7 +41,7 @@ bash-3.2$ ed Vagrantfile
 w
 165
 q
-bash-3.2$ cat Vagrantfile 
+bash-3.2$ cat Vagrantfile
 Vagrant.configure("2") do |config|
   config.vm.box = "folio/testing-backend"
   config.vm.synced_folder "/Users/mike/git/folio/other/mod-graphql", "/mod-graphql"
@@ -75,7 +75,7 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: shared folder errors, please make sure the guest additions within the
     default: virtual machine match the version of VirtualBox you have installed on
     default: your host and reload your VM.
-    default: 
+    default:
     default: Guest Additions Version: 4.3.36
     default: VirtualBox Version: 5.0
 ==> default: Mounting shared folders...
@@ -185,4 +185,4 @@ bash-3.2$ echo '{"query": "query { users { id, username } }"}' | okapi create /g
     ]
   }
 }
-bash-3.2$ 
+bash-3.2$
