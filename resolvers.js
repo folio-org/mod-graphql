@@ -1,5 +1,6 @@
 import fetch  from 'node-fetch';
 import queryString from 'query-string';
+import strictUriEncode from 'strict-uri-encode';
 import _ from 'lodash';
 
 export default {
@@ -24,7 +25,8 @@ export default {
     },
     instances: (root, { cql }, context) => {
       let okapi = context.okapi;
-      return fetch(`${okapi.url}/instance-storage/instances` + (cql ? `?query=${cql}` : ''), { headers: okapi.headers }).then((response) => {
+      const url = `${okapi.url}/instance-storage/instances` + (cql ? `?query=${strictUriEncode(cql)}` : '')
+      return fetch(url, { headers: okapi.headers }).then((response) => {
         return response.json().then(json => {
           return {
             records: json.instances,
