@@ -6,6 +6,24 @@ import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
+function badRequest(response, reason) {
+  response
+    .status(400)
+    .send(reason);
+}
+
+function checkOkapiHeaders(request, response, next) {
+  if (!request.get('X-Okapi-Url')) {
+    badRequest(response, 'Missing Header: X-Okapi-Url');
+  } else if (!request.get('X-Okapi-Tenant')) {
+    badRequest(response, 'Missing Header: X-Okapi-Tenant');
+  } else if (!request.get('X-Okapi-Token')) {
+    badRequest(response, 'Missing Header: X-Okapi-Token');
+  } else {
+    next();
+  }
+}
+
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default express()
@@ -26,20 +44,3 @@ export default express()
   })));
 
 
-function checkOkapiHeaders(request, response, next) {
-  if (!request.get('X-Okapi-Url')) {
-    badRequest(response, 'Missing Header: X-Okapi-Url');
-  } else if (!request.get('X-Okapi-Tenant')) {
-    badRequest(response, 'Missing Header: X-Okapi-Tenant');
-  } else if (!request.get('X-Okapi-Token')) {
-    badRequest(response, 'Missing Header: X-Okapi-Token');
-  } else {
-    next();
-  }
-}
-
-function badRequest(response, reason) {
-  response
-    .status(400)
-    .send(reason);
-}
