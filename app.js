@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
+import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 
 import typeDefs from './schema';
@@ -27,7 +27,7 @@ function checkOkapiHeaders(request, response, next) {
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default express()
-  .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress((request) => ({
+  .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
     schema,
     context: {
       query: request.body,
@@ -42,5 +42,3 @@ export default express()
       }
     }
   })));
-
-
