@@ -26,13 +26,22 @@ export default {
     instances: (root, { cql }, context) => {
       let okapi = context.okapi;
       const url = `${okapi.url}/instance-storage/instances` + (cql ? `?query=${strictUriEncode(cql)}` : '')
+      console.log('*** url:', url);
       return fetch(url, { headers: okapi.headers }).then((response) => {
-        return response.json().then(json => {
-          return {
-            records: json.instances,
-            totalCount: json.totalRecords,
-          };
-        });
+        if (response.status >= 400) {
+          // We can't rely on the response body being JSON
+          response.text().then(text => {
+            console.log('*** error:', text);
+            throw new Error(text);
+          });
+        } else {
+          return response.json().then(json => {
+            return {
+              records: json.instances,
+              totalCount: json.totalRecords,
+            };
+          });
+        }
       });
     },
     instance: (root, { id }, context) => {
