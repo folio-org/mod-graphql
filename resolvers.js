@@ -1,6 +1,3 @@
-/* ### Remove these comments once we have our ESLint config sorted out */
-/* eslint-disable arrow-body-style */
-
 import fetch from 'node-fetch';
 import strictUriEncode from 'strict-uri-encode';
 import _ from 'lodash';
