@@ -5,4 +5,4 @@
 * The `instances` query now returns a structure of a `records` array and a `totalCount`. Fixes MODGQL-3.
 * URL-encode the CQL query in instances requests. Fixes MODGQL-8.
 * Set up ESLint. Fixes MODGQL-11.
-
+* Lint-clean the code. Fixes MODGQL-10.
