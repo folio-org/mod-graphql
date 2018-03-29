@@ -74,7 +74,9 @@ export default {
         throw new Error(text);
       })),
     instanceFormat: (obj, args, { okapi }) => {
-      if (obj.instanceFormatId) {
+      if (!obj.instanceFormatId) {
+        throw new Error('no instanceFormatId');
+      } else {
         return fetch(`${okapi.url}/instance-formats/${obj.instanceFormatId}`,
           { headers: okapi.headers })
           .then(res => res.text().then(text => {
@@ -96,7 +98,9 @@ export default {
 
   Contributor: {
     contributorType: (obj, args, { okapi }) => {
-      if (obj.contributorTypeId) {
+      if (!obj.contributorTypeId) {
+        throw new Error('no contributorTypeId');
+      } else {
         return fetch(`${okapi.url}/contributor-types/${obj.contributorTypeId}`,
           { headers: okapi.headers })
           .then(res => res.text().then(text => {
@@ -106,7 +110,9 @@ export default {
       }
     },
     contributorNameType: (obj, args, { okapi }) => {
-      if (obj.contributorNameTypeId) {
+      if (!obj.contributorNameTypeId) {
+        throw new Error('no contributorNameTypeId');
+      } else {
         return fetch(`${okapi.url}/contributor-name-types/${obj.contributorNameTypeId}`,
           { headers: okapi.headers })
           .then(res => res.text().then(text => {
@@ -119,7 +125,9 @@ export default {
 
   Classification: {
     classificationType: (obj, args, { okapi }) => {
-      if (obj.classificationTypeId) {
+      if (!obj.classificationTypeId) {
+        throw new Error('no classificationTypeId');
+      } else {
         return fetch(`${okapi.url}/classification-types/${obj.classificationTypeId}`,
           { headers: okapi.headers })
           .then(res => res.text().then(text => {
