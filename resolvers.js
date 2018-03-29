@@ -1,3 +1,6 @@
+/* ### Remove these comments once we have our ESLint config sorted out */
+/* eslint-disable arrow-body-style */
+
 import fetch from 'node-fetch';
 import strictUriEncode from 'strict-uri-encode';
 import _ from 'lodash';
@@ -28,8 +31,8 @@ export default {
       console.log('*** url:', url); // eslint-disable-line no-console
       return fetch(url, { headers: okapi.headers }).then((response) => {
         if (response.status >= 400) {
-          // We can't rely on the response body being JSON
-          response.text().then(text => {
+          // We can't rely on the response body being JSON, so extract it as text
+          return response.text().then(text => {
             console.log('*** error:', text); // eslint-disable-line no-console
             throw new Error(text);
           });
