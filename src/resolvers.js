@@ -75,7 +75,7 @@ export default {
       })),
     instanceFormat: (obj, args, { okapi }) => {
       if (!obj.instanceFormatId) {
-        throw new Error('no instanceFormatId');
+        return null;
       } else {
         return fetch(`${okapi.url}/instance-formats/${obj.instanceFormatId}`,
           { headers: okapi.headers })
@@ -99,7 +99,7 @@ export default {
   Contributor: {
     contributorType: (obj, args, { okapi }) => {
       if (!obj.contributorTypeId) {
-        throw new Error('no contributorTypeId');
+        return null;
       } else {
         return fetch(`${okapi.url}/contributor-types/${obj.contributorTypeId}`,
           { headers: okapi.headers })
@@ -111,7 +111,7 @@ export default {
     },
     contributorNameType: (obj, args, { okapi }) => {
       if (!obj.contributorNameTypeId) {
-        throw new Error('no contributorNameTypeId');
+        return null;
       } else {
         return fetch(`${okapi.url}/contributor-name-types/${obj.contributorNameTypeId}`,
           { headers: okapi.headers })
@@ -126,7 +126,7 @@ export default {
   Classification: {
     classificationType: (obj, args, { okapi }) => {
       if (!obj.classificationTypeId) {
-        throw new Error('no classificationTypeId');
+        return null;
       } else {
         return fetch(`${okapi.url}/classification-types/${obj.classificationTypeId}`,
           { headers: okapi.headers })
