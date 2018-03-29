@@ -6,3 +6,5 @@
 * URL-encode the CQL query in instances requests. Fixes MODGQL-8.
 * Set up ESLint. Fixes MODGQL-11.
 * Lint-clean the code. Fixes MODGQL-10.
+* Move source-code down into new `src` directory. Fixes MODGQL-13.
+
