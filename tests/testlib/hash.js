@@ -2,39 +2,25 @@
 // Copyright 2016 Yahoo Inc.
 // Licensed under the terms of the MIT license. Please see LICENSE file in the project root for terms.
 
-var crypto = require('crypto');
-var url = require('url');
+const crypto = require('crypto');
+const url = require('url');
 
-module.exports = createStream;
+function sort(obj) {
+  const ret = {};
 
-function createStream(algorithm, encoding) {
-  var hash = createHash(algorithm);
-
-  hash.on('pipe', function (req) {
-    updateHash(hash, req);
+  Object.keys(obj).sort().forEach((key) => {
+    ret[key] = obj[key];
   });
 
-  hash.setEncoding(encoding || 'hex');
-
-  return hash;
+  return ret;
 }
-
-createStream.sync = function (req, body, algorithm, encoding) {
-  var hash = createHash(algorithm);
-
-  updateHash(hash, req);
-
-  hash.write(body);
-
-  return hash.digest(encoding || 'hex');
-};
 
 function createHash(algorithm) {
   return crypto.createHash(algorithm || 'md5');
 }
 
 function updateHash(hash, req) {
-  var parts = url.parse(req.url, true);
+  const parts = url.parse(req.url, true);
 
   hash.update(req.httpVersion);
   hash.update(req.method);
@@ -44,12 +30,26 @@ function updateHash(hash, req) {
   hash.update(JSON.stringify(sort(req.trailers)));
 }
 
-function sort(obj) {
-  var ret = {};
+function createStream(algorithm, encoding) {
+  const hash = createHash(algorithm);
 
-  Object.keys(obj).sort().forEach(function (key) {
-    ret[key] = obj[key];
+  hash.on('pipe', (req) => {
+    updateHash(hash, req);
   });
 
-  return ret;
+  hash.setEncoding(encoding || 'hex');
+
+  return hash;
 }
+
+createStream.sync = (req, body, algorithm, encoding) => {
+  const hash = createHash(algorithm);
+
+  updateHash(hash, req);
+
+  hash.write(body);
+
+  return hash.digest(encoding || 'hex');
+};
+
+module.exports = createStream;
