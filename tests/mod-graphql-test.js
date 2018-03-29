@@ -8,7 +8,7 @@ describe('mod-graphql', () => {
     beforeEach(() => {
       return chai.request(app)
         .post('/graphql')
-        .set('X-Okapi-Url', 'http://localhost:9131')
+        .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
         .set('X-Okapi-Tenant', OKAPI_TENANT)
         .set('X-Okapi-Token', OKAPI_TOKEN)
         .send({ query: 'query { users { id } }' })
