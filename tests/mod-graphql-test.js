@@ -1,6 +1,6 @@
 import { chai, expect, describe, it, beforeEach, OKAPI_TENANT, OKAPI_TOKEN } from './testlib/helper';
 
-import app from '../app';
+import app from '../src/app';
 
 describe('mod-graphql', () => {
   describe('the simplest possible query', () => {
