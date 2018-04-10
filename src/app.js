@@ -29,6 +29,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 export default express()
   .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
     schema,
+    // debug: false, // if you don't want error objects passed to console.error()
     context: {
       query: request.body,
       okapi: {
