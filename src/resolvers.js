@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import strictUriEncode from 'strict-uri-encode';
 import _ from 'lodash';
+import { GraphQLError } from 'graphql';
 
 export default {
   Query: {
@@ -30,8 +31,7 @@ export default {
         if (response.status >= 400) {
           // We can't rely on the response body being JSON, so extract it as text
           return response.text().then(text => {
-            console.log('*** error:', text); // eslint-disable-line no-console
-            throw new Error(text);
+            throw new GraphQLError(text);
           });
         } else {
           return response.json().then(json => ({
