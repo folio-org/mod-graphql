@@ -3,7 +3,7 @@ export default `
     hello: String
     users(cql: String):[User]
     groups:[Group]
-    instances(cql: String):[Instance]
+    instances(cql: String, offset: Int, limit: Int):InstancesWithTotalCount
     instance(id: String):Instance
   }
 
@@ -57,6 +57,10 @@ export default `
   }
 
   # Instances and reference tables
+  type InstancesWithTotalCount {
+    records: [Instance]
+    totalCount: Int
+  }
   type Instance {
     id: ID!
     source: String

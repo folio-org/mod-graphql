@@ -1,7 +1,7 @@
 {
   "name": "@folio/mod-graphql",
   "version": "0.1.0",
-  "description": "Graphql services for OKAPI",
+  "description": "GraphQL services for Okapi",
   "repository": "folio-org/mod-graphql",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -9,21 +9,28 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "scripts": {
+    "lint": "eslint *.js tests/*.js tests/testlib/*.js",
     "start": "babel-node --presets=env,stage-2 main.js",
     "dev": "nodemon --exec babel-node --presets=env,stage-2 main.js",
     "test": "mocha --exit --require tests/testlib/support tests"
   },
   "dependencies": {
+    "@folio/eslint-config-stripes": "^1.1.1",
     "apollo-server-express": "^1.2.0",
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "eslint": "^4.19.1",
     "express": "^4.16.2",
     "graphql": "^0.11.7",
     "graphql-tools": "^2.7.0",
     "lodash": "^4.17.4",
     "node-fetch": "^1.7.3",
-    "query-string": "^5.0.1"
+    "query-string": "^5.0.1",
+    "strict-uri-encode": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

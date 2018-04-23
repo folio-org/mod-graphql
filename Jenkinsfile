@@ -1,5 +1,5 @@
 
-buildNPM { 
+buildNPM {
   buildNode = 'jenkins-slave-all'
   npmDeploy = 'no'
   runLint = 'no'
@@ -7,7 +7,7 @@ buildNPM {
   publishAPI = 'no'
   publishModDescriptor = 'yes'
   modDescriptor = 'ModuleDescriptor.json'
-  
+
   doDocker = {
     buildDocker {
       dockerDir = "${env.WORKSPACE}/project"
