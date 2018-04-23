@@ -3,7 +3,7 @@ export default `
     hello: String
     users(cql: String):[User]
     groups:[Group]
-    instances(cql: String):InstancesWithTotalCount
+    instances(cql: String, offset: Int, limit: Int):InstancesWithTotalCount
     instance(id: String):Instance
   }
 
