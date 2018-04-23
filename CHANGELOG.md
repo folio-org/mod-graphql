@@ -9,4 +9,5 @@
 * Move source-code down into new `src` directory. Fixes MODGQL-13.
 * Fix regression: errors when instance records lack foreign keys. Fixes MODGQL-15.
 * Emit diagnostics for (e.g.) malformed CQL. Fixes MODGQL-6.
+* Support paging parameters in mod-graphql Instances search. Fixes MODGQL-16.
 
