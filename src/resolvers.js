@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
-import strictUriEncode from 'strict-uri-encode';
 import _ from 'lodash';
 import { GraphQLError } from 'graphql';
+import queryString from 'query-string';
 
 export default {
   Query: {
@@ -23,9 +23,17 @@ export default {
         });
       });
     },
-    instances: (root, { cql }, context) => {
+    instances: (root, { cql, offset, limit }, context) => {
       const okapi = context.okapi;
-      const url = `${okapi.url}/instance-storage/instances` + (cql ? `?query=${strictUriEncode(cql)}` : '');
+
+      const query = {}
+      if (cql) query.query = cql;
+      if (offset) query.offset = offset;
+      if (limit) query.limit = limit;
+      let url = `${okapi.url}/instance-storage/instances`;
+      const search = queryString.stringify(query);
+      // console.log(`search '${search}' from query`, query);
+      if (search) url += `?${search}`;
       console.log('*** url:', url); // eslint-disable-line no-console
       return fetch(url, { headers: okapi.headers }).then((response) => {
         if (response.status >= 400) {
