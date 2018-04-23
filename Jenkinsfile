@@ -10,6 +10,7 @@ buildNPM {
   
   doDocker = {
     buildDocker {
+      dockerDir = "${env.WORKSPACE}/project"
       publishMaster = 'yes'
       healthChk = 'no'
     }
