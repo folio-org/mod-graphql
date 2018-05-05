@@ -82,6 +82,16 @@ export default `
     languages: [String]
     notes: [String]
     metadata: Metadata
+    holdingsRecords: [HoldingsRecord]
+  }
+
+  type HoldingsRecord {
+    id: ID!
+    instanceId: ID!
+    permanentLocationId: ID
+    callNumber: String
+    holdingsStatements: [String]
+    metadata: Metadata
   }
 
   type Identifier {
