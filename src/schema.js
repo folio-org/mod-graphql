@@ -61,6 +61,7 @@ export default `
     records: [Instance]
     totalCount: Int
   }
+
   type Instance {
     id: ID!
     source: String
