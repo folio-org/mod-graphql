@@ -23,9 +23,7 @@ export default {
         });
       });
     },
-    instances: (root, { cql, offset, limit }, context) => {
-      const okapi = context.okapi;
-
+    instances: (root, { cql, offset, limit }, { okapi }) => {
       const query = {}
       if (cql) query.query = cql;
       if (offset) query.offset = offset;
@@ -49,8 +47,7 @@ export default {
         }
       });
     },
-    instance: (root, { id }, context) => {
-      const okapi = context.okapi;
+    instance: (root, { id }, { okapi }) => {
       const url = `${okapi.url}/instance-storage/instances/${id}`;
       console.log(`instance from URL '${url}'`);
       return fetch(url, { headers: okapi.headers }).then((response) => {
