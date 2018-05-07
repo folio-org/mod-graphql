@@ -10,4 +10,6 @@
 * Fix regression: errors when instance records lack foreign keys. Fixes MODGQL-15.
 * Emit diagnostics for (e.g.) malformed CQL. Fixes MODGQL-6.
 * Support paging parameters in mod-graphql Instances search. Fixes MODGQL-16.
+* Return holdings statements, with their items, along with instance records. Fixes MODGQL-18.
+
 
