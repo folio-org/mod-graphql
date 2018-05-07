@@ -92,7 +92,34 @@ export default `
     permanentLocationId: ID
     callNumber: String
     holdingsStatements: [String]
+    holdingsItems: [Item]
     metadata: Metadata
+  }
+
+  type Item {
+    id: String!
+    barcode: String
+    holdingsRecordId: String
+    links: Link
+    materialType: IdName
+    notes: [String]
+    metadata: Metadata
+    numberOfPieces: Int
+    temporaryLoanType: IdName
+    permanentLoanType: IdName
+    permanentLocation: IdName
+    pieceIdentifiers: [String]
+    status: Status
+    title: String
+  }
+
+  type Link {
+    self: String
+    # I don't know what else might be in here, I am working from an example
+  }
+
+  type Status {
+    name: String
   }
 
   type Identifier {
