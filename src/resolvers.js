@@ -34,7 +34,7 @@ export default {
       const search = queryString.stringify(query);
       // console.log(`search '${search}' from query`, query);
       if (search) url += `?${search}`;
-      console.log('*** url:', url); // eslint-disable-line no-console
+      console.log(`instances from URL ${url}`);
       return fetch(url, { headers: okapi.headers }).then((response) => {
         if (response.status >= 400) {
           // We can't rely on the response body being JSON, so extract it as text
@@ -51,7 +51,9 @@ export default {
     },
     instance: (root, { id }, context) => {
       const okapi = context.okapi;
-      return fetch(`${okapi.url}/instance-storage/instances/${id}`, { headers: okapi.headers }).then((response) => {
+      const url = `${okapi.url}/instance-storage/instances/${id}`;
+      console.log(`instance from URL '${url}'`);
+      return fetch(url, { headers: okapi.headers }).then((response) => {
         return response.json().then(json => {
           return json;
         });
@@ -107,12 +109,10 @@ export default {
 
   HoldingsRecord: {
     holdingsItems: (obj, args, { okapi }) => {
-      console.log('getting holdingsItems');
       const url = `${okapi.url}/inventory/items?query=holdingsRecordId==${obj.id}`;
       console.log(`items from URL '${url}'`);
       return fetch(url, { headers: okapi.headers })
         .then(res => res.text().then(text => {
-          console.log('item text:', text);
           if (res.status >= 400) throw new Error(text);
           const json = JSON.parse(text);
           return json.items;
