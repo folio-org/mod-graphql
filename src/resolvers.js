@@ -96,15 +96,29 @@ export default {
     holdingsRecords: (obj, args, { okapi }) => {
       const url = `${okapi.url}/holdings-storage/holdings?query=instanceId==${obj.id}`;
       console.log(`holdings from URL '${url}'`);
-      return fetch(url,
-                   { headers: okapi.headers })
+      return fetch(url, { headers: okapi.headers })
         .then(res => res.text().then(text => {
-          console.log('holdings text:', text);
           if (res.status >= 400) throw new Error(text);
           const json = JSON.parse(text);
           return json.holdingsRecords;
         }));
     }
+  },
+
+  HoldingsRecord: {
+    holdingsItems: (obj, args, { okapi }) => {
+      console.log('getting holdingsItems');
+      const url = `${okapi.url}/inventory/items?query=holdingsRecordId==${obj.id}`;
+      console.log(`items from URL '${url}'`);
+      return fetch(url, { headers: okapi.headers })
+        .then(res => res.text().then(text => {
+          console.log('item text:', text);
+          if (res.status >= 400) throw new Error(text);
+          const json = JSON.parse(text);
+          return json.items;
+        }));
+    },
+    id: (obj) => `((([${obj.id}])))`,
   },
 
   Identifier: {
