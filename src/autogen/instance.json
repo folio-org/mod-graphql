@@ -77,6 +77,14 @@
       "required": [
         "self"
       ]
+    },
+    "holdingsRecords": {
+      "$ref" : "holdings.schema",
+      "folio:isVirtual": true,
+      "folio:linkBase": "holdings-storage/holdings",
+      "folio:linkFromField": "id",
+      "folio:linkToField": "instanceId",
+      "folio:includedElement": "holdingsRecords"
     }
   },
   "additionalProperties": false,
