@@ -12,5 +12,5 @@ JSON Schema.
 
 The master of the Instance schema is [on
 GithHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
-but we therefore use instead [a modified local copy](instance.json).
+but we therefore use instead [a modified local copy](inputs/instance.json).
 
