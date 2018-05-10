@@ -41,7 +41,5 @@ But that only works because `../metadata.schema` was defined in the RAML. We do 
 
 ## See also
 
-* https://github.com/folio-org/raml/blob/master/ramls/mod-users/addressTypes.raml
-* https://spacetelescope.github.io/understanding-json-schema/structuring.html
 * https://swagger.io/docs/specification/using-ref/
 
