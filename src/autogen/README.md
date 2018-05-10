@@ -14,3 +14,10 @@ The master of the Instance schema is [on
 GithHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
 but we therefore use instead [a modified local copy](inputs/instance.json).
 
+
+## See also
+
+* https://github.com/folio-org/raml/blob/master/ramls/mod-users/addressTypes.raml
+* https://spacetelescope.github.io/understanding-json-schema/structuring.html
+* https://swagger.io/docs/specification/using-ref/
+
