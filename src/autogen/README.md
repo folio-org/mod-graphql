@@ -8,7 +8,7 @@ We want to have mod-graphql configure itself by auto-generating its GraphQL sche
 Not all the information we need is included in those sources:  example, nothing in the Instance schemas says that there are a  of holdings records associated with it, let alone how to find those holdings records. Accordingly, we will use some custom extensions to JSON Schema.
 
 The master of the Instance schema is [on
-GithHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
+GitHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
 but we therefore use instead [a modified local copy](inputs/instance.json).
 
 
