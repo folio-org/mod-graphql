@@ -39,7 +39,3 @@ Including one JSON Schema in another is achieved using [the special `$ref` key](
 But that only works because `../metadata.schema` was defined in the RAML. We do not have a way to make a JSON schema refer to another schema outside the context of a RAML.
 
 
-## See also
-
-* https://swagger.io/docs/specification/using-ref/
-
