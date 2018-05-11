@@ -5,12 +5,6 @@
 
 We want to have mod-graphql configure itself by auto-generating its GraphQL schemas and resolvers based on the RAMLs and JSON Schemas that describe the underlying services.
 
-Not all the information we need is included in those sources:  example, nothing in the Instance schemas says that there are a  of holdings records associated with it, let alone how to find those holdings records. Accordingly, we will use some custom extensions to JSON Schema.
-
-The master of the Instance schema is [on
-GitHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
-but we therefore use instead [a modified local copy](inputs/instance.json).
-
 
 ## RAMLs and JSON Schemas
 
@@ -49,4 +43,29 @@ That gives us a well-defined approach to schema inclusion: the RAML declares _al
 
 That `$ref` only works because `../metadata.schema` was defined in the RAML.
 
+
+## JSON Schema extensions
+
+Not all the information we need is included in standard RAML and JSON Schema: for example, nothing in the Instance schemas says that there are a set of holdings records associated with it, let alone how to find those holdings records. Accordingly, we will use some custom extensions to JSON Schema. (It may suffice to use RAML in its standard form.)
+
+Since we are not using the standard form of JSON Schema, we will use the custom URL `https://github.com/folio-org/mod-graphql/json-schema` for the `$schema` identifier, in accordance with [section 6.4 of the specification](http://json-schema.org/latest/json-schema-core.html#rfc.section.6.4). We do not yet have a meta-schema, but may introduce one later.
+
+The JSON Schema specification rather unhelpfully [says](http://json-schema.org/latest/json-schema-core.html#rfc.section.4.3.2):
+
+> JSON Schema does not provide any formal namespacing system, but also does not constrain keyword names, allowing for any number of namespacing approaches.
+
+We therefore use our own convention for extension keywords, giving them names prefixed with `folio:`. We tentatively introduce the following:
+
+Keyword | Example | Description
+--- | --- | ---
+`folio:linkFromField` | "id" | If this is defined, then the field is a link field, and all the three following keywords must also be included. When the GraphQL resolver encounters this field, the value of the specified field in the main record is used as the query key in a search for linked records to be included.
+`folio:linkBase` | "holdings-storage/holdings" |
+`folio:linkToField` | "instanceId" |
+`folio:includedElement` | "holdingsRecords |
+
+As an example, a field with the specified keywords and values in the table above, and having `id` equal to `123`, would result in fetching subrecords from `/holdings-storage/holdings?query=instanceId=="123"`, and the top-level `holdingsRecord` element of each returned record being included in the main record,
+
+The master of the Instance schema is [on
+GitHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
+but we therefore use instead [a modified local copy](inputs/instance.json).
 
