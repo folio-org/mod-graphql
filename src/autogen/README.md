@@ -59,9 +59,9 @@ We therefore use our own convention for extension keywords, giving them names pr
 Keyword | Example | Description
 --- | --- | ---
 `folio:linkFromField` | "id" | If this is defined, then the field is a link field, and all the three following keywords must also be included. When the GraphQL resolver encounters this field, the value of the specified field in the main record is used as the query key in a search for linked records to be included.
-`folio:linkBase` | "holdings-storage/holdings" |
-`folio:linkToField` | "instanceId" |
-`folio:includedElement` | "holdingsRecords |
+`folio:linkBase` | "holdings-storage/holdings" | The base path at which searches that discover linked records are found. Should not include the leading `http:/` or hostname.
+`folio:linkToField` | "instanceId" | The field within linked records that is searched for a value identical to that of the master record's link-from field.
+`folio:includedElement` | "holdingsRecords | The field within linked records which is extracted and included as the linked content within the constructed master record.
 
 As an example, a field with the specified keywords and values in the table above, and having `id` equal to `123`, would result in fetching subrecords from `/holdings-storage/holdings?query=instanceId=="123"`, and the top-level `holdingsRecord` element of each returned record being included in the main record,
 
