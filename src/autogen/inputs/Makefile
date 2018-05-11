@@ -1,4 +1,4 @@
-COPIES = inventory.raml instances.json item.json items.json
+COPIES = inventory.raml instances.json items.json item.json
 
 **make-default**: $(COPIES)
 
