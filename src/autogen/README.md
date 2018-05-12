@@ -65,7 +65,7 @@ Keyword | Example | Description
 
 As an example, a field with the specified keywords and values in the table above, and having `id` equal to `123`, would result in fetching subrecords from `/holdings-storage/holdings?query=instanceId=="123"`, and the top-level `holdingsRecord` element of each returned record being included in the main record,
 
-The master of the Instance schema is [on
-GitHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
-but we therefore use instead [a modified local copy](inputs/instance.json).
+The master copy of the inventory module's schema is [on GitHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/inventory.raml). So is [the master of the Instance schema](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
+but we use instead [a modified local copy](inputs/instance.json) that includes the extension fields.
+
 
