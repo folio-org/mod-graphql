@@ -1,0 +1,13 @@
+{
+  "name": "raml2graphql",
+  "version": "0.1.0",
+  "description": "Translate RAML/JSON Schema into GraphQL schema",
+  "repository": "folio-org/mod-graphql",
+  "publishConfig": {
+    "registry": "https://repository.folio.org/repository/npm-folio/"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "raml-1-parser": "^1.1.42"
+  }
+}
