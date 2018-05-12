@@ -22,4 +22,8 @@ try {
 }
 
 console.log('SUCCESS');
-console.log(JSON.stringify(api.toJSON(), null, 2));
+// console.log(JSON.stringify(api.toJSON(), null, 2));
+var apiResources = api.resources();
+apiResources.forEach((resource) => {
+  console.log(`${resource.kind()}: ${resource.absoluteUri()}`);
+});
