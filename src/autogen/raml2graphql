@@ -1,0 +1,25 @@
+// Run as `node ./raml2graphql inputs/inventory.raml`
+
+const argv0 = process.argv[1].replace(/.*\//, '');
+const file = process.argv[2];
+if (!file) {
+  console.error(`Usage: ${argv0}: SOMEFILE.raml`);
+  process.exit(1);
+}
+
+// Ideally, we want a library that reads the RAML and knows how to
+// include the information from the references JSON Schemas. But if we
+// can't find such a thing, it would suffice to parse it as YAML and
+// walk the tree ourselves to discover the schemas.
+
+const raml = require('raml-1-parser');
+let api;
+try {
+  api = raml.loadApiSync(file);
+} catch(e) {
+  console.error(`${argv0}: RAML parse failed:`, e);
+  process.exit(2);
+}
+
+console.log('SUCCESS');
+console.log(JSON.stringify(api.toJSON(), null, 2));
