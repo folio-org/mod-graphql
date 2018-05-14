@@ -1,6 +1,11 @@
-// Run as `node ./raml2graphql inputs/inventory.raml`
+// Run as `node ./raml2graphql [-v] inputs/inventory.raml`
 
 const argv0 = process.argv[1].replace(/.*\//, '');
+let verbose = false;
+if (process.argv[2] == '-v') {
+  verbose = true;
+  process.argv.shift();
+}
 const file = process.argv[2];
 if (!file) {
   console.error(`Usage: ${argv0}: SOMEFILE.raml`);
@@ -21,8 +26,10 @@ try {
   process.exit(2);
 }
 
-console.log('SUCCESS');
-// console.log(JSON.stringify(api.toJSON(), null, 2));
+if (verbose) {
+  console.log(JSON.stringify(api.toJSON(), null, 2));
+}
+
 var apiResources = api.resources();
 apiResources.forEach((resource) => {
   console.log(`${resource.kind()}: ${resource.absoluteUri()}`);
