@@ -25,7 +25,7 @@ In mod-graphql's schema -- currently [../src/schema.js](`../src/schema.js`), add
 
 In the present case, it was necessary to add `holdingsItems: [Item]` to the `HoldingsRecord` type; and to add the new `Item` type referenced that that addition.
 
-**Note.** It is _not_ necessary to create a new variant of the containing type (`FullHoldingsRecord`, for example). Simply add the new fields to the existing type (`HoldingsRecord` in this case). The cliebt will request only the elements it wants, so no additional work will be done for existing clients that do not request the new elements.
+**Note.** It is _not_ necessary to create a new variant of the containing type (`FullHoldingsRecord`, for example). Simply add the new fields to the existing type (`HoldingsRecord` in this case). The client will request only the elements it wants, so no additional work will be done for existing clients that do not request the new elements.
 
 ### GraphQL resolver
 
@@ -41,7 +41,7 @@ XXX ui-inventory commit a9849790a3d9d66d4e34f078482c1da3e0778fa8
 
 In the GraphQL query sent by the client -- typically declared using a `gql` tag -- add the new element _including all its subelements_. In the present case, this means adding `holdingsItems` within the request for `holdingsRecords`.
 
-This very easy to overlook -- and very difficult to diagnose, because in this case mod-graphql simply does not return the newly added elements, and issues no diagostics. It's quite right to behave this way: it's doing exactly what the client code is requesting. If you think you detect here the kind of wisdom that comes only by experience, you are quite correct.
+This very easy to overlook -- and very difficult to diagnose, because in this case mod-graphql simply does not return the newly added elements, and issues no diagnostics. It's quite right to behave this way: it's doing exactly what the client code is requesting. If you think you detect here the kind of wisdom that comes only by experience, you are quite correct.
 
 Irritatingly, it's necessary to explicitly specify _within_ the new element the names of all the fields you want to see, even though that's usually all of them. This, too, is obviously correct: it's part of GraphQL's flexibility that you can tell it precisely what elements you do and don't want to obtain.
 
