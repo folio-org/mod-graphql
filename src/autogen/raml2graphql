@@ -27,6 +27,7 @@ try {
 }
 
 if (verbose) {
+  // console.log(api.constructor.name);
   console.log(JSON.stringify(api.toJSON(), null, 2));
 }
 
