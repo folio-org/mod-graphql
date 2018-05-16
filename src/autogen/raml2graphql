@@ -37,13 +37,19 @@ emitComment(api, 'protocols')
 emitComment(api, 'baseUri')
 
 var apiResources = api.elementsOfKind("resources");
-apiResources.forEach((resource) => {
-  console.log(`${resource}:`, resource);
+apiResources.forEach((resource, i) => {
+   console.log("" + (i+1) + ". " + resource.attr("relativeUri").value());
 });
 
 
 function emitComment(api, tag) {
-  var attr = api.attr(tag);
-  var value = attr.plainValue();
-  console.log(`# ${tag}: ${value} (${typeof value})`);
+  const attrs = api.attributes(tag);
+  const rendered = [];
+
+  attrs.forEach((attr) => {
+    const value = attr.plainValue();
+    rendered.push(`${value} (${typeof value})`);
+  });
+
+  console.log(`# ${tag}: ${rendered.join(', ')}`);
 }
