@@ -20,18 +20,30 @@ if (!file) {
 const raml = require('raml-1-parser');
 let api;
 try {
-  api = raml.loadApiSync(file);
+  api = raml.parseSync(file);
 } catch(e) {
   console.error(`${argv0}: RAML parse failed:`, e);
   process.exit(2);
 }
 
 if (verbose) {
-  // console.log(api.constructor.name);
+  console.log(`api is a ${api.constructor.name}`); // ASTNodeImpl
   console.log(JSON.stringify(api.toJSON(), null, 2));
 }
 
-var apiResources = api.resources();
+emitComment(api, 'title')
+emitComment(api, 'version')
+emitComment(api, 'protocols')
+emitComment(api, 'baseUri')
+
+var apiResources = api.elementsOfKind("resources");
 apiResources.forEach((resource) => {
-  console.log(`${resource.kind()}: ${resource.absoluteUri()}`);
+  console.log(`${resource}:`, resource);
 });
+
+
+function emitComment(api, tag) {
+  var attr = api.attr(tag);
+  var value = attr.plainValue();
+  console.log(`# ${tag}: ${value} (${typeof value})`);
+}
