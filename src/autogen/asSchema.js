@@ -1,3 +1,14 @@
+function getMethods(x) {
+  const ret = [];
+  for (var prop in x) {
+    if (x[prop] && x[prop].constructor && x[prop].call && x[prop].apply) {
+      ret.push(prop);
+    }
+  }
+  return ret.sort();
+}
+
+
 function render(api, options) {
   let output = '';
 
@@ -9,15 +20,46 @@ function render(api, options) {
     output += `# ${tag}: ${rendered.join(', ')}\n`;
   });
 
+  output += '\n';
+  output += 'type Query {\n';
   api.elementsOfKind('resources').forEach((resource, i) => {
     processResource(resource);
   });
-
+  output += '}\n';
 
   function processResource(resource, level = 0, parentUri = '') {
-    const uri = parentUri + resource.attr('relativeUri').plainValue();
-    const dna = resource.attr('displayName');
-    output += `${'  '.repeat(level)}${uri}${dna ? ` # ${dna.plainValue()}` : ''}\n`;
+    const rel = resource.attr('relativeUri').plainValue();
+    const uri = parentUri + rel;
+    // We will come back to pick up the types later
+
+    const methods = resource.elementsOfKind('methods');
+    methods.forEach((method) => {
+      // At this stage, we are only interested in GET, not mutations
+      if (method.name() === 'get') {
+        const args = [];
+
+        let basePath;
+        if (rel.startsWith('/{')) {
+          args.push(rel.replace(/\/{(.*)}/, '$1'));
+          basePath = parentUri;
+        } else {
+          basePath = uri;
+        }
+
+        const queryName = basePath.substr(1).replace('/', '-');
+        output += '  '.repeat(level) + queryName;
+        if (args.length > 0) {
+          output += `(${args.join(', ')})`;
+        }
+
+        const dna = resource.attr('displayName');
+        if (dna) {
+          output += ` # ${dna.plainValue()}`;
+        }
+
+        output += '\n';
+      }
+    });
 
     resource.elementsOfKind('resources').forEach((sub, i) => {
       processResource(sub, level+1, uri);
