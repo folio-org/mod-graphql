@@ -31,9 +31,8 @@ emitComment(api, 'version')
 emitComment(api, 'protocols')
 emitComment(api, 'baseUri')
 
-var apiResources = api.elementsOfKind("resources");
-apiResources.forEach((resource, i) => {
-   console.log("" + (i+1) + ". " + resource.attr("relativeUri").value());
+api.elementsOfKind('resources').forEach((resource, i) => {
+  processResource(resource);
 });
 
 
@@ -47,4 +46,15 @@ function emitComment(api, tag) {
   });
 
   console.log(`# ${tag}: ${rendered.join(', ')}`);
+}
+
+
+function processResource(resource, level = 0, parentUri = '') {
+  const uri = parentUri + resource.attr('relativeUri').plainValue();
+  const dna = resource.attr('displayName');
+  console.log(`${'  '.repeat(level)}${uri}${dna ? ` # ${dna.plainValue()}` : ''}`);
+
+  resource.elementsOfKind('resources').forEach((sub, i) => {
+    processResource(sub, level+1, uri);
+  });
 }
