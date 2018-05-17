@@ -3,9 +3,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import resolvers from './resolvers';
 
 const typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
-import resolvers from './resolvers';
 
 function badRequest(response, reason) {
   response
