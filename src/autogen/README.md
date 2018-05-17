@@ -1,5 +1,11 @@
 # Autogeneration of GraphQL schemas and resolvers
 
+<!-- md2toc -l 2 README.md -->
+* [Introduction](#introduction)
+* [RAMLs and JSON Schemas](#ramls-and-json-schemas)
+* [Schema inclusion](#schema-inclusion)
+* [JSON Schema extensions](#json-schema-extensions)
+
 
 ## Introduction
 
