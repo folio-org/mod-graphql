@@ -18,8 +18,7 @@ if (options.version) {
   process.exit(0);
 }
 
-const file = opt.argv[0];
-if (!file) {
+if (opt.argv.length !== 1) {
   console.error(`Usage: ${argv0}: SOMEFILE.raml`);
   process.exit(1);
 }
@@ -27,7 +26,7 @@ if (!file) {
 const raml = require('raml-1-parser');
 let api;
 try {
-  api = raml.parseSync(file);
+  api = raml.parseSync(opt.argv[0]);
 } catch(e) {
   console.error(`${argv0}: RAML parse failed:`, e);
   process.exit(2);
