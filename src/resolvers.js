@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import fetch from 'node-fetch';
 import _ from 'lodash';
 import { GraphQLError } from 'graphql';
@@ -24,7 +25,7 @@ export default {
       });
     },
     instances: (root, { cql, offset, limit }, { okapi }) => {
-      const query = {}
+      const query = {};
       if (cql) query.query = cql;
       if (offset) query.offset = offset;
       if (limit) query.limit = limit;
