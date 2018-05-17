@@ -1,12 +1,27 @@
 // Run as `node ./raml2graphql [-v] inputs/inventory.raml`
 
+const package = require('./package.json');
+const Getopt = require('node-getopt');
+
 const argv0 = process.argv[1].replace(/.*\//, '');
-let verbose = false;
-if (process.argv[2] == '-v') {
-  verbose = true;
-  process.argv.shift();
+const opt = new Getopt([
+  ['v' , 'verbose' , 'Verbose mode: dump JSON of RAML/Schema'],
+  ['V' , 'version' , 'Show version and exit'],
+  ['h' , 'help'    , 'Display this help'],
+]);
+
+opt.setHelp(`Usage: node ${argv0} [OPTIONS] <RAMLfile>\n[[OPTIONS]]`);
+opt.bindHelp();
+opt.parseSystem();
+const options = opt.options;
+const verbose = options.verbose;
+
+if (options.version) {
+  console.log(`${argv0} version ${package.version}`);
+  process.exit(0);
 }
-const file = process.argv[2];
+
+const file = opt.argv[0];
 if (!file) {
   console.error(`Usage: ${argv0}: SOMEFILE.raml`);
   process.exit(1);
