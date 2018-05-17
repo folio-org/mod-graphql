@@ -12,8 +12,7 @@ const opt = require('node-getopt').create([
 .bindHelp()
 .parseSystem();
 
-const options = opt.options;
-if (options.version) {
+if (opt.options.version) {
   console.log(`${argv0} version ${package.version}`);
   process.exit(0);
 }
@@ -32,7 +31,7 @@ try {
   process.exit(2);
 }
 
-if (options.verbose) {
+if (opt.options.verbose) {
   console.log(`api is a ${api.constructor.name}`); // ASTNodeImpl
   console.log(JSON.stringify(api.toJSON(), null, 2));
 }
