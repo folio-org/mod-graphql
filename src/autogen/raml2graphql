@@ -38,12 +38,9 @@ api.elementsOfKind('resources').forEach((resource, i) => {
 
 function emitComment(api, tag) {
   const rendered = [];
-
   api.attributes(tag).forEach((attr) => {
-    const value = attr.plainValue();
-    rendered.push(`${value} (${typeof value})`);
+    rendered.push(attr.plainValue());
   });
-
   console.log(`# ${tag}: ${rendered.join(', ')}`);
 }
 
