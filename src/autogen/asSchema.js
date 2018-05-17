@@ -6,7 +6,7 @@ function render(api, options) {
     api.attributes(tag).forEach((attr) => {
       rendered.push(attr.plainValue());
     });
-    output += `# ${tag}: ${rendered.join(', ')}`;
+    output += `# ${tag}: ${rendered.join(', ')}\n`;
   });
 
   api.elementsOfKind('resources').forEach((resource, i) => {
@@ -17,7 +17,7 @@ function render(api, options) {
   function processResource(resource, level = 0, parentUri = '') {
     const uri = parentUri + resource.attr('relativeUri').plainValue();
     const dna = resource.attr('displayName');
-    output += `${'  '.repeat(level)}${uri}${dna ? ` # ${dna.plainValue()}` : ''}`;
+    output += `${'  '.repeat(level)}${uri}${dna ? ` # ${dna.plainValue()}` : ''}\n`;
 
     resource.elementsOfKind('resources').forEach((sub, i) => {
       processResource(sub, level+1, uri);
