@@ -36,4 +36,4 @@ if (opt.options.verbose) {
 }
 
 const asSchema = require('./asSchema');
-asSchema.render(api, opt.options);
+console.log(asSchema.render(api, opt.options));
