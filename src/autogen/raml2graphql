@@ -1,4 +1,4 @@
-/ Run as `node ./raml2graphql [-v] inputs/inventory.raml`
+// Run as `node ./raml2graphql [-v] inputs/inventory.raml`
 
 const package = require('./package.json');
 
@@ -13,8 +13,6 @@ const opt = require('node-getopt').create([
 .parseSystem();
 
 const options = opt.options;
-const verbose = options.verbose;
-
 if (options.version) {
   console.log(`${argv0} version ${package.version}`);
   process.exit(0);
@@ -35,7 +33,7 @@ try {
   process.exit(2);
 }
 
-if (verbose) {
+if (options.verbose) {
   console.log(`api is a ${api.constructor.name}`); // ASTNodeImpl
   console.log(JSON.stringify(api.toJSON(), null, 2));
 }
