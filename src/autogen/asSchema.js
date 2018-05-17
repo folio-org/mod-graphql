@@ -1,4 +1,4 @@
-function render(api, options) {
+function render(api, _options) {
   let output = '';
 
   ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
@@ -11,7 +11,7 @@ function render(api, options) {
 
   output += '\n';
   output += 'type Query {\n';
-  api.elementsOfKind('resources').forEach((resource, i) => {
+  api.elementsOfKind('resources').forEach((resource) => {
     processResource(resource);
   });
   output += '}\n';
@@ -50,7 +50,7 @@ function render(api, options) {
       }
     });
 
-    resource.elementsOfKind('resources').forEach((sub, i) => {
+    resource.elementsOfKind('resources').forEach((sub) => {
       processResource(sub, level+1, uri);
     });
   }
