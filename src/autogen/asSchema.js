@@ -34,7 +34,7 @@ function renderResource(resource, level = 0, parentUri = '') {
   });
 
   resource.elementsOfKind('resources').forEach((sub) => {
-    output += renderResource(sub, level+1, uri);
+    output += renderResource(sub, level + 1, uri);
   });
 
   return output;
