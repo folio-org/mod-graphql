@@ -1,7 +1,5 @@
 // Run as `node ./raml2graphql [-v] inputs/inventory.raml`
 
-const package = require('./package.json');
-
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
   ['v' , 'verbose' , 'Verbose mode: dump JSON of RAML/Schema'],
@@ -13,6 +11,7 @@ const opt = require('node-getopt').create([
 .parseSystem();
 
 if (opt.options.version) {
+  const package = require('./package.json');
   console.log(`${argv0} version ${package.version}`);
   process.exit(0);
 }
