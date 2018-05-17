@@ -26,23 +26,17 @@ if (verbose) {
   console.log(JSON.stringify(api.toJSON(), null, 2));
 }
 
-emitComment(api, 'title')
-emitComment(api, 'version')
-emitComment(api, 'protocols')
-emitComment(api, 'baseUri')
-
-api.elementsOfKind('resources').forEach((resource, i) => {
-  processResource(resource);
-});
-
-
-function emitComment(api, tag) {
+['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
   const rendered = [];
   api.attributes(tag).forEach((attr) => {
     rendered.push(attr.plainValue());
   });
   console.log(`# ${tag}: ${rendered.join(', ')}`);
-}
+});
+
+api.elementsOfKind('resources').forEach((resource, i) => {
+  processResource(resource);
+});
 
 
 function processResource(resource, level = 0, parentUri = '') {
