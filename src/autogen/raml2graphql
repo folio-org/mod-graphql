@@ -6,9 +6,9 @@ const opt = require('node-getopt').create([
   ['V' , 'version' , 'Show version and exit'],
   ['h' , 'help'    , 'Display this help'],
 ])
-.setHelp(`Usage: node ${argv0} [OPTIONS] <RAMLfile>\n[[OPTIONS]]`)
-.bindHelp()
-.parseSystem();
+  .setHelp(`Usage: node ${argv0} [OPTIONS] <RAMLfile>\n[[OPTIONS]]`)
+  .bindHelp()
+  .parseSystem();
 
 if (opt.options.version) {
   const package = require('./package.json');
