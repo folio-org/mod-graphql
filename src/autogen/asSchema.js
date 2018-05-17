@@ -1,14 +1,3 @@
-function getMethods(x) {
-  const ret = [];
-  for (var prop in x) {
-    if (x[prop] && x[prop].constructor && x[prop].call && x[prop].apply) {
-      ret.push(prop);
-    }
-  }
-  return ret.sort();
-}
-
-
 function render(api, options) {
   let output = '';
 
