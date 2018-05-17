@@ -1,18 +1,22 @@
+/* eslint-disable no-console */
 // Run as `node ./raml2graphql [-v] inputs/inventory.raml`
+
+const raml = require('raml-1-parser');
+const packageInfo = require('./package.json');
+const asSchema = require('./asSchema');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
-  ['v' , 'verbose' , 'Verbose mode: dump JSON of RAML/Schema'],
-  ['V' , 'version' , 'Show version and exit'],
-  ['h' , 'help'    , 'Display this help'],
+  ['v', 'verbose', 'Verbose mode: dump JSON of RAML/Schema'],
+  ['V', 'version', 'Show version and exit'],
+  ['h', 'help', 'Display this help'],
 ])
   .setHelp(`Usage: node ${argv0} [OPTIONS] <RAMLfile>\n[[OPTIONS]]`)
   .bindHelp()
   .parseSystem();
 
 if (opt.options.version) {
-  const package = require('./package.json');
-  console.log(`${argv0} version ${package.version}`);
+  console.log(`${argv0} version ${packageInfo.version}`);
   process.exit(0);
 }
 
@@ -21,11 +25,10 @@ if (opt.argv.length !== 1) {
   process.exit(1);
 }
 
-const raml = require('raml-1-parser');
 let api;
 try {
   api = raml.parseSync(opt.argv[0]);
-} catch(e) {
+} catch (e) {
   console.error(`${argv0}: RAML parse failed:`, e);
   process.exit(2);
 }
@@ -35,5 +38,4 @@ if (opt.options.verbose) {
   console.log(JSON.stringify(api.toJSON(), null, 2));
 }
 
-const asSchema = require('./asSchema');
 console.log(asSchema.render(api, opt.options));
