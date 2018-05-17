@@ -19,7 +19,7 @@ if (options.version) {
 }
 
 if (opt.argv.length !== 1) {
-  console.error(`Usage: ${argv0}: SOMEFILE.raml`);
+  console.info(opt.getHelp());
   process.exit(1);
 }
 
