@@ -11,7 +11,6 @@ const opt = require('node-getopt').create([
 .setHelp(`Usage: node ${argv0} [OPTIONS] <RAMLfile>\n[[OPTIONS]]`)
 .bindHelp()
 .parseSystem();
-console.log(opt);
 
 const options = opt.options;
 const verbose = options.verbose;
