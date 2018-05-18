@@ -22,7 +22,7 @@ function renderResource(resource, level = 0, parentUri = '') {
 
     let basePath;
     if (rel.startsWith('/{')) {
-      args.push(rel.replace(/\/{(.*)}/, '$1'));
+      args.push(rel.replace(/\/{(.*)}/, '$1: String!'));
       basePath = `${parentUri}-SINGLE`;
     } else {
       basePath = uri;
