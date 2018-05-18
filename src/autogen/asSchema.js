@@ -1,3 +1,14 @@
+function ramll2graphql_type(type) {
+  const map = {
+    string: 'String',
+    integer: 'Int',
+    // More to follow
+  }
+
+  return map[type] || 'Unknown';
+}
+
+
 function renderResource(resource, level = 0, parentUri = '') {
   let output = '';
   const rel = resource.attr('relativeUri').plainValue();
@@ -12,10 +23,18 @@ function renderResource(resource, level = 0, parentUri = '') {
     let basePath;
     if (rel.startsWith('/{')) {
       args.push(rel.replace(/\/{(.*)}/, '$1'));
-      basePath = parentUri;
+      basePath = `${parentUri}-SINGLE`;
     } else {
       basePath = uri;
     }
+
+    method.elementsOfKind('queryParameters').forEach((qp) => {
+      const a1 = qp.attr('required');
+      const required = a1 ? a1.plainValue() : false;
+      const a2 = qp.attr('type');
+      const type = a2 ? a2.plainValue() : 'string';
+      args.push(`${qp.name()}: ${ramll2graphql_type(type)}${required ? '!' : ''}`);
+    });      
 
     const queryName = basePath.substr(1).replace('/', '-');
     output += '  '.repeat(level) + queryName;
