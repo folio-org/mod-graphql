@@ -1,9 +1,9 @@
-function ramll2graphql_type(type) {
+function ramll2graphqlType(type) {
   const map = {
     string: 'String',
     integer: 'Int',
     // More to follow
-  }
+  };
 
   return map[type] || 'Unknown';
 }
@@ -33,8 +33,8 @@ function renderResource(resource, level = 0, parentUri = '') {
       const required = a1 ? a1.plainValue() : false;
       const a2 = qp.attr('type');
       const type = a2 ? a2.plainValue() : 'string';
-      args.push(`${qp.name()}: ${ramll2graphql_type(type)}${required ? '!' : ''}`);
-    });      
+      args.push(`${qp.name()}: ${ramll2graphqlType(type)}${required ? '!' : ''}`);
+    });
 
     const queryName = basePath.substr(1).replace('/', '-');
     output += `  ${queryName}`;
