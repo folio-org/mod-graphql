@@ -45,11 +45,8 @@ function render(api, _options) {
   let output = '';
 
   ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
-    const rendered = [];
-    api.attributes(tag).forEach((attr) => {
-      rendered.push(attr.plainValue());
-    });
-    output += `# ${tag}: ${rendered.join(', ')}\n`;
+    const values = api.attributes(tag).map(attr => attr.plainValue());
+    output += `# ${tag}: ${values.join(', ')}\n`;
   });
 
   output += '\n';
