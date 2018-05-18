@@ -37,7 +37,7 @@ function renderResource(resource, level = 0, parentUri = '') {
     });      
 
     const queryName = basePath.substr(1).replace('/', '-');
-    output += '  '.repeat(level) + queryName;
+    output += `  ${queryName}`;
     if (args.length > 0) {
       output += `(${args.join(', ')})`;
     }
