@@ -49,12 +49,10 @@ function render(api, _options) {
     output += `# ${tag}: ${values.join(', ')}\n`;
   });
 
-  output += '\n';
-  output += 'type Query {\n';
-  api.elementsOfKind('resources').forEach((resource) => {
-    output += renderResource(resource);
-  });
-  output += '}\n';
+  output += '\n' +
+    'type Query {\n' +
+    api.elementsOfKind('resources').map(r => renderResource(r)).join('') +
+    '}\n';
 
   return output;
 }
