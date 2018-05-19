@@ -40,7 +40,7 @@ That gives us a well-defined approach to schema inclusion: the RAML declares _al
 	        exampleItem: !include ../../examples/mod-users/addresstype.sample
 	        schema: addresstype.json
 
-[That schema](https://github.com/folio-org/raml/blob/master/ramls/mod-users/addressTypes.raml) lists fields including `metadata`, which itself is of a type defined by another of the schemas, `../metadata.schema`:
+[That schema](https://github.com/folio-org/raml/blob/master/schemas/mod-users/addresstype.json) lists fields including `metadata`, which itself is of a type defined by another of the schemas, `../metadata.schema`:
 
 	"metadata" : {
 	  "$ref" : "../metadata.schema",
