@@ -35,6 +35,7 @@ function renderResources(flattened, _options) {
 
 function render(api, _options) {
   return (renderComments(api.comments, _options) +
+          '\n' +
           renderResources(api.resources, _options));
 }
 
