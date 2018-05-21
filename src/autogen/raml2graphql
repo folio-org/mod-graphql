@@ -41,4 +41,5 @@ if (opt.options.verbose) {
   console.log(JSON.stringify(api.toJSON(), null, 2));
 }
 
-console.log(asSchema.render(api, opt.options));
+const gathered = asSchema.gatherAPI(api, opt.options);
+console.log(asSchema.renderAPI(gathered, opt.options));

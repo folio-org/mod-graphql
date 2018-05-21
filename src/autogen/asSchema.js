@@ -135,10 +135,5 @@ function renderAPI(api, _options) {
 }
 
 
-function gatherAndRender(api, _options) {
-  const gathered = gatherAPI(api, _options);
-  return renderAPI(gathered, _options);
-}
-
-
-exports.render = gatherAndRender;
+exports.gatherAPI = gatherAPI;
+exports.renderAPI = renderAPI;
