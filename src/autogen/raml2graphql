@@ -6,7 +6,8 @@
 
 const raml = require('raml-1-parser');
 const packageInfo = require('./package.json');
-const { gatherAPI, renderAPI } = require('./asSchema');
+const { gatherAPI } = require('./gatherAPI');
+const { renderAPI } = require('./asSchema');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
