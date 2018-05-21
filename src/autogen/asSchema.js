@@ -121,12 +121,24 @@ function renderResources(flattened, _options) {
 }
 
 
-function render(api, _options) {
-  const comments = gatherComments(api, _options);
-  const resources = gatherResources(api, _options);
-  return (renderComments(comments, _options) +
-          renderResources(resources, _options));
+function gatherAPI(api, _options) {
+  return {
+    comments: gatherComments(api, _options),
+    resources: gatherResources(api, _options),
+  }
 }
 
 
-exports.render = render;
+function renderAPI(api, _options) {
+  return (renderComments(api.comments, _options) +
+          renderResources(api.resources, _options));
+}
+
+
+function gatherAndRender(api, _options) {
+  const gathered = gatherAPI(api, _options);
+  return renderAPI(gathered, _options);
+}
+
+
+exports.render = gatherAndRender;
