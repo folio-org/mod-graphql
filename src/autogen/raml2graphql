@@ -37,10 +37,8 @@ try {
   process.exit(2);
 }
 
-if (opt.options.verbose) {
-  console.log(`api is a ${api.constructor.name}`); // ASTNodeImpl
-  console.log(JSON.stringify(api.toJSON(), null, 2));
-}
-
 const gathered = gatherAPI(api, opt.options);
+if (opt.options.verbose) {
+  console.log(JSON.stringify(gathered, null, 2));
+}
 console.log(render(gathered, opt.options));
