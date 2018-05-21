@@ -122,14 +122,10 @@ function renderResources(flattened, _options) {
 
 
 function render(api, _options) {
-  let output = '';
-
   const comments = gatherComments(api, _options);
-  output += renderComments(comments, _options);
   const resources = gatherResources(api, _options);
-  output += renderResources(resources, _options);
-
-  return output;
+  return (renderComments(comments, _options) +
+          renderResources(resources, _options));
 }
 
 
