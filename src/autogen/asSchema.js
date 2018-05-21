@@ -17,7 +17,13 @@ function renderResources(flattened, _options) {
   flattened.forEach(resource => {
     output += `  ${resource.queryName}`;
     if (resource.args.length > 0) {
-      output += `(${resource.args.join(', ')})`;
+      output += `(${resource.args.map(arg => {
+        const name = arg[0];
+        const type = arg[1];
+        const required = arg[2];
+
+        return `${name}: ${type}${required ? '!' : ''}`;
+      }).join(', ')})`;
     }
 
     if (resource.displayName) {
