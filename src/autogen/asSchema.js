@@ -93,6 +93,12 @@ function flattenResources(resources) {
 }
 
 
+function gatherResources(api, _options) {
+  const resources = api.elementsOfKind('resources').map(r => gatherResource(r));
+  return flattenResources(resources, _options);
+}
+
+
 function renderResources(flattened, _options) {
   let output = 'type Query {\n';
 
@@ -120,10 +126,8 @@ function render(api, _options) {
 
   const comments = gatherComments(api, _options);
   output += renderComments(comments, _options);
-
-  const resources = api.elementsOfKind('resources').map(r => gatherResource(r));
-  const flattened = flattenResources(resources, _options);
-  output += renderResources(flattened, _options);
+  const resources = gatherResources(api, _options);
+  output += renderResources(resources, _options);
 
   return output;
 }
