@@ -33,8 +33,8 @@ function renderComments(comments, _options) {
 }
 
 
-function renderResource(resource, level = 0, parentUri = '') {
-  let output = '';
+function gatherResource(resource, level = 0, parentUri = '') {
+  const result = { level };
   const rel = resource.attr('relativeUri').plainValue();
   const uri = parentUri + rel;
   // We will come back to pick up the types later
@@ -60,23 +60,56 @@ function renderResource(resource, level = 0, parentUri = '') {
       args.push(`${qp.name()}: ${ramll2graphqlType(type)}${required ? '!' : ''}`);
     });
 
-    const queryName = basePath.substr(1).replace('/', '-');
-    output += `  ${queryName}`;
-    if (args.length > 0) {
-      output += `(${args.join(', ')})`;
+    result.queryName = basePath.substr(1).replace('/', '-');
+    result.args = args;
+    const dna = resource.attr('displayName');
+    if (dna) result.displayName = dna.plainValue();
+  });
+
+  result.subResources = [];
+  resource.elementsOfKind('resources').forEach((sub) => {
+    result.subResources.push(gatherResource(sub, level + 1, uri));
+  });
+
+  return result;
+}
+
+
+function flattenResources(resources) {
+  const result = [];
+
+  resources.forEach(resource => {
+    const copy = Object.assign({}, resource);
+    const subResources = copy.subResources;
+    delete copy.subResources;
+    if (copy.queryName) result.push(copy);
+    const tmp = flattenResources(subResources);
+    tmp.forEach(subResource => {
+      result.push(subResource);
+    });
+  });
+
+  return result;
+}
+
+
+function renderResources(flattened, _options) {
+  let output = 'type Query {\n';
+
+  flattened.forEach(resource => {
+    output += `  ${resource.queryName}`;
+    if (resource.args.length > 0) {
+      output += `(${resource.args.join(', ')})`;
     }
 
-    const dna = resource.attr('displayName');
-    if (dna) {
-      output += ` # ${dna.plainValue()}`;
+    if (resource.displayName) {
+      output += ` # ${resource.displayName}`;
     }
 
     output += '\n';
   });
 
-  resource.elementsOfKind('resources').forEach((sub) => {
-    output += renderResource(sub, level + 1, uri);
-  });
+  output += '}\n';
 
   return output;
 }
@@ -88,10 +121,9 @@ function render(api, _options) {
   const comments = gatherComments(api, _options);
   output += renderComments(comments, _options);
 
-  output += '\n' +
-    'type Query {\n' +
-    api.elementsOfKind('resources').map(r => renderResource(r)).join('') +
-    '}\n';
+  const resources = api.elementsOfKind('resources').map(r => gatherResource(r));
+  const flattened = flattenResources(resources, _options);
+  output += renderResources(flattened, _options);
 
   return output;
 }
