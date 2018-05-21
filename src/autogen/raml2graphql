@@ -7,7 +7,7 @@
 const raml = require('raml-1-parser');
 const packageInfo = require('./package.json');
 const { gatherAPI } = require('./gatherAPI');
-const { renderAPI } = require('./asSchema');
+const { render } = require('./asSchema');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
@@ -43,4 +43,4 @@ if (opt.options.verbose) {
 }
 
 const gathered = gatherAPI(api, opt.options);
-console.log(renderAPI(gathered, opt.options));
+console.log(render(gathered, opt.options));

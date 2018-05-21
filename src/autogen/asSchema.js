@@ -33,10 +33,10 @@ function renderResources(flattened, _options) {
 }
 
 
-function renderAPI(api, _options) {
+function render(api, _options) {
   return (renderComments(api.comments, _options) +
           renderResources(api.resources, _options));
 }
 
 
-exports.renderAPI = renderAPI;
+exports.render = render;
