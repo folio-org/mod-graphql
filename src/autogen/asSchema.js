@@ -9,6 +9,30 @@ function ramll2graphqlType(type) {
 }
 
 
+function gather_comments(api, _options) {
+  const comments = [];
+
+  ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
+    comments.push([tag, api.attributes(tag).map(attr => attr.plainValue())]);
+  });
+
+  return comments;
+}
+
+
+function render_comments(comments, _options) {
+  let output = '';
+
+  comments.forEach(comment => {
+    const tag = comment[0];
+    const values = comment[1];
+    output += `# ${tag}: ${values.join(', ')}\n`;
+  });
+
+  return output;
+}
+
+
 function renderResource(resource, level = 0, parentUri = '') {
   let output = '';
   const rel = resource.attr('relativeUri').plainValue();
@@ -61,10 +85,8 @@ function renderResource(resource, level = 0, parentUri = '') {
 function render(api, _options) {
   let output = '';
 
-  ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
-    const values = api.attributes(tag).map(attr => attr.plainValue());
-    output += `# ${tag}: ${values.join(', ')}\n`;
-  });
+  const comments = gather_comments(api, _options);
+  output += render_comments(comments, _options);
 
   output += '\n' +
     'type Query {\n' +
