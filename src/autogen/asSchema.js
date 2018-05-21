@@ -9,7 +9,7 @@ function ramll2graphqlType(type) {
 }
 
 
-function gather_comments(api, _options) {
+function gatherComments(api, _options) {
   const comments = [];
 
   ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
@@ -20,7 +20,7 @@ function gather_comments(api, _options) {
 }
 
 
-function render_comments(comments, _options) {
+function renderComments(comments, _options) {
   let output = '';
 
   comments.forEach(comment => {
@@ -85,8 +85,8 @@ function renderResource(resource, level = 0, parentUri = '') {
 function render(api, _options) {
   let output = '';
 
-  const comments = gather_comments(api, _options);
-  output += render_comments(comments, _options);
+  const comments = gatherComments(api, _options);
+  output += renderComments(comments, _options);
 
   output += '\n' +
     'type Query {\n' +
