@@ -24,7 +24,6 @@ function gatherResource(resource, level = 0, parentUri = '') {
   const result = { level };
   const rel = resource.attr('relativeUri').plainValue();
   const uri = parentUri + rel;
-  // We will come back to pick up the types later
 
   const methods = resource.elementsOfKind('methods');
   // At this stage, we are only interested in GET, not mutations
@@ -51,6 +50,22 @@ function gatherResource(resource, level = 0, parentUri = '') {
     result.args = args;
     const dna = resource.attr('displayName');
     if (dna) result.displayName = dna.plainValue();
+
+    const type = resource.attr('type');
+    const typeValue = type.findReferencedValue();
+    // console.log('typeValue:', typeValue);
+    const localType = typeValue.localType();
+    // console.log('localType:', localType);
+    // const { getMethods } = require('./getMethods');
+    // console.log('localType methods:', getMethods(localType));
+    console.log("Body media type: " + localType.nameId() + " with properties:");
+    localType.allProperties().forEach(function(prop){
+      console.log(' '+prop.nameId() + ": " + prop.range().nameId());
+      if(prop.nameId() === 'schema') console.log('  ', prop.range());
+    });
+
+    const schema = typeValue.attr('schema');
+    console.log('schema:', schema);
   });
 
   result.subResources = [];
