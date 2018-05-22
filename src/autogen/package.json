@@ -11,6 +11,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "json-schema-ref-parser": "^5.0.3",
     "node-getopt": "^0.3.2",
     "raml-1-parser": "^1.1.42"
   }
