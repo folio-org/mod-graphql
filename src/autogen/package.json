@@ -5,7 +5,8 @@
   "repository": "folio-org/mod-graphql",
   "scripts": {
     "lint": "cd ../.. && yarn lint",
-    "test": "./raml2graphql ../../../mod-inventory/ramls/inventory.raml | diff Output -"
+    "test": "./raml2graphql ../../../mod-inventory/ramls/inventory.raml | diff Output -",
+    "regen": "./raml2graphql ../../../mod-inventory/ramls/inventory.raml > Output"
   },
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
