@@ -29,9 +29,7 @@ function gatherResource(resource, level = 0, parentUri = '') {
     }
 
     (method.queryParameters || []).forEach((qp) => {
-      const required = qp.required || false;
-      const type = qp.type || 'string';
-      args.push([qp.name, type, required]);
+      args.push([qp.name, qp.type || 'string', qp.required || false]);
     });
 
     result.queryName = basePath.substr(1).replace('/', '-');
