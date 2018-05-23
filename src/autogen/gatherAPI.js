@@ -1,14 +1,3 @@
-function ramll2graphqlType(type) {
-  const map = {
-    string: 'String',
-    integer: 'Int',
-    // More to follow
-  };
-
-  return map[type] || 'Unknown';
-}
-
-
 function gatherComments(api, _options) {
   const comments = [];
 
@@ -32,7 +21,7 @@ function gatherResource(resource, level = 0, parentUri = '') {
 
     let basePath;
     if (rel.startsWith('/{')) {
-      args.push([rel.replace(/\/{(.*)}/, '$1'), 'String', true]);
+      args.push([rel.replace(/\/{(.*)}/, '$1'), 'string', true]);
       basePath = `${parentUri}-SINGLE`;
     } else {
       basePath = uri;
@@ -43,7 +32,7 @@ function gatherResource(resource, level = 0, parentUri = '') {
       const required = a1 ? a1.plainValue() : false;
       const a2 = qp.attr('type');
       const type = a2 ? a2.plainValue() : 'string';
-      args.push([qp.name(), ramll2graphqlType(type), required]);
+      args.push([qp.name(), type, required]);
     });
 
     result.queryName = basePath.substr(1).replace('/', '-');
