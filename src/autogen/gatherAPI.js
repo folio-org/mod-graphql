@@ -2,7 +2,7 @@ function gatherComments(api, _options) {
   const comments = [];
 
   ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
-    let val = api.specification[tag];
+    const val = api.specification[tag];
     comments.push([tag, typeof val === 'string' ? [val] : val]);
   });
 
@@ -38,12 +38,14 @@ function findResponseSchemaText(resource) {
       }
     }
   }
+
+  return null;
 }
 
 
 function gatherResource(resource, level = 0, parentUri = '') {
   const result = { level };
-  const rel = resource.relativeUri
+  const rel = resource.relativeUri;
   const uri = parentUri + rel;
 
   const methods = resource.methods || [];
@@ -65,7 +67,7 @@ function gatherResource(resource, level = 0, parentUri = '') {
 
     result.queryName = basePath.substr(1).replace('/', '-');
     result.args = args;
-    if (resource.displayName.match(/^[^\/]/)) {
+    if (resource.displayName.match(/^[^/]/)) {
       result.displayName = resource.displayName;
     }
   });
@@ -109,7 +111,7 @@ function gatherAPI(api, _options) {
   return {
     comments: gatherComments(api, _options),
     resources: gatherResources(api, _options),
-  }
+  };
 }
 
 
