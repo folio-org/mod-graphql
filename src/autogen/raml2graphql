@@ -32,7 +32,7 @@ if (opt.argv.length !== 1) {
 
 let api;
 try {
-  api = raml.parseSync(opt.argv[0]);
+  api = raml.loadSync(opt.argv[0]);
 } catch (e) {
   console.error(`${argv0}: RAML parse failed:`, e);
   process.exit(2);
