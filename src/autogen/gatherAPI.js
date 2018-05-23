@@ -10,6 +10,37 @@ function gatherComments(api, _options) {
 }
 
 
+function findResponseSchemaText(resource) {
+  // The response schema can be provided at several different levels,
+  // the lower and more specific overriding the higher and more
+  // general. So we look in each candidate location, from the most
+  // specific upwards, and return the first one we find.
+
+  const getMethods = (resource.methods || []).filter(m => m.method === 'get');
+  if (getMethods.length > 1) {
+    console.error('multiple get methods');
+  }
+  if (getMethods.length > 0) {
+    const method = getMethods[0];
+    const response200 = (method.responses || []).filter(r => r.code === '200');
+    if (response200.length > 1) {
+      console.error('multiple 200 responses');
+    }
+    if (response200.length > 0) {
+      const response = response200[0];
+      const bodyJSON = (response.body || []).filter(b => b.name === 'application/json');
+      if (bodyJSON.length > 1) {
+        console.error('multiple application/json bodies');
+      }
+      if (bodyJSON.length > 0) {
+        const body = bodyJSON[0];
+        if (body.schemaContent) return body.schemaContent;
+      }
+    }
+  }
+}
+
+
 function gatherResource(resource, level = 0, parentUri = '') {
   const result = { level };
   const rel = resource.relativeUri
@@ -43,6 +74,8 @@ function gatherResource(resource, level = 0, parentUri = '') {
   (resource.resources || []).forEach((sub) => {
     result.subResources.push(gatherResource(sub, level + 1, uri));
   });
+
+  const schemaText = findResponseSchemaText(resource);
 
   return result;
 }
