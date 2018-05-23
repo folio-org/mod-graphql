@@ -4,7 +4,8 @@
   "description": "Translate RAML/JSON Schema into GraphQL schema",
   "repository": "folio-org/mod-graphql",
   "scripts": {
-    "lint": "cd ../.. && yarn lint"
+    "lint": "cd ../.. && yarn lint",
+    "test": "./raml2graphql ../../../mod-inventory/ramls/inventory.raml | diff Output -"
   },
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
