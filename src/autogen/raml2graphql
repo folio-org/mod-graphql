@@ -12,7 +12,7 @@ const { render } = require('./asSchema');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
-  ['v', 'verbose', 'Verbose mode: dump JSON of RAML/Schema'],
+  ['v', 'verbose', 'Verbose mode: dump JSON of gathered RAML/Schema'],
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
 ])
