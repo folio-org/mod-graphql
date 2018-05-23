@@ -2,7 +2,8 @@ function gatherComments(api, _options) {
   const comments = [];
 
   ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
-    comments.push([tag, api.attributes(tag).map(attr => attr.plainValue())]);
+    let val = api.specification[tag];
+    comments.push([tag, typeof val === 'string' ? [val] : val]);
   });
 
   return comments;
@@ -11,12 +12,12 @@ function gatherComments(api, _options) {
 
 function gatherResource(resource, level = 0, parentUri = '') {
   const result = { level };
-  const rel = resource.attr('relativeUri').plainValue();
+  const rel = resource.relativeUri
   const uri = parentUri + rel;
 
-  const methods = resource.elementsOfKind('methods');
+  const methods = resource.methods || [];
   // At this stage, we are only interested in GET, not mutations
-  methods.filter(m => m.name() === 'get').forEach((method) => {
+  methods.filter(m => m.method === 'get').forEach((method) => {
     const args = [];
 
     let basePath;
@@ -27,22 +28,21 @@ function gatherResource(resource, level = 0, parentUri = '') {
       basePath = uri;
     }
 
-    method.elementsOfKind('queryParameters').forEach((qp) => {
-      const a1 = qp.attr('required');
-      const required = a1 ? a1.plainValue() : false;
-      const a2 = qp.attr('type');
-      const type = a2 ? a2.plainValue() : 'string';
-      args.push([qp.name(), type, required]);
+    (method.queryParameters || []).forEach((qp) => {
+      const required = qp.required || false;
+      const type = qp.type || 'string';
+      args.push([qp.name, type, required]);
     });
 
     result.queryName = basePath.substr(1).replace('/', '-');
     result.args = args;
-    const dna = resource.attr('displayName');
-    if (dna) result.displayName = dna.plainValue();
+    if (resource.displayName.match(/^[^\/]/)) {
+      result.displayName = resource.displayName;
+    }
   });
 
   result.subResources = [];
-  resource.elementsOfKind('resources').forEach((sub) => {
+  (resource.resources || []).forEach((sub) => {
     result.subResources.push(gatherResource(sub, level + 1, uri));
   });
 
@@ -69,7 +69,7 @@ function flattenResources(resources) {
 
 
 function gatherResources(api, _options) {
-  const resources = api.elementsOfKind('resources').map(r => gatherResource(r));
+  const resources = api.specification.resources.map(r => gatherResource(r));
   return flattenResources(resources, _options);
 }
 
