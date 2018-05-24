@@ -106,9 +106,6 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     // library simply does not support id: see
     // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
     const obj = JSON.parse(schemaText);
-    if (obj === null) {
-      console.error(`*** could not parse schema for '${result.queryName}':\n${schemaText}`);
-    }
     rewriteObjRefs(obj, basePath);
     console.log('=== before ===\n', JSON.stringify(obj, null, 2));
     const expanded = $RefParser.dereference(obj);
