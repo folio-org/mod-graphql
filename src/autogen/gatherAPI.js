@@ -45,6 +45,31 @@ function findResponseSchemaText(resource) {
 }
 
 
+function rewriteObjRefs(obj, basePath) {
+  const keys = Object.keys(obj);
+  keys.forEach(k => {
+    if (k === '$ref') {
+      obj[k] = `${basePath}/${obj[k]}`;
+    } else if (Array.isArray(obj[k])) {
+      rewriteArrayRefs(obj[k], basePath);
+    } else if (obj[k] instanceof Object) {
+      rewriteObjRefs(obj[k], basePath);
+    }
+  });
+}
+
+
+function rewriteArrayRefs(arr, basePath) {
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      rewriteArrayRefs(arr[i], basePath);
+    } else if (arr[i] instanceof Object) {
+      rewriteObjRefs(arr[i], basePath);
+    }
+  }
+}
+
+
 function gatherResource(resource, basePath, level = 0, parentUri = '') {
   const result = { level };
   const rel = resource.relativeUri;
@@ -81,12 +106,15 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
   });
 
   const schemaText = findResponseSchemaText(resource);
-  // We have to insert a suitable "id" at the top level of the schema
-  // to specify the base-path for resolving $ref references. The
-  // simplest way to do that is to parse it, insert the id into the
-  // object.
+  // We have to rewrite every $ref in this schema to be relative to
+  // `basePath`: it does not suffice to insert a suitable "id" at the
+  // top level of the schema, as the json-schema-ref-parser library
+  // simply does not support id: see https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
   const obj = JSON.parse(schemaText);
-  obj.id = `${basePath}/dummy`;
+  if (obj === null) {
+    console.error(`*** could not parse schema for '${result.queryName}':\n${schemaText}`);
+  }
+  rewriteObjRefs(obj, basePath);
   console.log('=== before ===\n', JSON.stringify(obj, null, 2));
   const expanded = $RefParser.dereference(obj);
   console.log('=== after ===\n', JSON.stringify(expanded, null, 2));
