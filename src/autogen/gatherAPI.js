@@ -1,3 +1,5 @@
+const $RefParser = require('json-schema-ref-parser-sync');
+
 function gatherComments(api, _options) {
   const comments = [];
 
@@ -78,6 +80,10 @@ function gatherResource(resource, level = 0, parentUri = '') {
   });
 
   const schemaText = findResponseSchemaText(resource);
+  const parsedSchema = JSON.parse(schemaText);
+  console.log('=== before ===\n', schemaText);
+  const expanded = $RefParser.dereference(parsedSchema);
+  console.log('=== after ===\n', JSON.stringify(expanded, null, 2));
 
   return result;
 }
