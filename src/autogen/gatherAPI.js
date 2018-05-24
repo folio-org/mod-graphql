@@ -55,19 +55,19 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
   methods.filter(m => m.method === 'get').forEach((method) => {
     const args = [];
 
-    let basePath;
+    let queryPath;
     if (rel.startsWith('/{')) {
       args.push([rel.replace(/\/{(.*)}/, '$1'), 'string', true]);
-      basePath = `${parentUri}-SINGLE`;
+      queryPath = `${parentUri}-SINGLE`;
     } else {
-      basePath = uri;
+      queryPath = uri;
     }
 
     (method.queryParameters || []).forEach((qp) => {
       args.push([qp.name, qp.type || 'string', qp.required || false]);
     });
 
-    result.queryName = basePath.substr(1).replace('/', '-');
+    result.queryName = queryPath.substr(1).replace('/', '-');
     result.args = args;
     if (resource.displayName.match(/^[^/]/)) {
       result.displayName = resource.displayName;
