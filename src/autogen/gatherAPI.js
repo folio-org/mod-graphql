@@ -115,7 +115,7 @@ function rewriteArrayRefs(arr, basePath) {
 }
 
 
-function gatherResource(resource, basePath, level = 0, parentUri = '') {
+function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
   const result = { level };
   const rel = resource.relativeUri;
   const uri = parentUri + rel;
@@ -155,12 +155,16 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     const obj = JSON.parse(schemaText);
     rewriteObjRefs(obj, basePath);
     const expanded = $RefParser.dereference(obj);
+    if (expanded.type !== 'object') {
+      console.error('schema for non-object');
+    }
+    
     // Now we can generate a type declaration corresponding the name of result.type
   });
 
   result.subResources = [];
   (resource.resources || []).forEach((sub) => {
-    result.subResources.push(gatherResource(sub, basePath, level + 1, uri));
+    result.subResources.push(gatherResource(sub, basePath, types, level + 1, uri));
   });
 
   return result;
@@ -185,16 +189,18 @@ function flattenResources(resources) {
 }
 
 
-function gatherResources(api, basePath, _options) {
-  const resources = api.specification.resources.map(r => gatherResource(r, basePath));
+function gatherResources(api, basePath, types, _options) {
+  const resources = api.specification.resources.map(r => gatherResource(r, basePath, types));
   return flattenResources(resources, _options);
 }
 
 
 function gatherAPI(api, basePath, _options) {
+  const types = {};
   return {
     comments: gatherComments(api, _options),
-    resources: gatherResources(api, basePath, _options),
+    resources: gatherResources(api, basePath, types, _options),
+    types
   };
 }
 
