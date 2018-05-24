@@ -1,6 +1,6 @@
 const $RefParser = require('json-schema-ref-parser-sync');
 
-function raml2graphqlType(type) {
+function r2gBasicType(type) {
   const map = {
     string: 'String',
     integer: 'Int',
@@ -109,7 +109,7 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     }
 
     (method.queryParameters || []).forEach((qp) => {
-      args.push([qp.name, raml2graphqlType(qp.type) || 'String', qp.required || false]);
+      args.push([qp.name, r2gBasicType(qp.type) || 'String', qp.required || false]);
     });
 
     result.queryName = queryPath.substr(1).replace('/', '-');
