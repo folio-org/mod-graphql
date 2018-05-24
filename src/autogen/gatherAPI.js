@@ -30,6 +30,12 @@ function r2gBasicType(type) {
 }
 
 
+// Converts schema-names, which function as types
+function r2gDefinedType(type) {
+  return `T${type.replace('.', '-')}`;
+}
+
+
 function gatherComments(api, _options) {
   const comments = [];
 
@@ -139,6 +145,8 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     }
 
     const { schemaName, schemaText } = findResponseSchema(resource);
+    const graphQLtype = r2gDefinedType(schemaName);
+    // console.log(`schemaName '${schemaName}' -> type '${graphQLtype}'`);
     // We have to rewrite every $ref in this schema to be relative to
     // `basePath`: it does not suffice to insert a suitable "id" at
     // the top level of the schema, as the json-schema-ref-parser
