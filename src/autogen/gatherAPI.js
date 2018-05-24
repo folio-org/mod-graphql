@@ -145,8 +145,8 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     }
 
     const { schemaName, schemaText } = findResponseSchema(resource);
-    const graphQLtype = r2gDefinedType(schemaName);
-    // console.log(`schemaName '${schemaName}' -> type '${graphQLtype}'`);
+    result.type = r2gDefinedType(schemaName);
+
     // We have to rewrite every $ref in this schema to be relative to
     // `basePath`: it does not suffice to insert a suitable "id" at
     // the top level of the schema, as the json-schema-ref-parser
@@ -155,7 +155,7 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     const obj = JSON.parse(schemaText);
     rewriteObjRefs(obj, basePath);
     const expanded = $RefParser.dereference(obj);
-    // Now we can generate a type for the return-value of the GraphQL query
+    // Now we can generate a type declaration corresponding the name of result.type
   });
 
   result.subResources = [];
