@@ -69,7 +69,8 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
 
     result.queryName = queryPath.substr(1).replace('/', '-');
     result.args = args;
-    if (resource.displayName.match(/^[^/]/)) {
+    // eslint-disable-next-line no-useless-escape
+    if (resource.displayName.match(/^[^\/]/)) {
       result.displayName = resource.displayName;
     }
   });
