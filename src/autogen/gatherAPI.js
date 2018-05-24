@@ -1,14 +1,32 @@
 const $RefParser = require('json-schema-ref-parser-sync');
 
 
+// Converts the small, fixed set of well-known basic types from RAML
+// These are documented at https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md#scalar-types
 function r2gBasicType(type) {
   const map = {
-    string: 'String',
-    integer: 'Int',
-    // More to follow
+    'any': null,
+    'string': 'String',
+    'number': null,
+    'integer': 'Int',
+    'boolean': null,
+    'date-only': null,
+    'time-only': null,
+    'datetime-only': null,
+    'datetime': null,
+    'file': null,
+    'nil': null,
+    // No attempt at this stage to support union types such as "nil | string".
   };
 
-  return map[type] || 'Unknown';
+  const res = map[type];
+  if (res) {
+    return res;
+  } else if (res === null) {
+    console.error(`use of unsupported RAML type '${type}'`);
+  }
+
+  return 'Unknown';
 }
 
 
