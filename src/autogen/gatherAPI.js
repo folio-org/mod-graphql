@@ -1,5 +1,6 @@
 const $RefParser = require('json-schema-ref-parser-sync');
 
+
 function r2gBasicType(type) {
   const map = {
     string: 'String',
