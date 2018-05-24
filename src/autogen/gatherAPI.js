@@ -1,5 +1,16 @@
 const $RefParser = require('json-schema-ref-parser-sync');
 
+function raml2graphqlType(type) {
+  const map = {
+    string: 'String',
+    integer: 'Int',
+    // More to follow
+  };
+
+  return map[type] || 'Unknown';
+}
+
+
 function gatherComments(api, _options) {
   const comments = [];
 
@@ -91,14 +102,14 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
 
     let queryPath;
     if (rel.startsWith('/{')) {
-      args.push([rel.replace(/\/{(.*)}/, '$1'), 'string', true]);
+      args.push([rel.replace(/\/{(.*)}/, '$1'), 'String', true]);
       queryPath = `${parentUri}-SINGLE`;
     } else {
       queryPath = uri;
     }
 
     (method.queryParameters || []).forEach((qp) => {
-      args.push([qp.name, qp.type || 'string', qp.required || false]);
+      args.push([qp.name, raml2graphqlType(qp.type) || 'String', qp.required || false]);
     });
 
     result.queryName = queryPath.substr(1).replace('/', '-');

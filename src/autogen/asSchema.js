@@ -1,14 +1,3 @@
-function raml2graphqlType(type) {
-  const map = {
-    string: 'String',
-    integer: 'Int',
-    // More to follow
-  };
-
-  return map[type] || 'Unknown';
-}
-
-
 function renderComments(comments, _options) {
   let output = '';
 
@@ -30,7 +19,7 @@ function renderResources(flattened, _options) {
     if (resource.args.length > 0) {
       output += `(${resource.args.map(arg => {
         const name = arg[0];
-        const type = raml2graphqlType(arg[1]);
+        const type = arg[1];
         const required = arg[2];
 
         return `${name}: ${type}${required ? '!' : ''}`;
