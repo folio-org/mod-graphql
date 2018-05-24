@@ -45,7 +45,7 @@ function findResponseSchemaText(resource) {
 }
 
 
-function gatherResource(resource, level = 0, parentUri = '') {
+function gatherResource(resource, basePath, level = 0, parentUri = '') {
   const result = { level };
   const rel = resource.relativeUri;
   const uri = parentUri + rel;
@@ -76,13 +76,18 @@ function gatherResource(resource, level = 0, parentUri = '') {
 
   result.subResources = [];
   (resource.resources || []).forEach((sub) => {
-    result.subResources.push(gatherResource(sub, level + 1, uri));
+    result.subResources.push(gatherResource(sub, basePath, level + 1, uri));
   });
 
   const schemaText = findResponseSchemaText(resource);
-  const parsedSchema = JSON.parse(schemaText);
-  console.log('=== before ===\n', schemaText);
-  const expanded = $RefParser.dereference(parsedSchema);
+  // We have to insert a suitable "id" at the top level of the schema
+  // to specify the base-path for resolving $ref references. The
+  // simplest way to do that is to parse it, insert the id into the
+  // object.
+  const obj = JSON.parse(schemaText);
+  obj.id = `${basePath}/dummy`;
+  console.log('=== before ===\n', JSON.stringify(obj, null, 2));
+  const expanded = $RefParser.dereference(obj);
   console.log('=== after ===\n', JSON.stringify(expanded, null, 2));
 
   return result;
@@ -107,16 +112,16 @@ function flattenResources(resources) {
 }
 
 
-function gatherResources(api, _options) {
-  const resources = api.specification.resources.map(r => gatherResource(r));
+function gatherResources(api, basePath, _options) {
+  const resources = api.specification.resources.map(r => gatherResource(r, basePath));
   return flattenResources(resources, _options);
 }
 
 
-function gatherAPI(api, _options) {
+function gatherAPI(api, basePath, _options) {
   return {
     comments: gatherComments(api, _options),
-    resources: gatherResources(api, _options),
+    resources: gatherResources(api, basePath, _options),
   };
 }
 
