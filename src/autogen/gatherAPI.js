@@ -12,7 +12,7 @@ function gatherComments(api, _options) {
 }
 
 
-function findResponseSchemaText(resource) {
+function findResponseSchema(resource) {
   // The response schema can be provided at several different levels,
   // the lower and more specific overriding the higher and more
   // general. So we look in each candidate location, from the most
@@ -36,12 +36,20 @@ function findResponseSchemaText(resource) {
       }
       if (bodyJSON.length > 0) {
         const body = bodyJSON[0];
-        if (body.schemaContent) return body.schemaContent;
+        if (body.schemaContent) {
+          return {
+            schemaName: body.schema,
+            schemaText: body.schemaContent,
+          };
+        }
       }
     }
   }
 
-  return null;
+  return {
+    schemaName: null,
+    schemaText: null,
+  };
 }
 
 
@@ -100,7 +108,7 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
       result.displayName = resource.displayName;
     }
 
-    const schemaText = findResponseSchemaText(resource);
+    const { schemaName, schemaText } = findResponseSchema(resource);
     // We have to rewrite every $ref in this schema to be relative to
     // `basePath`: it does not suffice to insert a suitable "id" at
     // the top level of the schema, as the json-schema-ref-parser
