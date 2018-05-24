@@ -30,15 +30,17 @@ if (opt.argv.length !== 1) {
   process.exit(1);
 }
 
+const file = opt.argv[0];
 let api;
 try {
-  api = raml.loadSync(opt.argv[0]);
+  api = raml.loadSync(file);
 } catch (e) {
   console.error(`${argv0}: RAML parse failed:`, e);
   process.exit(2);
 }
 
-const gathered = gatherAPI(api, opt.options);
+const basePath = file.match('/') ? file.replace(/(.*)\/.*/, '$1') : '.';
+const gathered = gatherAPI(api, basePath, opt.options);
 if (opt.options.verbose) {
   console.log(JSON.stringify(gathered, null, 2));
 }
