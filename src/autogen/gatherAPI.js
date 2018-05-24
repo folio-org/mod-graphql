@@ -158,7 +158,7 @@ function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
     if (expanded.type !== 'object') {
       console.error('schema for non-object');
     }
-    
+
     // Now we can generate a type declaration corresponding the name of result.type
   });
 
