@@ -51,6 +51,7 @@ function rewriteObjRefs(obj, basePath) {
     if (k === '$ref') {
       obj[k] = `${basePath}/${obj[k]}`;
     } else if (Array.isArray(obj[k])) {
+      // eslint-disable-next-line no-use-before-define
       rewriteArrayRefs(obj[k], basePath);
     } else if (obj[k] instanceof Object) {
       rewriteObjRefs(obj[k], basePath);
