@@ -107,9 +107,8 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
     const obj = JSON.parse(schemaText);
     rewriteObjRefs(obj, basePath);
-    console.log('=== before ===\n', JSON.stringify(obj, null, 2));
     const expanded = $RefParser.dereference(obj);
-    console.log('=== after ===\n', JSON.stringify(expanded, null, 2));
+    // Now we can generate a type for the return-value of the GraphQL query
   });
 
   result.subResources = [];
