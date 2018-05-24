@@ -98,26 +98,27 @@ function gatherResource(resource, basePath, level = 0, parentUri = '') {
     if (resource.displayName.match(/^[^\/]/)) {
       result.displayName = resource.displayName;
     }
+
+    const schemaText = findResponseSchemaText(resource);
+    // We have to rewrite every $ref in this schema to be relative to
+    // `basePath`: it does not suffice to insert a suitable "id" at
+    // the top level of the schema, as the json-schema-ref-parser
+    // library simply does not support id: see
+    // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
+    const obj = JSON.parse(schemaText);
+    if (obj === null) {
+      console.error(`*** could not parse schema for '${result.queryName}':\n${schemaText}`);
+    }
+    rewriteObjRefs(obj, basePath);
+    console.log('=== before ===\n', JSON.stringify(obj, null, 2));
+    const expanded = $RefParser.dereference(obj);
+    console.log('=== after ===\n', JSON.stringify(expanded, null, 2));
   });
 
   result.subResources = [];
   (resource.resources || []).forEach((sub) => {
     result.subResources.push(gatherResource(sub, basePath, level + 1, uri));
   });
-
-  const schemaText = findResponseSchemaText(resource);
-  // We have to rewrite every $ref in this schema to be relative to
-  // `basePath`: it does not suffice to insert a suitable "id" at the
-  // top level of the schema, as the json-schema-ref-parser library
-  // simply does not support id: see https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
-  const obj = JSON.parse(schemaText);
-  if (obj === null) {
-    console.error(`*** could not parse schema for '${result.queryName}':\n${schemaText}`);
-  }
-  rewriteObjRefs(obj, basePath);
-  console.log('=== before ===\n', JSON.stringify(obj, null, 2));
-  const expanded = $RefParser.dereference(obj);
-  console.log('=== after ===\n', JSON.stringify(expanded, null, 2));
 
   return result;
 }
