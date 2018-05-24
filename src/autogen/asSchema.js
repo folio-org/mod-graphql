@@ -26,6 +26,8 @@ function renderResources(flattened, _options) {
       }).join(', ')})`;
     }
 
+    output += `: ${resource.type}`;
+
     if (resource.displayName) {
       output += ` # ${resource.displayName}`;
     }
