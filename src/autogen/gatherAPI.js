@@ -3,20 +3,22 @@ const $RefParser = require('json-schema-ref-parser-sync');
 
 // Converts the small, fixed set of well-known basic types from RAML
 // These are documented at https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md#scalar-types
+// No attempt at this stage to support union types such as "nil | string".
+//
 function r2gBasicType(type) {
   const map = {
     'any': null,
     'string': 'String',
-    'number': null,
+    'number': 'Float',
     'integer': 'Int',
-    'boolean': null,
+    'boolean': 'Boolean',
     'date-only': null,
     'time-only': null,
     'datetime-only': null,
     'datetime': null,
     'file': null,
     'nil': null,
-    // No attempt at this stage to support union types such as "nil | string".
+    // There is no JSON Schema equivalent of GraphQL's "ID" type
   };
 
   const res = map[type];
