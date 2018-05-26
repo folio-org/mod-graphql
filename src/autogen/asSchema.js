@@ -41,10 +41,31 @@ function renderResources(flattened, _options) {
 }
 
 
+function renderTypes(types, _options) {
+  var output = '';
+  console.log(JSON.stringify(types, null, 2));
+
+  Object.keys(types).sort().forEach(name => {
+    const t = types[name];
+    output += `type ${name} \{\n`;
+    Object.keys(t).forEach(field => {
+      const [type, arrayDepth, required] = t[field];
+      output += `  ${field}: ${'['.repeat(arrayDepth)}${type}${']'.repeat(arrayDepth)}${required ? '!' : ''}\n`;
+    });
+    output += '}\n';
+    output += '\n';
+  });
+
+  return output;
+}
+
+
 function render(api, _options) {
   return (renderComments(api.comments, _options) +
           '\n' +
-          renderResources(api.resources, _options));
+          renderResources(api.resources, _options) +
+          '\n' +
+          renderTypes(api.types, _options));
 }
 
 
