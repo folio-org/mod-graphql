@@ -50,6 +50,26 @@ function gatherComments(api, _options) {
 }
 
 
+// Gathers the specified schema, and stores it in `types` as
+// `name`. May recursively gather sub-schemas and store those under
+// appropriate names as well.
+//
+function gatherSchema(types, name, jsonSchema) {
+  // console.log(JSON.stringify(jsonSchema, null, 20));
+  if (jsonSchema.type !== 'object') {
+    console.error('schema for non-object');
+  }
+
+  if (types[name]) {
+    // Down the line, we could verify that old and new definitions are the same
+    console.warn(`replacing existing schema for type '${name}'`);
+  }
+
+  // XXX do it
+  types[name] = null;
+}
+
+
 function findResponseSchema(resource) {
   // The response schema can be provided at several different levels,
   // the lower and more specific overriding the higher and more
@@ -157,11 +177,7 @@ function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
     const obj = JSON.parse(schemaText);
     rewriteObjRefs(obj, basePath);
     const expanded = $RefParser.dereference(obj);
-    if (expanded.type !== 'object') {
-      console.error('schema for non-object');
-    }
-
-    // Now we can generate a type declaration corresponding the name of result.type
+    gatherSchema(types, result.type, expanded);
   });
 
   result.subResources = [];
