@@ -1,6 +1,18 @@
 const $RefParser = require('json-schema-ref-parser-sync');
 
 
+function gatherComments(api, _options) {
+  const comments = [];
+
+  ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
+    const val = api.specification[tag];
+    comments.push([tag, typeof val === 'string' ? [val] : val]);
+  });
+
+  return comments;
+}
+
+
 // Converts the small, fixed set of well-known basic types from RAML
 // These are documented at https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md#scalar-types
 // No attempt at this stage to support union types such as "nil | string".
@@ -35,18 +47,6 @@ function r2gBasicType(type) {
 // Converts schema-names, which function as types
 function r2gDefinedType(type) {
   return `T${type.replace('.', '-')}`;
-}
-
-
-function gatherComments(api, _options) {
-  const comments = [];
-
-  ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
-    const val = api.specification[tag];
-    comments.push([tag, typeof val === 'string' ? [val] : val]);
-  });
-
-  return comments;
 }
 
 
