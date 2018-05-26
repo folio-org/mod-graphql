@@ -2,8 +2,7 @@ function renderComments(comments, _options) {
   let output = '';
 
   comments.forEach(comment => {
-    const tag = comment[0];
-    const values = comment[1];
+    const [tag, values] = comment;
     output += `# ${tag}: ${values.join(', ')}\n`;
   });
 
@@ -18,10 +17,7 @@ function renderResources(flattened, _options) {
     output += `  ${resource.queryName}`;
     if (resource.args.length > 0) {
       output += `(${resource.args.map(arg => {
-        const name = arg[0];
-        const type = arg[1];
-        const required = arg[2];
-
+        const [name, type, required] = arg;
         return `${name}: ${type}${required ? '!' : ''}`;
       }).join(', ')})`;
     }
