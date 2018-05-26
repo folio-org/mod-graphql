@@ -54,10 +54,17 @@ function r2gDefinedType(type) {
 // `name`. May recursively gather sub-schemas and store those under
 // appropriate names as well.
 //
-function gatherSchema(types, name, jsonSchema) {
-  // console.log(JSON.stringify(jsonSchema, null, 20));
+function gatherSchema(types, name, arrayLevels, jsonSchema) {
+  // console.log('*** schema:', JSON.stringify(jsonSchema, null, 20));
+  if (jsonSchema.type === 'array') {
+    // console.log('*** recursing for array');
+    gatherSchema(types, name, arrayLevels+1, jsonSchema.items);
+    return;
+  }
+
   if (jsonSchema.type !== 'object') {
-    console.error('schema for non-object');
+    console.error(`schema '${name}' for non-object/array '${jsonSchema.type}'`);
+    return;
   }
 
   if (types[name]) {
@@ -65,8 +72,28 @@ function gatherSchema(types, name, jsonSchema) {
     console.warn(`replacing existing schema for type '${name}'`);
   }
 
-  // XXX do it
-  types[name] = null;
+  const required = {};
+  jsonSchema.required.forEach(key => {
+    required[key] = true;
+  });
+
+  const result = {};
+  Object.keys(jsonSchema.properties).sort().forEach(key => {
+    const val = jsonSchema.properties[key];
+    const req = required[key] || false;
+    var type;
+    if (val.type === 'object' || val.type === 'array') {
+      // Rich structure: make sub-schema
+      // console.log('*** recursing for sub-structure');
+      type = `${name}-${key}`;
+      gatherSchema(types, type, 0, val);
+    } else {
+      type = r2gBasicType(val.type);
+    }
+    result[key] = [type, arrayLevels, req];
+  });
+
+  types[name] = result;
 }
 
 
@@ -177,7 +204,7 @@ function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
     const obj = JSON.parse(schemaText);
     rewriteObjRefs(obj, basePath);
     const expanded = $RefParser.dereference(obj);
-    gatherSchema(types, result.type, expanded);
+    gatherSchema(types, result.type, 0, expanded);
   });
 
   result.subResources = [];
