@@ -43,7 +43,6 @@ function renderResources(flattened, _options) {
 
 function renderTypes(types, _options) {
   var output = '';
-  console.log(JSON.stringify(types, null, 2));
 
   Object.keys(types).sort().forEach(name => {
     const t = types[name];
