@@ -3,7 +3,9 @@ function renderComments(comments, _options) {
 
   comments.forEach(comment => {
     const [tag, values] = comment;
-    output += `# ${tag}: ${values.join(', ')}\n`;
+    if (values) {
+      output += `# ${tag}: ${values.join(', ')}\n`;
+    }
   });
 
   return output;
