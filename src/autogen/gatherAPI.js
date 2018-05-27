@@ -196,19 +196,19 @@ function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
     const { schemaName, schemaText } = findResponseSchema(resource);
     if (!schemaName) {
       console.error(`no schema for '${result.queryName}'`);
-      return result;
-    }
-    result.type = r2gDefinedType(schemaName);
+    } else {
+      result.type = r2gDefinedType(schemaName);
 
-    // We have to rewrite every $ref in this schema to be relative to
-    // `basePath`: it does not suffice to insert a suitable "id" at
-    // the top level of the schema, as the json-schema-ref-parser
-    // library simply does not support id: see
-    // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
-    const obj = JSON.parse(schemaText);
-    rewriteObjRefs(obj, basePath);
-    const expanded = $RefParser.dereference(obj);
-    gatherSchema(types, result.type, 0, expanded);
+      // We have to rewrite every $ref in this schema to be relative to
+      // `basePath`: it does not suffice to insert a suitable "id" at
+      // the top level of the schema, as the json-schema-ref-parser
+      // library simply does not support id: see
+      // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
+      const obj = JSON.parse(schemaText);
+      rewriteObjRefs(obj, basePath);
+      const expanded = $RefParser.dereference(obj);
+      gatherSchema(types, result.type, 0, expanded);
+    }
   });
 
   result.subResources = [];
