@@ -194,6 +194,10 @@ function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
     }
 
     const { schemaName, schemaText } = findResponseSchema(resource);
+    if (!schemaName) {
+      console.error(`no schema for '${result.queryName}'`);
+      return result;
+    }
     result.type = r2gDefinedType(schemaName);
 
     // We have to rewrite every $ref in this schema to be relative to
