@@ -17,9 +17,9 @@ let total = 0, passed = 0, failed = 0;
 const errors = [];
 
 try {
-  fs.readdirSync(`${dir}/data`).forEach(runTest);
+  fs.readdirSync(`${dir}/input`).forEach(runTest);
 } catch (err) {
-  console.error(`Cannot read data files: ${err.message}`);
+  console.error(`Cannot read input files: ${err.message}`);
   process.exit(1);
 }
 
@@ -40,7 +40,7 @@ if (errors.length) {
 
 
 function runTest(file) {
-  const { schema, resolvers } = convertAPI(`${dir}/data/${file}`, {});
+  const { schema, resolvers } = convertAPI(`${dir}/input/${file}`, {});
   const schemaFile = `${dir}/output/${file.replace(/raml$/, 'graphql')}`;
   total++;
 
