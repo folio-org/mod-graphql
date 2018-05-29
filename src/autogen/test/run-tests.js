@@ -24,6 +24,7 @@ if (errors.length) {
     const [name, expected, got] = e;
     console.info(`failed ${name}: expected (${expected}), got (${got})`);
   });
+  process.exit(2);
 }
 
 
