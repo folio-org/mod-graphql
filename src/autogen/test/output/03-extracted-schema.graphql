@@ -1,0 +1,6 @@
+# title: simple API
+
+type Query {
+  foo(name: String, bar: Float, baz: String): undefined
+}
+
