@@ -5,8 +5,8 @@
   "repository": "folio-org/mod-graphql",
   "scripts": {
     "lint": "cd ../.. && yarn lint",
-    "test": "./raml2graphql ../../../mod-inventory/ramls/inventory.raml | diff Output -",
-    "regen": "./raml2graphql ../../../mod-inventory/ramls/inventory.raml > Output"
+    "test": "./raml2graphql test/data/01-inline=schema.raml | diff test/output/01-inline=schema.graphql -",
+    "regen": "./raml2graphql test/data/01-inline=schema.raml > test/output/01-inline=schema.graphql"
   },
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
