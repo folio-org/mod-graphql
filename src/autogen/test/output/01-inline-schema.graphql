@@ -9,4 +9,3 @@ type Tgenerated1 {
   title: String!
 }
 
-
