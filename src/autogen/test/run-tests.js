@@ -40,7 +40,13 @@ if (errors.length) {
 
 
 function runTest(file) {
-  const { schema, resolvers } = convertAPI(`${dir}/input/${file}`, {});
+  let schema, resolvers;
+  try {
+    ({ schema, resolvers } = convertAPI(`${dir}/input/${file}`, {}));
+  } catch (err3) {
+    schema = `*${err3}`;
+  }
+
   const schemaFile = `${dir}/output/${file.replace(/raml$/, 'graphql')}`;
   total++;
 
