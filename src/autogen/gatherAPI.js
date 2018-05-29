@@ -58,7 +58,7 @@ function gatherSchema(types, name, arrayLevels, jsonSchema) {
   // console.log('*** schema:', JSON.stringify(jsonSchema, null, 20));
   if (jsonSchema.type === 'array') {
     // console.log('*** recursing for array');
-    gatherSchema(types, name, arrayLevels+1, jsonSchema.items);
+    gatherSchema(types, name, arrayLevels + 1, jsonSchema.items);
     return;
   }
 
@@ -81,7 +81,7 @@ function gatherSchema(types, name, arrayLevels, jsonSchema) {
   Object.keys(jsonSchema.properties).sort().forEach(key => {
     const val = jsonSchema.properties[key];
     const req = required[key] || false;
-    var type;
+    let type;
     if (val.type === 'object' || val.type === 'array') {
       // Rich structure: make sub-schema
       // console.log('*** recursing for sub-structure');
@@ -98,6 +98,12 @@ function gatherSchema(types, name, arrayLevels, jsonSchema) {
 
 
 function findResponseSchema(resource) {
+  let typeNameCounter = 0;
+  function generateSchemaName() {
+    typeNameCounter++;
+    return `generated${typeNameCounter}`;
+  }
+
   // The response schema can be provided at several different levels,
   // the lower and more specific overriding the higher and more
   // general. So we look in each candidate location, from the most
@@ -122,9 +128,14 @@ function findResponseSchema(resource) {
       if (bodyJSON.length > 0) {
         const body = bodyJSON[0];
         if (body.schemaContent) {
+          // For some reason, raml-1-parser sets the schema name equal
+          // to its context if it appears inline. In this case assign
+          // a random name.
+          const schemaText = body.schemaContent;
+          const schemaName = (body.schema === schemaText) ? generateSchemaName() : body.schema;
           return {
-            schemaName: body.schema,
-            schemaText: body.schemaContent,
+            schemaName,
+            schemaText,
           };
         }
       }
