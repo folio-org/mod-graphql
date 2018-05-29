@@ -6,6 +6,6 @@ type Query {
 
 type Tgenerated1 {
   description: String
-  title: String!
+  title: String
 }
 
