@@ -1,12 +1,23 @@
+// Usage: node run-tests.js [--regenerate] [<test-dir>]
+
 const fs = require('fs');
 const { convertAPI } = require('../convertAPI');
 
-const regen = (process.argv[2] === '--regenerate');
+let regen, dir;
+if (process.argv[2] === '--regenerate') {
+  regen = true;
+  dir = process.argv[3];
+} else {
+  regen = false;
+  dir = process.argv[2];
+}
+if (!dir) dir = '.';
+
 let total = 0, passed = 0, failed = 0;
 const errors = [];
 
 try {
-  fs.readdirSync('data').forEach(runTest);
+  fs.readdirSync(`${dir}/data`).forEach(runTest);
 } catch (err) {
   console.error(`Cannot read data files: ${err.message}`);
   process.exit(1);
@@ -29,8 +40,8 @@ if (errors.length) {
 
 
 function runTest(file) {
-  const { schema, resolvers } = convertAPI(`data/${file}`, {});
-  const schemaFile = `output/${file.replace(/raml$/, 'graphql')}`;
+  const { schema, resolvers } = convertAPI(`${dir}/data/${file}`, {});
+  const schemaFile = `${dir}/output/${file.replace(/raml$/, 'graphql')}`;
   total++;
 
   if (regen) {
