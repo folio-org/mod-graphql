@@ -1,28 +1,27 @@
 #%RAML 0.8
 
-# For reasons that I do not fully understand, this schema does not get
-# included in the definition of the application/json body for 200
-# responses to the get method, as it does in test 02 where it is
-# inline. It might be that RAML 0.8 doesn't support this (but RAML 1.0
-# does)?
+# It seems that named types are a RAML 1.0-only feature, not supported
+# by RAML 0.8 which is what we're concentrating on. So I've commented
+# out the attempt to use this facility, and we accept that this is
+# going to result in an undefined response type.
 
 title: simple API  
 
-types:
-  fooType: |
-    {
-      "type": "object",
-      "$schema": "http://json-schema.org/draft-03/schema",
-      "properties": {
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    }
+# types:
+#   fooType: |
+#     {
+#       "type": "object",
+#       "$schema": "http://json-schema.org/draft-03/schema",
+#       "properties": {
+#         "title": {
+#           "type": "string",
+#           "required": true
+#         },
+#         "description": {
+#           "type": "string"
+#         }
+#       }
+#     }
 
 /foo:
   get:
@@ -34,4 +33,4 @@ types:
       200:
         body:
           application/json:
-            type: fooType
+#            type: fooType
