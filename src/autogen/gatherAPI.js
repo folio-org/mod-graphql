@@ -37,7 +37,7 @@ function r2gBasicType(type) {
   if (res) {
     return res;
   } else if (res === null) {
-    console.error(`use of unsupported RAML type '${type}'`);
+    throw new Error(`use of unsupported RAML type '${type}'`);
   }
 
   return 'Unknown';
@@ -63,7 +63,7 @@ function gatherSchema(types, name, arrayLevels, jsonSchema) {
   }
 
   if (jsonSchema.type !== 'object') {
-    console.error(`schema '${name}' for non-object/array '${jsonSchema.type}'`);
+    throw new Error(`schema '${name}' for non-object/array '${jsonSchema.type}'`);
     return;
   }
 
@@ -206,7 +206,7 @@ function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
 
     const { schemaName, schemaText } = findResponseSchema(resource);
     if (!schemaName) {
-      console.error(`no schema for '${result.queryName}'`);
+      throw new Error(`no schema for '${result.queryName}'`);
     } else {
       result.type = r2gDefinedType(schemaName);
 
