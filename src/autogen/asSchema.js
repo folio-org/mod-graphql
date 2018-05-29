@@ -40,10 +40,11 @@ function renderResources(flattened, _options) {
 
 
 function renderTypes(types, _options) {
-  var output = '';
+  let output = '';
 
   Object.keys(types).sort().forEach(name => {
     const t = types[name];
+    // eslint-disable-next-line no-useless-escape
     output += `type ${name} \{\n`;
     Object.keys(t).forEach(field => {
       const [type, arrayDepth, required] = t[field];
