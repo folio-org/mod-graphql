@@ -73,7 +73,7 @@ function gatherSchema(types, name, arrayLevels, jsonSchema) {
   }
 
   const required = {};
-  jsonSchema.required.forEach(key => {
+  (jsonSchema.required || []).forEach(key => {
     required[key] = true;
   });
 
