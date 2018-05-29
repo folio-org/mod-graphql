@@ -28,4 +28,5 @@ if (opt.argv.length !== 1) {
   process.exit(1);
 }
 
-convertAPI(opt.options, opt.argv[0], null, null);
+const { schema } = convertAPI(opt.argv[0], opt.options);
+console.log(schema);
