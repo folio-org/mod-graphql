@@ -64,7 +64,6 @@ function gatherSchema(types, name, arrayLevels, jsonSchema) {
 
   if (jsonSchema.type !== 'object') {
     throw new Error(`schema '${name}' for non-object/array '${jsonSchema.type}'`);
-    return;
   }
 
   if (types[name]) {
