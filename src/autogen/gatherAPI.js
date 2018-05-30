@@ -96,13 +96,37 @@ function gatherSchema(types, name, arrayLevels, jsonSchema) {
 }
 
 
-function findResponseSchema(resource) {
+function findBodySchema(body) {
   let typeNameCounter = 0;
   function generateSchemaName() {
     typeNameCounter++;
     return `generated${typeNameCounter}`;
   }
 
+  const bodyJSON = (body || []).filter(b => b.name === 'application/json');
+  if (bodyJSON.length > 1) {
+    console.error('multiple application/json bodies');
+  }
+  if (bodyJSON.length > 0) {
+    const ajBody = bodyJSON[0];
+    if (ajBody.schemaContent) {
+      // For some reason, raml-1-parser sets the schema name equal
+      // to its context if it appears inline. In this case assign
+      // a random name.
+      const schemaText = ajBody.schemaContent;
+      const schemaName = (ajBody.schema === schemaText) ? generateSchemaName() : ajBody.schema;
+      return {
+        schemaName,
+        schemaText,
+      };
+    }
+  }
+
+  return null;
+}
+
+
+function findResponseSchema(resource) {
   // The response schema can be provided at several different levels,
   // the lower and more specific overriding the higher and more
   // general. So we look in each candidate location, from the most
@@ -120,24 +144,12 @@ function findResponseSchema(resource) {
     }
     if (response200.length > 0) {
       const response = response200[0];
-      const bodyJSON = (response.body || []).filter(b => b.name === 'application/json');
-      if (bodyJSON.length > 1) {
-        console.error('multiple application/json bodies');
-      }
-      if (bodyJSON.length > 0) {
-        const body = bodyJSON[0];
-        if (body.schemaContent) {
-          // For some reason, raml-1-parser sets the schema name equal
-          // to its context if it appears inline. In this case assign
-          // a random name.
-          const schemaText = body.schemaContent;
-          const schemaName = (body.schema === schemaText) ? generateSchemaName() : body.schema;
-          return {
-            schemaName,
-            schemaText,
-          };
-        }
-      }
+      const res = findBodySchema(response.body);
+      if (res) return res;
+    }
+    if (method.body) {
+      const res = findBodySchema(method.body);
+      if (res) return res;
     }
   }
 
