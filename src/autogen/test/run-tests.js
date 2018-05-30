@@ -24,7 +24,9 @@ if (singleTest) {
   runTest(singleTest);
 } else {
   try {
-    fs.readdirSync(`${dir}/input`).forEach(runTest);
+    fs.readdirSync(`${dir}/input`).forEach(file => {
+      if (file.match(/\.raml$/)) runTest(file);
+    });
   } catch (err) {
     console.error(`Cannot read input files: ${err.message}`);
     process.exit(1);
