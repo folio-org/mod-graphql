@@ -13,7 +13,7 @@ if (process.argv[2] === '--regenerate') {
 }
 if (!dir) dir = '.';
 
-let total = 0, passed = 0, exceptions = 0, failed = 0;
+let ntotal = 0, npassed = 0, nexceptions = 0, nfailed = 0;
 const errors = [];
 
 try {
@@ -24,9 +24,9 @@ try {
 }
 
 if (!regen) {
-  console.info(`${total} tests: ${passed} passed (including ${exceptions} expected exceptions), ${failed} failed`);
+  console.info(`${ntotal} tests: ${npassed} passed (including ${nexceptions} expected exceptions), ${nfailed} failed`);
 }
-if (failed === 0) {
+if (nfailed === 0) {
   console.log("Success!");
 }
 if (errors.length) {
@@ -48,7 +48,7 @@ function runTest(file) {
   }
 
   const schemaFile = `${dir}/output/${file.replace(/raml$/, 'graphql')}`;
-  total++;
+  ntotal++;
 
   if (regen) {
     fs.writeFileSync(schemaFile, schema);
@@ -56,11 +56,11 @@ function runTest(file) {
     const expected = fs.readFileSync(schemaFile, 'utf8');
     if (expected === schema) {
       console.info(`ok ${file}`);
-      passed++;
-      if (schema.startsWith('*')) exceptions++;
+      npassed++;
+      if (schema.startsWith('*')) nexceptions++;
     } else {
       console.info(`FAIL ${file}`);
-      failed++;
+      nfailed++;
       errors.push([file, expected, schema]);
     }
   }
