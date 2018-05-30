@@ -1,0 +1,16 @@
+#%RAML 0.8
+
+title: simple API  
+
+schemas:
+  - fooSchema: !include schemas/foo.json
+
+/foo:
+  get:
+    queryParameters:
+      name:
+      bar: {type: number}
+      baz: {type: string}
+    body:
+      application/json:
+        schema: fooSchema
