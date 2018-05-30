@@ -1,6 +1,5 @@
 More tests to come:
 
-* Schema in external file
 * Both of the above together
 * Body defined for whole method, not individual response
 * Body defined at both these levels, with more precise one winning
