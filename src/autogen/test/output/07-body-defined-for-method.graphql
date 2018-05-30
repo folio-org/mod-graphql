@@ -1,1 +1,11 @@
-*Error: no schema for 'foo'
+# title: simple API
+
+type Query {
+  foo(name: String, bar: Float, baz: String): TfooSchema
+}
+
+type TfooSchema {
+  description: String
+  title: String!
+}
+
