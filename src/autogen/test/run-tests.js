@@ -24,7 +24,7 @@ try {
 }
 
 if (!regen) {
-  console.info(`${total} tests: ${passed} passed (including ${exceptions} exceptions), ${failed} failed`);
+  console.info(`${total} tests: ${passed} passed (including ${exceptions} expected exceptions), ${failed} failed`);
 }
 if (failed === 0) {
   console.log("Success!");
