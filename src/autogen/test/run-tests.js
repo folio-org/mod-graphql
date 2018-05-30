@@ -1,26 +1,34 @@
-// Usage: node run-tests.js [--regenerate] [<test-dir>]
+// Usage: node run-tests.js [--regenerate] [<test-dir>] [<test-name>]
+
+console.log(`run-tests in ${process.cwd()}`);
 
 const fs = require('fs');
 const { convertAPI } = require('../convertAPI');
 
-let regen, dir;
+let regen, dir, singleTest;
 if (process.argv[2] === '--regenerate') {
   regen = true;
   dir = process.argv[3];
+  singleTest = process.argv[4];
 } else {
   regen = false;
   dir = process.argv[2];
+  singleTest = process.argv[3];
 }
 if (!dir) dir = '.';
 
 let ntotal = 0, npassed = 0, nexceptions = 0, nfailed = 0;
 const errors = [];
 
-try {
-  fs.readdirSync(`${dir}/input`).forEach(runTest);
-} catch (err) {
-  console.error(`Cannot read input files: ${err.message}`);
-  process.exit(1);
+if (singleTest) {
+  runTest(singleTest);
+} else {
+  try {
+    fs.readdirSync(`${dir}/input`).forEach(runTest);
+  } catch (err) {
+    console.error(`Cannot read input files: ${err.message}`);
+    process.exit(1);
+  }
 }
 
 if (!regen) {
