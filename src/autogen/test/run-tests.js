@@ -13,7 +13,7 @@ if (process.argv[2] === '--regenerate') {
 }
 if (!dir) dir = '.';
 
-let total = 0, passed = 0, failed = 0;
+let total = 0, passed = 0, exceptions = 0, failed = 0;
 const errors = [];
 
 try {
@@ -24,7 +24,7 @@ try {
 }
 
 if (!regen) {
-  console.info(`${total} tests: ${passed} passed, ${failed} failed`);
+  console.info(`${total} tests: ${passed} passed (including ${exceptions} exceptions), ${failed} failed`);
 }
 if (failed === 0) {
   console.log("Success!");
@@ -57,6 +57,7 @@ function runTest(file) {
     if (expected === schema) {
       console.info(`ok ${file}`);
       passed++;
+      if (schema.startsWith('*')) exceptions++;
     } else {
       console.info(`FAIL ${file}`);
       failed++;
