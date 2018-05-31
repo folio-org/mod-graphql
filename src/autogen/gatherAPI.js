@@ -186,7 +186,7 @@ function rewriteArrayRefs(arr, basePath) {
 }
 
 
-function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
+function gatherResource(resource, basePath, types, options, level = 0, parentUri = '') {
   const result = { level };
   const rel = resource.relativeUri;
   const uri = parentUri + rel;
@@ -227,15 +227,18 @@ function gatherResource(resource, basePath, types, level = 0, parentUri = '') {
       // library simply does not support id: see
       // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
       const obj = JSON.parse(schemaText);
+      if (options.showRewrite) console.info(`rewriting schema from (${JSON.stringify(obj, null, 2)})`);
       rewriteObjRefs(obj, basePath);
+      if (options.showRewrite) console.info(`rewrote schema to (${JSON.stringify(obj, null, 2)})`);
       const expanded = $RefParser.dereference(obj);
+      if (options.showExpand) console.info(`expanded dereferenced schema to (${JSON.stringify(expanded, null, 2)})`);
       gatherSchema(types, result.type, 0, expanded);
     }
   });
 
   result.subResources = [];
   (resource.resources || []).forEach((sub) => {
-    result.subResources.push(gatherResource(sub, basePath, types, level + 1, uri));
+    result.subResources.push(gatherResource(sub, basePath, types, options, level + 1, uri));
   });
 
   return result;
@@ -260,9 +263,9 @@ function flattenResources(resources) {
 }
 
 
-function gatherResources(api, basePath, types, _options) {
-  const resources = api.specification.resources.map(r => gatherResource(r, basePath, types));
-  return flattenResources(resources, _options);
+function gatherResources(api, basePath, types, options) {
+  const resources = api.specification.resources.map(r => gatherResource(r, basePath, types, options));
+  return flattenResources(resources, options);
 }
 
 
