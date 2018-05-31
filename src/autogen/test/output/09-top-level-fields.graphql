@@ -1,0 +1,14 @@
+# title: simple API
+# version: v1.1
+# protocols: HTTP, HTTPS
+# baseUri: http://some-site.com/dummy-api
+
+type Query {
+  foo(name: String, bar: Float, baz: String): TfooSchema
+}
+
+type TfooSchema {
+  description: String
+  title: String!
+}
+
