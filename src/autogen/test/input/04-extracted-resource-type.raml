@@ -3,12 +3,12 @@
 title: simple API  
 
 resourceTypes: 
-  - fooResource:
+  - personResource:
       get:
         queryParameters:
           name:
-          bar: {type: number}
-          baz: {type: string}
+          maxCount: {type: number}
+          queryString: {type: string}
         responses:
           200:
             body:
@@ -18,17 +18,17 @@ resourceTypes:
                     "type": "object",
                     "$schema": "http://json-schema.org/draft-03/schema",
                     "properties": {
-                      "title": {
+                      "name": {
                         "type": "string"
                       },
-                      "description": {
+                      "address": {
                         "type": "string"
                       }
                     },
                     "required": [
-                      "title"
+                      "name"
                     ]
                   }
 
-/foo:
-  type: fooResource
+/person:
+  type: personResource

@@ -8,29 +8,29 @@
 title: simple API  
 
 # types:
-#   fooType: |
+#   personType: |
 #     {
 #       "type": "object",
 #       "$schema": "http://json-schema.org/draft-03/schema",
 #       "properties": {
-#         "title": {
+#         "name": {
 #           "type": "string",
 #           "required": true
 #         },
-#         "description": {
+#         "address": {
 #           "type": "string"
 #         }
 #       }
 #     }
 
-/foo:
+/person:
   get:
     queryParameters:
       name:
-      bar: {type: number}
-      baz: {type: string}
+      maxCount: {type: number}
+      queryString: {type: string}
     responses:
       200:
         body:
           application/json:
-#            type: fooType
+#            type: personType

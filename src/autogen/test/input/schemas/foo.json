@@ -2,14 +2,14 @@
   "type": "object",
   "$schema": "http://json-schema.org/draft-03/schema",
   "properties": {
-    "title": {
+    "name": {
       "type": "string"
     },
-    "description": {
+    "address": {
       "type": "string"
     }
   },
   "required": [
-    "title"
+    "name"
   ]
 }

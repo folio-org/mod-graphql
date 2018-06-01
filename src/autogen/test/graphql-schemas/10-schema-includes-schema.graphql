@@ -4,13 +4,13 @@
 # baseUri: http://some-site.com/dummy-api
 
 type Query {
-  foo(name: String, bar: Float, baz: String): TtopSchema
+  person(name: String, maxCount: Float, queryString: String): TtopSchema
 }
 
 type TtopSchema {
-  description: String
+  address: String
   metadata: TtopSchema-metadata
-  title: String!
+  name: String!
 }
 
 type TtopSchema-metadata {

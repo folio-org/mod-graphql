@@ -1,10 +1,10 @@
 # title: simple API
 
 type Query {
-  foo(name: String, bar: Float, baz: String): TbarSchema
+  person(name: String, maxCount: Float, queryString: String): TgroupSchema
 }
 
-type TbarSchema {
+type TgroupSchema {
   hammerstein: String!
   rodgers: String
 }

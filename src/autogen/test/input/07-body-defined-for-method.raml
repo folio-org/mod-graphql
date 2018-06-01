@@ -3,14 +3,14 @@
 title: simple API  
 
 schemas:
-  - fooSchema: !include schemas/foo.json
+  - personSchema: !include schemas/foo.json
 
-/foo:
+/person:
   get:
     queryParameters:
       name:
-      bar: {type: number}
-      baz: {type: string}
+      maxCount: {type: number}
+      queryString: {type: string}
     body:
       application/json:
-        schema: fooSchema
+        schema: personSchema

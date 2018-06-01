@@ -16,12 +16,12 @@ baseUri: http://some-site.com/dummy-api
 schemas:
   - topSchema: !include top.json
 
-/foo:
+/person:
   get:
     queryParameters:
       name:
-      bar: {type: number}
-      baz: {type: string}
+      maxCount: {type: number}
+      queryString: {type: string}
     responses:
       200:
         body:

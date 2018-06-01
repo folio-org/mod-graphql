@@ -1,11 +1,11 @@
 # title: simple API
 
 type Query {
-  foo(name: String, bar: Float, baz: String): TfooSchema
+  person(name: String, maxCount: Float, queryString: String): TpersonSchema
 }
 
-type TfooSchema {
-  description: String
-  title: String!
+type TpersonSchema {
+  address: String
+  name: String!
 }
 
