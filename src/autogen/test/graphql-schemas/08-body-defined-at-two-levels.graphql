@@ -5,7 +5,7 @@ type Query {
 }
 
 type TgroupSchema {
-  hammerstein: String!
-  rodgers: String
+  name: String
+  purpose: String!
 }
 
