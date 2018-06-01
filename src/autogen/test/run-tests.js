@@ -57,7 +57,7 @@ function runTest(file) {
     schema = `*${err3}`;
   }
 
-  const schemaFile = `${dir}/output/${file.replace(/raml$/, 'graphql')}`;
+  const schemaFile = `${dir}/graphql-schemas/${file.replace(/raml$/, 'graphql')}`;
   ntotal++;
 
   if (regen) {
