@@ -219,8 +219,6 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
     if (!schemaName) {
       throw new Error(`no schema for '${result.queryName}'`);
     } else {
-      result.type = r2gDefinedType(schemaName);
-
       // We have to rewrite every $ref in this schema to be relative to
       // `basePath`: it does not suffice to insert a suitable "id" at
       // the top level of the schema, as the json-schema-ref-parser
@@ -232,6 +230,8 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
       if (options.showRewrite) console.info(`rewrote schema to (${JSON.stringify(obj, null, 2)})`);
       const expanded = $RefParser.dereference(obj);
       if (options.showExpand) console.info(`expanded dereferenced schema to (${JSON.stringify(expanded, null, 2)})`);
+
+      result.type = r2gDefinedType(schemaName);
       gatherSchema(types, result.type, 0, expanded);
     }
   });
