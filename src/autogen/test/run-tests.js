@@ -34,7 +34,7 @@ if (singleTest) {
 }
 
 if (!regen) {
-  console.info(`${ntotal} tests: ${npassed} passed (including ${nexceptions} expected exceptions), ${nfailed} failed`);
+  console.info(`${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
 }
 if (nfailed === 0) {
   console.log("Success!");
@@ -71,7 +71,6 @@ function runTest(file) {
       errors.push([file, expected, schema]);
     } else if (hadException) {
       console.info(`ok ${file} (exception)`);
-      npassed++;
       nexceptions++;
     } else {
       console.info(`ok ${file}`);
