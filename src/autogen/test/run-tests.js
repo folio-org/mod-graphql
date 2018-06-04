@@ -54,7 +54,7 @@ function runTest(file) {
   try {
     ({ schema, resolvers } = convertAPI(`${dir}/input/${file}`, {}));
   } catch (err3) {
-    schema = `*${err3}`;
+    schema = `*EXCEPTION* ${err3}`;
   }
 
   const schemaFile = `${dir}/graphql-schemas/${file.replace(/raml$/, 'graphql')}`;
