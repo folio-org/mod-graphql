@@ -72,11 +72,10 @@ function runTest(file) {
     } else if (hadException) {
       console.info(`ok ${file} (exception)`);
       npassed++;
-      if (schema.startsWith('*')) nexceptions++;
+      nexceptions++;
     } else {
       console.info(`ok ${file}`);
       npassed++;
-      nexceptions++;
     }
   }
 }
