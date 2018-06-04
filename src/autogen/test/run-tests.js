@@ -50,10 +50,11 @@ if (errors.length) {
 
 
 function runTest(file) {
-  let schema, resolvers;
+  let schema, resolvers, hadException = false;
   try {
     ({ schema, resolvers } = convertAPI(`${dir}/input/${file}`, {}));
   } catch (err3) {
+    hadException = true;
     schema = `*EXCEPTION* ${err3}`;
   }
 
@@ -64,14 +65,18 @@ function runTest(file) {
     fs.writeFileSync(schemaFile, schema);
   } else {
     const expected = fs.readFileSync(schemaFile, 'utf8');
-    if (expected === schema) {
-      console.info(`ok ${file}`);
-      npassed++;
-      if (schema.startsWith('*')) nexceptions++;
-    } else {
+    if (expected !== schema) {
       console.info(`FAIL ${file}`);
       nfailed++;
       errors.push([file, expected, schema]);
+    } else if (hadException) {
+      console.info(`ok ${file} (exception)`);
+      npassed++;
+      if (schema.startsWith('*')) nexceptions++;
+    } else {
+      console.info(`ok ${file}`);
+      npassed++;
+      nexceptions++;
     }
   }
 }
