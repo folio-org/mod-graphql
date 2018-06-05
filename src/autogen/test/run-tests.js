@@ -37,7 +37,7 @@ if (!regen) {
   console.info(`${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
 }
 if (nfailed === 0) {
-  console.log("Success!");
+  console.log("SUCCESS!");
 }
 if (errors.length) {
   console.info();
