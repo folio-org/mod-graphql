@@ -52,7 +52,7 @@ function renderTypes(types, _options) {
       const { name, required, arrayDepth, type } = field;
       let fieldType = type;
       if (type instanceof Object) {
-        fieldType = `${typeName}-${name}`;
+        fieldType = `${typeName}_${name}`;
         subTypes[fieldType] = type;
       }
       output += `  ${name}: ${'['.repeat(arrayDepth)}${fieldType}${']'.repeat(arrayDepth)}${required ? '!' : ''}\n`;

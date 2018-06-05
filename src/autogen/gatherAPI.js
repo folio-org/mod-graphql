@@ -46,7 +46,7 @@ function r2gBasicType(type) {
 
 // Converts schema-names, which function as types
 function r2gDefinedType(type) {
-  return `T${type.replace('.', '-')}`;
+  return `T${type.replace('.', '_')}`;
 }
 
 
@@ -185,7 +185,7 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
     let queryPath;
     if (rel.startsWith('/{')) {
       args.push([rel.replace(/\/{(.*)}/, '$1'), 'String', true]);
-      queryPath = `${parentUri}-SINGLE`;
+      queryPath = `${parentUri}_SINGLE`;
     } else {
       queryPath = uri;
     }
@@ -194,7 +194,8 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
       args.push([qp.name, r2gBasicType(qp.type) || 'String', qp.required || false]);
     });
 
-    result.queryName = queryPath.substr(1).replace('/', '-');
+    // eslint-disable-next-line no-useless-escape
+    result.queryName = queryPath.substr(1).replace(/[\/-]/g, '_');
     result.args = args;
     // eslint-disable-next-line no-useless-escape
     if (resource.displayName.match(/^[^\/]/)) {
