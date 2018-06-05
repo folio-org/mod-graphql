@@ -17,7 +17,7 @@ We therefore compile all of this to a much simpler "Abstract Representation Obje
 
 This document describes that structure. The ARO for a given RAML-with-JSON-Schemas can be seen by running `raml2graphql` with the `-v` command-line option, as in:
 
-	./raml2graphql -v test/input/11-array-of-scalars.raml
+	./raml2graphql -v test/input/12-array-of-scalars.raml
 
 
 
@@ -73,7 +73,7 @@ A type is represented by an ordered array of zero or more fields. Each field is 
 ### Two string fields, one of them optional
 
 Consider [a simple RAML API with associated schema](test/input/02-required-clause.raml): it provides a single resource, `/person`, the response for which contains two string fields: `name` is mandatory, and `address` is optional. The types array for this is represented as follows:
-<!-- ./raml2graphql -v test/input/02-required-clause.raml -->
+<!-- ./raml2graphql test/input/02-required-clause.raml -->
 
 	"types": {
 	  "Tgenerated1": [
@@ -95,9 +95,9 @@ Consider [a simple RAML API with associated schema](test/input/02-required-claus
 
 ### Array of strings
 
-Consider an API like the previous one, but [with an additional optional field, `aliases`](test/input/11-array-of-scalars.raml). The types array is now represented as:
+Consider an API like the previous one, but [with an additional optional field, `aliases`](test/input/12-array-of-scalars.raml). The types array is now represented as:
 
-<!-- ./raml2graphql -v test/input/11-array-of-scalars.raml -->
+<!-- ./raml2graphql test/input/12-array-of-scalars.raml -->
 
 	"types": {
 	  "Tgenerated1": [
