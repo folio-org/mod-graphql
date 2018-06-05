@@ -41,18 +41,29 @@ function renderResources(flattened, _options) {
 
 function renderTypes(types, _options) {
   let output = '';
+  const subTypes = {};
 
-  Object.keys(types).sort().forEach(name => {
-    const t = types[name];
+  Object.keys(types).sort().forEach(typeName => {
+    const t = types[typeName];
     // eslint-disable-next-line no-useless-escape
-    output += `type ${name} \{\n`;
-    Object.keys(t).forEach(field => {
-      const [type, arrayDepth, required] = t[field];
-      output += `  ${field}: ${'['.repeat(arrayDepth)}${type}${']'.repeat(arrayDepth)}${required ? '!' : ''}\n`;
+    output += `type ${typeName} \{\n`;
+    // console.log('considering t =', t);
+    t.forEach(field => {
+      const { name, required, arrayDepth, type } = field;
+      let fieldType = type;
+      if (type instanceof Object) {
+        fieldType = `${typeName}-${name}`;
+        subTypes[fieldType] = type;
+      }
+      output += `  ${name}: ${'['.repeat(arrayDepth)}${fieldType}${']'.repeat(arrayDepth)}${required ? '!' : ''}\n`;
     });
     output += '}\n';
     output += '\n';
   });
+
+  if (Object.keys(subTypes).length > 0) {
+    output += renderTypes(subTypes, _options);
+  }
 
   return output;
 }
