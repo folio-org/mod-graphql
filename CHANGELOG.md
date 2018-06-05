@@ -12,4 +12,5 @@
 * Support paging parameters in mod-graphql Instances search. Fixes MODGQL-16.
 * Return holdings statements, with their items, along with instance records. Fixes MODGQL-18.
 * Set up test-suite for GraphQL schema generation. Fixes MODGQL-21.
+* Auto-generate GraphQL schemas from RAMLs and JSON Schemas. Fixes MODGQL-20.
 
