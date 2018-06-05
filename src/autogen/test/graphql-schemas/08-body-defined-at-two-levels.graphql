@@ -1,0 +1,11 @@
+# title: simple API
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TgroupSchema
+}
+
+type TgroupSchema {
+  name: String
+  purpose: String!
+}
+

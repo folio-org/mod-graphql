@@ -1,0 +1,36 @@
+#%RAML 0.8
+
+# It seems that named types are a RAML 1.0-only feature, not supported
+# by RAML 0.8 which is what we're concentrating on. So I've commented
+# out the attempt to use this facility, and we accept that this is
+# going to result in an undefined response type.
+
+title: simple API  
+
+# types:
+#   personType: |
+#     {
+#       "type": "object",
+#       "$schema": "http://json-schema.org/draft-03/schema",
+#       "properties": {
+#         "name": {
+#           "type": "string",
+#           "required": true
+#         },
+#         "address": {
+#           "type": "string"
+#         }
+#       }
+#     }
+
+/person:
+  get:
+    queryParameters:
+      name:
+      maxCount: {type: number}
+      queryString: {type: string}
+    responses:
+      200:
+        body:
+          application/json:
+#            type: personType

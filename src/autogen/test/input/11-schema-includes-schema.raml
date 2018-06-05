@@ -1,0 +1,29 @@
+#%RAML 0.8
+
+# This test has to include the schema `top.json` from the working
+# directory rather than from the `schemas` subdirectory, where we keep
+# all the other schemas. This is because the schema-expansion library,
+# json-schema-ref-parser, doesn't know what path the RAML included the
+# initial schema from, so it doesn't have a way to find sub-schemas at
+# locations relative to that. And there doesn't seem to be a way to
+# invoke it while telling it this information.
+
+title: simple API  
+version: v1.1
+protocols: [ HTTP, HTTPS ]
+baseUri: http://some-site.com/dummy-api
+
+schemas:
+  - topSchema: !include top.json
+
+/person:
+  get:
+    queryParameters:
+      name:
+      maxCount: {type: number}
+      queryString: {type: string}
+    responses:
+      200:
+        body:
+          application/json:
+            schema: topSchema

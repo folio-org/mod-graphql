@@ -1,0 +1,24 @@
+# title: simple API
+# version: v1.1
+# protocols: HTTP, HTTPS
+# baseUri: http://some-site.com/dummy-api
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TtopSchema
+}
+
+type TtopSchema {
+  address: String
+  metadata: TtopSchema-metadata
+  name: String!
+}
+
+type TtopSchema-metadata {
+  createdByUserId: String!
+  createdByUsername: String
+  createdDate: String!
+  updatedByUserId: String
+  updatedByUsername: String
+  updatedDate: String
+}
+
