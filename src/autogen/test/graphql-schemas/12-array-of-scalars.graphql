@@ -1,0 +1,12 @@
+# title: simple API
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): Tgenerated1
+}
+
+type Tgenerated1 {
+  address: String
+  aliases: [String]
+  name: String!
+}
+
