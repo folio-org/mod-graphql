@@ -6,7 +6,10 @@
     * [Comments](#comments)
     * [Resources](#resources)
     * [Types](#types)
-* [Example](#example)
+* [Examples](#examples)
+    * [Two string fields, one of them optional](#two-string-fields-one-of-them-optional)
+    * [Array of strings](#array-of-strings)
+
 
 RAML documents with their associated schemas are awkward to traverse and require a great deal of resolution: referenced JSON schemas, the sub-schemas that they contain, and so on. Sadly, various issues with the available libraries that perform these tasks mean that none of this is straightforward: for example, each `$ref` in a JSON schema has to be explicitly rewritten so it can find the referenced schema relative to the correct path.
 
@@ -64,7 +67,59 @@ A type is represented by an ordered array of zero or more fields. Each field is 
 
 
 
-## Example
+## Examples
 
-XXX to follow
+
+### Two string fields, one of them optional
+
+Consider [a simple RAML API with associated schema](test/input/02-required-clause.raml): it provides a single resource, `/person`, the response for which contains two string fields: `name` is mandatory, and `address` is optional. The types array for this is represented as follows:
+<!-- ./raml2graphql -v test/input/02-required-clause.raml -->
+
+	"types": {
+	  "Tgenerated1": [
+	    {
+	      "name": "address",
+	      "required": false,
+	      "arrayDepth": 0,
+	      "type": "String"
+	    },
+	    {
+	      "name": "name",
+	      "required": true,
+	      "arrayDepth": 0,
+	      "type": "String"
+	    }
+	  ]
+	}
+
+
+### Array of strings
+
+Consider an API like the previous one, but [with an additional optional field, `aliases`](test/input/11-array-of-scalars.raml). The types array is now represented as:
+
+<!-- ./raml2graphql -v test/input/11-array-of-scalars.raml -->
+
+	"types": {
+	  "Tgenerated1": [
+	    {
+	      "name": "address",
+	      "required": false,
+	      "arrayDepth": 0,
+	      "type": "String"
+	    },
+	    {
+	      "name": "aliases",
+	      "required": false,
+	      "arrayDepth": 1,
+	      "type": "String"
+	    },
+	    {
+	      "name": "name",
+	      "required": true,
+	      "arrayDepth": 0,
+	      "type": "String"
+	    }
+	  ]
+	}
+
 
