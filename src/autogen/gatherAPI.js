@@ -50,49 +50,35 @@ function r2gDefinedType(type) {
 }
 
 
-// Gathers the specified schema, and stores it in `types` as
-// `name`. May recursively gather sub-schemas and store those under
-// appropriate names as well.
-//
-function gatherSchema(types, name, arrayLevels, jsonSchema) {
-  // console.log('*** schema:', JSON.stringify(jsonSchema, null, 20));
+function gatherType(jsonSchema) {
   if (jsonSchema.type === 'array') {
-    // console.log('*** recursing for array');
-    gatherSchema(types, name, arrayLevels + 1, jsonSchema.items);
-    return;
+    const [arrayDepth, type] = gatherType(jsonSchema.items);
+    return [arrayDepth + 1, type];
+  } else if (jsonSchema.type === 'object') {
+    // eslint-disable-next-line no-use-before-define
+    const result = gatherFields(jsonSchema);
+    return [0, result];
+  } else {
+    return [0, r2gBasicType(jsonSchema.type)];
   }
+}
 
-  if (jsonSchema.type !== 'object') {
-    throw new Error(`schema '${name}' for non-object/array '${jsonSchema.type}'`);
-  }
 
-  if (types[name]) {
-    // Down the line, we could verify that old and new definitions are the same
-    console.warn(`replacing existing schema for type '${name}'`);
-  }
+function gatherFields(jsonSchema) {
+  // assert(jsonSchema.type === 'object');
 
   const required = {};
   (jsonSchema.required || []).forEach(key => {
     required[key] = true;
   });
 
-  const result = {};
-  Object.keys(jsonSchema.properties).sort().forEach(key => {
-    const val = jsonSchema.properties[key];
-    const req = required[key] || false;
-    let type;
-    if (val.type === 'object' || val.type === 'array') {
-      // Rich structure: make sub-schema
-      // console.log('*** recursing for sub-structure');
-      type = `${name}-${key}`;
-      gatherSchema(types, type, 0, val);
-    } else {
-      type = r2gBasicType(val.type);
-    }
-    result[key] = [type, arrayLevels, req];
+  const result = [];
+  Object.keys(jsonSchema.properties).sort().forEach(name => {
+    const [arrayDepth, type] = gatherType(jsonSchema.properties[name]);
+    result.push({ name, required: required[name] || false, arrayDepth, type });
   });
 
-  types[name] = result;
+  return result;
 }
 
 
@@ -232,7 +218,11 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
       if (options.showExpand) console.info(`expanded dereferenced schema to (${JSON.stringify(expanded, null, 2)})`);
 
       result.type = r2gDefinedType(schemaName);
-      gatherSchema(types, result.type, 0, expanded);
+      if (types[result.type]) {
+        // Down the line, we could verify that old and new definitions are the same
+        console.warn(`replacing existing schema for type '${result.type}'`);
+      }
+      types[result.type] = gatherFields(expanded);
     }
   });
 
