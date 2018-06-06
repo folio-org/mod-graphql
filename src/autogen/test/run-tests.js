@@ -34,10 +34,10 @@ if (singleTest) {
 }
 
 if (!regen) {
-  console.info(`${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
+  console.info(`\t${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
 }
 if (nfailed === 0) {
-  console.log("SUCCESS!");
+  console.log("\tSUCCESS!");
 }
 if (errors.length) {
   console.info();
