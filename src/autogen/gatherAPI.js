@@ -206,6 +206,12 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
     if (!schemaName) {
       throw new Error(`no schema for '${result.queryName}'`);
     } else {
+      // We shouldn't have to do this, but for some idiot reason when
+      // raml.loadSync is unable to respolve a schema, it just sets
+      // the schema-content to a "cannot resolve" message instead of
+      // throwing an exception.
+      if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
+
       // We have to rewrite every $ref in this schema to be relative to
       // `basePath`: it does not suffice to insert a suitable "id" at
       // the top level of the schema, as the json-schema-ref-parser
