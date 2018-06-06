@@ -6,11 +6,11 @@ type Query {
 
 type Tgenerated1 {
   address: String
-  aliases: [Tgenerated1-aliases]
+  aliases: [Tgenerated1_aliases]
   name: String
 }
 
-type Tgenerated1-aliases {
+type Tgenerated1_aliases {
   alias: String
   inUseSince: Int
 }

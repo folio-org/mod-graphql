@@ -5,11 +5,11 @@ type Query {
 }
 
 type Tgenerated1 {
-  address: Tgenerated1-address
+  address: Tgenerated1_address
   name: String!
 }
 
-type Tgenerated1-address {
+type Tgenerated1_address {
   city: String!
   district: String
   streetAddress: String!

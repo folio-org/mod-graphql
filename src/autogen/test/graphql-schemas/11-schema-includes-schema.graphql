@@ -9,11 +9,11 @@ type Query {
 
 type TtopSchema {
   address: String
-  metadata: TtopSchema-metadata
+  metadata: TtopSchema_metadata
   name: String!
 }
 
-type TtopSchema-metadata {
+type TtopSchema_metadata {
   createdByUserId: String!
   createdByUsername: String
   createdDate: String!
