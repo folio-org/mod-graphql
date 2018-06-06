@@ -1,0 +1,18 @@
+# title: simple API
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): Tgenerated1
+}
+
+type Tgenerated1 {
+  address: String
+  aliases: [Tgenerated1_aliases]
+  name: String
+}
+
+type Tgenerated1_aliases {
+  alias: String
+  inUseSince: Int
+  othersUsingThisAlias: [String]
+}
+
