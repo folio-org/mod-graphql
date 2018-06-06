@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Contained Schema that in turn contains another",
+  "type": "object",
+  "properties": {
+    "middleLevelField": {
+      "type": "string",
+    },
+    "subSubRecord": {
+      "type": "object",
+      "$ref": "subcontained.json"
+    }
+  }
+}

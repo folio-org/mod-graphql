@@ -1,0 +1,23 @@
+# title: simple API
+# version: v1.1
+# protocols: HTTP, HTTPS
+# baseUri: http://some-site.com/dummy-api
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TtopSchema
+}
+
+type TtopSchema {
+  metadata: TtopSchema_metadata
+  topLevelField: String
+}
+
+type TtopSchema_metadata {
+  middleLevelField: String
+  subSubRecord: TtopSchema_metadata_subSubRecord
+}
+
+type TtopSchema_metadata_subSubRecord {
+  innerField: String
+}
+
