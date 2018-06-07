@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "middleLevelField": {
-      "type": "string",
+      "type": "string"
     },
     "subSubRecord": {
       "type": "object",
