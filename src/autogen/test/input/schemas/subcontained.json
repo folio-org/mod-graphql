@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "innerField": {
-      "type": "string",
-    },
+      "type": "string"
+    }
   }
 }
