@@ -55,12 +55,11 @@ const resolvers = {
         });
       });
     },
-    instances: (obj, args, context) => {
-      return resolve(obj, args, context, 'instances', 'instance-storage/instances', null, null, {
+    instances: (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances', null, null, {
         records: 'instances',
         totalCount: 'totalRecords',
-      });
-    },
+      }),
+
     instance: (root, { id }, { okapi }) => {
       const url = `${okapi.url}/instance-storage/instances/${id}`;
       console.log(`instance from URL '${url}'`);
