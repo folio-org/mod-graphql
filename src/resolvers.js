@@ -6,7 +6,7 @@ import queryString from 'query-string';
 
 
     function resolve(obj, args, context,
-                     caption, path, linkFromField, linkToField) {
+                     caption, path, linkFromField, linkToField, skeleton) {
       const { cql, offset, limit } = args;
       const { okapi } = context;
 
@@ -22,7 +22,15 @@ import queryString from 'query-string';
         .then(res => res.text().then(text => {
           if (res.status >= 400) throw new GraphQLError(text);
           const json = JSON.parse(text);
-          return json.items;
+          if (typeof skeleton === 'string') {
+            return json[skeleton];
+          }
+          // Skeleton is an object whose keys tell us what to return
+          const val = {};
+          Object.keys(skeleton).forEach(key => {
+            val[key] = json[skeleton[key]];
+          });
+          return val;
         }));
     }
 
@@ -52,6 +60,10 @@ const resolvers = {
       const path = 'instance-storage/instances';
       const linkFromField = null;
       const linkToField = null;
+      const skeleton = {
+        records: 'instances',
+        totalCount: 'totalRecords',
+      };
 
       const { cql, offset, limit } = args;
       const { okapi } = context;
@@ -68,10 +80,15 @@ const resolvers = {
         .then(res => res.text().then(text => {
           if (res.status >= 400) throw new GraphQLError(text);
           const json = JSON.parse(text);
-          return {
-            records: json.instances,
-            totalCount: json.totalRecords,
-          };
+          if (typeof skeleton === 'string') {
+            return json[skeleton];
+          }
+          // Skeleton is an object whose keys tell us what to return
+          const val = {};
+          Object.keys(skeleton).forEach(key => {
+            val[key] = json[skeleton[key]];
+          });
+          return val;
         }));
     },
     instance: (root, { id }, { okapi }) => {
@@ -183,7 +200,7 @@ const resolvers = {
   },
 
   HoldingsRecord: {
-    holdingsItems: (o, a, c) => resolve(o, a, c, 'items', 'inventory/items', 'id', 'holdingsRecordId'),
+    holdingsItems: (o, a, c) => resolve(o, a, c, 'items', 'inventory/items', 'id', 'holdingsRecordId', 'items'),
   },
 
   Mutation: {
