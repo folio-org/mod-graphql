@@ -61,7 +61,7 @@ The set of types is represented by a JavaScript object. The keys are the names o
 A type is represented by an ordered array of zero or more fields. Each field is itself a four-element object with the following keys:
 
 * `name` (string) -- the name of the field within its type (not necessarily globally unique).
-* `mandatory` (boolean) -- if true, indicates that the present field is mandatory within the type; otherwise false.
+* `required` (boolean) -- if true, indicates that the present field is mandatory within the type; otherwise false.
 * `arrayDepth` (integer) -- the number of levels of array nesting containing the object. This is usually 0, for simple objects, and occasionally 1, for arrays. It can be 2 for arrays of arrays, etc.
 * `type` -- maybe either a string containing the name of a simple GraphQL type such as `'String'` or `'Int'`; or it may be another high-level type, which is itself represented by an array like that of the containing type.
 
@@ -72,7 +72,7 @@ A type is represented by an ordered array of zero or more fields. Each field is 
 
 ### Two string fields, one of them optional
 
-Consider [a simple RAML API with associated schema](test/input/02-required-clause.raml): it provides a single resource, `/person`, the response for which contains two string fields: `name` is mandatory, and `address` is optional. The types array for this is represented as follows:
+Consider [a simple RAML API with associated schema](test/input/02-required-clause.raml): it provides a single resource, `/person`, the response for which contains two string fields: `name` is required, and `address` is optional. The types array for this is represented as follows:
 <!-- ./raml2graphql test/input/02-required-clause.raml -->
 
 	"types": {
