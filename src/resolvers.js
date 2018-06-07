@@ -56,40 +56,10 @@ const resolvers = {
       });
     },
     instances: (obj, args, context) => {
-      const caption = 'instances';
-      const path = 'instance-storage/instances';
-      const linkFromField = null;
-      const linkToField = null;
-      const skeleton = {
+      return resolve(obj, args, context, 'instances', 'instance-storage/instances', null, null, {
         records: 'instances',
         totalCount: 'totalRecords',
-      };
-
-      const { cql, offset, limit } = args;
-      const { okapi } = context;
-
-      const query = {};
-      if (cql) query.query = cql;
-      if (offset) query.offset = offset;
-      if (limit) query.limit = limit;
-      if (linkFromField) query.query = `${linkToField}=="${obj[linkFromField]}"`;
-      const search = queryString.stringify(query);
-      const url = `${okapi.url}/${path}${search ? `?${search}` : ''}`;
-      console.log(`${caption} from URL '${url}'`);
-      return fetch(url, { headers: okapi.headers })
-        .then(res => res.text().then(text => {
-          if (res.status >= 400) throw new GraphQLError(text);
-          const json = JSON.parse(text);
-          if (typeof skeleton === 'string') {
-            return json[skeleton];
-          }
-          // Skeleton is an object whose keys tell us what to return
-          const val = {};
-          Object.keys(skeleton).forEach(key => {
-            val[key] = json[skeleton[key]];
-          });
-          return val;
-        }));
+      });
     },
     instance: (root, { id }, { okapi }) => {
       const url = `${okapi.url}/instance-storage/instances/${id}`;
