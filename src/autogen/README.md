@@ -69,7 +69,7 @@ Keyword | Example | Description
 `folio:linkToField` | "instanceId" | The field within linked records that is searched for a value identical to that of the master record's link-from field.
 `folio:includedElement` | "holdingsRecords | The field within linked records which is extracted and included as the linked content within the constructed master record.
 
-As an example, a field with the specified keywords and values in the table above, and having `id` equal to `123`, would result in fetching subrecords from `/holdings-storage/holdings?query=instanceId=="123"`, and the top-level `holdingsRecord` element of each returned record being included in the main record,
+As an example, a field with the specified keywords and values in the table above, and having `id` equal to `123`, would result in fetching subrecords from `/holdings-storage/holdings?query=instanceId=="123"`, and the top-level `holdingsRecord` element of each returned record being included in the main record.
 
 The master copy of the inventory module's schema is [on GitHub](https://github.com/folio-org/mod-inventory/blob/master/ramls/inventory.raml). So is [the master of the Instance schema](https://github.com/folio-org/mod-inventory/blob/master/ramls/instance.json),
 but we use instead [a modified local copy](inputs/instance.json) that includes the extension fields.

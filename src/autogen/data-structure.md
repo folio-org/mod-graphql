@@ -45,13 +45,13 @@ The set of comments is represented by a JavaScript array. Each element is itself
 
 The set of resources is represented by a JavaScript array. Each element is a JavaScript object with the following keys:
 
-* `level` (integer) -- an indication of how far down the hierarchy of RAML resources this was found: 0 for a top-level resource such as `/instance-storage`, 1 for a contained resource such as `/instance-storage/instances`, 2 for `/instance-storage/instances/{instanceId}`, etc. (Not presently used by the graphQL generators.)
-* `queryName` (string) -- a human-readable name for the resource, generated from the RAML path but suitable for used as a GraphQL query.
+* `level` (integer) -- an indication of how far down the hierarchy of RAML resources this was found: 0 for a top-level resource such as `/instance-storage`, 1 for a contained resource such as `/instance-storage/instances`, 2 for `/instance-storage/instances/{instanceId}`, etc. (Not presently used by the GraphQL generators.)
+* `queryName` (string) -- a human-readable name for the resource, generated from the RAML path but suitable for use as a GraphQL query.
 * `args` (array) -- a list of the arguments that may be provided when querying the resource. Each is a three-element array with the following elements:
   0 (string) -- the name of the parameter.
   1 (string) -- the type of the parameter, which is either a simple GraphQL type such as `'Integer'` or the name of one of the types defined in the `types` array (see [below](#types)).
   2 (boolean) -- an indication of whether the argument is required when querying the resource.
-* `type` (string) -- the type of the returned document when performing an HTTP GET on the resource. This is the name of the one of the types that are the keys of the `types` array (see [below](#types)).
+* `type` (string) -- the type of the returned document when performing an HTTP GET on the resource. This is the name of one of the types that are the keys of the `types` array (see [below](#types)).
 
 
 ### Types
