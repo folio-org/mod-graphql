@@ -4,6 +4,21 @@ import _ from 'lodash';
 import { GraphQLError } from 'graphql';
 import queryString from 'query-string';
 
+
+function resolve(obj, args, context,
+                 caption, path, linkFromField, linkToField) {
+  const okapi = context.okapi;
+  const url = `${okapi.url}/${path}?query=${linkToField}=="${obj[linkFromField]}"`;
+  console.log(`${caption} from URL '${url}'`);
+  return fetch(url, { headers: okapi.headers })
+    .then(res => res.text().then(text => {
+      if (res.status >= 400) throw new Error(text);
+      const json = JSON.parse(text);
+      return json.items;
+    }));
+}
+
+
 const resolvers = {
   Query: {
     hello: () => 'hi!',
@@ -156,6 +171,10 @@ const resolvers = {
     },
   },
 
+  HoldingsRecord: {
+    holdingsItems: (o, a, c) => resolve(o, a, c, 'items', 'inventory/items', 'id', 'holdingsRecordId'),
+  },
+
   Mutation: {
     updateUser: (root, updated, { okapi }) => {
       // We don't currently support PATCH so we'll need to grab the record to base our update on
@@ -206,22 +225,5 @@ const resolvers = {
   },
 };
 
-
-function resolve(obj, args, context, path, linkFromField, linkToField) {
-  const okapi = context.okapi;
-  const url = `${okapi.url}/${path}?query=${linkToField}=="${obj[linkFromField]}"`;
-  console.log(`items from URL '${url}'`);
-  return fetch(url, { headers: okapi.headers })
-    .then(res => res.text().then(text => {
-      if (res.status >= 400) throw new Error(text);
-      const json = JSON.parse(text);
-      return json.items;
-    }));
-}
-
-
-resolvers.HoldingsRecord = {
-  holdingsItems: (o, a, c) => resolve(o, a, c, 'inventory/items', 'id', 'holdingsRecordId'),
-};
 
 export default resolvers;
