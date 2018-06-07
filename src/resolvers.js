@@ -5,18 +5,26 @@ import { GraphQLError } from 'graphql';
 import queryString from 'query-string';
 
 
-function resolve(obj, args, context,
-                 caption, path, linkFromField, linkToField) {
-  const okapi = context.okapi;
-  const url = `${okapi.url}/${path}?query=${linkToField}=="${obj[linkFromField]}"`;
-  console.log(`${caption} from URL '${url}'`);
-  return fetch(url, { headers: okapi.headers })
-    .then(res => res.text().then(text => {
-      if (res.status >= 400) throw new Error(text);
-      const json = JSON.parse(text);
-      return json.items;
-    }));
-}
+    function resolve(obj, args, context,
+                     caption, path, linkFromField, linkToField) {
+      const { cql, offset, limit } = args;
+      const { okapi } = context;
+
+      const query = {};
+      if (cql) query.query = cql;
+      if (offset) query.offset = offset;
+      if (limit) query.limit = limit;
+      if (linkFromField) query.query = `${linkToField}=="${obj[linkFromField]}"`;
+      const search = queryString.stringify(query);
+      const url = `${okapi.url}/${path}${search ? `?${search}` : ''}`;
+      console.log(`${caption} from URL '${url}'`);
+      return fetch(url, { headers: okapi.headers })
+        .then(res => res.text().then(text => {
+          if (res.status >= 400) throw new GraphQLError(text);
+          const json = JSON.parse(text);
+          return json.items;
+        }));
+    }
 
 
 const resolvers = {
@@ -39,29 +47,32 @@ const resolvers = {
         });
       });
     },
-    instances: (root, { cql, offset, limit }, { okapi }) => {
+    instances: (obj, args, context) => {
+      const caption = 'instances';
+      const path = 'instance-storage/instances';
+      const linkFromField = null;
+      const linkToField = null;
+
+      const { cql, offset, limit } = args;
+      const { okapi } = context;
+
       const query = {};
       if (cql) query.query = cql;
       if (offset) query.offset = offset;
       if (limit) query.limit = limit;
-      let url = `${okapi.url}/instance-storage/instances`;
+      if (linkFromField) query.query = `${linkToField}=="${obj[linkFromField]}"`;
       const search = queryString.stringify(query);
-      // console.log(`search '${search}' from query`, query);
-      if (search) url += `?${search}`;
-      console.log(`instances from URL ${url}`);
-      return fetch(url, { headers: okapi.headers }).then((response) => {
-        if (response.status >= 400) {
-          // We can't rely on the response body being JSON, so extract it as text
-          return response.text().then(text => {
-            throw new GraphQLError(text);
-          });
-        } else {
-          return response.json().then(json => ({
+      const url = `${okapi.url}/${path}${search ? `?${search}` : ''}`;
+      console.log(`${caption} from URL '${url}'`);
+      return fetch(url, { headers: okapi.headers })
+        .then(res => res.text().then(text => {
+          if (res.status >= 400) throw new GraphQLError(text);
+          const json = JSON.parse(text);
+          return {
             records: json.instances,
             totalCount: json.totalRecords,
-          }));
-        }
-      });
+          };
+        }));
     },
     instance: (root, { id }, { okapi }) => {
       const url = `${okapi.url}/instance-storage/instances/${id}`;
