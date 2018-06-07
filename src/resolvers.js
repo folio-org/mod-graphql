@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { GraphQLError } from 'graphql';
 import queryString from 'query-string';
 
-export default {
+const resolvers = {
   Query: {
     hello: () => 'hi!',
     users: (root, { cql }, context) => {
@@ -103,20 +103,6 @@ export default {
           return json.holdingsRecords;
         }));
     }
-  },
-
-  HoldingsRecord: {
-    holdingsItems: (obj, args, { okapi }) => {
-      const url = `${okapi.url}/inventory/items?query=holdingsRecordId==${obj.id}`;
-      console.log(`items from URL '${url}'`);
-      return fetch(url, { headers: okapi.headers })
-        .then(res => res.text().then(text => {
-          if (res.status >= 400) throw new Error(text);
-          const json = JSON.parse(text);
-          return json.items;
-        }));
-    },
-    id: (obj) => `((([${obj.id}])))`,
   },
 
   Identifier: {
@@ -219,3 +205,23 @@ export default {
     },
   },
 };
+
+
+function resolve(obj, args, context, path, linkFromField, linkToField) {
+  const okapi = context.okapi;
+  const url = `${okapi.url}/${path}?query=${linkToField}=="${obj[linkFromField]}"`;
+  console.log(`items from URL '${url}'`);
+  return fetch(url, { headers: okapi.headers })
+    .then(res => res.text().then(text => {
+      if (res.status >= 400) throw new Error(text);
+      const json = JSON.parse(text);
+      return json.items;
+    }));
+}
+
+
+resolvers.HoldingsRecord = {
+  holdingsItems: (o, a, c) => resolve(o, a, c, 'inventory/items', 'id', 'holdingsRecordId'),
+};
+
+export default resolvers;
