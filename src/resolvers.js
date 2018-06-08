@@ -28,7 +28,7 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
     .then(res => res.text().then(text => {
       if (res.status >= 400) throw new GraphQLError(text);
       const json = JSON.parse(text);
-      if (skeleton === '.') {
+      if (!skeleton) {
         return json;
       } else if (typeof skeleton === 'string') {
         return json[skeleton];
@@ -68,12 +68,12 @@ const resolvers = {
       records: 'instances',
       totalCount: 'totalRecords',
     }),
-    instance: (o, a, c) => resolve(o, a, c, 'instance', 'instance-storage/instances/{id}', null, null, '.'),
+    instance: (o, a, c) => resolve(o, a, c, 'instance', 'instance-storage/instances/{id}'),
   },
 
   Metadata: {
-    createdByUser: (o, a, c) => resolve(o, a, c, 'createdByUser', 'users/[createdByUserId]', null, null, '.'),
-    updatedByUser: (o, a, c) => resolve(o, a, c, 'updatedByUser', 'users/[updatedByUserId]', null, null, '.'),
+    createdByUser: (o, a, c) => resolve(o, a, c, 'createdByUser', 'users/[createdByUserId]'),
+    updatedByUser: (o, a, c) => resolve(o, a, c, 'updatedByUser', 'users/[updatedByUserId]'),
   },
 
   Instance: {
