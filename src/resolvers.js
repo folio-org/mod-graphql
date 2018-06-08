@@ -37,6 +37,7 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
 
   return fetch(url, { headers: okapi.headers })
     .then(res => res.text().then(text => {
+      logger.log('result', url, '->', text);
       if (res.status >= 400) throw new GraphQLError(text);
       const json = JSON.parse(text);
       if (!skeleton) {
