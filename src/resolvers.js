@@ -10,7 +10,9 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
   const { okapi, loggingCategories } = context;
   const logger = new Logger(loggingCategories);
 
-  const processedPath = path.replace(/{(.*?)}/g, (text, match) => args[match]);
+  const processedPath = path
+        .replace(/{(.*?)}/g, (text, match) => args[match])
+        .replace(/\[(.*?)\]/g, (text, match) => obj[match]);
 
   const query = {};
   if (cql) query.query = cql;
@@ -71,18 +73,8 @@ const resolvers = {
   },
 
   Metadata: {
-    createdByUser: (obj, args, { okapi }) => fetch(`${okapi.url}/users/${obj.createdByUserId}`,
-      { headers: okapi.headers })
-      .then(res => res.text().then(text => {
-        if (res.status < 400) return JSON.parse(text);
-        throw new Error(text);
-      })),
-    updatedByUser: (obj, args, { okapi }) => fetch(`${okapi.url}/users/${obj.updatedByUserId}`,
-      { headers: okapi.headers })
-      .then(res => res.text().then(text => {
-        if (res.status < 400) return JSON.parse(text);
-        throw new Error(text);
-      })),
+    createdByUser: (o, a, c) => resolve(o, a, c, 'createdByUser', 'users/[createdByUserId]', null, null, '.'),
+    updatedByUser: (o, a, c) => resolve(o, a, c, 'updatedByUser', 'users/[updatedByUserId]', null, null, '.'),
   },
 
   Instance: {
