@@ -9,27 +9,34 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
   const { cql, offset, limit } = args;
   const { okapi } = context;
 
+  const processedPath = path.replace(/{(.*?)}/g, (text, match) => args[match]);
+
   const query = {};
   if (cql) query.query = cql;
   if (offset) query.offset = offset;
   if (limit) query.limit = limit;
   if (linkFromField) query.query = `${linkToField}=="${obj[linkFromField]}"`;
   const search = queryString.stringify(query);
-  const url = `${okapi.url}/${path}${search ? `?${search}` : ''}`;
+
+  const url = `${okapi.url}/${processedPath}${search ? `?${search}` : ''}`;
   console.log(`${caption} from URL '${url}'`);
+
   return fetch(url, { headers: okapi.headers })
     .then(res => res.text().then(text => {
       if (res.status >= 400) throw new GraphQLError(text);
       const json = JSON.parse(text);
-      if (typeof skeleton === 'string') {
+      if (skeleton === '.') {
+        return json;
+      } else if (typeof skeleton === 'string') {
         return json[skeleton];
+      } else {
+        // Skeleton is an object whose keys tell us what to return
+        const val = {};
+        Object.keys(skeleton).forEach(key => {
+          val[key] = json[skeleton[key]];
+        });
+        return val;
       }
-      // Skeleton is an object whose keys tell us what to return
-      const val = {};
-      Object.keys(skeleton).forEach(key => {
-        val[key] = json[skeleton[key]];
-      });
-      return val;
     }));
 }
 
@@ -59,15 +66,7 @@ const resolvers = {
       totalCount: 'totalRecords',
     }),
 
-    instance: (root, { id }, { okapi }) => {
-      const url = `${okapi.url}/instance-storage/instances/${id}`;
-      console.log(`instance from URL '${url}'`);
-      return fetch(url, { headers: okapi.headers }).then((response) => {
-        return response.json().then(json => {
-          return json;
-        });
-      });
-    },
+    instance: (o, a, c) => resolve(o, a, c, 'instance', 'instance-storage/instances/{id}', null, null, '.'),
   },
 
   Metadata: {
