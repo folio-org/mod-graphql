@@ -10,9 +10,20 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
   const { okapi, loggingCategories } = context;
   const logger = new Logger(loggingCategories);
 
+  const failedSubstitutions = [];
   const processedPath = path
-        .replace(/{(.*?)}/g, (text, match) => args[match])
-        .replace(/\[(.*?)\]/g, (text, match) => obj[match]);
+    .replace(/{(.*?)}/g, (text, match) => {
+      if (args[match] === undefined) failedSubstitutions.push(text);
+      return args[match];
+    })
+    .replace(/\[(.*?)\]/g, (text, match) => {
+      if (obj[match] === undefined) failedSubstitutions.push(text);
+      return obj[match];
+    });
+  if (failedSubstitutions.length !== 0) {
+    logger.log('failsub', `failed substitutions: ${failedSubstitutions.join(', ')}`);
+    return null;
+  }
 
   const query = {};
   if (cql) query.query = cql;
@@ -77,24 +88,8 @@ const resolvers = {
   },
 
   Instance: {
-    instanceType: (obj, args, { okapi }) => fetch(`${okapi.url}/instance-types/${obj.instanceTypeId}`,
-      { headers: okapi.headers })
-      .then(res => res.text().then(text => {
-        if (res.status < 400) return JSON.parse(text);
-        throw new Error(text);
-      })),
-    instanceFormat: (obj, args, { okapi }) => {
-      if (!obj.instanceFormatId) {
-        return null;
-      } else {
-        return fetch(`${okapi.url}/instance-formats/${obj.instanceFormatId}`,
-          { headers: okapi.headers })
-          .then(res => res.text().then(text => {
-            if (res.status < 400) return JSON.parse(text);
-            throw new Error(text);
-          }));
-      }
-    },
+    instanceType: (o, a, c) => resolve(o, a, c, 'instanceType', 'instance-types/[instanceTypeId]'),
+    instanceFormat: (o, a, c) => resolve(o, a, c, 'instanceFormat', 'instance-formats/[instanceFormatId]'),
     holdingsRecords: (o, a, c) => resolve(o, a, c, 'holdings', 'holdings-storage/holdings', 'id', 'instanceId', 'holdingsRecords'),
   },
 
