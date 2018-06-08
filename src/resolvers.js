@@ -103,30 +103,8 @@ const resolvers = {
   },
 
   Contributor: {
-    contributorType: (obj, args, { okapi }) => {
-      if (!obj.contributorTypeId) {
-        return null;
-      } else {
-        return fetch(`${okapi.url}/contributor-types/${obj.contributorTypeId}`,
-          { headers: okapi.headers })
-          .then(res => res.text().then(text => {
-            if (res.status < 400) return JSON.parse(text);
-            throw new Error(text);
-          }));
-      }
-    },
-    contributorNameType: (obj, args, { okapi }) => {
-      if (!obj.contributorNameTypeId) {
-        return null;
-      } else {
-        return fetch(`${okapi.url}/contributor-name-types/${obj.contributorNameTypeId}`,
-          { headers: okapi.headers })
-          .then(res => res.text().then(text => {
-            if (res.status < 400) return JSON.parse(text);
-            throw new Error(text);
-          }));
-      }
-    },
+    contributorType: (o, a, c) => resolve(o, a, c, 'contributorType', 'contributor-types/[contributorTypeId]'),
+    contributorNameType: (o, a, c) => resolve(o, a, c, 'contributorNameType', 'contributor-name-types/[contributorNameTypeId]'),
   },
 
   Classification: {
