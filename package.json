@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@folio/eslint-config-stripes": "^1.1.1",
+    "@folio/stripes-logger": "^0.0.2",
     "apollo-server-express": "^1.2.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
