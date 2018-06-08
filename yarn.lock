@@ -89,6 +89,10 @@
     eslint-plugin-jsx-a11y "^6.0.3"
     eslint-plugin-react "^7.6.0"
 
+"@folio/stripes-logger@^0.0.2":
+  version "0.0.2"
+  resolved "https://repository.folio.org/repository/npm-folio/@folio/stripes-logger/-/stripes-logger-0.0.2.tgz#7ca7bb45c6c3eea7c81f65abb93a45d1566b0ebb"
+
 "@types/node@^7.0.48":
   version "7.0.48"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.48.tgz#24bfdc0aa82e8f6dbd017159c58094a2e06d0abb"
