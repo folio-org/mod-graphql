@@ -41,6 +41,7 @@ export default express()
           'X-Okapi-Tenant': request.get('X-Okapi-Tenant'),
           'X-Okapi-Token': request.get('X-Okapi-Token')
         }
-      }
+      },
+      loggingCategories: 'url',
     }
   })));
