@@ -68,7 +68,6 @@ const resolvers = {
       records: 'instances',
       totalCount: 'totalRecords',
     }),
-
     instance: (o, a, c) => resolve(o, a, c, 'instance', 'instance-storage/instances/{id}', null, null, '.'),
   },
 
