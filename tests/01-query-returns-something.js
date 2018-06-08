@@ -2,7 +2,7 @@ import { chai, expect, describe, it, beforeEach, OKAPI_TENANT, OKAPI_TOKEN } fro
 
 import app from '../src/app';
 
-describe('mod-graphql', () => {
+describe('query returns something', () => {
   describe('the simplest possible query', () => {
     let response;
     beforeEach(() => {
