@@ -1,13 +1,14 @@
-/* eslint-disable no-console */
 import fetch from 'node-fetch';
 import _ from 'lodash';
 import { GraphQLError } from 'graphql';
 import queryString from 'query-string';
+import Logger from '@folio/stripes-logger';
 
 
 function resolve(obj, args, context, caption, path, linkFromField, linkToField, skeleton) {
   const { cql, offset, limit } = args;
-  const { okapi } = context;
+  const { okapi, loggingCategories } = context;
+  const logger = new Logger(loggingCategories);
 
   const processedPath = path.replace(/{(.*?)}/g, (text, match) => args[match]);
 
@@ -19,7 +20,7 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
   const search = queryString.stringify(query);
 
   const url = `${okapi.url}/${processedPath}${search ? `?${search}` : ''}`;
-  console.log(`${caption} from URL '${url}'`);
+  logger.log('url', `${caption} from URL '${url}'`);
 
   return fetch(url, { headers: okapi.headers })
     .then(res => res.text().then(text => {
