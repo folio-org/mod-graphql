@@ -130,18 +130,7 @@ const resolvers = {
   },
 
   Classification: {
-    classificationType: (obj, args, { okapi }) => {
-      if (!obj.classificationTypeId) {
-        return null;
-      } else {
-        return fetch(`${okapi.url}/classification-types/${obj.classificationTypeId}`,
-          { headers: okapi.headers })
-          .then(res => res.text().then(text => {
-            if (res.status < 400) return JSON.parse(text);
-            throw new Error(text);
-          }));
-      }
-    },
+    classificationType: (o, a, c) => resolve(o, a, c, 'classificationType', 'classification-types/[classificationTypeId]'),
   },
 
   HoldingsRecord: {
