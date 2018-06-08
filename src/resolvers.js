@@ -95,12 +95,7 @@ const resolvers = {
   },
 
   Identifier: {
-    identifierType: (obj, args, { okapi }) => fetch(`${okapi.url}/identifier-types/${obj.identifierTypeId}`,
-      { headers: okapi.headers })
-      .then(res => res.text().then(text => {
-        if (res.status < 400) return JSON.parse(text);
-        throw new Error(text);
-      })),
+    identifierType: (o, a, c) => resolve(o, a, c, 'identifierType', 'identifier-types/[identifierTypeId]'),
   },
 
   Contributor: {
