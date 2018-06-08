@@ -103,16 +103,7 @@ const resolvers = {
           }));
       }
     },
-    holdingsRecords: (obj, args, { okapi }) => {
-      const url = `${okapi.url}/holdings-storage/holdings?query=instanceId==${obj.id}`;
-      console.log(`holdings from URL '${url}'`);
-      return fetch(url, { headers: okapi.headers })
-        .then(res => res.text().then(text => {
-          if (res.status >= 400) throw new Error(text);
-          const json = JSON.parse(text);
-          return json.holdingsRecords;
-        }));
-    }
+    holdingsRecords: (o, a, c) => resolve(o, a, c, 'holdings', 'holdings-storage/holdings', 'id', 'instanceId', 'holdingsRecords'),
   },
 
   Identifier: {
