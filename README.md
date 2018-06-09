@@ -103,3 +103,19 @@ This will deposit new tapes with the recorded HTTP interactions into
 the `/tests/tapes` directory which you can then check back into version.
 
 [1]: https://github.com/flickr/yakbak
+
+
+## Environment
+
+Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported:
+
+* `failsub` -- note when substituting an argument or field-value into a path fails.
+* `url` -- log each URL before trying to fetch it.
+* `result` -- log the result of each GET.
+
+If you are getting this warning all over your output:
+
+> [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+
+You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
+
