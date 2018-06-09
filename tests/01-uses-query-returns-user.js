@@ -11,7 +11,10 @@ describe('query returns a user with an ID', () => {
         .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
         .set('X-Okapi-Tenant', OKAPI_TENANT)
         .set('X-Okapi-Token', OKAPI_TOKEN)
-        .send({ query: 'query { users { id username } }' })
+        .send({
+          query: 'query { users { id username } }',
+          variables: { limit: 3, cql: 'diku_admin' },
+        })
         .then(res => {
           response = res;
         });
@@ -33,7 +36,6 @@ describe('query returns a user with an ID', () => {
       // const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/;
       const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
       expect(record.id, 'ID field should be a UUID').to.match(UUIDregex);
-      // eslint-disable-next-line no-unused-expressions
       expect(record.username, 'fields should include a username').to.exist;
     });
   });
