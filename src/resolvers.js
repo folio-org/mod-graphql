@@ -59,23 +59,8 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
 const resolvers = {
   Query: {
     hello: () => 'hi!',
-    users: (root, { cql }, context) => {
-      const okapi = context.okapi;
-      return fetch(`${okapi.url}/users` + (cql ? `?query=${cql}` : ''),
-        { headers: okapi.headers }).then((response) => {
-        return response.json().then(json => {
-          return json.users;
-        });
-      });
-    },
-    groups: (root, args, context) => {
-      const okapi = context.okapi;
-      return fetch(`${okapi.url}/groups`, { headers: okapi.headers }).then((response) => {
-        return response.json().then(json => {
-          return json.usergroups;
-        });
-      });
-    },
+    users: (o, a, c) => resolve(o, a, c, 'users', 'users', null, null, 'users'),
+    groups: (o, a, c) => resolve(o, a, c, 'groups', 'groups', null, null, 'usergroups'),
     instances: (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances', null, null, {
       records: 'instances',
       totalCount: 'totalRecords',
