@@ -2,6 +2,10 @@ import { chai, expect, describe, it, beforeEach, OKAPI_TENANT, OKAPI_TOKEN } fro
 
 import app from '../src/app';
 
+// The first regexp is more rigorous, but fails in our tests, hence the second
+// const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/;
+const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
+
 describe('query returns a user with an ID', () => {
   describe('query for all users', () => {
     let response;
@@ -19,6 +23,7 @@ describe('query returns a user with an ID', () => {
           response = res;
         });
     });
+
     it('contains a payload with users that have IDs', () => {
       expect(response, 'server returns a good response').to.have.status(200);
       const json = JSON.parse(response.text);
@@ -32,10 +37,8 @@ describe('query returns a user with an ID', () => {
       // See https://github.com/chaijs/chai/issues/56 for explanation of lint-disable
       // eslint-disable-next-line no-unused-expressions
       expect(record.id, 'fields should include an ID').to.exist;
-      // check that it's a v4 UUID. The first regexp is more rigorous, but fails in our tests, hence the second
-      // const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/;
-      const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
-      expect(record.id, 'ID field should be a UUID').to.match(UUIDregex);
+      expect(record.id, 'ID field should be a v4 UUID').to.match(UUIDregex);
+      // eslint-disable-next-line no-unused-expressions
       expect(record.username, 'fields should include a username').to.exist;
     });
   });
