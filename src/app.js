@@ -42,6 +42,7 @@ export default express()
           'X-Okapi-Token': request.get('X-Okapi-Token')
         }
       },
-      loggingCategories: 'failsub,url,result',
+      loggingCategories: process.env.LOGGING_CATEGORIES,
+      // Supported: 'failsub,url,result'
     }
   })));
