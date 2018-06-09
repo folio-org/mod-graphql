@@ -2,8 +2,8 @@ import { chai, expect, describe, it, beforeEach, OKAPI_TENANT, OKAPI_TOKEN } fro
 
 import app from '../src/app';
 
-describe('query returns something', () => {
-  describe('the simplest possible query', () => {
+describe('query returns a user with an ID', () => {
+  describe('query for all users', () => {
     let response;
     beforeEach(() => {
       return chai.request(app)
@@ -16,9 +16,21 @@ describe('query returns something', () => {
           response = res;
         });
     });
-    it('contains a payload with users', () => {
-      expect(response).to.have.status(200);
-      expect(JSON.parse(response.text).data.users).to.be.instanceOf(Array);
+    it('contains a payload with users that have IDs', () => {
+      expect(response, 'server returns a good response').to.have.status(200);
+      const json = JSON.parse(response.text);
+      expect(Object.keys(json.data).length, 'response should only contain one element').to.equal(1);
+      expect(json.data, 'the sole element should be an object').to.be.instanceOf(Object);
+      expect(json.data.users, 'response users should be an array').to.be.instanceOf(Array);
+      expect(json.data.users.length, 'returned list should contain at least one record').above(0);
+      const record = json.data.users[0];
+      expect(record, 'records should be objects').to.be.instanceOf(Object);
+      expect(Object.keys(record).length, 'only one field should be included').to.equal(1);
+      expect(record.id, 'included field should be an ID').to.exist;
+      // check that it's a v4 UUID. The first regexp is more rigorous, but fails in our tests, hence the second
+      // const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/;
+      const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
+      expect(record.id, 'included field should be an ID').to.match(UUIDregex);
     });
   });
 });
