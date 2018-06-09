@@ -26,6 +26,8 @@ describe('query returns a user with an ID', () => {
       const record = json.data.users[0];
       expect(record, 'records should be objects').to.be.instanceOf(Object);
       expect(Object.keys(record).length, 'only one field should be included').to.equal(1);
+      // See https://github.com/chaijs/chai/issues/56 for explanation of lint-disable
+      // eslint-disable-next-line no-unused-expressions
       expect(record.id, 'included field should be an ID').to.exist;
       // check that it's a v4 UUID. The first regexp is more rigorous, but fails in our tests, hence the second
       // const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/;
