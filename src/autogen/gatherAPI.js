@@ -204,7 +204,7 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
 
     const { schemaName, schemaText } = findResponseSchema(resource);
     if (!schemaName) {
-      throw new Error(`no schema for '${result.queryName}'`);
+      throw new Error(`no schema for '${result.queryName}' in ${JSON.stringify(resource, null, 2)}`);
     } else {
       // We shouldn't have to do this, but for some idiot reason when
       // raml.loadSync is unable to respolve a schema, it just sets
