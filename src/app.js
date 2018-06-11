@@ -1,11 +1,14 @@
-import fs from 'fs';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
-import resolvers from './resolvers';
 
-const typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
+const { convertAPI } = require('./autogen/convertAPI');
+
+// const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
+const ramlPath = 'COPY/mod-inventory-storage/ramls/instance-storage.raml';
+const { schema, resolvers } = convertAPI(ramlPath, {});
+console.info('got schema');
 
 function badRequest(response, reason) {
   response
@@ -25,11 +28,11 @@ function checkOkapiHeaders(request, response, next) {
   }
 }
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+const execSchema = makeExecutableSchema({ typeDefs: schema, resolvers });
 
 export default express()
   .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
-    schema,
+    execSchema,
     // debug: false, // if you don't want error objects passed to console.error()
     context: {
       query: request.body,
