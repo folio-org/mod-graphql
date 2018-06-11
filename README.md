@@ -119,3 +119,9 @@ If you are getting this warning all over your output:
 
 You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
 
+
+## See also
+
+[`folio-graphiql`](https://github.com/folio-org/stripes-experiments/tree/master/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
+
+
