@@ -19,8 +19,9 @@ describe('query returns a user with an ID and username', () => {
         })
         .then(res => {
           response = res;
-        }).catch(err => {
-          console.log(`${err}`, JSON.parse(err.response.text));
+        })
+        .catch(err => {
+          console.error(`${err}`, JSON.parse(err.response.text));
           throw err;
         });
     });

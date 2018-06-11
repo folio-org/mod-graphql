@@ -18,8 +18,9 @@ describe('query returns an instance with an ID and username', () => {
         })
         .then(res => {
           response = res;
-        }).catch(err => {
-          console.log(`${err}`, JSON.parse(err.response.text));
+        })
+        .catch(err => {
+          console.error(`${err}`, JSON.parse(err.response.text));
           throw err;
         });
     });
@@ -31,8 +32,10 @@ describe('query returns an instance with an ID and username', () => {
       expect(json.data, 'the sole element should be an object').to.be.instanceOf(Object);
       const instances = json.data.instances;
       expect(instances, 'response instances should be an object').to.be.instanceOf(Object);
+      // eslint-disable-next-line no-unused-expressions
       expect(instances.totalCount, 'response should include totalCount').to.exist;
       expect(instances.totalCount, 'totalCount should be at least ten').to.be.at.least(10);
+      // eslint-disable-next-line no-unused-expressions
       expect(instances.records, 'response should include records').to.exist;
       expect(instances.records.length, 'returned list should contain at least one record').above(0);
       const record = instances.records[0];
