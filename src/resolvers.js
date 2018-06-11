@@ -17,7 +17,7 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
       return args[match];
     })
     .replace(/\[(.*?)\]/g, (text, match) => {
-      if (obj[match] === undefined) failedSubstitutions.push(text);
+      if (obj[match] === undefined || obj[match] === '') failedSubstitutions.push(text);
       return obj[match];
     });
   if (failedSubstitutions.length !== 0) {
