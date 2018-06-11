@@ -157,6 +157,6 @@ See [above](#b-run-mod-graphql-in-the-host-box) on the `OKAPI_URL` environment v
 
 ## See also
 
-[`folio-graphiql`](https://github.com/folio-org/stripes-experiments/tree/master/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
+[`folio-graphiql`](https://github.com/folio-org/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
 
 
