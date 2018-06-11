@@ -1,0 +1,49 @@
+import { chai, expect, describe, it, beforeEach, OKAPI_TENANT, OKAPI_TOKEN } from './testlib/helper';
+
+import app from '../src/app';
+
+const UUIDregex = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[1-5][a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/;
+
+describe('query returns an instance with an ID', () => {
+  describe('query for all instances', () => {
+    let response;
+    beforeEach(() => {
+      return chai.request(app)
+        .post('/graphql')
+        .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
+        .set('X-Okapi-Tenant', OKAPI_TENANT)
+        .set('X-Okapi-Token', OKAPI_TOKEN)
+        .send({
+          query: 'query { instances { records { id title } totalCount } }',
+        })
+        .then(res => {
+          response = res;
+        }).catch(err => {
+          console.log(`${err}`, JSON.parse(err.response.text));
+          throw err;
+        });
+    });
+
+    it('contains a payload with instances that have IDs', () => {
+      expect(response, 'server returns a good response').to.have.status(200);
+      const json = JSON.parse(response.text);
+      expect(Object.keys(json.data).length, 'response should only contain one element').to.equal(1);
+      expect(json.data, 'the sole element should be an object').to.be.instanceOf(Object);
+      const instances = json.data.instances;
+      expect(instances, 'response instances should be an object').to.be.instanceOf(Object);
+      expect(instances.totalCount, 'response should include totalCount').to.exist;
+      expect(instances.totalCount, 'totalCount should be at least ten').to.be.at.least(10);
+      expect(instances.records, 'response should include records').to.exist;
+      expect(instances.records.length, 'returned list should contain at least one record').above(0);
+      const record = instances.records[0];
+      expect(record, 'records should be objects').to.be.instanceOf(Object);
+      expect(Object.keys(record).length, 'exactly two fields should be included').to.equal(2);
+      // See https://github.com/chaijs/chai/issues/56 for explanation of lint-disable
+      // eslint-disable-next-line no-unused-expressions
+      expect(record.id, 'fields should include an ID').to.exist;
+      expect(record.id, 'ID field should be a v4 UUID').to.match(UUIDregex);
+      // eslint-disable-next-line no-unused-expressions
+      expect(record.title, 'fields should include a title').to.exist;
+    });
+  });
+});
