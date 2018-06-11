@@ -5,8 +5,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 
 const { convertAPI } = require('./autogen/convertAPI');
 
-// const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
-const ramlPath = 'COPY/mod-inventory-storage/ramls/instance-storage.raml';
+const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
 const { schema, resolvers } = convertAPI(ramlPath, {});
 console.info('got schema');
 
