@@ -2,6 +2,17 @@
 
 [![Build Status](https://travis-ci.org/folio-org/mod-graphql.svg?branch=master)](https://travis-ci.org/folio-org/mod-graphql)
 
+<!-- md2toc -l 2 README.md -->
+* [Development](#development)
+* [Developing with the Vagrant box](#developing-with-the-vagrant-box)
+    * [A. Run `mod-graphql` inside the Vagrant box](#a-run-mod-graphql-inside-the-vagrant-box)
+    * [B. Run `mod-graphql` in the host box](#b-run-mod-graphql-in-the-host-box)
+    * [Registering with Okapi](#registering-with-okapi)
+* [Recording Tests](#recording-tests)
+* [Environment](#environment)
+* [See also](#see-also)
+
+
 ## Development
 
 Install dependencies:
@@ -18,16 +29,17 @@ $ yarn test
 
 ## Developing with the Vagrant box
 
-It's often helpful to have a full FOLIO system to explore when extending the schema and resolvers; and to develop this service in a realistic setting. One convenient way is to share your checkout of this repo with the [Vagrant box](https://github.com/folio-org/folio-ansible#quick-start), run it inside that environment, and register it with the Okapi gateway there.
+It's often helpful to have a full FOLIO system to explore when extending the schema and resolvers; and to develop this service in a realistic setting. One convenient way is to use a pre-built [Vagrant box](https://github.com/folio-org/folio-ansible#quick-start) that is running Okapi and a set of back-end services. It's then necessary to get your local installation of `mod-graphql` running within that Okapi-moderated system. There are two basic approaches to this.
 
-### Share this folder and run inside the VM
+### A. Run `mod-graphql` inside the Vagrant box
 
-Add a line in your `Vagrantfile` expose this to the VM at `/mod-graphql`:
+To do this, you need to share your host box's `mod-graphql` folder. Add a line in your `Vagrantfile` to expose this directory to the VM at `/mod-graphql`:
 ```
 config.vm.synced_folder "/local/path/to/mod-graphql", "/mod-graphql"
 ```
 
-You'll need to restart your VM for this to take effect if it was already running. You can do this using `vagrant halt && vagrant up`. Now when you run `vagrant ssh` to ssh into the VM, you can access the checkout at `/mod-graphql`. Start the GraphQL module:
+If your VM was already running, you'll need to restart it for this to take effect. You can do this using `vagrant halt && vagrant up`. Now when you run `vagrant ssh` to ssh into the VM, you can access the checkout at `/mod-graphql`. Start the GraphQL module:
+
 ```
 host$ vagrant ssh
 guest$ cd /mod-graphql
@@ -36,7 +48,29 @@ guest$ ^D
 host$
 ```
 
+This runs on port 3001 by default.
+
+### B. Run `mod-graphql` in the host box
+
+As an alternative, you may find it simpler to work on `mod-graphql` in your own computer, but arrange for it to be visible to the Vagrant box. You can do this using ssh tunnelling. Edit your host machine's `.ssh/config` and add the lines:
+
+```
+Host 127.0.0.1
+RemoteForward 3000 127.0.0.1:3001
+```
+
+Now when you ssh into the Vagrant box -- for example, using `vagrant ssh` -- as a side-effect, a tunnel will be established connecting port 3001 on the guest box to port 3001 on the host box.
+
+When running in this way, `mod-graphql` will not be able to call back to Okapi using the address that it provides in its `X-Okapi-Url` header, because that will be defined in a way that is only valid within the Vagrant box. So you must override the use of this header by providing an `OKAPI_URL` environment variable that tells `mod-graphql` where to find Okapi. Start it like this:
+
+```
+host$ cd .../mod-graphql
+host$ OKAPI_URL=http://localhost:9130 yarn start
+```
+
 ### Registering with Okapi
+
+Whether you use method A or B, you will need to tell Okapi on the Vagrant box where to find the running `mod-graphql`. This is done the same way in either case, since both of them result in the VM having access to the GraphQL service on port 3001.
 
 This can be done with any tool that can send arbitrary HTTP requests, such as `curl`. However [okapi.rb](https://github.com/thefrontside/okapi.rb) is a handy CLI that makes this a bit less fiddly by understanding Okapi conventions. On most platforms `gem install okapi` should work, provided you have a new enough Ruby. For now the VM doesn't but that's okay as Vagrant forwards port 9130 into it so `localhost:9130` is getting to Okapi from your host machine too.
 
@@ -119,6 +153,7 @@ If you are getting this warning all over your output:
 
 You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
 
+See [above](#b-run-mod-graphql-in-the-host-box) on the `OKAPI_URL` environment variable.
 
 ## See also
 
