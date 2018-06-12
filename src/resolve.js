@@ -5,7 +5,7 @@ import { GraphQLError } from 'graphql';
 
 
 function resolve(obj, args, context, caption, path, linkFromField, linkToField, skeleton) {
-  const { cql, offset, limit } = args;
+  const { query: cql, offset, limit } = args;
   const { okapi, loggingCategories } = context;
   const logger = new Logger(loggingCategories);
 
