@@ -78,4 +78,4 @@ function render(api, _options) {
 }
 
 
-exports.render = render;
+exports.asSchema = render;
