@@ -8,7 +8,6 @@ const { convertAPI } = require('./autogen/convertAPI');
 
 const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
 const { schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {});
-console.info(`got typeDefs: [${typeDefs}]`);
 
 function badRequest(response, reason) {
   response
