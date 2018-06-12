@@ -1,6 +1,6 @@
-function render(api, resolveFunction, options) {
+function asResolvers(api, resolveFunction, options) {
   return {};
 }
 
 
-exports.render = render;
+exports.asResolvers = asResolvers;
