@@ -1,11 +1,10 @@
 function makeQueryResolvers(api, resolve, options) {
   const resolvers = {};
 
-  api.resources.forEach((resource) => {
-    console.log(JSON.stringify(resource, null, 2));
-    resolvers[resource.queryName] = (o, a, c) => resolve(o, a, c,
-                                                         resource.displayName || resource.queryName,
-                                                         'instance-storage/instances');
+  api.resources.forEach((r) => {
+    const caption = r.displayName || r.queryName;
+    const path = r.url.replace('http://localhost/', ''); // This doesn't feel quite right
+    resolvers[r.queryName] = (o, a, c) => resolve(o, a, c, caption, path)
     // We presently ignore the arguments: the resolve function knows about query, offset, etc.
   });
   return resolvers;
