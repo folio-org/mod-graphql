@@ -1,6 +1,13 @@
 function makeQueryResolvers(api, resolve, options) {
   const resolvers = {};
-  resolvers.instance_storage_instances = (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances');
+
+  api.resources.forEach((resource) => {
+    console.log(JSON.stringify(resource, null, 2));
+    resolvers[resource.queryName] = (o, a, c) => resolve(o, a, c,
+                                                         resource.displayName || resource.queryName,
+                                                         'instance-storage/instances');
+    // We presently ignore the arguments: the resolve function knows about query, offset, etc.
+  });
   return resolvers;
 }
 
