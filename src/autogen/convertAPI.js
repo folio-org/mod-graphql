@@ -1,6 +1,6 @@
 const raml = require('raml-1-parser');
 const { gatherAPI } = require('./gatherAPI');
-const asSchema = require('./asSchema');
+const { asSchema } = require('./asSchema');
 const { asResolvers } = require('./asResolvers');
 
 
@@ -29,7 +29,7 @@ function convertAPI(ramlName, resolveFunction, options) {
   }
 
   return {
-    schema: asSchema.render(gathered, options),
+    schema: asSchema(gathered, options),
     resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
   };
 }
