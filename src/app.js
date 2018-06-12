@@ -36,7 +36,7 @@ export default express()
     context: {
       query: request.body,
       okapi: {
-        url: request.get('X-Okapi-Url'),
+        url: process.env.OKAPI_URL || request.get('X-Okapi-Url'),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
