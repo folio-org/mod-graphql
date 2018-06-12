@@ -182,6 +182,7 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
   methods.filter(m => m.method === 'get').forEach((method) => {
     const args = [];
 
+    result.url = resource.absoluteUri;
     let queryPath;
     if (rel.startsWith('/{')) {
       args.push([rel.replace(/\/{(.*)}/, '$1'), 'String', true]);
