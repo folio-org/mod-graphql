@@ -52,7 +52,7 @@ if (errors.length) {
 function runTest(file) {
   let schema, resolvers, hadException = false;
   try {
-    ({ schema, resolvers } = convertAPI(`${dir}/input/${file}`, {}));
+    ({ schema, resolvers } = convertAPI(`${dir}/input/${file}`, null, {}));
   } catch (err3) {
     hadException = true;
     schema = `*EXCEPTION* ${err3}`;
