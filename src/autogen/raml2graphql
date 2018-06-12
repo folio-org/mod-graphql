@@ -28,5 +28,5 @@ if (opt.argv.length !== 1) {
   process.exit(1);
 }
 
-const { schema } = convertAPI(opt.argv[0], opt.options);
+const { schema } = convertAPI(opt.argv[0], null, opt.options);
 console.log(schema);
