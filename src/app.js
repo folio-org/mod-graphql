@@ -7,8 +7,8 @@ import resolve from './resolve';
 const { convertAPI } = require('./autogen/convertAPI');
 
 const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
-const { schema, resolvers } = convertAPI(ramlPath, resolve, {});
-console.info(`got schema: [${schema}]`);
+const { schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {});
+console.info(`got typeDefs: [${typeDefs}]`);
 
 function badRequest(response, reason) {
   response
@@ -28,11 +28,11 @@ function checkOkapiHeaders(request, response, next) {
   }
 }
 
-const execSchema = makeExecutableSchema({ typeDefs: schema, resolvers });
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default express()
   .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
-    execSchema,
+    schema,
     // debug: false, // if you don't want error objects passed to console.error()
     context: {
       query: request.body,
