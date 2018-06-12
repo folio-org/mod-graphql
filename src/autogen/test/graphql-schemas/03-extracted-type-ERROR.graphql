@@ -1,1 +1,51 @@
-*EXCEPTION* Error: no schema for 'person'
+*EXCEPTION* Error: no schema for 'person' in {
+  "relativeUri": "/person",
+  "methods": [
+    {
+      "responses": [
+        {
+          "code": "200",
+          "body": [
+            {
+              "name": "application/json"
+            }
+          ]
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "name",
+          "displayName": "name",
+          "type": "string",
+          "required": false,
+          "repeat": false
+        },
+        {
+          "name": "maxCount",
+          "displayName": "maxCount",
+          "type": "number",
+          "required": false,
+          "repeat": false
+        },
+        {
+          "name": "queryString",
+          "displayName": "queryString",
+          "type": "string",
+          "required": false,
+          "repeat": false
+        }
+      ],
+      "method": "get",
+      "parentUri": "/person",
+      "absoluteParentUri": "/person"
+    }
+  ],
+  "displayName": "/person",
+  "relativeUriPathSegments": [
+    "person"
+  ],
+  "absoluteUri": "/person",
+  "completeRelativeUri": "/person",
+  "parentUri": "",
+  "absoluteParentUri": ""
+}
