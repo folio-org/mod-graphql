@@ -14,7 +14,7 @@ describe('query returns an instance with an ID and username', () => {
         .set('X-Okapi-Tenant', OKAPI_TENANT)
         .set('X-Okapi-Token', OKAPI_TOKEN)
         .send({
-          query: 'query { instances { records { id title } totalCount } }',
+          query: 'query { instance_storage_instances { records { id title } totalCount } }',
         })
         .then(res => {
           response = res;
