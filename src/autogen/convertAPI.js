@@ -1,6 +1,7 @@
 const raml = require('raml-1-parser');
 const { gatherAPI } = require('./gatherAPI');
-const { render } = require('./asSchema');
+const asSchema = require('./asSchema');
+const asResolvers = require('./asResolvers');
 
 
 // Reads the RAML file at the specified `ramlName`, together with
@@ -12,9 +13,7 @@ const { render } = require('./asSchema');
 // The `options` object can control various aspects of RAML and JSON
 // Schema parsing, and GraphQL schema and resolver generation.
 //
-// XXX note that resolver generation is not yet done.
-//
-function convertAPI(ramlName, options) {
+function convertAPI(ramlName, resolveFunction, options) {
   let api;
   try {
     api = raml.loadSync(ramlName);
@@ -30,7 +29,8 @@ function convertAPI(ramlName, options) {
   }
 
   return {
-    schema: render(gathered, options),
+    schema: asSchema.render(gathered, options),
+    resolvers: resolveFunction ? asResolvers.render(gathered, resolveFunction, options) : null,
   };
 }
 
