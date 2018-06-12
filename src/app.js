@@ -6,7 +6,6 @@ import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
 
 const typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
-console.info(`got typeDefs: [${typeDefs}]`);
 
 function badRequest(response, reason) {
   response
