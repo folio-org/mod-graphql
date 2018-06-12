@@ -1,7 +1,7 @@
 function makeQueryResolvers(api, resolve, options) {
-  return {
-    instance_storage_instances: (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances'),
-  };
+  const resolvers = {};
+  resolvers.instance_storage_instances = (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances');
+  return resolvers;
 }
 
 function asResolvers(api, resolve, options) {
