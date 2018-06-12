@@ -30,7 +30,7 @@ function convertAPI(ramlName, resolveFunction, options) {
 
   return {
     schema: asSchema.render(gathered, options),
-    resolvers: resolveFunction ? asResolvers.render(gathered, resolveFunction, options) : null,
+    resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
   };
 }
 
