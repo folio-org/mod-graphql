@@ -8,7 +8,7 @@ const { convertAPI } = require('./autogen/convertAPI');
 
 const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
 const { schema, resolvers } = convertAPI(ramlPath, resolve, {});
-console.info('got schema, resolvers =', resolvers);
+console.info(`got schema: [${schema}]`);
 
 function badRequest(response, reason) {
   response
