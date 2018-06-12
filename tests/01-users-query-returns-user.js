@@ -15,7 +15,7 @@ describe('query returns a user with an ID and username', () => {
         .set('X-Okapi-Token', OKAPI_TOKEN)
         .send({
           query: 'query { users { id username } }',
-          variables: { limit: 3, cql: 'diku_admin' },
+          variables: { limit: 3, query: 'diku_admin' },
         })
         .then(res => {
           response = res;

@@ -99,7 +99,7 @@ echo '{"query": "query { users { id, username } }"}' | okapi create /graphql
 ```
 Or to search the users with CQL:
 ```
-echo '{"query": "query { users(cql: \"username=al*\") { id, username } }"}' | okapi create /graphql
+echo '{"query": "query { users(query: \"username=al*\") { id, username } }"}' | okapi create /graphql
 ```
 (See [a transcript of this process](doc/running-mod-graphql.txt).)
 
