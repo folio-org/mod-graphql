@@ -2,12 +2,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import resolve from './resolve';
 
 const { convertAPI } = require('./autogen/convertAPI');
 
 const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
-const { schema, resolvers } = convertAPI(ramlPath, {});
-console.info('got schema');
+const { schema, resolvers } = convertAPI(ramlPath, resolve, {});
+console.info('got schema, resolvers =', resolvers);
 
 function badRequest(response, reason) {
   response
