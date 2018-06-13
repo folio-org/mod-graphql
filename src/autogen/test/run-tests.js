@@ -3,7 +3,7 @@
 console.log(`run-tests in ${process.cwd()}`);
 
 const fs = require('fs');
-const { convertAPI } = require('../convertAPI');
+const { testSchema } = require('./testSchema');
 
 let regen, dir, singleTest;
 if (process.argv[2] === '--regenerate') {
@@ -17,45 +17,15 @@ if (process.argv[2] === '--regenerate') {
 }
 if (!dir) dir = '.';
 
-let ntotal = 0, npassed = 0, nexceptions = 0, nfailed = 0;
+const counts = { total: 0, passed: 0, exceptions: 0, failed: 0 };
 const errors = [];
 
-function testSchema(file) {
-  let schema, hadException = false;
-  try {
-    ({ schema } = convertAPI(`${dir}/input/${file}`, null, {}));
-  } catch (err3) {
-    hadException = true;
-    schema = `*EXCEPTION* ${err3}`;
-  }
-
-  const schemaFile = `${dir}/graphql-schemas/${file.replace(/raml$/, 'graphql')}`;
-  ntotal++;
-
-  if (regen) {
-    fs.writeFileSync(schemaFile, schema);
-  } else {
-    const expected = fs.readFileSync(schemaFile, 'utf8');
-    if (expected !== schema) {
-      console.info(`FAIL ${file}`);
-      nfailed++;
-      errors.push([file, expected, schema]);
-    } else if (hadException) {
-      console.info(`ok ${file} (exception)`);
-      nexceptions++;
-    } else {
-      console.info(`ok ${file}`);
-      npassed++;
-    }
-  }
-}
-
 if (singleTest) {
-  testSchema(singleTest);
+  testSchema(dir, singleTest, regen, counts, errors);
 } else {
   try {
     fs.readdirSync(`${dir}/input`).forEach(file => {
-      if (file.match(/\.raml$/)) testSchema(file);
+      if (file.match(/\.raml$/)) testSchema(dir, file, regen, counts, errors);
     });
   } catch (err) {
     console.error(`Cannot read input files: ${err.message}`);
@@ -64,9 +34,9 @@ if (singleTest) {
 }
 
 if (!regen) {
-  console.info(`\t${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
+  console.info(`\t${counts.total} tests: ${counts.passed} passed, ${counts.exceptions} expected exceptions, ${counts.failed} failed`);
 }
-if (nfailed === 0) {
+if (counts.failed === 0) {
   console.log('\tSUCCESS!');
 }
 if (errors.length) {
