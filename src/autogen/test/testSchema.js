@@ -47,7 +47,7 @@ function testSchema(dir, file, regen, counts, errors) {
     counts.passed++;
     return Status.PASS;
   }
-};
+}
 
 exports.testSchema = testSchema;
 exports.Status = Status;
