@@ -5,7 +5,7 @@
 //     or: ./raml2graphql [-v] ../../../mod-inventory/ramls/inventory.raml
 // For the time being, you will need mod-inventory-storage to be on the "graphql" branch.
 
-const packageInfo = require('./package.json');
+const packageInfo = require('../../package.json');
 const { convertAPI } = require('./convertAPI');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
