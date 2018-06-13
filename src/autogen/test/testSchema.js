@@ -1,6 +1,17 @@
 const fs = require('fs');
 const { convertAPI } = require('../convertAPI');
 
+// This has a slightly complex API, because it has to provide all the
+// necessary information to two different callers -- ./run-tests.js
+// and ../../../tests/01-schema-generation.js
+//
+// It returns the text of an exception if one occurred, otherwise true
+// if the generated schema matches the expectation and false if
+// not. It also increments two of the members of the `counts` object:
+// `total` and one of `passed`, `failed`, `exceptions`. When
+// appropriate, it also pushes an error report onto the end of the
+// `errors` array.
+
 exports.testSchema = (dir, file, regen, counts, errors) => {
   let schema, hadException = false;
   try {
