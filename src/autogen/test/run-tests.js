@@ -20,7 +20,7 @@ if (!dir) dir = '.';
 let ntotal = 0, npassed = 0, nexceptions = 0, nfailed = 0;
 const errors = [];
 
-function runTest(file) {
+function testSchema(file) {
   let schema, hadException = false;
   try {
     ({ schema } = convertAPI(`${dir}/input/${file}`, null, {}));
@@ -51,11 +51,11 @@ function runTest(file) {
 }
 
 if (singleTest) {
-  runTest(singleTest);
+  testSchema(singleTest);
 } else {
   try {
     fs.readdirSync(`${dir}/input`).forEach(file => {
-      if (file.match(/\.raml$/)) runTest(file);
+      if (file.match(/\.raml$/)) testSchema(file);
     });
   } catch (err) {
     console.error(`Cannot read input files: ${err.message}`);
