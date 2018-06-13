@@ -3,7 +3,7 @@
 console.log(`run-tests in ${process.cwd()}`);
 
 const fs = require('fs');
-const { testSchema } = require('./testSchema');
+const { testSchema, Status } = require('./testSchema');
 
 let regen, dir, singleTest;
 if (process.argv[2] === '--regenerate') {
@@ -25,7 +25,16 @@ if (singleTest) {
 } else {
   try {
     fs.readdirSync(`${dir}/input`).forEach(file => {
-      if (file.match(/\.raml$/)) testSchema(dir, file, regen, counts, errors);
+      if (file.match(/\.raml$/)) {
+        const res = testSchema(dir, file, regen, counts, errors);
+        if (res === Status.PASS) {
+          console.info(`ok ${file}`);
+        } else if (res === Status.FAIL) {
+          console.info(`FAIL ${file}`);
+        } else {
+          console.info(`ok ${file} (exception)`);
+        }
+      }
     });
   } catch (err) {
     console.error(`Cannot read input files: ${err.message}`);
