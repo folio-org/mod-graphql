@@ -1,13 +1,22 @@
+import fs from 'fs';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import resolve from './resolve';
+import legacyResolvers from './resolvers';
 
 const { convertAPI } = require('./autogen/convertAPI');
 
-const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
-const { schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {});
+let typeDefs;
+let resolvers;
+if (process.env.LEGACY_RESOLVERS) {
+  typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
+  resolvers = legacyResolvers;
+} else {
+  const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
+  ({ schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {}));
+}
 
 function badRequest(response, reason) {
   response
