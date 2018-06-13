@@ -3,8 +3,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import resolve from './resolve';
 import legacyResolvers from './resolvers';
 
+// const { convertAPI } = require('./autogen/convertAPI');
+//
+// const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
+// const { schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {});
 const legacyTypeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
 
 function badRequest(response, reason) {
@@ -26,6 +31,7 @@ function checkOkapiHeaders(request, response, next) {
   }
 }
 
+// const schema = makeExecutableSchema({ typeDefs, resolvers });
 const schema = makeExecutableSchema({ typeDefs: legacyTypeDefs, resolvers: legacyResolvers });
 
 export default express()
