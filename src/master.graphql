@@ -2,7 +2,7 @@ type Query {
   hello: String
   users(cql: String):[User]
   groups:[Group]
-  instances(cql: String, offset: Int, limit: Int):InstancesWithTotalCount
+  instance_storage_instances(cql: String, offset: Int, limit: Int):InstancesWithTotalCount
   instance(id: String):Instance
 }
 
@@ -57,8 +57,8 @@ type Metadata {
 
 # Instances and reference tables
 type InstancesWithTotalCount {
-  records: [Instance]
-  totalCount: Int
+  instances: [Instance]
+  totalRecords: Int
 }
 
 type Instance {
