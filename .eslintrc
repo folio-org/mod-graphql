@@ -2,6 +2,8 @@
   "extends": "@folio/eslint-config-stripes",
   "parser": "babel-eslint",
   "rules": {
-    "no-console": ["error", { allow: ["warn", "error", "info"] }]
+    "no-console": ["error", { allow: ["warn", "error", "info"] }],
+    "one-var": "off",
+    "one-var-declaration-per-line": "off",
   }
 }
