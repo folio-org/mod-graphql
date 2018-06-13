@@ -3,9 +3,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
-import resolvers from './resolvers';
+import legacyResolvers from './resolvers';
 
-const typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
+const legacyTypeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
 
 function badRequest(response, reason) {
   response
@@ -26,7 +26,7 @@ function checkOkapiHeaders(request, response, next) {
   }
 }
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+const schema = makeExecutableSchema({ typeDefs: legacyTypeDefs, resolvers: legacyResolvers });
 
 export default express()
   .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
