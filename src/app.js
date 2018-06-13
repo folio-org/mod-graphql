@@ -9,13 +9,13 @@ import { convertAPI } from './autogen/convertAPI';
 
 let typeDefs;
 let resolvers;
-if (process.env.LEGACY_RESOLVERS) {
-  typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
-  resolvers = legacyResolvers;
-} else {
+if (process.env.AUTO_RESOLVERS) {
   // Clearly we should parameterize this
   const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
   ({ schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {}));
+} else {
+  typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
+  resolvers = legacyResolvers;
 }
 
 function badRequest(response, reason) {
