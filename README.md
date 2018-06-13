@@ -160,3 +160,4 @@ See [above](#b-run-mod-graphql-in-the-host-box) on the `OKAPI_URL` environment v
 [`folio-graphiql`](https://github.com/folio-org/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
 
 
+<!-- indir ~/git/folio/other/mod-graphql/ env AUTO_RESOLVERS=1 OKAPI_URL=http://localhost:9130 LOGGING_CATEGORIES=url yarn start -->
