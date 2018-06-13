@@ -5,7 +5,7 @@ const { convertAPI } = require('../convertAPI');
 // necessary information to two different callers -- ./run-tests.js
 // and ../../../tests/01-schema-generation.js
 //
-// It returns the text of an exception if one occurred, otherwise true
+// It returns null if an expected exception occurred, otherwise true
 // if the generated schema matches the expectation and false if
 // not. It also increments two of the members of the `counts` object:
 // `total` and one of `passed`, `failed`, `exceptions`. When
@@ -26,18 +26,19 @@ exports.testSchema = (dir, file, regen, counts, errors) => {
 
   if (regen) {
     fs.writeFileSync(schemaFile, schema);
+    return true;
+  }
+
+  const expected = fs.readFileSync(schemaFile, 'utf8');
+  if (expected !== schema) {
+    counts.failed++;
+    errors.push([file, expected, schema]);
+    return false;
+  } else if (hadException) {
+    counts.exceptions++;
+    return null;
   } else {
-    const expected = fs.readFileSync(schemaFile, 'utf8');
-    if (expected !== schema) {
-      console.info(`FAIL ${file}`);
-      counts.failed++;
-      errors.push([file, expected, schema]);
-    } else if (hadException) {
-      console.info(`ok ${file} (exception)`);
-      counts.exceptions++;
-    } else {
-      console.info(`ok ${file}`);
-      counts.passed++;
-    }
+    counts.passed++;
+    return true;
   }
 };
