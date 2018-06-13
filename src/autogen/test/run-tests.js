@@ -21,9 +21,9 @@ let ntotal = 0, npassed = 0, nexceptions = 0, nfailed = 0;
 const errors = [];
 
 function runTest(file) {
-  let schema, resolvers, hadException = false;
+  let schema, hadException = false;
   try {
-    ({ schema, resolvers } = convertAPI(`${dir}/input/${file}`, null, {}));
+    ({ schema } = convertAPI(`${dir}/input/${file}`, null, {}));
   } catch (err3) {
     hadException = true;
     schema = `*EXCEPTION* ${err3}`;
@@ -67,7 +67,7 @@ if (!regen) {
   console.info(`\t${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
 }
 if (nfailed === 0) {
-  console.log("\tSUCCESS!");
+  console.log('\tSUCCESS!');
 }
 if (errors.length) {
   console.info();
