@@ -20,35 +20,6 @@ if (!dir) dir = '.';
 let ntotal = 0, npassed = 0, nexceptions = 0, nfailed = 0;
 const errors = [];
 
-if (singleTest) {
-  runTest(singleTest);
-} else {
-  try {
-    fs.readdirSync(`${dir}/input`).forEach(file => {
-      if (file.match(/\.raml$/)) runTest(file);
-    });
-  } catch (err) {
-    console.error(`Cannot read input files: ${err.message}`);
-    process.exit(1);
-  }
-}
-
-if (!regen) {
-  console.info(`\t${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
-}
-if (nfailed === 0) {
-  console.log("\tSUCCESS!");
-}
-if (errors.length) {
-  console.info();
-  errors.forEach((e) => {
-    const [name, expected, got] = e;
-    console.info(`failed ${name}: expected (${expected}), got (${got})`);
-  });
-  process.exit(2);
-}
-
-
 function runTest(file) {
   let schema, resolvers, hadException = false;
   try {
@@ -77,4 +48,32 @@ function runTest(file) {
       npassed++;
     }
   }
+}
+
+if (singleTest) {
+  runTest(singleTest);
+} else {
+  try {
+    fs.readdirSync(`${dir}/input`).forEach(file => {
+      if (file.match(/\.raml$/)) runTest(file);
+    });
+  } catch (err) {
+    console.error(`Cannot read input files: ${err.message}`);
+    process.exit(1);
+  }
+}
+
+if (!regen) {
+  console.info(`\t${ntotal} tests: ${npassed} passed, ${nexceptions} expected exceptions, ${nfailed} failed`);
+}
+if (nfailed === 0) {
+  console.log("\tSUCCESS!");
+}
+if (errors.length) {
+  console.info();
+  errors.forEach((e) => {
+    const [name, expected, got] = e;
+    console.info(`failed ${name}: expected (${expected}), got (${got})`);
+  });
+  process.exit(2);
 }
