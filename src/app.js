@@ -13,6 +13,7 @@ if (process.env.LEGACY_RESOLVERS) {
   typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
   resolvers = legacyResolvers;
 } else {
+  // Clearly we should parameterize this
   const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
   ({ schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {}));
 }
