@@ -5,8 +5,7 @@ import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import resolve from './resolve';
 import legacyResolvers from './resolvers';
-
-const { convertAPI } = require('./autogen/convertAPI');
+import { convertAPI } from './autogen/convertAPI';
 
 let typeDefs;
 let resolvers;
