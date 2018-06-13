@@ -8,10 +8,7 @@ const resolvers = {
     hello: () => 'hi!',
     users: (o, a, c) => resolve(o, a, c, 'users', 'users', null, null, 'users'),
     groups: (o, a, c) => resolve(o, a, c, 'groups', 'groups', null, null, 'usergroups'),
-    instances: (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances', null, null, {
-      records: 'instances',
-      totalCount: 'totalRecords',
-    }),
+    instance_storage_instances: (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances'),
     instance: (o, a, c) => resolve(o, a, c, 'instance', 'instance-storage/instances/{id}'),
   },
 
