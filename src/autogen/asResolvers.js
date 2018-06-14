@@ -42,6 +42,7 @@ function asResolvers(api, resolve, options) {
   // When we get around to it:
   // typeResolvers.Mutation = makeMutationResolvers(api, resolve, options);
 
+  if (options.showResolvers) console.info('*** resolvers:', typeResolvers);
   return typeResolvers;
 }
 
