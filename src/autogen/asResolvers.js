@@ -25,17 +25,17 @@ function makeTypeResolvers(fields, resolve, _options) {
   return resolvers;
 }
 
-function asResolvers(api, resolve, _options) {
+function asResolvers(api, resolve, options) {
   const typeResolvers = {};
 
-  typeResolvers.Query = makeQueryResolvers(api, resolve, _options);
+  typeResolvers.Query = makeQueryResolvers(api, resolve, options);
 
   // We need register resolvers only for types that have one or more
   // link fields, since only those fields need special handling.
   Object.keys(api.types).forEach(typeName => {
     const fields = api.types[typeName];
     if (_.some(fields, field => field.link)) {
-      typeResolvers[typeName] = makeTypeResolvers(fields, resolve, _options);
+      typeResolvers[typeName] = makeTypeResolvers(fields, resolve, options);
     }
   });
 
