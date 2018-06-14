@@ -13,13 +13,21 @@ const { asResolvers } = require('./asResolvers');
 // The `options` object can control various aspects of RAML and JSON
 // Schema parsing, and GraphQL schema and resolver generation.
 //
-function convertAPI(ramlName, resolveFunction, options) {
+function convertAPI(ramlName, resolveFunction, baseOptions) {
   let api;
   try {
     api = raml.loadSync(ramlName);
   } catch (e) {
     console.error('RAML parse failed:', e);
     process.exit(2);
+  }
+
+  const options = Object.assign({}, baseOptions);
+  const optstring = process.env.GRAPHQL_OPTIONS;
+  if (optstring) {
+    optstring.split(',').forEach(option => {
+      options[option] = true;
+    });
   }
 
   const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
