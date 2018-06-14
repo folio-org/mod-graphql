@@ -55,16 +55,28 @@ function r2gDefinedType(type) {
 
 
 function gatherType(jsonSchema) {
+  let res;
+
   if (jsonSchema.type === 'array') {
-    const [arrayDepth, type] = gatherType(jsonSchema.items);
-    return [arrayDepth + 1, type];
+    res = gatherType(jsonSchema.items);
+    res[0]++; // increment level
   } else if (jsonSchema.type === 'object') {
     // eslint-disable-next-line no-use-before-define
-    const result = gatherFields(jsonSchema);
-    return [0, result];
+    res = [0, gatherFields(jsonSchema)];
   } else {
-    return [0, r2gBasicType(jsonSchema.type)];
+    res = [0, r2gBasicType(jsonSchema.type)];
   }
+
+  if (jsonSchema['folio:isVirtual']) {
+    res.push({
+      base:      jsonSchema['folio:linkBase'],
+      fromField: jsonSchema['folio:linkFromField'],
+      toField:   jsonSchema['folio:linkToField'],
+      include:   jsonSchema['folio:includedElement'],
+    });
+  }
+
+  return res;
 }
 
 
@@ -78,8 +90,8 @@ function gatherFields(jsonSchema) {
 
   const result = [];
   Object.keys(jsonSchema.properties).sort().forEach(name => {
-    const [arrayDepth, type] = gatherType(jsonSchema.properties[name]);
-    result.push({ name, required: required[name] || false, arrayDepth, type });
+    const [arrayDepth, type, link] = gatherType(jsonSchema.properties[name]);
+    result.push({ name, required: required[name] || false, arrayDepth, type, link });
   });
 
   return result;
