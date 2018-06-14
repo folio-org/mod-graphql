@@ -1,4 +1,4 @@
-import _ from 'lodash';
+const _ = require('lodash');
 
 function makeQueryResolvers(api, resolve, _options) {
   const resolvers = {};
