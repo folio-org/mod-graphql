@@ -42,7 +42,6 @@ function asResolvers(api, resolve, _options) {
   // When we get around to it:
   // typeResolvers.Mutation = makeMutationResolvers(api, resolve, options);
 
-  // console.log('*** resolvers:', JSON.stringify(typeResolvers, null, 2), typeResolvers);
   return typeResolvers;
 }
 
