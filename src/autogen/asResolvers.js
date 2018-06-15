@@ -12,7 +12,7 @@ function makeQueryResolvers(api, resolve, _options) {
   return resolvers;
 }
 
-function makeTypeResolvers(fields, resolve, _options) {
+function registerTypeResolvers(typeResolvers, typeName, fields, resolve, _options) {
   const resolvers = {};
 
   fields.forEach(field => {
@@ -22,7 +22,7 @@ function makeTypeResolvers(fields, resolve, _options) {
     }
   });
 
-  return resolvers;
+  typeResolvers[typeName] = resolvers;
 }
 
 function asResolvers(api, resolve, options) {
@@ -35,7 +35,7 @@ function asResolvers(api, resolve, options) {
   Object.keys(api.types).forEach(typeName => {
     const fields = api.types[typeName];
     if (_.some(fields, field => field.link)) {
-      typeResolvers[typeName] = makeTypeResolvers(fields, resolve, options);
+      registerTypeResolvers(typeResolvers, typeName, fields, resolve, options);
     }
   });
 
