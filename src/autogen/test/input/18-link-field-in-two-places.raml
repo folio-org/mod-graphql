@@ -1,0 +1,29 @@
+#%RAML 0.8
+
+title: API that contains a link-field referenced in two places
+
+schemas:
+  - personSchema: !include personWithLink.json
+  - peopleSchema: !include peopleWithLink.json
+
+/person:
+  get:
+    queryParameters:
+      name:
+      maxCount: {type: number}
+      queryString: {type: string}
+    responses:
+      200:
+        body:
+          application/json:
+            schema: personSchema
+
+/people:
+  get:
+    queryParameters:
+      queryString: {type: string}
+    responses:
+      200:
+        body:
+          application/json:
+            schema: peopleSchema

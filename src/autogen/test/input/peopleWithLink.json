@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "personWithLink.json"
+      },
+      "readonly": true
+    }
+  },
+  "required": [
+    "count", "records"
+  ]
+}

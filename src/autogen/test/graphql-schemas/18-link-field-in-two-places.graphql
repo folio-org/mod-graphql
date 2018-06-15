@@ -1,0 +1,34 @@
+# title: API that contains a link-field referenced in two places
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TpersonSchema
+  people(queryString: String): TpeopleSchema
+}
+
+type TpeopleSchema {
+  count: Int!
+  records: [TpeopleSchema_records]!
+}
+
+type TpersonSchema {
+  address: String
+  memberOf: [TpersonSchema_memberOf] # link: /aliases (personId=$id) -> records
+  name: String!
+}
+
+type TpeopleSchema_records {
+  address: String
+  memberOf: [TpeopleSchema_records_memberOf] # link: /aliases (personId=$id) -> records
+  name: String!
+}
+
+type TpersonSchema_memberOf {
+  alias: String
+  inUseSinceYear: Int
+}
+
+type TpeopleSchema_records_memberOf {
+  alias: String
+  inUseSinceYear: Int
+}
+
