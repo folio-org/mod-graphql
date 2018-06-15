@@ -42,7 +42,19 @@ function asResolvers(api, resolve, options) {
   // When we get around to it:
   // typeResolvers.Mutation = makeMutationResolvers(api, resolve, options);
 
-  if (options.showResolvers) console.info('*** resolvers:', typeResolvers);
+  if (options.showResolvers) {
+    let text = 'resolvers:\n';
+    Object.keys(typeResolvers).sort().forEach(r => {
+      const t = typeResolvers[r];
+      let rtext = '';
+      Object.keys(t).sort().forEach(f => {
+        rtext += `    ${f}\n`;
+      });
+      text += `  ${r}: {\n${rtext}  }\n`;
+      console.log(typeResolvers[r]);
+    });
+    console.info(text);
+  }
   return typeResolvers;
 }
 
