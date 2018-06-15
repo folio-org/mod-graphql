@@ -6,12 +6,12 @@ type Query {
 
 type TpersonSchema {
   address: String
-  memberOf: [TpersonSchema_memberOf]
+  memberOf: [TpersonSchema_memberOf] # link: /aliases (personId=$id) -> records
   name: String!
 }
 
 type TpersonSchema_memberOf {
   alias: String
-  inUseSinceYear: Float
+  inUseSinceYear: Int
 }
 
