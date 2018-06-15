@@ -51,7 +51,6 @@ function asResolvers(api, resolve, options) {
         rtext += `    ${f}\n`;
       });
       text += `  ${r}: {\n${rtext}  }\n`;
-      console.log(typeResolvers[r]);
     });
     console.info(text);
   }
