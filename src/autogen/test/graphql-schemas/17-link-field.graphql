@@ -1,0 +1,17 @@
+# title: API that contains a link-field
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TpersonSchema
+}
+
+type TpersonSchema {
+  address: String
+  memberOf: [TpersonSchema_memberOf]
+  name: String!
+}
+
+type TpersonSchema_memberOf {
+  alias: String
+  inUseSinceYear: Float
+}
+
