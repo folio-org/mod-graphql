@@ -6,7 +6,7 @@
       "type": "string"
     },
     "inUseSinceYear": {
-      "type": "number"
+      "type": "integer"
     }
   },
   "required": [
