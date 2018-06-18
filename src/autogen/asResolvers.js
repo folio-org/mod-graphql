@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 function makeQueryResolvers(api, resolve, _options) {
   const resolvers = {};
 
@@ -12,33 +10,40 @@ function makeQueryResolvers(api, resolve, _options) {
   return resolvers;
 }
 
-function registerTypeResolvers(typeResolvers, typeName, fields, resolve, _options) {
+function registerTypeResolvers(typeResolvers, typeName, fields, resolve, options) {
   const resolvers = {};
+  const subTypes = {};
 
   fields.forEach(field => {
     if (field.link) {
       const l = field.link;
       resolvers[field.name] = (o, a, c) => resolve(o, a, c, `${field.name}-link`, l.base, l.fromField, l.toField, l.include);
     }
+    if (Array.isArray(field.type)) {
+      subTypes[`${typeName}_${field.name}`] = field.type;
+    }
   });
 
-  typeResolvers[typeName] = resolvers;
+  if (Object.keys(resolvers).length > 0) typeResolvers[typeName] = resolvers;
+
+  // eslint-disable-next-line no-use-before-define
+  insertTypeResolvers(typeResolvers, subTypes, resolve, options);
 }
+
+
+function insertTypeResolvers(typeResolvers, types, resolve, options) {
+  Object.keys(types).sort().forEach(typeName => {
+    const fields = types[typeName];
+    registerTypeResolvers(typeResolvers, typeName, fields, resolve, options);
+  });
+}
+
 
 function asResolvers(api, resolve, options) {
   const typeResolvers = {};
 
   typeResolvers.Query = makeQueryResolvers(api, resolve, options);
-
-  // We need register resolvers only for types that have one or more
-  // link fields, since only those fields need special handling.
-  Object.keys(api.types).forEach(typeName => {
-    const fields = api.types[typeName];
-    if (_.some(fields, field => field.link)) {
-      registerTypeResolvers(typeResolvers, typeName, fields, resolve, options);
-    }
-  });
-
+  insertTypeResolvers(typeResolvers, api.types, resolve, options);
   // When we get around to it:
   // typeResolvers.Mutation = makeMutationResolvers(api, resolve, options);
 
