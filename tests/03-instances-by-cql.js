@@ -28,7 +28,7 @@ describe('query returns an instance with holdings', () => {
       expect(instances.totalRecords, 'totalRecords should be less than ten').not.to.be.at.least(10);
       expect(instances.instances, 'response should include instances').to.exist;
       expect(instances.instances.length, 'returned list should contain at least three records').above(3);
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < instances.instances.length; i++) {
         const record = instances.instances[i];
         expect(record, 'instances should be objects').to.be.instanceOf(Object);
         expect(Object.keys(record).length, 'exactly two fields should be included').to.equal(2);
