@@ -2,7 +2,7 @@ type Query {
   hello: String
   users(cql: String):[User]
   groups:[Group]
-  instance_storage_instances(cql: String, offset: Int, limit: Int):InstancesWithTotalCount
+  instance_storage_instances(query: String, offset: Int, limit: Int):InstancesWithTotalCount
   instance(id: String):Instance
 }
 
