@@ -15,12 +15,12 @@ describe('query returns an instance with an ID and username', () => {
   describe('query for all instances', () => {
     let response;
     beforeEach(() => runQuery(app, 'query { instance_storage_instances { instances { id title } totalRecords } }')
-      .then(res => {
-        response = res;
-      })
       .catch(err => {
         console.error(`${err}`, JSON.parse(err.response.text));
         throw err;
+      })
+      .then(res => {
+        response = res;
       }));
 
     it('contains a payload with instances that have IDs', () => {
