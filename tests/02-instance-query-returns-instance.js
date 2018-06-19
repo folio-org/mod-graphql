@@ -2,26 +2,28 @@ import { chai, expect, describe, it, beforeEach, OKAPI_TENANT, OKAPI_TOKEN, UUID
 
 import app from '../src/app';
 
+function runQuery(xapp) {
+  return chai.request(xapp)
+    .post('/graphql')
+    .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
+    .set('X-Okapi-Tenant', OKAPI_TENANT)
+    .set('X-Okapi-Token', OKAPI_TOKEN)
+    .send({
+      query: 'query { instance_storage_instances { instances { id title } totalRecords } }',
+    });
+}
+
 describe('query returns an instance with an ID and username', () => {
   describe('query for all instances', () => {
     let response;
-    beforeEach(() => {
-      return chai.request(app)
-        .post('/graphql')
-        .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
-        .set('X-Okapi-Tenant', OKAPI_TENANT)
-        .set('X-Okapi-Token', OKAPI_TOKEN)
-        .send({
-          query: 'query { instance_storage_instances { instances { id title } totalRecords } }',
-        })
-        .then(res => {
-          response = res;
-        })
-        .catch(err => {
-          console.error(`${err}`, JSON.parse(err.response.text));
-          throw err;
-        });
-    });
+    beforeEach(() => runQuery(app)
+      .then(res => {
+        response = res;
+      })
+      .catch(err => {
+        console.error(`${err}`, JSON.parse(err.response.text));
+        throw err;
+      }));
 
     it('contains a payload with instances that have IDs', () => {
       expect(response, 'server returns a good response').to.have.status(200);
