@@ -8,20 +8,18 @@ function runQuery(xapp, query) {
     .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
     .set('X-Okapi-Tenant', OKAPI_TENANT)
     .set('X-Okapi-Token', OKAPI_TOKEN)
-    .send({ query });
+    .send({ query })
+    .catch(err => {
+      console.error(`${err}`, JSON.parse(err.response.text));
+      throw err;
+    });
 }
 
 describe('query returns an instance with an ID and username', () => {
   describe('query for all instances', () => {
     let response;
     beforeEach(() => runQuery(app, 'query { instance_storage_instances { instances { id title } totalRecords } }')
-      .catch(err => {
-        console.error(`${err}`, JSON.parse(err.response.text));
-        throw err;
-      })
-      .then(res => {
-        response = res;
-      }));
+      .then(res => { response = res; }));
 
     it('contains a payload with instances that have IDs', () => {
       expect(response, 'server returns a good response').to.have.status(200);
