@@ -14,4 +14,6 @@
 * Set up test-suite for GraphQL schema generation. Fixes MODGQL-21.
 * Auto-generate GraphQL schemas from RAMLs and JSON Schemas. Fixes MODGQL-20.
 * Auto-generate GraphQL resolvers from RAMLs and JSON Schemas. Fixes MODGQL-23.
+* Abstract out common parts of tests. Fixes MODGQL-31.
+
 
