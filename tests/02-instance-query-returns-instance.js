@@ -2,21 +2,19 @@ import { chai, expect, describe, it, beforeEach, OKAPI_TENANT, OKAPI_TOKEN, UUID
 
 import app from '../src/app';
 
-function runQuery(xapp) {
+function runQuery(xapp, query) {
   return chai.request(xapp)
     .post('/graphql')
     .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
     .set('X-Okapi-Tenant', OKAPI_TENANT)
     .set('X-Okapi-Token', OKAPI_TOKEN)
-    .send({
-      query: 'query { instance_storage_instances { instances { id title } totalRecords } }',
-    });
+    .send({ query });
 }
 
 describe('query returns an instance with an ID and username', () => {
   describe('query for all instances', () => {
     let response;
-    beforeEach(() => runQuery(app)
+    beforeEach(() => runQuery(app, 'query { instance_storage_instances { instances { id title } totalRecords } }')
       .then(res => {
         response = res;
       })
