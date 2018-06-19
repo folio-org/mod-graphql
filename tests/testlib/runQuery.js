@@ -1,5 +1,5 @@
-import { OKAPI_TENANT, OKAPI_TOKEN } from './env';
 import { request } from 'chai';
+import { OKAPI_TENANT, OKAPI_TOKEN } from './env';
 
 export const runQuery = (app, query) => {
   return request(app)
