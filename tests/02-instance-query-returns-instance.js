@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
 import app from '../src/app';
 
@@ -14,20 +16,16 @@ describe('query returns an instance with an ID and username', () => {
       expect(json.data, 'the sole element should be an object').to.be.instanceOf(Object);
       const instances = json.data.instance_storage_instances;
       expect(instances, 'response instances should be an object').to.be.instanceOf(Object);
-      // eslint-disable-next-line no-unused-expressions
       expect(instances.totalRecords, 'response should include totalRecords').to.exist;
       expect(instances.totalRecords, 'totalRecords should be at least ten').to.be.at.least(10);
-      // eslint-disable-next-line no-unused-expressions
       expect(instances.instances, 'response should include instances').to.exist;
       expect(instances.instances.length, 'returned list should contain at least one record').above(0);
       const record = instances.instances[0];
       expect(record, 'instances should be objects').to.be.instanceOf(Object);
       expect(Object.keys(record).length, 'exactly two fields should be included').to.equal(2);
       // See https://github.com/chaijs/chai/issues/56 for explanation of lint-disable
-      // eslint-disable-next-line no-unused-expressions
       expect(record.id, 'fields should include an ID').to.exist;
       expect(record.id, 'ID field should be a v4 UUID').to.match(UUIDregex);
-      // eslint-disable-next-line no-unused-expressions
       expect(record.title, 'fields should include a title').to.exist;
     });
   });
