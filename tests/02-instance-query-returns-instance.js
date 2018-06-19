@@ -1,5 +1,4 @@
-import { expect, describe, it, beforeEach, runQuery, UUIDregex } from './testlib/helper';
-
+import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
 import app from '../src/app';
 
 describe('query returns an instance with an ID and username', () => {
