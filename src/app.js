@@ -25,7 +25,7 @@ function badRequest(response, reason) {
 }
 
 function checkOkapiHeaders(request, response, next) {
-  // console.info('GraphQL query:', request.body);
+  // console.info('GraphQL query:', JSON.stringify(request.body, null, 2));
   if (!request.get('X-Okapi-Url')) {
     badRequest(response, 'Missing Header: X-Okapi-Url');
   } else if (!request.get('X-Okapi-Tenant')) {
