@@ -3,10 +3,17 @@
 import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
 import app from '../src/app';
 
+const QUERY = `query multipleInstances {
+  instance_storage_instances {
+    instances { id title }
+    totalRecords
+  }
+}`;
+
 describe('query returns an instance with an ID and title', () => {
   describe('query for all instances', () => {
     let response;
-    beforeEach(() => runQuery(app, 'query { instance_storage_instances { instances { id title } totalRecords } }')
+    beforeEach(() => runQuery(app, QUERY)
       .then(res => { response = res; }));
 
     it('contains a payload with instances that have IDs', () => {
