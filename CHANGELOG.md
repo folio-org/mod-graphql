@@ -17,4 +17,5 @@
 * Set up test-suite for GraphQL schema generation. Fixes MODGQL-21.
 * Abstract out common parts of tests. Fixes MODGQL-31.
 * Add tests for two-level and three-level fetching. Fixes MODGQL-24.
+* Document [procedure for uninstalling a running module](doc/remove-running-modules.md). Fixes MODGQL-5.
 
