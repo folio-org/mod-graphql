@@ -9,7 +9,7 @@ const resolvers = {
     users: (o, a, c) => resolve(o, a, c, 'users', 'users', null, null, 'users'),
     groups: (o, a, c) => resolve(o, a, c, 'groups', 'groups', null, null, 'usergroups'),
     instance_storage_instances: (o, a, c) => resolve(o, a, c, 'instances', 'instance-storage/instances'),
-    instance: (o, a, c) => resolve(o, a, c, 'instance', 'instance-storage/instances/{id}'),
+    instance_storage_instances_SINGLE: (o, a, c) => resolve(o, a, c, 'instance', 'instance-storage/instances/{instanceId}'),
   },
 
   Metadata: {

@@ -3,7 +3,7 @@ type Query {
   users(cql: String):[User]
   groups:[Group]
   instance_storage_instances(query: String, offset: Int, limit: Int):InstancesWithTotalCount
-  instance(id: String):Instance
+  instance_storage_instances_SINGLE(instanceId: String):Instance
 }
 
 type Mutation {
