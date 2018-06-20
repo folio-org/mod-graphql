@@ -11,9 +11,10 @@
 * Emit diagnostics for (e.g.) malformed CQL. Fixes MODGQL-6.
 * Support paging parameters in mod-graphql Instances search. Fixes MODGQL-16.
 * Return holdings statements, with their items, along with instance records. Fixes MODGQL-18.
-* Set up test-suite for GraphQL schema generation. Fixes MODGQL-21.
 * Auto-generate GraphQL schemas from RAMLs and JSON Schemas. Fixes MODGQL-20.
 * Auto-generate GraphQL resolvers from RAMLs and JSON Schemas. Fixes MODGQL-23.
+* General work towards a useful test-suite. Fixes MODGQL-12.
+* Set up test-suite for GraphQL schema generation. Fixes MODGQL-21.
 * Abstract out common parts of tests. Fixes MODGQL-31.
-
+* Add tests for two-level and three-level fetching. Fixes MODGQL-24.
 
