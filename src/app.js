@@ -10,8 +10,8 @@ import { convertAPI } from './autogen/convertAPI';
 let typeDefs;
 let resolvers;
 if (process.env.AUTO_RESOLVERS) {
-  // Clearly we should parameterize this
-  const ramlPath = '../mod-inventory-storage/ramls/instance-storage.raml';
+  // Clearly we should parameterize this: see MODGQL-29
+  const ramlPath = 'tests/input/mod-inventory-storage/ramls/instance-storage.raml';
   ({ schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {}));
 } else {
   typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
