@@ -21,7 +21,6 @@ const QUERY = `{
         status {
           name
         }
-        enumeration
       }
     }
   }
@@ -65,6 +64,21 @@ describe('query returns an instance with holdings', () => {
         'id,callNumber,instanceId,holdingsItems'.split(',').forEach(field => {
           expect(hr[i][field], `holdings field '${field}' should exist`).to.exist;
           expect(hr[i].instanceId, 'holdings instanceId should match instance ID').to.equal(record.id);
+        });
+      }
+    });
+
+    it('has two items in first holdings record', () => {
+      const json = JSON.parse(response.text);
+      const record = json.data.instance_storage_instances_SINGLE;
+      const hr = record.holdingsRecords;
+      const hi = hr[0].holdingsItems;
+      expect(hi, 'holdings items should be an array').to.be.instanceOf(Array);
+      expect(hi.length, 'two holdings items should be present').to.equal(2);
+      for (let i = 0; i < 2; i++) {
+        expect(Object.keys(hi[i]).length, 'exactly three holdings-tiem fields should be included').to.equal(3);
+        'id,barcode,status'.split(',').forEach(field => {
+          expect(hi[i][field], `holdings field '${field}' should exist`).to.exist;
         });
       }
     });
