@@ -3,14 +3,14 @@
 import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
 import app from '../src/app';
 
-const QUERY = `query instanceWithHoldings($cql: String) {
+const QUERY = `query multipleInstances($cql: String) {
   instance_storage_instances(query: $cql) {
     instances { id title }
     totalRecords
   }
 }`;
 
-describe('query returns an instance with holdings', () => {
+describe('query returns an instances matching 'ba*'', () => {
   describe('query for all instances', () => {
     let response;
     beforeEach(() => runQuery(app, QUERY, 'title=ba*')
