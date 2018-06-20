@@ -3,8 +3,8 @@
 import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
 import app from '../src/app';
 
-const QUERY = `query multipleInstances {
-  instance_storage_instances {
+const QUERY = `query multipleInstances($cql: String) {
+  instance_storage_instances(query: $cql) {
     instances { id title }
     totalRecords
   }
