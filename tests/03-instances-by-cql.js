@@ -13,12 +13,13 @@ const QUERY = `query multipleInstances($cql: String) {
 describe('query returns instances matching "ba*"', () => {
   describe('query for matching instances', () => {
     let response;
-    beforeEach(() => runQuery(app, QUERY, 'title=ba*')
+    beforeEach(() => runQuery(app, QUERY)
       .then(res => { response = res; }));
 
     it('contains a payload with instances that have IDs', () => {
       expect(response, 'server returns a good response').to.have.status(200);
       const json = JSON.parse(response.text);
+      console.log('*** got server response:', JSON.stringify(json, null, 2));
       expect(Object.keys(json.data).length, 'response should only contain one element').to.equal(1);
       expect(json.data, 'the sole element should be an object').to.be.instanceOf(Object);
       const instances = json.data.instance_storage_instances;
