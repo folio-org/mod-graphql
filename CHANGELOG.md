@@ -19,4 +19,6 @@
 * Add tests for two-level and three-level fetching. Fixes MODGQL-24.
 * Document [procedure for uninstalling a running module](doc/remove-running-modules.md). Fixes MODGQL-5.
 * Use `PROXY_OKAPI_URL` environment variable for instructing the yakbak proxy server, rather than re-using `OKAPI_URL` which is used here as in other places such as the various Okapi CLIs. Prevents the yakbak HTTP server from being bypassed in tests, and so fixes MODGQL-35.
+* Get tests running within CI (be generating a good set of tapes). Fixes MODGQL-34.
+
 
