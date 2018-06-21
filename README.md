@@ -126,7 +126,7 @@ values for your running gateway url, your tenant and your token inside
 of it like so:
 
 ``` shell
-OKAPI_URL=http://localhost:9130
+PROXY_OKAPI_URL=http://localhost:9130
 OKAPI_TENANT=diku
 OKAPI_TOKEN=abc123
 ```
