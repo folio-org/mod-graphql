@@ -13,8 +13,10 @@ if (process.env.LEGACY_RESOLVERS) {
   typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
   resolvers = legacyResolvers;
 } else {
-  // Clearly we should parameterize this: see MODGQL-29
-  const ramlPath = 'tests/input/mod-inventory-storage/ramls/instance-storage.raml';
+  let ramlPath = 'tests/input/mod-inventory-storage/ramls/instance-storage.raml';
+  // We need to avoid taking '--exit' as a RAML path, as `yarn test` specifies that
+  if (process.argv.length > 2 && process.argv[2] !== '--exit') ramlPath = process.argv[2];
+  console.info(`using RAML '${ramlPath}'`);
   ({ schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {}));
 }
 
