@@ -1,0 +1,16 @@
+#%RAML 0.8
+
+title: simple API  
+
+schemas:
+  - person-schema: !include schemas/person.json
+
+/person:
+  get:
+    queryParameters:
+      name:
+      maxCount: {type: number}
+      queryString: {type: string}
+    body:
+      application/json:
+        schema: person-schema

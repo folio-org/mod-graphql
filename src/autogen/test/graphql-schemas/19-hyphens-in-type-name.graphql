@@ -1,0 +1,11 @@
+# title: simple API
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): Tperson_schema
+}
+
+type Tperson_schema {
+  address: String
+  name: String!
+}
+
