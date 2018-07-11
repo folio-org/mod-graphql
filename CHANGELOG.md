@@ -23,5 +23,5 @@
 * Parameterise which RAML drives mod-graphql. Fixes MODGQL-29.
 * Handle RAML type-names with embedded hyphens. Fixes MODGQL-36.
 * Add `schema` logging-category for dumping the generated GraphQL schema. Fixes MODGQL-37.
-
+* Create single logger object, pass it down to wherever it's needed. Fixes MODGQL-38.
 

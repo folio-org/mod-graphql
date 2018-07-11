@@ -1,13 +1,11 @@
 import fetch from 'node-fetch';
-import Logger from '@folio/stripes-logger';
 import queryString from 'query-string';
 import { GraphQLError } from 'graphql';
 
 
 function resolve(obj, args, context, caption, path, linkFromField, linkToField, skeleton) {
   const { query: cql, offset, limit } = args;
-  const { okapi, loggingCategories } = context;
-  const logger = new Logger(loggingCategories);
+  const { okapi, logger } = context;
 
   const failedSubstitutions = [];
   const processedPath = path

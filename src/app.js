@@ -8,6 +8,7 @@ import resolve from './resolve';
 import legacyResolvers from './resolvers';
 import { convertAPI } from './autogen/convertAPI';
 
+// Supported: 'schema,failsub,url,result'
 const logger = new Logger(process.env.LOGGING_CATEGORIES);
 
 let typeDefs;
@@ -60,7 +61,6 @@ export default express()
           'X-Okapi-Token': request.get('X-Okapi-Token')
         }
       },
-      loggingCategories: process.env.LOGGING_CATEGORIES,
-      // Supported: 'failsub,url,result'
+      logger,
     }
   })));
