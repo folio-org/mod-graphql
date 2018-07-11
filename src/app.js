@@ -3,9 +3,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import Logger from '@folio/stripes-logger';
 import resolve from './resolve';
 import legacyResolvers from './resolvers';
 import { convertAPI } from './autogen/convertAPI';
+
+const loggingCategories = process.env.LOGGING_CATEGORIES;
+const logger = new Logger(loggingCategories);
 
 let typeDefs;
 let resolvers;
@@ -18,6 +22,7 @@ if (process.env.LEGACY_RESOLVERS) {
   if (process.argv.length > 2 && process.argv[2] !== '--exit') ramlPath = process.argv[2];
   console.info(`using RAML '${ramlPath}'`);
   ({ schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, {}));
+  logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 }
 
 function badRequest(response, reason) {

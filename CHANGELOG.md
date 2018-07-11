@@ -22,4 +22,6 @@
 * Get tests running within CI (be generating a good set of tapes). Fixes MODGQL-34.
 * Parameterise which RAML drives mod-graphql. Fixes MODGQL-29.
 * Handle RAML type-names with embedded hyphens. Fixes MODGQL-36.
+* Add `schema` logging-category for dumping the generated GraphQL schema. Fixes MODGQL-37.
+
 
