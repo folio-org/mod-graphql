@@ -161,3 +161,10 @@ See [above](#b-run-mod-graphql-in-the-host-box) on the `OKAPI_URL` environment v
 
 
 <!-- indir ~/git/folio/other/mod-graphql/ env OKAPI_URL=http://localhost:9130 LOGGING_CATEGORIES=url yarn start -->
+<!--
+Some FOLIO RAMLs that this can work on:
+* ../mod-inventory-storage/ramls/instance-storage.raml
+* ../mod-inventory-storage/ramls/classification-type.raml
+* ../mod-inventory-storage/ramls/locationunit.raml
+* ../mod-inventory/ramls/inventory.raml
+-->
