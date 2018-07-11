@@ -91,7 +91,13 @@ function gatherFields(jsonSchema) {
   const result = [];
   Object.keys(jsonSchema.properties).sort().forEach(name => {
     const [arrayDepth, type, link] = gatherType(jsonSchema.properties[name]);
-    result.push({ name, required: required[name] || false, arrayDepth, type, link });
+    result.push({
+      name: name.replace('@', '_'),
+      required: required[name] || false,
+      arrayDepth,
+      type,
+      link
+    });
   });
 
   return result;
