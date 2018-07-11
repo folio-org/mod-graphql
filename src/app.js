@@ -8,8 +8,7 @@ import resolve from './resolve';
 import legacyResolvers from './resolvers';
 import { convertAPI } from './autogen/convertAPI';
 
-const loggingCategories = process.env.LOGGING_CATEGORIES;
-const logger = new Logger(loggingCategories);
+const logger = new Logger(process.env.LOGGING_CATEGORIES);
 
 let typeDefs;
 let resolvers;
