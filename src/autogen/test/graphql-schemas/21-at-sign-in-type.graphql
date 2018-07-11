@@ -1,0 +1,20 @@
+# title: API where a type-name starts with '@'
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): Tgenerated1
+}
+
+type Tgenerated1 {
+  _metadata: Tgenerated1__metadata
+  name: String
+}
+
+type Tgenerated1__metadata {
+  createdByUserId: String!
+  createdByUsername: String
+  createdDate: String!
+  updatedByUserId: String
+  updatedByUsername: String
+  updatedDate: String
+}
+

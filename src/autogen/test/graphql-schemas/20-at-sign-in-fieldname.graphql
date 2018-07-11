@@ -1,0 +1,11 @@
+# title: API with '@' sign in fieldname
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): Tgenerated1
+}
+
+type Tgenerated1 {
+  _address: String
+  name: String
+}
+
