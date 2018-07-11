@@ -1,6 +1,6 @@
 // Usage: node run-tests.js [--regenerate] [<test-dir>] [<test-name>]
 
-console.log(`run-tests in ${process.cwd()}`);
+console.info(`run-tests in ${process.cwd()}`);
 
 const fs = require('fs');
 const { testSchema, Status } = require('./testSchema');
@@ -46,7 +46,7 @@ if (!regen) {
   console.info(`\t${counts.total} tests: ${counts.passed} passed, ${counts.exceptions} expected exceptions, ${counts.failed} failed`);
 }
 if (counts.failed === 0) {
-  console.log('\tSUCCESS!');
+  console.info('\tSUCCESS!');
 }
 if (errors.length) {
   console.info();
