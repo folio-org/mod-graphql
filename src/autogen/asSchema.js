@@ -47,7 +47,6 @@ function renderTypes(types, _options) {
     const t = types[typeName];
     // eslint-disable-next-line no-useless-escape
     output += `type ${typeName} \{\n`;
-    // console.log('considering t =', t);
     t.forEach(field => {
       const { name, required, arrayDepth, type } = field;
       let fieldType = type;
