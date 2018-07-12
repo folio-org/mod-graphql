@@ -290,11 +290,11 @@ function gatherResources(api, basePath, types, options) {
 }
 
 
-function gatherAPI(api, basePath, _options) {
+function gatherAPI(api, basePath, options) {
   const types = {};
   return {
-    comments: gatherComments(api, _options),
-    resources: gatherResources(api, basePath, types, _options),
+    comments: gatherComments(api, options),
+    resources: gatherResources(api, basePath, types, options),
     types
   };
 }
