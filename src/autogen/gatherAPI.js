@@ -58,7 +58,7 @@ function gatherType(jsonSchema) {
   let res;
 
   if (jsonSchema.type === 'array') {
-    res = gatherType(jsonSchema.items);
+    res = gatherType(jsonSchema.items || {});
     res[0]++; // increment level
   } else if (jsonSchema.type === 'object') {
     // eslint-disable-next-line no-use-before-define
