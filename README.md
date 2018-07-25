@@ -167,4 +167,6 @@ Some FOLIO RAMLs that this can work on:
 * ../mod-inventory-storage/ramls/classification-type.raml
 * ../mod-inventory-storage/ramls/locationunit.raml
 * ../mod-inventory/ramls/inventory.raml
+Some that presently fail:
+* ../raml/ramls/mod-users/users.raml
 -->
