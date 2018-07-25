@@ -25,4 +25,5 @@
 * Add `schema` logging-category for dumping the generated GraphQL schema. Fixes MODGQL-37.
 * Create single logger object, pass it down to wherever it's needed. Fixes MODGQL-38.
 * Support '@' symbol in field-names. Fixes MODGQL-39.
+* RAML/JSON-Schema translator can handle arrays with no `items` specification. Fixes MODGQL-40.
 
