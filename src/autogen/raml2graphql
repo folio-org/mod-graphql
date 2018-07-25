@@ -5,6 +5,7 @@
 //     or: ./raml2graphql [-v] ../../../mod-inventory/ramls/inventory.raml
 // For the time being, you will need mod-inventory-storage to be on the "graphql" branch.
 
+const Logger = require('@folio/stripes-logger');
 const packageInfo = require('../../package.json');
 const { convertAPI } = require('./convertAPI');
 
@@ -28,5 +29,6 @@ if (opt.argv.length !== 1) {
   process.exit(1);
 }
 
-const { schema } = convertAPI(opt.argv[0], () => null, opt.options);
+const logger = new Logger(process.env.LOGGING_CATEGORIES);
+const { schema } = convertAPI(opt.argv[0], () => null, Object.assign({}, opt.options, { logger }));
 console.log(schema);
