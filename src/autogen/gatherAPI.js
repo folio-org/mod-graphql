@@ -242,11 +242,11 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
       // library simply does not support id: see
       // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
       const obj = JSON.parse(schemaText);
-      if (options.showRewrite) console.info(`rewriting schema from (${JSON.stringify(obj, null, 2)})`);
+      options.logger.log('rewrite', `schema from ${JSON.stringify(obj, null, 2)}`);
       rewriteObjRefs(obj, basePath);
-      if (options.showRewrite) console.info(`rewrote schema to (${JSON.stringify(obj, null, 2)})`);
+      options.logger.log('rewrite', `schema to ${JSON.stringify(obj, null, 2)}`);
       const expanded = $RefParser.dereference(obj);
-      if (options.showExpand) console.info(`expanded dereferenced schema to (${JSON.stringify(expanded, null, 2)})`);
+      options.logger.log('expand', `dereferenced schema to ${JSON.stringify(expanded, null, 2)}`);
 
       result.type = r2gDefinedType(schemaName);
       if (types[result.type]) {
