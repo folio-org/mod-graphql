@@ -234,35 +234,35 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
     if (!schemaInfo) {
       console.warn(`no application/json body for resource ${result.url}: skipping`);
     } else {
-     const { schemaName, schemaText } = schemaInfo;
-     if (!schemaName) {
-      throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema in ${JSON.stringify(resource, null, 2)}`);
-     } else {
-      // We shouldn't have to do this, but for some idiot reason when
-      // raml.loadSync is unable to respolve a schema, it just sets
-      // the schema-content to a "cannot resolve" message instead of
-      // throwing an exception.
-      if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
+      const { schemaName, schemaText } = schemaInfo;
+      if (!schemaName) {
+        throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema in ${JSON.stringify(resource, null, 2)}`);
+      } else {
+        // We shouldn't have to do this, but for some idiot reason when
+        // raml.loadSync is unable to respolve a schema, it just sets
+        // the schema-content to a "cannot resolve" message instead of
+        // throwing an exception.
+        if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
 
-      // We have to rewrite every $ref in this schema to be relative to
-      // `basePath`: it does not suffice to insert a suitable "id" at
-      // the top level of the schema, as the json-schema-ref-parser
-      // library simply does not support id: see
-      // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
-      const obj = JSON.parse(schemaText);
-      options.logger.log('rewrite', `schema from ${JSON.stringify(obj, null, 2)}`);
-      rewriteObjRefs(obj, basePath);
-      options.logger.log('rewrite', `schema to ${JSON.stringify(obj, null, 2)}`);
-      const expanded = $RefParser.dereference(obj);
-      options.logger.log('expand', `dereferenced schema to ${JSON.stringify(expanded, null, 2)}`);
+        // We have to rewrite every $ref in this schema to be relative to
+        // `basePath`: it does not suffice to insert a suitable "id" at
+        // the top level of the schema, as the json-schema-ref-parser
+        // library simply does not support id: see
+        // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
+        const obj = JSON.parse(schemaText);
+        options.logger.log('rewrite', `schema from ${JSON.stringify(obj, null, 2)}`);
+        rewriteObjRefs(obj, basePath);
+        options.logger.log('rewrite', `schema to ${JSON.stringify(obj, null, 2)}`);
+        const expanded = $RefParser.dereference(obj);
+        options.logger.log('expand', `dereferenced schema to ${JSON.stringify(expanded, null, 2)}`);
 
-      result.type = r2gDefinedType(schemaName);
-      if (types[result.type]) {
-        // Down the line, we could verify that old and new definitions are the same
-        console.warn(`replacing existing schema for type '${result.type}'`);
+        result.type = r2gDefinedType(schemaName);
+        if (types[result.type]) {
+          // Down the line, we could verify that old and new definitions are the same
+          console.warn(`replacing existing schema for type '${result.type}'`);
+        }
+        types[result.type] = gatherFields(expanded);
       }
-      types[result.type] = gatherFields(expanded);
-     }
     }
   });
 
