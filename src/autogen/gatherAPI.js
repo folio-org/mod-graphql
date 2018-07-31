@@ -104,6 +104,11 @@ function gatherFields(jsonSchema) {
 }
 
 
+// If the body has no data for type application/jason, return null
+// Otherwise, return an object of two keys describing the schema for that response:
+//      schemaName: name of the schema, or undefined if there is none
+//      schemaContent: JSON content of the schema
+//
 function findBodySchema(body) {
   let typeNameCounter = 0;
   function generateSchemaName() {
@@ -114,31 +119,33 @@ function findBodySchema(body) {
   const bodyJSON = (body || []).filter(b => b.name === 'application/json');
   if (bodyJSON.length > 1) {
     console.error('multiple application/json bodies');
-  }
-  if (bodyJSON.length > 0) {
-    const ajBody = bodyJSON[0];
-    if (ajBody.schemaContent) {
-      // For some reason, raml-1-parser sets the schema name equal
-      // to its context if it appears inline. In this case assign
-      // a random name.
-      const schemaText = ajBody.schemaContent;
-      const schemaName = (ajBody.schema === schemaText) ? generateSchemaName() : ajBody.schema;
-      return {
-        schemaName,
-        schemaText,
-      };
-    }
+  } else if (bodyJSON.length == 0) {
+    return null;
   }
 
-  return null;
+  const ajBody = bodyJSON[0];
+  const schemaText = ajBody.schemaContent;
+  let schemaName;
+  if (schemaText) {
+    // For some reason, raml-1-parser sets the schema name equal
+    // to its context if it appears inline. In this case assign
+    // a random name.
+    schemaName = (ajBody.schema === schemaText) ? generateSchemaName() : ajBody.schema;
+  }
+
+  return {
+    schemaName,
+    schemaText,
+  };
 }
 
 
 function findResponseSchema(resource) {
-  // The response schema can be provided at several different levels,
-  // the lower and more specific overriding the higher and more
-  // general. So we look in each candidate location, from the most
-  // specific upwards, and return the first one we find.
+  // The response schema can be provided at two different levels,
+  // either specific to response-code 200 or generic to the endpoint.
+  // We look in both candidate locations, from the most specific
+  // upwards, and return the first one we find. If we can't find a
+  // specification for a suitable response, just return null.
 
   const getMethods = (resource.methods || []).filter(m => m.method === 'get');
   if (getMethods.length > 1) {
@@ -161,10 +168,7 @@ function findResponseSchema(resource) {
     }
   }
 
-  return {
-    schemaName: null,
-    schemaText: null,
-  };
+  return null;
 }
 
 
@@ -226,10 +230,14 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
       result.displayName = resource.displayName;
     }
 
-    const { schemaName, schemaText } = findResponseSchema(resource);
-    if (!schemaName) {
-      throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema in ${JSON.stringify(resource, null, 2)}`);
+    const schemaInfo = findResponseSchema(resource);
+    if (!schemaInfo) {
+      console.warn(`no application/json body for resource ${result.url}: skipping`);
     } else {
+     const { schemaName, schemaText } = schemaInfo;
+     if (!schemaName) {
+      throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema in ${JSON.stringify(resource, null, 2)}`);
+     } else {
       // We shouldn't have to do this, but for some idiot reason when
       // raml.loadSync is unable to respolve a schema, it just sets
       // the schema-content to a "cannot resolve" message instead of
@@ -254,6 +262,7 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
         console.warn(`replacing existing schema for type '${result.type}'`);
       }
       types[result.type] = gatherFields(expanded);
+     }
     }
   });
 
