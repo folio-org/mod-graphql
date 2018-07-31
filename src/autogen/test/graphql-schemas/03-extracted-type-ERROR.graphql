@@ -1,4 +1,4 @@
-*EXCEPTION* Error: no schema for 'person' in {
+*EXCEPTION* Error: no schema for 'person': cannot find get/responses/200/body/schema or get/body/schema in {
   "relativeUri": "/person",
   "methods": [
     {
