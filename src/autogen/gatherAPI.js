@@ -119,7 +119,7 @@ function findBodySchema(body) {
   const bodyJSON = (body || []).filter(b => b.name === 'application/json');
   if (bodyJSON.length > 1) {
     console.error('multiple application/json bodies');
-  } else if (bodyJSON.length == 0) {
+  } else if (bodyJSON.length === 0) {
     return null;
   }
 
