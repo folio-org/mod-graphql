@@ -282,7 +282,7 @@ function flattenResources(resources) {
     const copy = Object.assign({}, resource);
     const subResources = copy.subResources;
     delete copy.subResources;
-    if (copy.queryName) result.push(copy);
+    if (copy.queryName && copy.type) result.push(copy);
     const tmp = flattenResources(subResources);
     tmp.forEach(subResource => {
       result.push(subResource);
