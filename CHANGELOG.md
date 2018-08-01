@@ -26,4 +26,5 @@
 * Create single logger object, pass it down to wherever it's needed. Fixes MODGQL-38.
 * Support '@' symbol in field-names. Fixes MODGQL-39.
 * RAML/JSON-Schema translator can handle arrays with no `items` specification. Fixes MODGQL-40.
+* Discard endpoints that define no JSON response (but continue reject those that define a JSON response with no schema specified). Fixes MODGQL-41.
 
