@@ -1,0 +1,51 @@
+*EXCEPTION* Error: no schema for 'person_in_pure_text': cannot find get/responses/200/body/schema or get/body/schema in {
+  "relativeUri": "/in-pure-text",
+  "methods": [
+    {
+      "responses": [
+        {
+          "code": "200",
+          "body": [
+            {
+              "name": "application/json"
+            }
+          ]
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "name",
+          "displayName": "name",
+          "type": "string",
+          "required": false,
+          "repeat": false
+        },
+        {
+          "name": "maxCount",
+          "displayName": "maxCount",
+          "type": "number",
+          "required": false,
+          "repeat": false
+        },
+        {
+          "name": "queryString",
+          "displayName": "queryString",
+          "type": "string",
+          "required": false,
+          "repeat": false
+        }
+      ],
+      "method": "get",
+      "parentUri": "/person/in-pure-text",
+      "absoluteParentUri": "/person/in-pure-text"
+    }
+  ],
+  "displayName": "/in-pure-text",
+  "relativeUriPathSegments": [
+    "in-pure-text"
+  ],
+  "absoluteUri": "/person/in-pure-text",
+  "completeRelativeUri": "/person/in-pure-text",
+  "parentUri": "/person",
+  "absoluteParentUri": "/person"
+}
