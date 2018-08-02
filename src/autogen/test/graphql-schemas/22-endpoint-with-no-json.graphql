@@ -1,4 +1,4 @@
-# title: simple API
+# title: endpoint that has no body-type application/json
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1
