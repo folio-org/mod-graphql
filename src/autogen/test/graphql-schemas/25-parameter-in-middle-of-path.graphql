@@ -1,0 +1,11 @@
+# title: endpoint that has a parameter-name in a non-terminal component of the path
+
+type Query {
+  person_SINGLE_raw(personId: String!, name: String, maxCount: Float, queryString: String): TpersonSchema
+}
+
+type TpersonSchema {
+  address: String
+  name: String!
+}
+
