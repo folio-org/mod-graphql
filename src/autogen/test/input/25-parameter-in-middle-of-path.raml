@@ -1,0 +1,20 @@
+#%RAML 0.8
+
+title: endpoint that has a parameter-name in a non-terminal component of the path
+
+schemas:
+  - personSchema: !include schemas/person.json
+
+/person:
+  /{personId}:
+    /raw:
+      get:
+        queryParameters:
+          name:
+          maxCount: {type: number}
+          queryString: {type: string}
+        responses:
+          200:
+            body:
+              application/json:
+                schema: personSchema
