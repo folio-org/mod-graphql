@@ -198,9 +198,10 @@ function rewriteArrayRefs(arr, basePath) {
 }
 
 
-function gatherResource(resource, basePath, types, options, level = 0, parentUri = '') {
+function gatherResource(resource, basePath, types, options, level = 0) {
   const result = { level };
   const rel = resource.relativeUri;
+  const parentUri = resource.parentUri;
   const uri = parentUri + rel;
 
   const methods = resource.methods || [];
@@ -268,7 +269,7 @@ function gatherResource(resource, basePath, types, options, level = 0, parentUri
 
   result.subResources = [];
   (resource.resources || []).forEach((sub) => {
-    result.subResources.push(gatherResource(sub, basePath, types, options, level + 1, uri));
+    result.subResources.push(gatherResource(sub, basePath, types, options, level + 1));
   });
 
   return result;
