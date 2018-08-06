@@ -200,7 +200,6 @@ function rewriteArrayRefs(arr, basePath) {
 
 function gatherResource(resource, basePath, types, options, level = 0) {
   const result = { level };
-  let rel = resource.relativeUri;
   const parentUri = resource.parentUri;
 
   const methods = resource.methods || [];
@@ -208,8 +207,7 @@ function gatherResource(resource, basePath, types, options, level = 0) {
   methods.filter(m => m.method === 'get').forEach((method) => {
     const args = [];
 
-    result.url = resource.absoluteUri;
-    let queryPath = parentUri + rel;
+    let queryPath = parentUri + resource.relativeUri;
     const re = /\/{(.*)}/;
     const match = queryPath.match(re);
     if (match) {
@@ -224,6 +222,7 @@ function gatherResource(resource, basePath, types, options, level = 0) {
     // eslint-disable-next-line no-useless-escape
     result.queryName = queryPath.substr(1).replace(/[\/-]/g, '_');
     result.args = args;
+    result.url = resource.absoluteUri;
     // eslint-disable-next-line no-useless-escape
     if (resource.displayName.match(/^[^\/]/)) {
       result.displayName = resource.displayName;
