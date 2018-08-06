@@ -209,13 +209,13 @@ function gatherResource(resource, basePath, types, options, level = 0) {
     const args = [];
 
     result.url = resource.absoluteUri;
+    let queryPath = parentUri + rel;
     const re = /\/{(.*)}/;
-    const match = rel.match(re);
+    const match = queryPath.match(re);
     if (match) {
       args.push([match[1], 'String', true]);
-      rel = '_SINGLE';
+      queryPath = queryPath.replace(re, '_SINGLE');
     }
-    const queryPath = parentUri + rel;
 
     (method.queryParameters || []).forEach((qp) => {
       args.push([qp.name, r2gBasicType(qp.type) || 'String', qp.required || false]);
