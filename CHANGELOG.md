@@ -28,4 +28,5 @@
 * RAML/JSON-Schema translator can handle arrays with no `items` specification. Fixes MODGQL-40.
 * Discard endpoints that define no JSON response (but continue reject those that define a JSON response with no schema specified). Fixes MODGQL-41.
 * Correctly handle API paths that have parameters in the middle. Fixes MODGQL-44.
+* Correctly handle API paths that have multiple parameters. Fixes MODGQL-45
 
