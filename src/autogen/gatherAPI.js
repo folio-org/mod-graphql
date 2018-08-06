@@ -200,9 +200,8 @@ function rewriteArrayRefs(arr, basePath) {
 
 function gatherResource(resource, basePath, types, options, level = 0) {
   const result = { level };
-  const rel = resource.relativeUri;
+  let rel = resource.relativeUri;
   const parentUri = resource.parentUri;
-  const uri = parentUri + rel;
 
   const methods = resource.methods || [];
   // At this stage, we are only interested in GET, not mutations
@@ -210,14 +209,13 @@ function gatherResource(resource, basePath, types, options, level = 0) {
     const args = [];
 
     result.url = resource.absoluteUri;
-    let queryPath;
-    if (rel.startsWith('/{')) {
-      args.push([rel.replace(/\/{(.*)}/, '$1'), 'String', true]);
-      // XXX Consider using https://github.com/blakeembrey/pluralize
-      queryPath = `${parentUri}_SINGLE`;
-    } else {
-      queryPath = uri;
+    const re = /\/{(.*)}/;
+    const match = rel.match(re);
+    if (match) {
+      args.push([match[1], 'String', true]);
+      rel = '_SINGLE';
     }
+    const queryPath = parentUri + rel;
 
     (method.queryParameters || []).forEach((qp) => {
       args.push([qp.name, r2gBasicType(qp.type) || 'String', qp.required || false]);
