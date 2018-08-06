@@ -1,0 +1,22 @@
+#%RAML 0.8
+
+title: endpoint that has multiple parameter-names in the path
+
+schemas:
+  - personSchema: !include schemas/person.json
+
+/person:
+  /{personId}:
+    /friends:
+      /{friendId}:
+        /raw:
+          get:
+            queryParameters:
+              name:
+              maxCount: {type: number}
+              queryString: {type: string}
+            responses:
+              200:
+                body:
+                  application/json:
+                    schema: personSchema
