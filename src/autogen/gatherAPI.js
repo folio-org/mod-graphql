@@ -230,7 +230,7 @@ function gatherResource(resource, basePath, types, options, level = 0) {
 
     const schemaInfo = findResponseSchema(resource);
     if (!schemaInfo) {
-      console.warn(`no application/json body for resource ${result.url}: skipping`);
+      options.logger.log('nojson', `no application/json body for resource ${result.url}: skipping`);
     } else {
       const { schemaName, schemaText } = schemaInfo;
       if (!schemaName) {
