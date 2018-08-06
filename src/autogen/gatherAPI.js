@@ -207,10 +207,11 @@ function gatherResource(resource, basePath, types, options, level = 0) {
   methods.filter(m => m.method === 'get').forEach((method) => {
     const args = [];
 
+    const re = /\/{(.*?)}/;
     let queryPath = parentUri + resource.relativeUri;
-    const re = /\/{(.*)}/;
-    const match = queryPath.match(re);
-    if (match) {
+    let match;
+    // eslint-disable-next-line no-cond-assign
+    while (match = queryPath.match(re)) {
       args.push([match[1], 'String', true]);
       queryPath = queryPath.replace(re, '_SINGLE');
     }
