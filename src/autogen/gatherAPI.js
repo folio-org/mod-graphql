@@ -40,7 +40,11 @@ function r2gBasicType(type) {
     throw new Error(`use of unsupported RAML type '${type}'`);
   }
 
-  return 'Unknown';
+  if (type !== undefined) {
+    console.warn(`no GraphQL map for JSON-Schema basic type '${type}'`);
+  }
+
+  return null;
 }
 
 
@@ -59,12 +63,15 @@ function gatherType(jsonSchema) {
 
   if (jsonSchema.type === 'array') {
     res = gatherType(jsonSchema.items || {});
+    if (!res) return null;
     res[0]++; // increment level
   } else if (jsonSchema.type === 'object') {
     // eslint-disable-next-line no-use-before-define
     res = [0, gatherFields(jsonSchema)];
   } else {
-    res = [0, r2gBasicType(jsonSchema.type)];
+    const inner = r2gBasicType(jsonSchema.type);
+    if (!inner) return null;
+    res = [0, inner];
   }
 
   if (jsonSchema['folio:isVirtual']) {
@@ -90,14 +97,17 @@ function gatherFields(jsonSchema) {
 
   const result = [];
   Object.keys(jsonSchema.properties).sort().forEach(name => {
-    const [arrayDepth, type, link] = gatherType(jsonSchema.properties[name]);
-    result.push({
-      name: name.replace('@', '_'),
-      required: required[name] || false,
-      arrayDepth,
-      type,
-      link
-    });
+    const t = gatherType(jsonSchema.properties[name]);
+    if (t) {
+      const [arrayDepth, type, link] = t;
+      result.push({
+        name: name.replace('@', '_'),
+        required: required[name] || false,
+        arrayDepth,
+        type,
+        link
+      });
+    }
   });
 
   return result;
