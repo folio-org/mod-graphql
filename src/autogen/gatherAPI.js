@@ -304,7 +304,7 @@ function flattenResources(resources) {
 
 function gatherResources(api, basePath, types, options) {
   const resources = api.specification.resources.map(r => gatherResource(r, basePath, types, options));
-  return flattenResources(resources, options);
+  return flattenResources(resources);
 }
 
 
