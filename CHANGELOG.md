@@ -33,4 +33,5 @@
 * Extend mod-graphql so that its test-suite, broken by mod-inventory-storage, works once more. Fixes MODGQL-43.
 * Document use of environment variables. Fixes MODGQL-48.
 * Use logger to emit gathered API instead of checking options. Fixes MODGQL-27.
+* Support RAML API body specifications with type `application/vnd.api+json` as well as `application/json`. Fixes MODGQL-49.
 
