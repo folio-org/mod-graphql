@@ -10,6 +10,13 @@
     * [Registering with Okapi](#registering-with-okapi)
 * [Recording Tests](#recording-tests)
 * [Environment](#environment)
+    * [`OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`](#okapi_url-okapi_tenant-okapi_token)
+    * [`PROXY_OKAPI_URL`](#proxy_okapi_url)
+    * [`LEGACY_RESOLVERS`](#legacy_resolvers)
+    * [`GRAPHQL_OPTIONS`](#graphql_options)
+    * [`LOGGING_CATEGORIES`](#logging_categories)
+    * [`CONSOLE_TRACE`](#console_trace)
+    * [`NODE_OPTIONS`](#node_options)
 * [See also](#see-also)
 
 
@@ -61,7 +68,7 @@ RemoteForward 3000 127.0.0.1:3001
 
 Now when you ssh into the Vagrant box -- for example, using `vagrant ssh` -- as a side-effect, a tunnel will be established connecting port 3001 on the guest box to port 3001 on the host box.
 
-When running in this way, `mod-graphql` will not be able to call back to Okapi using the address that it provides in its `X-Okapi-Url` header, because that will be defined in a way that is only valid within the Vagrant box. So you must override the use of this header by providing an `OKAPI_URL` environment variable that tells `mod-graphql` where to find Okapi. Start it like this:
+When running in this way, `mod-graphql` will not be able to call back to Okapi using the address that it provides in its `X-Okapi-Url` header, because that will be defined in a way that is only valid within the Vagrant box. So you must override the use of this header by providing an `OKAPI_URL` environment variable that tells `mod-graphql` where to find Okapi (see below). Start it like this:
 
 ```
 host$ cd .../mod-graphql
@@ -141,19 +148,57 @@ the `/tests/tapes` directory which you can then check back into version.
 
 ## Environment
 
-Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported:
+The operation of `mod-graphql` is affected by several environment variables:
 
-* `failsub` -- note when substituting an argument or field-value into a path fails.
-* `url` -- log each URL before trying to fetch it.
+### `OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`
+
+These are used in the standard way, as with for example [the Okapi command-line client](https://github.com/thefrontside/okapi.rb):
+
+* `OKAPI_URL`: specifies the URL of the Okapi service which is contacted in order to perform the underlying WSAPI operations needed to respond to GraphQL queries. When not specified, the Okapi URL is determined from the `X-Okapi-URL` header in the requests that are sent to `mod-graphql`, i.e. low-level WSAPI requests are sent to the same Okapi that sent the high-level GraphQL request. Typical value: `http://localhost:9130`.
+* `OKAPI_TENANT`: specifies the name of a FOLIO tenant enabled for the specified Okapi service, which is used for all WSAPI operations. Typical value: `diku`.
+* `OKAPI_TOKEN`: used to provide the value of a token from an established Okapi session associated with the specified tenant. Typical value: `eyJhbGciOiJIUzUx...v76BSXSlPh-m9AQA`.
+
+See [above](#b-run-mod-graphql-in-the-host-box) for the required use of the `OKAPI_URL` environment variable when running Okapi inside a VM and mod-graphql outside it.
+
+### `PROXY_OKAPI_URL`
+
+Required _only_ when [regenerating test tapes](#recording-tests). This is the URL of an Okapi instance which the yakbak library shoud proxy for, providing the Okapi service from which WSAPI tapes are made.
+
+### `LEGACY_RESOLVERS`
+
+**Deprecated**. When set to a true value (e.g. `1`), causes `mod-graphql` to use a hand-coded GraphQL schema and corresponding hand-coded resolvers, which were created in early development and are no longer used. These are retained for now as they enable us to run more tests than the auto-generated schema and resolvers yet allow, but will be removed in time.
+
+### `GRAPHQL_OPTIONS`
+
+A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways. Available options include:
+
+* `verbose`: dump to the console a JSON rendition of the gathered API specification. Useful for debugging.
+
+(At present, reading source code suggests this is the _only_ such option. Is it worth maintaining the options infrastructure just for this, or might we add more uses down the line?)
+
+### `LOGGING_CATEGORIES`
+
+Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported (listed here in the order that that they occur during a run):
+
+* `nojson` -- log WSAPI endpoints in the RAML for which there is no `application/json` body. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
+* `rewrite` -- log the rewriting of schema references to take into account the directory in which the RAML file was found.
+* `expand` -- log the expansion of JSON Schemas by the inclusion of their content in place of references.
+* `schema` -- log the generated GraphQL schema before starting to execute it.
+* `failsub` -- log a resolver's failure to substitute an argument or field-value into a path.
+* `url` -- log each WSAPI URL before trying to fetch it.
 * `result` -- log the result of each GET.
+
+### `CONSOLE_TRACE`
+
+When set to a true value (e.g. `1`), causes every output to the console to be accompanied by a full stack-trace. This can be useful when tracking down the cause of a warning.
+
+### `NODE_OPTIONS`
 
 If you are getting this warning all over your output:
 
 > [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
 
 You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
-
-See [above](#b-run-mod-graphql-in-the-host-box) on the `OKAPI_URL` environment variable.
 
 ## See also
 
