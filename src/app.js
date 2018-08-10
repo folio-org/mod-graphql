@@ -18,7 +18,7 @@ if (process.env.LEGACY_RESOLVERS) {
   // We need to avoid taking '--exit' as a RAML path, as `yarn test` specifies that
   if (process.argv.length > 2 && process.argv[2] !== '--exit') ramlPath = process.argv[2];
   console.info(`using RAML '${ramlPath}'`);
-  ({ schema: typeDefs, resolvers, logger } = convertAPI(ramlPath, resolve, {}));
+  ({ schema: typeDefs, resolvers, logger } = convertAPI(ramlPath, resolve));
   logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 }
 
