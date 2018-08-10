@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /* eslint-disable no-console */
-// Run as: ./raml2graphql [-v] ../../../mod-inventory-storage/ramls/instance-storage.raml
-//     or: ./raml2graphql [-v] ../../../mod-inventory/ramls/inventory.raml
+// Run as: ./raml2graphql ../../../mod-inventory-storage/ramls/instance-storage.raml
+//     or: ./raml2graphql ../../../mod-inventory/ramls/inventory.raml
 // For the time being, you will need mod-inventory-storage to be on the "graphql" branch.
 
 const Logger = require('@folio/stripes-logger');
@@ -11,7 +11,6 @@ const { convertAPI } = require('./convertAPI');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
-  ['v', 'verbose', 'Verbose mode: dump JSON of gathered RAML/Schema'],
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
 ])
