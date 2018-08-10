@@ -170,11 +170,9 @@ Required _only_ when [regenerating test tapes](#recording-tests). This is the UR
 
 ### `GRAPHQL_OPTIONS`
 
-A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways. Available options include:
+A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways.
 
-* `verbose`: dump to the console a JSON rendition of the gathered API specification. Useful for debugging.
-
-(At present, reading source code suggests this is the _only_ such option. Is it worth maintaining the options infrastructure just for this, or might we add more uses down the line?)
+At present, no options are implemented. (In the past we used it to control some kinds of logging, but that is now all done using `LOGGING_CATEGORIES`). We retain the  options infrastructure for now, because we may find other uses for it down the line.
 
 ### `LOGGING_CATEGORIES`
 
@@ -183,6 +181,7 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `nojson` -- log WSAPI endpoints in the RAML for which there is no `application/json` body. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
 * `rewrite` -- log the rewriting of schema references to take into account the directory in which the RAML file was found.
 * `expand` -- log the expansion of JSON Schemas by the inclusion of their content in place of references.
+* `api`: log a JSON rendition of the gathered API specification. Useful for debugging.
 * `schema` -- log the generated GraphQL schema before starting to execute it.
 * `failsub` -- log a resolver's failure to substitute an argument or field-value into a path.
 * `url` -- log each WSAPI URL before trying to fetch it.
