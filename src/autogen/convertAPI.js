@@ -32,9 +32,7 @@ function convertAPI(ramlName, resolveFunction, baseOptions) {
 
   const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
   const gathered = gatherAPI(api, basePath, options);
-  if (options.verbose) {
-    console.info('gathered API:', JSON.stringify(gathered, null, 2));
-  }
+  options.logger.log('api', 'gathered API:', JSON.stringify(gathered, null, 2));
 
   return {
     schema: asSchema(gathered, options),
