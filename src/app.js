@@ -3,16 +3,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
-import Logger from '@folio/stripes-logger';
 import resolve from './resolve';
 import legacyResolvers from './resolvers';
 import { convertAPI } from './autogen/convertAPI';
 
-// Supported: 'schema,failsub,url,result'
-const logger = new Logger(process.env.LOGGING_CATEGORIES);
-
 let typeDefs;
 let resolvers;
+let logger;
 if (process.env.LEGACY_RESOLVERS) {
   typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
   resolvers = legacyResolvers;
@@ -21,7 +18,7 @@ if (process.env.LEGACY_RESOLVERS) {
   // We need to avoid taking '--exit' as a RAML path, as `yarn test` specifies that
   if (process.argv.length > 2 && process.argv[2] !== '--exit') ramlPath = process.argv[2];
   console.info(`using RAML '${ramlPath}'`);
-  ({ schema: typeDefs, resolvers } = convertAPI(ramlPath, resolve, { logger }));
+  ({ schema: typeDefs, resolvers, logger } = convertAPI(ramlPath, resolve, {}));
   logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 }
 
