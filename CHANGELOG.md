@@ -31,4 +31,5 @@
 * Correctly handle API paths that have multiple parameters. Fixes MODGQL-45
 * Skip over fields whose types are undefined. Fixes MODGQL-46.
 * Extend mod-graphql so that its test-suite, broken by mod-inventory-storage, works once more. Fixes MODGQL-43.
+* Document use of environment variables. Fixes MODGQL-48.
 
