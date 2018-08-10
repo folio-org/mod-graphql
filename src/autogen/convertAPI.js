@@ -1,4 +1,5 @@
 const raml = require('raml-1-parser');
+const Logger = require('@folio/stripes-logger');
 const { gatherAPI } = require('./gatherAPI');
 const { asSchema } = require('./asSchema');
 const { asResolvers } = require('./asResolvers');
@@ -22,7 +23,8 @@ function convertAPI(ramlName, resolveFunction, baseOptions) {
     process.exit(2);
   }
 
-  const options = Object.assign({}, baseOptions);
+  const logger = new Logger(process.env.LOGGING_CATEGORIES);
+  const options = Object.assign({ logger }, baseOptions);
   const optstring = process.env.GRAPHQL_OPTIONS;
   if (optstring) {
     optstring.split(',').forEach(option => {
