@@ -1,0 +1,18 @@
+#%RAML 0.8
+
+title: Using application/vnd.api+json content-type instead of application/json
+
+schemas:
+  - personSchema: !include schemas/person.json
+
+/person:
+  get:
+    queryParameters:
+      name:
+      maxCount: {type: number}
+      queryString: {type: string}
+    responses:
+      200:
+        body:
+          application/vnd.api+json:
+            schema: personSchema

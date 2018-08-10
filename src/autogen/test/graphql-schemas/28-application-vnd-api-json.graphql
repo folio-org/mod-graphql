@@ -1,0 +1,11 @@
+# title: Using application/vnd.api+json content-type instead of application/json
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TpersonSchema
+}
+
+type TpersonSchema {
+  address: String
+  name: String!
+}
+
