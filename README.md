@@ -178,7 +178,7 @@ At present, no options are implemented. (In the past we used it to control some 
 
 Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported (listed here in the order that that they occur during a run):
 
-* `nojson` -- log WSAPI endpoints in the RAML for which there is no `application/json` body. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
+* `nojson` -- log WSAPI endpoints in the RAML for which there is no JSON body specification. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
 * `rewrite` -- log the rewriting of schema references to take into account the directory in which the RAML file was found.
 * `expand` -- log the expansion of JSON Schemas by the inclusion of their content in place of references.
 * `api`: log a JSON rendition of the gathered API specification. Useful for debugging.
