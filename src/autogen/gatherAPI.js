@@ -126,9 +126,10 @@ function findBodySchema(body) {
     return `generated${typeNameCounter}`;
   }
 
-  const bodyJSON = (body || []).filter(b => b.name === 'application/json');
+  const bodyJSON = (body || []).filter(b => (b.name === 'application/json' ||
+                                             b.name === 'application/vnd.api+json'));
   if (bodyJSON.length > 1) {
-    console.error('multiple application/json bodies');
+    console.error('multiple JSON bodies');
   } else if (bodyJSON.length === 0) {
     return null;
   }
@@ -241,7 +242,7 @@ function gatherResource(resource, basePath, types, options, level = 0) {
 
     const schemaInfo = findResponseSchema(resource);
     if (!schemaInfo) {
-      options.logger.log('nojson', `no application/json body for resource ${result.url}: skipping`);
+      options.logger.log('nojson', `no JSON body for resource ${result.url}: skipping`);
     } else {
       const { schemaName, schemaText } = schemaInfo;
       if (!schemaName) {
