@@ -1,4 +1,4 @@
-# title: simple API
+# title: JSON schema moved out to external file
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): TpersonSchema

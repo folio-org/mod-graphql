@@ -1,4 +1,4 @@
-# title: endpoint that has multiple parameter-names in the path
+# title: Endpoint that has multiple parameter-names in the path
 
 type Query {
   person_SINGLE_friends_SINGLE_raw(personId: String!, friendId: String!, name: String, maxCount: Float, queryString: String): TpersonSchema

@@ -1,4 +1,4 @@
-# title: API where a type-name starts with '@'
+# title: Declaration of a schema that is not used
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

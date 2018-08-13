@@ -1,4 +1,4 @@
-# title: simple API
+# title: Schema-name with a hyphen in it
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tperson_schema

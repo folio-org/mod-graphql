@@ -1,4 +1,4 @@
-# title: simple API
+# title: Inline schema that has a 'required' clause
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

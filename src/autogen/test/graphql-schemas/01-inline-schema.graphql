@@ -1,4 +1,4 @@
-# title: simple API
+# title: API with inline schema
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

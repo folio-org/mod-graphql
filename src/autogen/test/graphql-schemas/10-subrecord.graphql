@@ -1,4 +1,4 @@
-# title: simple API
+# title: JSON Schema that includes a sub-record
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

@@ -1,4 +1,4 @@
-# title: simple API
+# title: External JSON Schema that includes a sub-schema
 # version: v1.1
 # protocols: HTTP, HTTPS
 # baseUri: http://some-site.com/dummy-api

@@ -1,4 +1,4 @@
-# title: simple API
+# title: Schema includes a sub-schema that includes a sub-sub-schema
 # version: v1.1
 # protocols: HTTP, HTTPS
 # baseUri: http://some-site.com/dummy-api

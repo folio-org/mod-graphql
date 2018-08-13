@@ -1,4 +1,4 @@
-# title: simple API
+# title: JSON Schema includes an array-of-arrays field
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

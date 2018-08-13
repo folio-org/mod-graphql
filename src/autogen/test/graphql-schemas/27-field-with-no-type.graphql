@@ -1,4 +1,4 @@
-# title: simple API
+# title: JSON Schema contains a field with no type
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

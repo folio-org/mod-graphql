@@ -1,4 +1,4 @@
-# title: endpoint that has a parameter-name in a non-terminal component of the path
+# title: Endpoint that has a parameter-name in a terminal component of the path
 
 type Query {
   person_SINGLE(personId: String!, name: String, maxCount: Float, queryString: String): TpersonSchema

@@ -1,4 +1,4 @@
-# title: simple API
+# title: Body defined for whole GET method as well as 200 response
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): TgroupSchema
