@@ -135,6 +135,7 @@ function findBodySchema(body) {
   }
 
   const ajBody = bodyJSON[0];
+  // console.log(`considering ajBody ${JSON.stringify(ajBody, null, 2)}`);
   const schemaText = ajBody.schemaContent;
   let schemaName;
   if (schemaText) {
