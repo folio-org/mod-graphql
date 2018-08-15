@@ -24,6 +24,8 @@ function convertAPI(ramlName, resolveFunction, baseOptions) {
   }
 
   const logger = new Logger(process.env.LOGGING_CATEGORIES);
+  logger.log('raml', JSON.stringify(api, null, 2));
+
   const options = Object.assign({ logger }, baseOptions);
   const optstring = process.env.GRAPHQL_OPTIONS;
   if (optstring) {
