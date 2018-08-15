@@ -35,4 +35,5 @@
 * Use logger to emit gathered API instead of checking options. Fixes MODGQL-27.
 * Support RAML API body specifications with type `application/vnd.api+json` as well as `application/json`. Fixes MODGQL-49.
 * Improve titles of RAML-to-GraphQL test-cases. Fixes MODGQL-51.
+* Add `raml` logging-category for dumping the compiled RAML before analysing schemas. Fixes MODGQL-52.
 
