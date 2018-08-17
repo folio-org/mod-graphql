@@ -1,0 +1,23 @@
+#%RAML 1.0
+
+title: Equivalent to test 06 but using RAML 1.0
+
+types:
+  personSchema: !include schemas/person.json
+
+/person:
+  get:
+    queryParameters:
+      name:
+        required: false
+      maxCount:
+        type: number
+        required: false
+      queryString:
+        type: string
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: personSchema

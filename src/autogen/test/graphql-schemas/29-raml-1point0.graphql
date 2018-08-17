@@ -1,0 +1,11 @@
+# title: Equivalent to test 06 but using RAML 1.0
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TpersonSchema
+}
+
+type TpersonSchema {
+  address: String
+  name: String!
+}
+
