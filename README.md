@@ -170,9 +170,9 @@ Required _only_ when [regenerating test tapes](#recording-tests). This is the UR
 
 ### `GRAPHQL_OPTIONS`
 
-A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways.
+A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways:
 
-At present, no options are implemented. (In the past we used it to control some kinds of logging, but that is now all done using `LOGGING_CATEGORIES`). We retain the  options infrastructure for now, because we may find other uses for it down the line.
+* `allowSchemaless` -- when set, endpoints that define no schema are simply ignored, rather than throwing an error. This is useful when working with an incompletely specified RAML file, such as one to which the JSON Schemas are being added progressively.
 
 ### `LOGGING_CATEGORIES`
 
