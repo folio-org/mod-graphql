@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const $RefParser = require('json-schema-ref-parser-sync');
 
 
@@ -119,7 +120,15 @@ function gatherFields(jsonSchema) {
 //      schemaName: name of the schema, or undefined if there is none
 //      schemaContent: JSON content of the schema
 //
-function findBodySchema(body) {
+// For some reason, the structure that gets built when reading a RAML
+// 0.8 file has the JSON Schema included directly in the body
+// specification, whereas when reading a RAML 1.0 file, only the
+// _name_ of the schema is included -- so we need to look it up in the
+// separate registry of RAML 1.0 types. This registry is undefined
+// when reading RAML 0.8, so we can know which version of RAML we're
+// working with.
+//
+function findBodySchema(body, raml10types) {
   let typeNameCounter = 0;
   function generateSchemaName() {
     typeNameCounter++;
@@ -135,14 +144,19 @@ function findBodySchema(body) {
   }
 
   const ajBody = bodyJSON[0];
-  // console.log(`considering ajBody ${JSON.stringify(ajBody, null, 2)}`);
-  const schemaText = ajBody.schemaContent;
-  let schemaName;
-  if (schemaText) {
-    // For some reason, raml-1-parser sets the schema name equal
-    // to its context if it appears inline. In this case assign
-    // a random name.
-    schemaName = (ajBody.schema === schemaText) ? generateSchemaName() : ajBody.schema;
+  let schemaText, schemaName;
+
+  if (raml10types) {
+    schemaName = ajBody.type[0];
+    schemaText = raml10types[schemaName][0];
+  } else {
+    schemaText = ajBody.schemaContent;
+    if (schemaText) {
+      // For some reason, raml-1-parser sets the schema name equal
+      // to its context if it appears inline. In this case assign
+      // a random name.
+      schemaName = (ajBody.schema === schemaText) ? generateSchemaName() : ajBody.schema;
+    }
   }
 
   return {
@@ -152,7 +166,7 @@ function findBodySchema(body) {
 }
 
 
-function findResponseSchema(resource) {
+function findResponseSchema(resource, raml10types) {
   // The response schema can be provided at two different levels,
   // either specific to response-code 200 or generic to the endpoint.
   // We look in both candidate locations, from the most specific
@@ -171,11 +185,11 @@ function findResponseSchema(resource) {
     }
     if (response200.length > 0) {
       const response = response200[0];
-      const res = findBodySchema(response.body);
+      const res = findBodySchema(response.body, raml10types);
       if (res) return res;
     }
     if (method.body) {
-      const res = findBodySchema(method.body);
+      const res = findBodySchema(method.body, raml10types);
       if (res) return res;
     }
   }
@@ -210,7 +224,7 @@ function rewriteArrayRefs(arr, basePath) {
 }
 
 
-function gatherResource(resource, basePath, types, options, level = 0) {
+function gatherResource(raml10types, resource, basePath, types, options, level = 0) {
   const result = { level };
   const parentUri = resource.parentUri;
 
@@ -241,7 +255,7 @@ function gatherResource(resource, basePath, types, options, level = 0) {
       result.displayName = resource.displayName;
     }
 
-    const schemaInfo = findResponseSchema(resource);
+    const schemaInfo = findResponseSchema(resource, raml10types);
     if (!schemaInfo) {
       options.logger.log('nojson', `no JSON body for resource ${result.url}: skipping`);
     } else {
@@ -281,7 +295,7 @@ function gatherResource(resource, basePath, types, options, level = 0) {
 
   result.subResources = [];
   (resource.resources || []).forEach((sub) => {
-    result.subResources.push(gatherResource(sub, basePath, types, options, level + 1));
+    result.subResources.push(gatherResource(raml10types, sub, basePath, types, options, level + 1));
   });
 
   return result;
@@ -307,7 +321,9 @@ function flattenResources(resources) {
 
 
 function gatherResources(api, basePath, types, options) {
-  const resources = api.specification.resources.map(r => gatherResource(r, basePath, types, options));
+  const ast = api.specification.types;
+  const raml10types = !ast ? undefined : _.mapValues(_.keyBy(ast, 'name'), 'type');
+  const resources = api.specification.resources.map(r => gatherResource(raml10types, r, basePath, types, options));
   return flattenResources(resources);
 }
 
