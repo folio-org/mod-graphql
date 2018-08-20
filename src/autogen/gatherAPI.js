@@ -148,7 +148,12 @@ function findBodySchema(body, raml10types) {
 
   if (raml10types) {
     schemaName = ajBody.type[0];
-    schemaText = raml10types[schemaName][0];
+    const list = raml10types[schemaName];
+    if (list && _.isArray(list) && list.length === 1 && list[0] !== 'any') {
+      schemaText = list[0];
+    } else {
+      schemaName = undefined; // indicate error to caller
+    }
   } else {
     schemaText = ajBody.schemaContent;
     if (schemaText) {
