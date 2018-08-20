@@ -38,4 +38,5 @@
 * Add `raml` logging-category for dumping the compiled RAML before analysing schemas. Fixes MODGQL-52.
 * When `allowSchemaless` option is in effect, simply ignore endpoints that have no schema. Fixes MODGQL-53.
 * Support RAML 1.0. Fixes MODGQL-50.
+* Recognise two ways absence of RAML 1.0 schema is indicated. Fixes MODGQL-54.
 
