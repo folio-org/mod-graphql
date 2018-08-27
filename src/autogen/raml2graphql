@@ -2,8 +2,10 @@
 
 /* eslint-disable no-console */
 // Run as: ./raml2graphql ../../../mod-inventory-storage/ramls/instance-storage.raml
-//     or: ./raml2graphql ../../../mod-inventory/ramls/inventory.raml
-// For the time being, you will need mod-inventory-storage to be on the "graphql" branch.
+//     or: ./raml2graphql ../../../mod-kb-ebsco/ramls/provider.raml
+// For the time being, you will need mod-inventory-storage to be on
+// the "graphql" branch and mod-kb-ebsco to be on the
+// "json-schema-for-mod-kb-providers-endpoint" branch
 
 const packageInfo = require('../../package.json');
 const { convertAPI } = require('./convertAPI');
