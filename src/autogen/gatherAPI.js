@@ -72,7 +72,7 @@ function gatherType(jsonSchema) {
   } else {
     if (typeof jsonSchema.type === 'object') {
       // Problem caused by one of the eHoldings schemas
-      throw 'type is an object: ' + JSON.stringify(jsonSchema.type, null, 2);
+      throw new Error('type is an object: ' + JSON.stringify(jsonSchema.type, null, 2));
     }
     const inner = r2gBasicType(jsonSchema.type);
     if (!inner) return null;
