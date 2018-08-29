@@ -1,0 +1,18 @@
+#%RAML 0.8
+
+title: Paramater-names contain square brackets (MODGQL-56)
+
+schemas:
+  - personSchema: !include schemas/person.json
+
+/person:
+  get:
+    queryParameters:
+      na[me:
+      maxC]]ount: {type: number}
+      queryString[code]: {type: string}
+    responses:
+      200:
+        body:
+          application/json:
+            schema: personSchema
