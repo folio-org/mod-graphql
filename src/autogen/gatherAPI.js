@@ -262,7 +262,7 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
     // eslint-disable-next-line no-useless-escape
     result.queryName = queryPath.substr(1).replace(/[\/-]/g, '_');
     result.args = args;
-    result.url = resource.absoluteUri;
+    result.url = resource.completeRelativeUri.replace(/^\//, '');
     // eslint-disable-next-line no-useless-escape
     if (resource.displayName.match(/^[^\/]/)) {
       result.displayName = resource.displayName;
