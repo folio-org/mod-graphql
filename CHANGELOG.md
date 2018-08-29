@@ -40,4 +40,5 @@
 * Support RAML 1.0. Fixes MODGQL-50.
 * Recognise two ways absence of RAML 1.0 schema is indicated. Fixes MODGQL-54.
 * Spot and diagnose non-scalar JSON-Schema type. Related to MODGQL-55.
+* Square brackets in parameter names are mapped to underscores. Fixes MODGQL-56.
 
