@@ -1,0 +1,11 @@
+# title: Paramater-names contain square brackets (MODGQL-56)
+
+type Query {
+  person(na_me: String, maxC__ount: Float, queryString_code_: String): TpersonSchema
+}
+
+type TpersonSchema {
+  address: String
+  name: String!
+}
+
