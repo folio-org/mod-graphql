@@ -3,15 +3,17 @@ import queryString from 'query-string';
 import { GraphQLError } from 'graphql';
 
 
-function resolve(obj, args, context, caption, path, linkFromField, linkToField, skeleton) {
-  const { query: cql, offset, limit } = args;
+function resolve(obj, originalArgs, context, caption, path, linkFromField, linkToField, skeleton) {
   const { okapi, logger } = context;
 
+  const args = Object.assign({}, originalArgs);
   const failedSubstitutions = [];
   const processedPath = path
     .replace(/{(.*?)}/g, (text, match) => {
-      if (args[match] === undefined) failedSubstitutions.push(text);
-      return args[match];
+      const val = args[match];
+      delete args[match];
+      if (val === undefined) failedSubstitutions.push(text);
+      return val;
     })
     .replace(/\[(.*?)\]/g, (text, match) => {
       if (obj[match] === undefined || obj[match] === '') failedSubstitutions.push(text);
@@ -22,12 +24,9 @@ function resolve(obj, args, context, caption, path, linkFromField, linkToField, 
     return null;
   }
 
-  const query = {};
-  if (cql) query.query = cql;
-  if (offset) query.offset = offset;
-  if (limit) query.limit = limit;
-  if (linkFromField) query.query = `${linkToField}=="${obj[linkFromField]}"`;
-  const search = queryString.stringify(query);
+  // Positional parameters have now been removed from `args`
+  if (linkFromField) args.query = `${linkToField}=="${obj[linkFromField]}"`;
+  const search = queryString.stringify(args);
 
   const url = `${okapi.url}/${processedPath}${search ? `?${search}` : ''}`;
   logger.log('url', `${caption} from URL '${url}'`);
