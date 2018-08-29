@@ -252,7 +252,9 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
     }
 
     (method.queryParameters || []).forEach((qp) => {
-      args.push([qp.name, r2gBasicType(qp.type) || 'String', qp.required || false]);
+      args.push([qp.name.replace(/[\[\]]/g, '_'),
+                 r2gBasicType(qp.type) || 'String',
+                 qp.required || false]);
     });
 
     // eslint-disable-next-line no-useless-escape
