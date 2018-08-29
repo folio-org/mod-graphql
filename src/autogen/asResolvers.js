@@ -3,8 +3,7 @@ function makeQueryResolvers(api, resolve, _options) {
 
   api.resources.forEach((r) => {
     const caption = r.displayName || r.queryName;
-    const path = r.url.replace('http://localhost/', ''); // This doesn't feel quite right
-    resolvers[r.queryName] = (o, a, c) => resolve(o, a, c, caption, path);
+    resolvers[r.queryName] = (o, a, c) => resolve(o, a, c, caption, r.url);
     // We presently ignore the arguments: the resolve function knows about query, offset, etc.
   });
   return resolvers;
