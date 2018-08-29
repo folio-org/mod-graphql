@@ -43,4 +43,5 @@
 * Square brackets in parameter names are mapped to underscores. Fixes MODGQL-56.
 * Omit leading baseURL from URLs gathered in API. Fixes MODGQL-57.
 * Propagate all query parameters from GraphQL queries to corresponding back-end queries. Fixes MODGQL-59.
+* Target mod-graphql on the RAML for mod-kb-ebsco. Fixes MODGQL-47.
 
