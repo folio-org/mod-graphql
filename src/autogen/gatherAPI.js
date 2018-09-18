@@ -233,6 +233,9 @@ function rewriteArrayRefs(arr, basePath) {
 }
 
 
+const util = require('util');
+
+
 function gatherResource(raml10types, resource, basePath, types, options, level = 0) {
   const result = { level };
   const parentUri = resource.parentUri;
@@ -294,7 +297,8 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
         rewriteObjRefs(obj, basePath);
         options.logger.log('rewrite', `schema to ${JSON.stringify(obj, null, 2)}`);
         const expanded = $RefParser.dereference(obj);
-        options.logger.log('expand', `dereferenced schema to ${JSON.stringify(expanded, null, 2)}`);
+        const string = util.inspect(expanded, { compact: false, depth: Infinity });
+        options.logger.log('expand', `dereferenced schema to ${string}`);
 
         result.type = r2gDefinedType(schemaName);
         if (types[result.type]) {
