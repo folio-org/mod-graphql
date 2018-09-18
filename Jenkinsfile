@@ -10,7 +10,6 @@ buildNPM {
 
   doDocker = {
     buildDocker {
-      dockerDir = 'project'
       publishMaster = 'yes'
       healthChk = 'no'
     }
