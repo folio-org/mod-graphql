@@ -101,7 +101,10 @@ function gatherFields(jsonSchema) {
   });
 
   const result = [];
-  Object.keys(jsonSchema.properties).sort().forEach(name => {
+  const keys = Object.keys(jsonSchema.properties);
+  const sorted = keys.sort();
+  // console.log('  2 gatherFields, sorted =', sorted);
+  sorted.forEach(name => {
     const t = gatherType(jsonSchema.properties[name]);
     if (t) {
       const [arrayDepth, type, link] = t;
