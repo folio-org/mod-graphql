@@ -45,4 +45,5 @@
 * Propagate all query parameters from GraphQL queries to corresponding back-end queries. Fixes MODGQL-59.
 * Target mod-graphql on the RAML for mod-kb-ebsco. Fixes MODGQL-47.
 * Use `util.inspect` to serialise JSON Schemas, as they may have circular references. Fixes part of MODGQL-61.
+* Support new logging categories `api.comments`, `api.resources`, `api.types`. Fixes MODGQL-63.
 
