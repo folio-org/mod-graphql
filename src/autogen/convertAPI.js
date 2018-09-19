@@ -37,7 +37,7 @@ function convertAPI(ramlName, resolveFunction, baseOptions) {
   const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
   const gathered = gatherAPI(api, basePath, options);
   options.logger.log('api', 'gathered API:', JSON.stringify(gathered, null, 2));
-
+  ['comments', 'resources', 'types'].forEach(s => options.logger.log(`api.${s}`, JSON.stringify(gathered[s], null, 2)));
   return {
     schema: asSchema(gathered, options),
     resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
