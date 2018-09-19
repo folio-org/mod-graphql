@@ -8,7 +8,7 @@
     "address": {
       "type": "string"
     },
-    "memberOf": {
+    "aliases": {
       "type": "array",
       "items": {
         "type": "object",
