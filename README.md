@@ -181,7 +181,10 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `nojson` -- log WSAPI endpoints in the RAML for which there is no JSON body specification. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
 * `rewrite` -- log the rewriting of schema references to take into account the directory in which the RAML file was found.
 * `expand` -- log the expansion of JSON Schemas by the inclusion of their content in place of references.
-* `api`: log a JSON rendition of the gathered API specification. Useful for debugging.
+* `api`: log a JSON rendition of the gathered API specification. Useful for debugging. Or, more specifically:
+  * `api.comments`: log a JSON rendition of only the `comments` portion of the gathered API specification.
+  * `api.resources`: log a JSON rendition of only the `comments` portion of the gathered API specification.
+  * `api.types`: log a JSON rendition of only the `comments` portion of the gathered API specification.
 * `schema` -- log the generated GraphQL schema before starting to execute it.
 * `failsub` -- log a resolver's failure to substitute an argument or field-value into a path.
 * `url` -- log each WSAPI URL before trying to fetch it.
