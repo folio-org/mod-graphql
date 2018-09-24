@@ -239,6 +239,43 @@ function rewriteArrayRefs(arr, basePath) {
 const util = require('util');
 
 
+function insertSchema(result, basePath, types, options, schemaInfo) {
+  const { schemaName, schemaText } = schemaInfo;
+  if (!schemaName) {
+    if (!options.allowSchemaless) {
+      throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema for '${result.url}'`);
+    }
+    return;
+  }
+
+  // We shouldn't have to do this, but for some idiot reason when
+  // raml.loadSync is unable to resolve a schema, it just sets the
+  // schema-content to a "cannot resolve" message instead of throwing
+  // an exception.
+  if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
+
+  // We have to rewrite every $ref in this schema to be relative to
+  // `basePath`: it does not suffice to insert a suitable "id" at
+  // the top level of the schema, as the json-schema-ref-parser
+  // library simply does not support id: see
+  // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
+  const obj = JSON.parse(schemaText);
+  options.logger.log('rewrite', `schema from ${JSON.stringify(obj, null, 2)}`);
+  rewriteObjRefs(obj, basePath);
+  options.logger.log('rewrite', `schema to ${JSON.stringify(obj, null, 2)}`);
+  const expanded = $RefParser.dereference(obj);
+  const string = util.inspect(expanded, { compact: false, depth: Infinity });
+  options.logger.log('expand', `dereferenced schema to ${string}`);
+
+  result.type = r2gDefinedType(schemaName);
+  if (types[result.type]) {
+    // Down the line, we could verify that old and new definitions are the same
+    console.warn(`replacing existing schema for type '${result.type}'`);
+  }
+  types[result.type] = gatherFields(expanded);
+}
+
+
 function gatherResource(raml10types, resource, basePath, types, options, level = 0) {
   const result = { level };
   const parentUri = resource.parentUri;
@@ -278,38 +315,7 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
     if (!schemaInfo) {
       options.logger.log('nojson', `no JSON body for resource ${result.url}: skipping`);
     } else {
-      const { schemaName, schemaText } = schemaInfo;
-      if (!schemaName) {
-        if (!options.allowSchemaless) {
-          throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema in ${JSON.stringify(resource, null, 2)}`);
-        }
-      } else {
-        // We shouldn't have to do this, but for some idiot reason when
-        // raml.loadSync is unable to respolve a schema, it just sets
-        // the schema-content to a "cannot resolve" message instead of
-        // throwing an exception.
-        if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
-
-        // We have to rewrite every $ref in this schema to be relative to
-        // `basePath`: it does not suffice to insert a suitable "id" at
-        // the top level of the schema, as the json-schema-ref-parser
-        // library simply does not support id: see
-        // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
-        const obj = JSON.parse(schemaText);
-        options.logger.log('rewrite', `schema from ${JSON.stringify(obj, null, 2)}`);
-        rewriteObjRefs(obj, basePath);
-        options.logger.log('rewrite', `schema to ${JSON.stringify(obj, null, 2)}`);
-        const expanded = $RefParser.dereference(obj);
-        const string = util.inspect(expanded, { compact: false, depth: Infinity });
-        options.logger.log('expand', `dereferenced schema to ${string}`);
-
-        result.type = r2gDefinedType(schemaName);
-        if (types[result.type]) {
-          // Down the line, we could verify that old and new definitions are the same
-          console.warn(`replacing existing schema for type '${result.type}'`);
-        }
-        types[result.type] = gatherFields(expanded);
-      }
+      insertSchema(result, basePath, types, options, schemaInfo);
     }
   });
 
