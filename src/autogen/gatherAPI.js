@@ -340,7 +340,7 @@ function flattenResources(resources) {
 }
 
 
-function gatherResources(api, basePath, types, options) {
+function gatherAllResources(api, basePath, types, options) {
   const ast = api.specification.types;
   const raml10types = !ast ? undefined : _.mapValues(_.keyBy(ast, 'name'), 'type');
   const resources = api.specification.resources.map(r => gatherResource(raml10types, r, basePath, types, options));
@@ -352,7 +352,7 @@ function gatherAPI(api, basePath, options) {
   const types = {};
   return {
     comments: gatherComments(api, options),
-    resources: gatherResources(api, basePath, types, options),
+    resources: gatherAllResources(api, basePath, types, options),
     types
   };
 }
