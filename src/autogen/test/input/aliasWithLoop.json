@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "properties": {
+    "alias": {
+      "type": "string"
+    },
+    "inUseSinceYear": {
+      "type": "integer"
+    },
+    "aliasForPerson": {
+      "type": "object",
+      "$ref": "schemas/person.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "people",
+      "folio:linkFromField": "personId",
+      "folio:linkToField": "id",
+      "folio:includedElement": "records"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

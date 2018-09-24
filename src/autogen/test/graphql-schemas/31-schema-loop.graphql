@@ -1,0 +1,23 @@
+# title: Schema 1 refers to Schema 2, which refers back to Schema 1
+
+type Query {
+  person(name: String, maxCount: Float, queryString: String): TpersonSchema
+}
+
+type TpersonSchema {
+  address: String
+  aliases: [TpersonSchema_aliases] # link: /aliases (personId=$id) -> records
+  name: String!
+}
+
+type TpersonSchema_aliases {
+  alias: String
+  aliasForPerson: TpersonSchema_aliases_aliasForPerson # link: /people (id=$personId) -> records
+  inUseSinceYear: Int
+}
+
+type TpersonSchema_aliases_aliasForPerson {
+  address: String
+  name: String!
+}
+
