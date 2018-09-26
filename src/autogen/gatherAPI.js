@@ -1,5 +1,5 @@
+const fs = require('fs');
 const _ = require('lodash');
-const $RefParser = require('json-schema-ref-parser-sync');
 
 
 function gatherComments(api, _options) {
@@ -55,7 +55,7 @@ function r2gDefinedType(type) {
   // ".json". That is an implementation detail that we don't need
   // polluting our GraphQL type names.
   // See https://github.com/folio-org/mod-inventory-storage/commit/b609ff9b64e62a9294a8c98bb9669f0834249ef2
-  return `T${type.replace(/\.json$/, '').replace(/[.-]/, '_')}`;
+  return `T${type.replace(/\.json$/, '').replace(/[.-/]/g, '_')}`;
 }
 
 
@@ -93,7 +93,10 @@ function gatherType(jsonSchema) {
 
 
 function gatherFields(jsonSchema) {
-  // assert(jsonSchema.type === 'object');
+  if (jsonSchema.$ref) {
+    // It's a reference to another named schema.
+    return r2gDefinedType(jsonSchema.$ref);
+  }
 
   const required = {};
   (jsonSchema.required || []).forEach(key => {
@@ -103,7 +106,6 @@ function gatherFields(jsonSchema) {
   const result = [];
   const keys = Object.keys(jsonSchema.properties);
   const sorted = keys.sort();
-  // console.log('  2 gatherFields, sorted =', sorted);
   sorted.forEach(name => {
     const t = gatherType(jsonSchema.properties[name]);
     if (t) {
@@ -210,44 +212,37 @@ function findResponseSchema(resource, raml10types) {
 }
 
 
-function rewriteObjRefs(obj, basePath) {
+function insertReferencedSchemas(basePath, types, options, obj) {
   const keys = Object.keys(obj);
   keys.forEach(k => {
     if (k === '$ref') {
-      obj[k] = `${basePath}/${obj[k]}`;
+      const schemaName = `${basePath}/${obj[k]}`;
+      const schemaText = fs.readFileSync(schemaName, 'utf8');
+      // eslint-disable-next-line no-use-before-define
+      insertSchema(basePath, types, options, schemaName, schemaText);
+      obj[k] = schemaName;
     } else if (Array.isArray(obj[k])) {
       // eslint-disable-next-line no-use-before-define
-      rewriteArrayRefs(obj[k], basePath);
+      insertReferencedSchemasFromArray(basePath, types, options, obj[k]);
     } else if (obj[k] instanceof Object) {
-      rewriteObjRefs(obj[k], basePath);
+      insertReferencedSchemas(basePath, types, options, obj[k]);
     }
   });
 }
 
 
-function rewriteArrayRefs(arr, basePath) {
+function insertReferencedSchemasFromArray(basePath, types, options, arr) {
   for (let i = 0; i < arr.length; i++) {
     if (Array.isArray(arr[i])) {
-      rewriteArrayRefs(arr[i], basePath);
+      insertReferencedSchemasFromArray(basePath, types, options, arr[i]);
     } else if (arr[i] instanceof Object) {
-      rewriteObjRefs(arr[i], basePath);
+      insertReferencedSchemas(basePath, types, options, arr[i]);
     }
   }
 }
 
 
-const util = require('util');
-
-
-function insertSchema(result, basePath, types, options, schemaInfo) {
-  const { schemaName, schemaText } = schemaInfo;
-  if (!schemaName) {
-    if (!options.allowSchemaless) {
-      throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema for '${result.url}'`);
-    }
-    return;
-  }
-
+function insertSchema(basePath, types, options, schemaName, schemaText) {
   // We shouldn't have to do this, but for some idiot reason when
   // raml.loadSync is unable to resolve a schema, it just sets the
   // schema-content to a "cannot resolve" message instead of throwing
@@ -260,19 +255,14 @@ function insertSchema(result, basePath, types, options, schemaInfo) {
   // library simply does not support id: see
   // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
   const obj = JSON.parse(schemaText);
-  options.logger.log('rewrite', `schema from ${JSON.stringify(obj, null, 2)}`);
-  rewriteObjRefs(obj, basePath);
-  options.logger.log('rewrite', `schema to ${JSON.stringify(obj, null, 2)}`);
-  const expanded = $RefParser.dereference(obj);
-  const string = util.inspect(expanded, { compact: false, depth: Infinity });
-  options.logger.log('expand', `dereferenced schema to ${string}`);
-
-  result.type = r2gDefinedType(schemaName);
-  if (types[result.type]) {
+  insertReferencedSchemas(basePath, types, options, obj);
+  const rtype = r2gDefinedType(schemaName);
+  if (types[rtype]) {
     // Down the line, we could verify that old and new definitions are the same
-    console.warn(`replacing existing schema for type '${result.type}'`);
+    console.warn(`replacing existing schema for type '${rtype}'`);
   }
-  types[result.type] = gatherFields(expanded);
+  types[rtype] = gatherFields(obj);
+  return rtype;
 }
 
 
@@ -315,7 +305,12 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
     if (!schemaInfo) {
       options.logger.log('nojson', `no JSON body for resource ${result.url}: skipping`);
     } else {
-      insertSchema(result, basePath, types, options, schemaInfo);
+      const { schemaName, schemaText } = schemaInfo;
+      if (schemaName) {
+        result.type = insertSchema(basePath, types, options, schemaName, schemaText);
+      } else if (!options.allowSchemaless) {
+        throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema for '${result.url}'`);
+      }
     }
   });
 
