@@ -7,28 +7,23 @@ type Query {
 
 type TpeopleSchema {
   count: Int!
-  records: [TpeopleSchema_records]!
+  records: [Ttest_input_personWithLink]!
 }
 
 type TpersonSchema {
   address: String
-  aliases: [TpersonSchema_aliases] # link: /aliases (personId=$id) -> records
+  aliases: [Ttest_input_alias] # link: /aliases (personId=$id) -> records
   name: String!
 }
 
-type TpeopleSchema_records {
+type Ttest_input_alias {
+  alias: String
+  inUseSinceYear: Int
+}
+
+type Ttest_input_personWithLink {
   address: String
-  aliases: [TpeopleSchema_records_aliases] # link: /aliases (personId=$id) -> records
+  aliases: [Ttest_input_alias] # link: /aliases (personId=$id) -> records
   name: String!
-}
-
-type TpersonSchema_aliases {
-  alias: String
-  inUseSinceYear: Int
-}
-
-type TpeopleSchema_records_aliases {
-  alias: String
-  inUseSinceYear: Int
 }
 
