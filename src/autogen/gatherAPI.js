@@ -55,7 +55,7 @@ function r2gDefinedType(type) {
   // ".json". That is an implementation detail that we don't need
   // polluting our GraphQL type names.
   // See https://github.com/folio-org/mod-inventory-storage/commit/b609ff9b64e62a9294a8c98bb9669f0834249ef2
-  return `T${type.replace(/\.json$/, '').replace(/[.-/]/g, '_')}`;
+  return `T${type.replace(/\.json$/, '').replace(/[./-]/g, '_')}`;
 }
 
 
