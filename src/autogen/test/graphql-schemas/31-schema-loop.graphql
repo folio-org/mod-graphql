@@ -6,17 +6,17 @@ type Query {
 
 type TpersonSchema {
   address: String
-  aliases: [TpersonSchema_aliases] # link: /aliases (personId=$id) -> records
+  aliases: [Ttest_input_aliasWithLoop] # link: /aliases (personId=$id) -> records
   name: String!
 }
 
-type TpersonSchema_aliases {
+type Ttest_input_aliasWithLoop {
   alias: String
-  aliasForPerson: TpersonSchema_aliases_aliasForPerson # link: /people (id=$personId) -> records
+  aliasForPerson: Ttest_input_schemas_person # link: /people (id=$personId) -> records
   inUseSinceYear: Int
 }
 
-type TpersonSchema_aliases_aliasForPerson {
+type Ttest_input_schemas_person {
   address: String
   name: String!
 }
