@@ -37,6 +37,7 @@ function testSchema(dir, file, regen, counts, errors) {
 
   const expected = fs.readFileSync(schemaFile, 'utf8');
   if (expected !== schema) {
+    // console.log(`*** testing ${file}: expected (${expected}), got (${schema})`);
     counts.failed++;
     errors.push([file, expected, schema]);
     return Status.FAIL;
