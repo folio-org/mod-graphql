@@ -219,7 +219,7 @@ function insertReferencedSchemas(basePath, types, options, obj) {
       const schemaName = `${basePath}/${obj[k]}`;
       const schemaText = fs.readFileSync(schemaName, 'utf8');
       // eslint-disable-next-line no-use-before-define
-      insertSchema(basePath, types, options, schemaName, schemaText);
+      insertSchema(schemaName.replace(/(.*)\/.*/, '$1'), types, options, schemaName, schemaText);
       obj[k] = schemaName;
     } else if (Array.isArray(obj[k])) {
       // eslint-disable-next-line no-use-before-define
@@ -249,11 +249,6 @@ function insertSchema(basePath, types, options, schemaName, schemaText) {
   // an exception.
   if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
 
-  // We have to rewrite every $ref in this schema to be relative to
-  // `basePath`: it does not suffice to insert a suitable "id" at
-  // the top level of the schema, as the json-schema-ref-parser
-  // library simply does not support id: see
-  // https://github.com/BigstickCarpet/json-schema-ref-parser/issues/22#issuecomment-231783185
   const obj = JSON.parse(schemaText);
   insertReferencedSchemas(basePath, types, options, obj);
   const rtype = r2gDefinedType(schemaName);
