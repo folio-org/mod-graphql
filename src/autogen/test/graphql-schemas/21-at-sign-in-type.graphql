@@ -5,11 +5,11 @@ type Query {
 }
 
 type Tgenerated1 {
-  _metadata: Tgenerated1__metadata
+  _metadata: Ttest_input_schemas_metadata
   name: String
 }
 
-type Tgenerated1__metadata {
+type Ttest_input_schemas_metadata {
   createdByUserId: String!
   createdByUsername: String
   createdDate: String!
