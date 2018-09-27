@@ -7,18 +7,18 @@ type Query {
   person(name: String, maxCount: Float, queryString: String): TtopSchema
 }
 
-type TtopSchema {
-  address: String
-  metadata: TtopSchema_metadata
-  name: String!
-}
-
-type TtopSchema_metadata {
+type Ttest_input_schemas_metadata {
   createdByUserId: String!
   createdByUsername: String
   createdDate: String!
   updatedByUserId: String
   updatedByUsername: String
   updatedDate: String
+}
+
+type TtopSchema {
+  address: String
+  metadata: Ttest_input_schemas_metadata
+  name: String!
 }
 
