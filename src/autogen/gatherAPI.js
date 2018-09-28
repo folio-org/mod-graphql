@@ -50,7 +50,7 @@ function r2gBasicType(type) {
 
 
 // Converts schema-names, which function as types
-function r2gDefinedType(type) {
+function r2gDefinedType(type, _removePrefix) {
   // A lot of our schemas have logical names that end with
   // ".json". That is an implementation detail that we don't need
   // polluting our GraphQL type names.
@@ -59,16 +59,16 @@ function r2gDefinedType(type) {
 }
 
 
-function gatherType(jsonSchema) {
+function gatherType(basePath, jsonSchema) {
   let res;
 
   if (jsonSchema.type === 'array') {
-    res = gatherType(jsonSchema.items || {});
+    res = gatherType(basePath, jsonSchema.items || {});
     if (!res) return null;
     res[0]++; // increment level
   } else if (jsonSchema.type === 'object') {
     // eslint-disable-next-line no-use-before-define
-    res = [0, gatherFields(jsonSchema)];
+    res = [0, gatherFields(basePath, jsonSchema)];
   } else {
     if (typeof jsonSchema.type === 'object') {
       // Problem caused by one of the eHoldings schemas
@@ -92,10 +92,12 @@ function gatherType(jsonSchema) {
 }
 
 
-function gatherFields(jsonSchema) {
+function gatherFields(basePath, jsonSchema) {
   if (jsonSchema.$ref) {
     // It's a reference to another named schema.
-    return r2gDefinedType(jsonSchema.$ref);
+    const res = r2gDefinedType(jsonSchema.$ref, basePath);
+    // console.log(`reference to r2gDefinedType(${jsonSchema.$ref}) = '${res}'`);
+    return res;
   }
 
   const required = {};
@@ -107,7 +109,7 @@ function gatherFields(jsonSchema) {
   const keys = Object.keys(jsonSchema.properties);
   const sorted = keys.sort();
   sorted.forEach(name => {
-    const t = gatherType(jsonSchema.properties[name]);
+    const t = gatherType(basePath, jsonSchema.properties[name]);
     if (t) {
       const [arrayDepth, type, link] = t;
       result.push({
@@ -212,37 +214,37 @@ function findResponseSchema(resource, raml10types) {
 }
 
 
-function insertReferencedSchemas(basePath, types, options, obj) {
+function insertReferencedSchemas(basePath, currentPath, types, options, obj) {
   const keys = Object.keys(obj);
   keys.forEach(k => {
     if (k === '$ref') {
-      const schemaName = `${basePath}/${obj[k]}`;
+      const schemaName = `${currentPath}/${obj[k]}`;
       const schemaText = fs.readFileSync(schemaName, 'utf8');
       // eslint-disable-next-line no-use-before-define
-      insertSchema(schemaName.replace(/(.*)\/.*/, '$1'), types, options, schemaName, schemaText);
+      insertSchema(basePath, schemaName.replace(/(.*)\/.*/, '$1'), types, options, schemaName, schemaText);
       obj[k] = schemaName;
     } else if (Array.isArray(obj[k])) {
       // eslint-disable-next-line no-use-before-define
-      insertReferencedSchemasFromArray(basePath, types, options, obj[k]);
+      insertReferencedSchemasFromArray(basePath, currentPath, types, options, obj[k]);
     } else if (obj[k] instanceof Object) {
-      insertReferencedSchemas(basePath, types, options, obj[k]);
+      insertReferencedSchemas(basePath, currentPath, types, options, obj[k]);
     }
   });
 }
 
 
-function insertReferencedSchemasFromArray(basePath, types, options, arr) {
+function insertReferencedSchemasFromArray(basePath, currentPath, types, options, arr) {
   for (let i = 0; i < arr.length; i++) {
     if (Array.isArray(arr[i])) {
-      insertReferencedSchemasFromArray(basePath, types, options, arr[i]);
+      insertReferencedSchemasFromArray(basePath, currentPath, types, options, arr[i]);
     } else if (arr[i] instanceof Object) {
-      insertReferencedSchemas(basePath, types, options, arr[i]);
+      insertReferencedSchemas(basePath, currentPath, types, options, arr[i]);
     }
   }
 }
 
 
-function insertSchema(basePath, types, options, schemaName, schemaText) {
+function insertSchema(basePath, currentPath, types, options, schemaName, schemaText) {
   // We shouldn't have to do this, but for some idiot reason when
   // raml.loadSync is unable to resolve a schema, it just sets the
   // schema-content to a "cannot resolve" message instead of throwing
@@ -250,13 +252,13 @@ function insertSchema(basePath, types, options, schemaName, schemaText) {
   if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
 
   const obj = JSON.parse(schemaText);
-  insertReferencedSchemas(basePath, types, options, obj);
-  const rtype = r2gDefinedType(schemaName);
+  insertReferencedSchemas(basePath, currentPath, types, options, obj);
+  const rtype = r2gDefinedType(schemaName, basePath);
   if (types[rtype]) {
     // Down the line, we could verify that old and new definitions are the same
     console.warn(`replacing existing schema for type '${rtype}'`);
   }
-  types[rtype] = gatherFields(obj);
+  types[rtype] = gatherFields(basePath, obj);
   return rtype;
 }
 
@@ -302,7 +304,7 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
     } else {
       const { schemaName, schemaText } = schemaInfo;
       if (schemaName) {
-        result.type = insertSchema(basePath, types, options, schemaName, schemaText);
+        result.type = insertSchema(basePath, basePath, types, options, schemaName, schemaText);
       } else if (!options.allowSchemaless) {
         throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema for '${result.url}'`);
       }
