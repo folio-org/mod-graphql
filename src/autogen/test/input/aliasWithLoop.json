@@ -10,7 +10,7 @@
     },
     "aliasForPerson": {
       "type": "object",
-      "$ref": "schemas/person.json",
+      "$ref": "personWithLinkAndLoop.json",
       "readonly": true,
       "folio:isVirtual": true,
       "folio:linkBase": "people",

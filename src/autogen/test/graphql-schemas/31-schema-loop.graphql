@@ -6,12 +6,13 @@ type Query {
 
 type T_aliasWithLoop {
   alias: String
-  aliasForPerson: T_schemas_person # link: /people (id=$personId) -> records
+  aliasForPerson: T_personWithLinkAndLoop # link: /people (id=$personId) -> records
   inUseSinceYear: Int
 }
 
-type T_schemas_person {
+type T_personWithLinkAndLoop {
   address: String
+  aliases: [T_aliasWithLoop] # link: /aliases (personId=$id) -> records
   name: String!
 }
 
