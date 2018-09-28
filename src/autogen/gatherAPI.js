@@ -251,13 +251,15 @@ function insertSchema(basePath, currentPath, types, options, schemaName, schemaT
   // an exception.
   if (schemaText.startsWith('Can not resolve ')) throw new Error(schemaText);
 
-  const obj = JSON.parse(schemaText);
-  insertReferencedSchemas(basePath, currentPath, types, options, obj);
   const rtype = r2gDefinedType(schemaName, basePath);
   if (types[rtype]) {
     // Down the line, we could verify that old and new definitions are the same
-    console.warn(`replacing existing schema for type '${rtype}'`);
+    console.warn(`not replacing existing schema for type '${rtype}'`);
+    return;
   }
+
+  const obj = JSON.parse(schemaText);
+  insertReferencedSchemas(basePath, currentPath, types, options, obj);
   types[rtype] = gatherFields(basePath, obj);
   return rtype;
 }
