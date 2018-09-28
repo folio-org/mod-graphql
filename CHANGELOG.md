@@ -48,4 +48,5 @@
 * Support new logging categories `api.comments`, `api.resources`, `api.types`. Fixes MODGQL-63.
 * Share GraphQL-schema types when the same JSON Schema is referenced in multiple places. Fixes MODGQL-64.
 * Omit constant leading path from generated type-names. Fixes MODGQL-66.
+* Repair test-suite failure due to running in higher-level directory. Fixes MODGQL-65.
 
