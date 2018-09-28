@@ -259,6 +259,7 @@ function insertSchema(basePath, currentPath, types, options, schemaName, schemaT
   }
 
   const obj = JSON.parse(schemaText);
+  types[rtype] = 'temporary marker'; // XXX this is ugly.
   insertReferencedSchemas(basePath, currentPath, types, options, obj);
   types[rtype] = gatherFields(basePath, obj);
   return rtype;
