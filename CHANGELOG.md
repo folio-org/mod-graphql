@@ -49,4 +49,5 @@
 * Share GraphQL-schema types when the same JSON Schema is referenced in multiple places. Fixes MODGQL-64.
 * Omit constant leading path from generated type-names. Fixes MODGQL-66.
 * Repair test-suite failure due to running in higher-level directory. Fixes MODGQL-65.
+* Handle circular references in schemas. Fixes MODGQL-61.
 
