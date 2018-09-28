@@ -4,14 +4,14 @@ type Query {
   person(name: String, maxCount: Float, queryString: String): TpersonSchema
 }
 
-type TpersonSchema {
-  address: String
-  aliases: [Ttest_input_alias] # link: /aliases (personId=$id) -> records
-  name: String!
-}
-
-type Ttest_input_alias {
+type T_alias {
   alias: String
   inUseSinceYear: Int
+}
+
+type TpersonSchema {
+  address: String
+  aliases: [T_alias] # link: /aliases (personId=$id) -> records
+  name: String!
 }
 

@@ -4,17 +4,17 @@ type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1
 }
 
-type Tgenerated1 {
-  _metadata: Ttest_input_schemas_metadata
-  name: String
-}
-
-type Ttest_input_schemas_metadata {
+type T_schemas_metadata {
   createdByUserId: String!
   createdByUsername: String
   createdDate: String!
   updatedByUserId: String
   updatedByUsername: String
   updatedDate: String
+}
+
+type Tgenerated1 {
+  _metadata: T_schemas_metadata
+  name: String
 }
 

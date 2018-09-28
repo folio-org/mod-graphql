@@ -5,25 +5,25 @@ type Query {
   people(queryString: String): TpeopleSchema
 }
 
-type TpeopleSchema {
-  count: Int!
-  records: [Ttest_input_personWithLink]!
-}
-
-type TpersonSchema {
-  address: String
-  aliases: [Ttest_input_alias] # link: /aliases (personId=$id) -> records
-  name: String!
-}
-
-type Ttest_input_alias {
+type T_alias {
   alias: String
   inUseSinceYear: Int
 }
 
-type Ttest_input_personWithLink {
+type T_personWithLink {
   address: String
-  aliases: [Ttest_input_alias] # link: /aliases (personId=$id) -> records
+  aliases: [T_alias] # link: /aliases (personId=$id) -> records
+  name: String!
+}
+
+type TpeopleSchema {
+  count: Int!
+  records: [T_personWithLink]!
+}
+
+type TpersonSchema {
+  address: String
+  aliases: [T_alias] # link: /aliases (personId=$id) -> records
   name: String!
 }
 

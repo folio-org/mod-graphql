@@ -7,17 +7,17 @@ type Query {
   person(name: String, maxCount: Float, queryString: String): TtopSchema
 }
 
-type Ttest_input_schemas_contained {
+type T_schemas_contained {
   middleLevelField: String
-  subSubRecord: Ttest_input_schemas_subcontained
+  subSubRecord: T_schemas_subcontained
 }
 
-type Ttest_input_schemas_subcontained {
+type T_schemas_subcontained {
   innerField: String
 }
 
 type TtopSchema {
-  metadata: Ttest_input_schemas_contained
+  metadata: T_schemas_contained
   topLevelField: String
 }
 
