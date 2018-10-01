@@ -53,4 +53,5 @@
 * Skeleton specified by `folio:includedElement` supports dot-separated paths such as `holdingsRecords.0`. Fixes MODGQL-68.
 * Add new document, [Example queries against mod-inventory-storage
 ](doc/example-queries.md). Fixes MODGQL-67.
+* Handle circular references in schemas. Fixes MODGQL-61.
 
