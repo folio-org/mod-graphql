@@ -178,9 +178,9 @@ A comma-separated list of options, each of which can affect the operation of `mo
 
 Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported (listed here in the order that that they occur during a run):
 
+* `raml` -- log the RAML file as initially loaded, before conversion to a GraphQL schema begins.
 * `nojson` -- log WSAPI endpoints in the RAML for which there is no JSON body specification. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
-* `rewrite` -- log the rewriting of schema references to take into account the directory in which the RAML file was found.
-* `expand` -- log the expansion of JSON Schemas by the inclusion of their content in place of references.
+* `replace` -- log when a JSON Schema is encountered for the second or subsequent time, as the code declines to replace the first version.
 * `api`: log a JSON rendition of the gathered API specification. Useful for debugging. Or, more specifically:
   * `api.comments`: log a JSON rendition of only the `comments` portion of the gathered API specification.
   * `api.resources`: log a JSON rendition of only the `comments` portion of the gathered API specification.
