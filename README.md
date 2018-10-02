@@ -211,6 +211,7 @@ You can get rid of it by run Node with the with `--no-deprecation` command-line 
 <!--
 Some FOLIO RAMLs that this can work on:
 * ../mod-inventory-storage/ramls/instance-storage.raml
+* ../mod-inventory-storage/ramls/item-storage.raml
 * ../mod-inventory-storage/ramls/classification-type.raml
 * ../mod-inventory-storage/ramls/locationunit.raml
 * ../mod-inventory/ramls/inventory.raml
