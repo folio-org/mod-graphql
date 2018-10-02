@@ -12,6 +12,7 @@
     * [Link back from item to holdings record](#link-back-from-item-to-holdings-record)
     * [Get holdings record for items](#get-holdings-record-for-items)
     * [Get holdings record and instance for items](#get-holdings-record-and-instance-for-items)
+    * [Fetch the title of a single item's instance](#fetch-the-title-of-a-single-items-instance)
 
 
 ## Setup
@@ -228,6 +229,14 @@ As before, but stepping up a level further.
 	        }
 	      }
 	    }
+	  }
+	}
+
+### Fetch the title of a single item's instance
+
+	query {
+	  item_storage_items_SINGLE(itemId: "e9f9bc2f-bad5-4613-9d6c-f55efa5805e7") {
+	    holdingsRecord { holdingsInstance { title } }
 	  }
 	}
 
