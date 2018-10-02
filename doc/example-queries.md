@@ -10,7 +10,8 @@
     * [Obtain holdings records for instances](#obtain-holdings-records-for-instances)
     * [Obtain item records for holdings of instances](#obtain-item-records-for-holdings-of-instances)
     * [Link back from item to holdings record](#link-back-from-item-to-holdings-record)
-    * [Get holdings records for items](#get-holdings-records-for-items)
+    * [Get holdings record for items](#get-holdings-record-for-items)
+    * [Get holdings record and instance for items](#get-holdings-record-and-instance-for-items)
 
 
 ## Setup
@@ -175,7 +176,7 @@ There's no reason you'd want to do this in real life, but the fact that you _can
 	  }
 	}
 
-### Get holdings records for items
+### Get holdings record for items
 
 For this one, you'll need to have started the GraphQL server on the items RAML instead of the instances RAML:
 
@@ -200,4 +201,33 @@ Then you can find the holdings records associated with three items:
 	}
 
 (In future it will be possible to have mod-graphql run with a compound GraphQL schema created by compiling and combining _multiple_ RAMLs and their JSON Schemas. See [MODGQL-30](https://issues.folio.org/browse/MODGQL-30).)
+
+### Get holdings record and instance for items
+
+As before, but stepping up a level further.
+
+	query {
+	  item_storage_items(limit: 3) {
+	    totalRecords
+	    items {
+	      id
+	      barcode
+	      enumeration
+	      holdingsRecord {
+	        id
+	        callNumber
+	        permanentLocationId
+	        holdingsInstance {
+	          id
+	          title
+	          contributors {
+	            contributorTypeId
+	            contributorTypeText
+	            primary
+	          }
+	        }
+	      }
+	    }
+	  }
+	}
 
