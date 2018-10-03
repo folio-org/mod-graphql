@@ -10,6 +10,8 @@ function gatherComments(api, _options) {
     comments.push([tag, typeof val === 'string' ? [val] : val]);
   });
 
+  comments.push(['raml-version', [api.specification.types ? '1.0' : '0.9']]);
+
   return comments;
 }
 
