@@ -55,4 +55,5 @@
 ](doc/example-queries.md). Fixes MODGQL-67.
 * Handle circular references in schemas. Fixes MODGQL-61.
 * Specify particular SHA1s for checkouts of modules whose RAMLs are used in `yarn test` (`mod-inventory-storage` and `raml-util`). Fixes MODGQL-69.
+* Upgrade tests to cope with the RAML 1.0 now used by `mod-inventory-storage` and `raml-util`. Fixes MODGQL-70.
 
