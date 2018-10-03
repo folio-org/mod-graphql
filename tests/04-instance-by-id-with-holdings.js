@@ -9,7 +9,7 @@ const QUERY = `{
     title
     alternativeTitles
     subjects
-    holdingsRecords {
+    holdingsRecords2 {
       id
       callNumber
       instanceId
@@ -49,13 +49,13 @@ describe('04. query returns an instance with holdings', () => {
       expect(record.alternativeTitles, 'alternativeTitles should be an array').to.be.instanceOf(Array);
       expect(record.subjects, 'fields should include subjects').to.exist;
       expect(record.subjects, 'subjects should be an array').to.be.instanceOf(Array);
-      expect(record.holdingsRecords, 'fields should include holdings').to.exist;
+      expect(record.holdingsRecords2, 'fields should include holdings').to.exist;
     });
 
     it('has two holdings records', () => {
       const json = JSON.parse(response.text);
       const record = json.data.instance_storage_instances_SINGLE;
-      const hr = record.holdingsRecords;
+      const hr = record.holdingsRecords2;
       expect(hr, 'holdings should be an array').to.be.instanceOf(Array);
       expect(hr, 'holdings should be an array').to.be.instanceOf(Array);
       expect(hr.length, 'holdings should contain two records').to.equal(2);
@@ -71,7 +71,7 @@ describe('04. query returns an instance with holdings', () => {
     it('has two items in first holdings record', () => {
       const json = JSON.parse(response.text);
       const record = json.data.instance_storage_instances_SINGLE;
-      const hr = record.holdingsRecords;
+      const hr = record.holdingsRecords2;
       const hi = hr[0].holdingsItems;
       expect(hi, 'holdings items should be an array').to.be.instanceOf(Array);
       expect(hi.length, 'two holdings items should be present').to.equal(2);
