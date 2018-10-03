@@ -105,7 +105,7 @@ And the corresponding set of query variables:
 	    instances {
 	      id
 	      title
-	      holdingsRecords {
+	      holdingsRecords2 {
 	        id
 	        instanceId
 	        callNumber
@@ -127,7 +127,7 @@ And the corresponding set of query variables:
 	    instances {
 	      id
 	      title
-	      holdingsRecords {
+	      holdingsRecords2 {
 	        id
 	        instanceId
 	        callNumber
@@ -156,7 +156,7 @@ There's no reason you'd want to do this in real life, but the fact that you _can
 	    instances {
 	      id
 	        title
-	        holdingsRecords {
+	        holdingsRecords2 {
 	          id
 	          instanceId
 	          callNumber
@@ -181,7 +181,7 @@ There's no reason you'd want to do this in real life, but the fact that you _can
 
 For this one, you'll need to have started the GraphQL server on the items RAML instead of the instances RAML:
 
-	$ env OKAPI_URL=http://localhost:9130 yarn start ../mod-inventory-storage/ramls/instance-storage.raml
+	$ env OKAPI_URL=http://localhost:9130 yarn start ../mod-inventory-storage/ramls/item-storage.raml
 
 Then you can find the holdings records associated with three items:
 
