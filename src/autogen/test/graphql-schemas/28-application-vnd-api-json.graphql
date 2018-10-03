@@ -1,4 +1,5 @@
 # title: Using application/vnd.api+json content-type instead of application/json
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): TpersonSchema

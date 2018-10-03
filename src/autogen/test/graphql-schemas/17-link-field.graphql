@@ -1,4 +1,5 @@
 # title: API that contains a link-field
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): TpersonSchema

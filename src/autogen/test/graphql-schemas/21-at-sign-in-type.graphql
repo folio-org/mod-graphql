@@ -1,4 +1,5 @@
 # title: Declaration of a schema that is not used
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

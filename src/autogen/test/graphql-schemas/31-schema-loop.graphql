@@ -1,4 +1,5 @@
 # title: Schema 1 refers to Schema 2, which refers back to Schema 1
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): TpersonSchema

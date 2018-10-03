@@ -2,6 +2,7 @@
 # version: v1.1
 # protocols: HTTP, HTTPS
 # baseUri: http://some-site.com/dummy-api
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): TtopSchema

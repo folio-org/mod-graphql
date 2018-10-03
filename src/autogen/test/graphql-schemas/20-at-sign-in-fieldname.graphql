@@ -1,4 +1,5 @@
 # title: API with '@' sign in fieldname
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

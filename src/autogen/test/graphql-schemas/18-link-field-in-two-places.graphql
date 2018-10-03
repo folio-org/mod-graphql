@@ -1,4 +1,5 @@
 # title: API that contains a link-field referenced in two places
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): TpersonSchema

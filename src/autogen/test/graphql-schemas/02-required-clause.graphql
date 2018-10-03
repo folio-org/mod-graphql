@@ -1,4 +1,5 @@
 # title: Inline schema that has a 'required' clause
+# raml-version: 0.9
 
 type Query {
   person(name: String, maxCount: Float, queryString: String): Tgenerated1

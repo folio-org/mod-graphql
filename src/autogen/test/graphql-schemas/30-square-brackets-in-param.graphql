@@ -1,4 +1,5 @@
 # title: Paramater-names contain square brackets (MODGQL-56)
+# raml-version: 0.9
 
 type Query {
   person(na_me: String, maxC__ount: Float, queryString_code_: String): TpersonSchema
