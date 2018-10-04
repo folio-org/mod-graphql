@@ -261,7 +261,7 @@ function insertSchema(basePath, currentPath, types, options, schemaName, schemaT
   if (types[rtype]) {
     // Down the line, we could verify that old and new definitions are the same
     options.logger.log('replace', `not replacing existing schema for schema '${schemaName}' (${rtype})`);
-    return;
+    return null;
   }
 
   const obj = JSON.parse(schemaText);
