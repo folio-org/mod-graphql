@@ -108,6 +108,9 @@ function gatherFields(basePath, jsonSchema) {
   });
 
   const result = [];
+  if (!jsonSchema.properties) {
+    throw Error('no properties for JSON Schema ' + JSON.stringify(jsonSchema, null, 2));
+  }
   const keys = Object.keys(jsonSchema.properties);
   const sorted = keys.sort();
   sorted.forEach(name => {
