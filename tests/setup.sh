@@ -16,7 +16,7 @@ git clone --recurse-submodules https://github.com/folio-org/mod-inventory-storag
 test -d mod-inventory-storage || exit 1
 
 cd mod-inventory-storage
-BRANCH=graphql-raml-1-0
+BRANCH=graphql
 git checkout $BRANCH
 # Stupidly, git checkout yields zero exit-status even if the branch-switch fails
 git branch | grep '^\* .*'"$BRANCH"')*$' > /dev/null || exit 1
