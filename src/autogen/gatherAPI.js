@@ -95,10 +95,11 @@ function gatherType(basePath, jsonSchema) {
 
 
 function gatherFields(basePath, jsonSchema) {
-  if (jsonSchema.$ref) {
+  const $ref = jsonSchema.$ref || jsonSchema['folio:$ref'];
+  if ($ref) {
     // It's a reference to another named schema.
-    const res = r2gDefinedType(jsonSchema.$ref, basePath);
-    // console.log(`reference to r2gDefinedType(${jsonSchema.$ref}) = '${res}'`);
+    const res = r2gDefinedType($ref, basePath);
+    // console.log(`reference to r2gDefinedType(${$ref}) = '${res}'`);
     return res;
   }
 
@@ -222,7 +223,7 @@ function findResponseSchema(resource, raml10types) {
 function insertReferencedSchemas(basePath, currentPath, types, options, obj) {
   const keys = Object.keys(obj);
   keys.forEach(k => {
-    if (k === '$ref') {
+    if (k === '$ref' || k === 'folio:$ref') {
       const schemaName = `${currentPath}/${obj[k]}`;
       const schemaText = fs.readFileSync(schemaName, 'utf8');
       // eslint-disable-next-line no-use-before-define
