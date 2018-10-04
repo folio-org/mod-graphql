@@ -56,4 +56,5 @@
 * Handle circular references in schemas. Fixes MODGQL-61.
 * Specify particular SHA1s for checkouts of modules whose RAMLs are used in `yarn test` (`mod-inventory-storage` and `raml-util`). Fixes MODGQL-69.
 * Upgrade tests to cope with the RAML 1.0 now used by `mod-inventory-storage` and `raml-util`. Fixes MODGQL-70.
+* Support "weak references" in JSON Schemas, specified as `folio:$ref`. Behaves the same as `$ref` in mod-graphql, but is ignored by RMB, circumventing its problem with cycles (RMB-265). Fixes MODGQL-71.
 
