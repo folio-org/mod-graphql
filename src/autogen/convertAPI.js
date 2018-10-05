@@ -147,3 +147,4 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions) {
 exports.convertAPIs = convertAPIs;
 exports._TESTING_mergeComments = mergeComments;
 exports._TESTING_mergeResources = mergeResources;
+exports._TESTING_mergeTypes = mergeTypes;
