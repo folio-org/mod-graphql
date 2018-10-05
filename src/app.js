@@ -5,7 +5,7 @@ import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import resolve from './resolve';
 import legacyResolvers from './resolvers';
-import { convertAPI } from './autogen/convertAPI';
+import { convertAPIs } from './autogen/convertAPI';
 
 let typeDefs;
 let resolvers;
@@ -18,7 +18,7 @@ if (process.env.LEGACY_RESOLVERS) {
   // We need to avoid taking '--exit' as a RAML path, as `yarn test` specifies that
   if (process.argv.length > 2 && process.argv[2] !== '--exit') ramlPath = process.argv[2];
   console.info(`using RAML '${ramlPath}'`);
-  ({ schema: typeDefs, resolvers, logger } = convertAPI(ramlPath, resolve));
+  ({ schema: typeDefs, resolvers, logger } = convertAPIs([ramlPath], resolve));
   logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 }
 
