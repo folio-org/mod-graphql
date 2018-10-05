@@ -14,11 +14,15 @@ if (process.env.LEGACY_RESOLVERS) {
   typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
   resolvers = legacyResolvers;
 } else {
-  let ramlPath = 'tests/input/mod-inventory-storage/ramls/instance-storage.raml';
+  let ramlPaths = ['tests/input/mod-inventory-storage/ramls/instance-storage.raml'];
   // We need to avoid taking '--exit' as a RAML path, as `yarn test` specifies that
-  if (process.argv.length > 2 && process.argv[2] !== '--exit') ramlPath = process.argv[2];
-  console.info(`using RAML '${ramlPath}'`);
-  ({ schema: typeDefs, resolvers, logger } = convertAPIs([ramlPath], resolve));
+  if (process.argv.length > 2 && process.argv[2] !== '--exit') {
+    ramlPaths = process.argv;
+    ramlPaths.shift();
+    ramlPaths.shift();
+  }
+  console.info(`using RAMLs ${ramlPaths.map(s => `'${s}'`).join(', ')}`);
+  ({ schema: typeDefs, resolvers, logger } = convertAPIs(ramlPaths, resolve));
   logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 }
 
