@@ -24,6 +24,11 @@ function parseAndGather(ramlName, resolveFunction, options) {
 }
 
 
+function mergeAPIs(APIs) {
+  return APIs[0]; // XXX this merging algorithm could use some work
+}
+
+
 // Reads the RAML files whose names are specified in the `ramlNames`
 // array, together with whatever traits, other fragments and JSON
 // Schemas they use. Converts the result into a GraphQL schema and a
@@ -43,7 +48,9 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions) {
     });
   }
 
-  const gathered = parseAndGather(ramlNames[0], resolveFunction, options);
+  const allAPIs = ramlNames.map(ramlName => parseAndGather(ramlName, resolveFunction, options));
+  const gathered = mergeAPIs(allAPIs);
+
   return {
     schema: asSchema(gathered, options),
     resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
