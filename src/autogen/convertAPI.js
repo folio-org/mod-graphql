@@ -24,11 +24,16 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions) {
     });
   }
 
-  return convertSingleAPI(ramlNames[0], resolveFunction, options);
+  const gathered = parseAndGather(ramlNames[0], resolveFunction, options);
+  return {
+    schema: asSchema(gathered, options),
+    resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
+    logger: options.logger,
+  };
 }
 
 
-function convertSingleAPI(ramlName, resolveFunction, options) {
+function parseAndGather(ramlName, resolveFunction, options) {
   let api;
   try {
     api = raml.loadSync(ramlName);
@@ -43,11 +48,7 @@ function convertSingleAPI(ramlName, resolveFunction, options) {
   options.logger.log('api', 'gathered API:', JSON.stringify(gathered, null, 2));
   ['comments', 'resources', 'types'].forEach(s => options.logger.log(`api.${s}`, JSON.stringify(gathered[s], null, 2)));
 
-  return {
-    schema: asSchema(gathered, options),
-    resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
-    logger: options.logger,
-  };
+  return gathered;
 }
 
 
