@@ -3,7 +3,7 @@
 import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
 import app from '../src/app';
 
-describe('05. query returns a user with an ID and username', () => {
+describe('14. query returns a user with an ID and username', () => {
   if (!process.env.LEGACY_RESOLVERS) {
     describe('test not supported with auto-generated resolvers', () => {
       it('passes by default', () => true);

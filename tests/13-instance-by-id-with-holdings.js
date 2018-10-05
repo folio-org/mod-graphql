@@ -26,7 +26,7 @@ const QUERY = `{
   }
 }`;
 
-describe('04. query returns an instance with holdings', () => {
+describe('13. query returns an instance with holdings', () => {
   describe('query for instances by ID', () => {
     let response;
     beforeEach(() => runQuery(app, QUERY)

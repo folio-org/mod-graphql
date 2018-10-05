@@ -10,7 +10,7 @@ const QUERY = `query multipleInstances($cql: String) {
   }
 }`;
 
-describe('02. query returns an instance with an ID and title', () => {
+describe('11. query returns an instance with an ID and title', () => {
   describe('query for all instances', () => {
     let response;
     beforeEach(() => runQuery(app, QUERY, 'title=a*')
