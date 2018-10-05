@@ -5,6 +5,25 @@ const { asSchema } = require('./asSchema');
 const { asResolvers } = require('./asResolvers');
 
 
+function parseAndGather(ramlName, resolveFunction, options) {
+  let api;
+  try {
+    api = raml.loadSync(ramlName);
+  } catch (e) {
+    console.error('RAML parse failed:', e);
+    process.exit(2);
+  }
+  options.logger.log('raml', JSON.stringify(api, null, 2));
+
+  const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
+  const gathered = gatherAPI(api, basePath, options);
+  options.logger.log('api', 'gathered API:', JSON.stringify(gathered, null, 2));
+  ['comments', 'resources', 'types'].forEach(s => options.logger.log(`api.${s}`, JSON.stringify(gathered[s], null, 2)));
+
+  return gathered;
+}
+
+
 // Reads the RAML files whose names are specified in the `ramlNames`
 // array, together with whatever traits, other fragments and JSON
 // Schemas they use. Converts the result into a GraphQL schema and a
@@ -30,25 +49,6 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions) {
     resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
     logger: options.logger,
   };
-}
-
-
-function parseAndGather(ramlName, resolveFunction, options) {
-  let api;
-  try {
-    api = raml.loadSync(ramlName);
-  } catch (e) {
-    console.error('RAML parse failed:', e);
-    process.exit(2);
-  }
-  options.logger.log('raml', JSON.stringify(api, null, 2));
-
-  const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
-  const gathered = gatherAPI(api, basePath, options);
-  options.logger.log('api', 'gathered API:', JSON.stringify(gathered, null, 2));
-  ['comments', 'resources', 'types'].forEach(s => options.logger.log(`api.${s}`, JSON.stringify(gathered[s], null, 2)));
-
-  return gathered;
 }
 
 
