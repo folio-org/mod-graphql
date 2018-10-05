@@ -82,7 +82,7 @@ function mergeResources(list) {
 // than a list, and duplicate definitions are OK provided they're
 // identical.
 //
-function mergeTypes(list) {
+function mergeTypes(list, options) {
   const res = {};
 
   list.forEach(types => {
@@ -93,7 +93,7 @@ function mergeTypes(list) {
       } else {
         const same = isEqual(type, res[name]);
         if (same) {
-          console.warn(`duplicate type name '${name}' with same definition`);
+          options.logger.log('duptype', `duplicate type name '${name}' with same definition`);
         } else {
           throw Error(`duplicate type name '${name}' with different definition`);
         }
@@ -105,11 +105,11 @@ function mergeTypes(list) {
 }
 
 
-function mergeAPIs(list) {
+function mergeAPIs(list, options) {
   return {
     comments: mergeComments(list.map(api => api.comments)),
     resources: mergeResources(list.map(api => api.resources)),
-    types: mergeTypes(list.map(api => api.types)),
+    types: mergeTypes(list.map(api => api.types), options),
   };
 }
 
@@ -134,7 +134,7 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions) {
   }
 
   const allAPIs = ramlNames.map(ramlName => parseAndGather(ramlName, resolveFunction, options));
-  const gathered = mergeAPIs(allAPIs);
+  const gathered = mergeAPIs(allAPIs, options);
 
   return {
     schema: asSchema(gathered, options),
