@@ -45,15 +45,38 @@ describe('01. RAMLs and JSON schemas can be translated into GraphQL schemas', ()
         ['protocols', ['HTTP', 'HTTPS', 'HTTP', 'HTTPS']],
       ],
     },
+    {
+      name: 'two sets of comments with some shared keys',
+      input: [
+        [
+          ['title', ['Instance Storage']],
+          ['version', ['v5.0']],
+          ['protocols', ['HTTP', 'HTTPS']],
+        ],
+        [
+          ['title', ['Item Storage']],
+          ['magicWords', ['xyzzy', 'plugh']],
+          ['protocols', ['SMTP']],
+        ],
+      ],
+      output: [
+        ['title', ['Instance Storage', 'Item Storage']],
+        ['version', ['v5.0']],
+        ['protocols', ['HTTP', 'HTTPS', 'SMTP']],
+        ['magicWords', ['xyzzy', 'plugh']],
+      ],
+    },
   ];
 
   testCases.forEach(testCase => {
     const { name, input, output } = testCase;
     it(name, () => {
       const res = mergeComments(input);
-      // console.log('res =', JSON.stringify(res, null, 2));
-      // console.log('output =', JSON.stringify(output, null, 2));
-      assert(isEqual(res, output), 'equal');
+      const outcome = isEqual(res, output);
+      if (!outcome) {
+        console.info('res =', JSON.stringify(res, null, 2), '\noutput =', JSON.stringify(output, null, 2));
+      }
+      assert(outcome, 'equal');
     });
   });
 });
