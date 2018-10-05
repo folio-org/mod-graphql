@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import fs from 'fs';
 import { testSchema, Status } from '../src/autogen/test/testSchema';
 
-describe('01. RAMLs and JSON schemas can be translated into GraphQL schemas', () => {
+describe('04. RAMLs and JSON schemas can be translated into GraphQL schemas', () => {
   const dir = './src/autogen/test';
   const counts = { total: 0, passed: 0, exceptions: 0, failed: 0 };
   const errors = [];

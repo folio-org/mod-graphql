@@ -192,7 +192,7 @@ Then you can find the holdings records associated with three items:
 	      id
 	      barcode
 	      enumeration
-	      holdingsRecord {
+	      holdingsRecord2 {
 	        id
 	        callNumber
 	        permanentLocationId
@@ -214,7 +214,7 @@ As before, but stepping up a level further.
 	      id
 	      barcode
 	      enumeration
-	      holdingsRecord {
+	      holdingsRecord2 {
 	        id
 	        callNumber
 	        permanentLocationId
@@ -236,7 +236,7 @@ As before, but stepping up a level further.
 
 	query {
 	  item_storage_items_SINGLE(itemId: "e9f9bc2f-bad5-4613-9d6c-f55efa5805e7") {
-	    holdingsRecord { holdingsInstance { title } }
+	    holdingsRecord2 { holdingsInstance { title } }
 	  }
 	}
 

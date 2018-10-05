@@ -207,7 +207,7 @@ You can get rid of it by run Node with the with `--no-deprecation` command-line 
 [`folio-graphiql`](https://github.com/folio-org/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
 
 
-<!-- indir ~/git/folio/other/mod-graphql/ env OKAPI_URL=http://localhost:9130 LOGGING_CATEGORIES=url yarn start -->
+<!-- indir ~/git/folio/other/mod-graphql/ env OKAPI_URL=http://localhost:9130 LOGGING_CATEGORIES=url yarn start ../mod-inventory-storage/ramls/instance-storage.raml ../mod-inventory-storage/ramls/item-storage.raml -->
 <!--
 Some FOLIO RAMLs that this can work on:
 * ../mod-inventory-storage/ramls/instance-storage.raml

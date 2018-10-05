@@ -10,7 +10,7 @@ const QUERY = `query multipleInstances($cql: String) {
   }
 }`;
 
-describe('03. query returns instances matching "ba*"', () => {
+describe('12. query returns instances matching "ba*"', () => {
   describe('query for matching instances', () => {
     let response;
     beforeEach(() => runQuery(app, QUERY, 'title=ba*')

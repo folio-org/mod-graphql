@@ -8,14 +8,14 @@
 // "json-schema-for-mod-kb-providers-endpoint" branch
 
 const packageInfo = require('../../package.json');
-const { convertAPI } = require('./convertAPI');
+const { convertAPIs } = require('./convertAPI');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
 ])
-  .setHelp(`Usage: node ${argv0} [OPTIONS] <RAMLfile>\n[[OPTIONS]]`)
+  .setHelp(`Usage: node ${argv0} [OPTIONS] <RAMLfile> ...\n[[OPTIONS]]`)
   .bindHelp()
   .parseSystem();
 
@@ -24,10 +24,11 @@ if (opt.options.version) {
   process.exit(0);
 }
 
-if (opt.argv.length !== 1) {
+if (opt.argv.length === 0) {
   console.info(opt.getHelp());
   process.exit(1);
 }
 
-const { schema } = convertAPI(opt.argv[0], null, opt.options);
+console.log('opt.argv =', opt.argv);
+const { schema } = convertAPIs(opt.argv, null, opt.options);
 console.log(schema);
