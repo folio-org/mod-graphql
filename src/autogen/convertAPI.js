@@ -45,7 +45,7 @@ function mergeComments(list) {
         register[name] = [name, values];
         res.push(register[name]);
       } else {
-        register[name][1].push(... values);
+        register[name][1].push(...values);
       }
     });
   });
@@ -59,7 +59,7 @@ function mergeAPIs(list) {
     comments: mergeComments(list.map(api => api.comments)),
     resources: list[0].resources,
     types: list[0].types,
-  }
+  };
 }
 
 
@@ -94,3 +94,4 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions) {
 
 
 exports.convertAPIs = convertAPIs;
+exports._TESTING_mergeComments = mergeComments;
