@@ -1,4 +1,5 @@
 const raml = require('raml-1-parser');
+const { isEqual } = require('lodash');
 const Logger = require('@folio/stripes-logger');
 const { gatherAPI } = require('./gatherAPI');
 const { asSchema } = require('./asSchema');
@@ -77,11 +78,38 @@ function mergeResources(list) {
 }
 
 
+// Similar to mergeResources, but each API's types are a map rather
+// than a list, and duplicate definitions are OK provided they're
+// identical.
+//
+function mergeTypes(list) {
+  const res = {};
+
+  list.forEach(types => {
+    Object.keys(types).forEach(name => {
+      const type = types[name];
+      if (!res[name]) {
+        res[name] = type;
+      } else {
+        const same = isEqual(type, res[name]);
+        if (same) {
+          console.warn(`duplicate type name '${name}' with same definition`);
+        } else {
+          throw Error(`duplicate type name '${name}' with different definition`);
+        }
+      }
+    });
+  });
+
+  return res;
+}
+
+
 function mergeAPIs(list) {
   return {
     comments: mergeComments(list.map(api => api.comments)),
     resources: mergeResources(list.map(api => api.resources)),
-    types: list[0].types,
+    types: mergeTypes(list.map(api => api.types)),
   };
 }
 
