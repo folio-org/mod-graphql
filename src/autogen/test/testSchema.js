@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { convertAPI } = require('../convertAPI');
+const { convertAPIs } = require('../convertAPI');
 
 const Status = {
   PASS: 1,
@@ -21,7 +21,7 @@ const Status = {
 function testSchema(dir, file, regen, counts, errors) {
   let schema, hadException = false;
   try {
-    ({ schema } = convertAPI(`${dir}/input/${file}`));
+    ({ schema } = convertAPIs([`${dir}/input/${file}`]));
   } catch (err3) {
     hadException = true;
     schema = `*EXCEPTION* ${err3}`;
