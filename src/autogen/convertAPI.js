@@ -54,10 +54,33 @@ function mergeComments(list) {
 }
 
 
+// For this one, it's just a matter of concatenating the array and
+// complaining if there's a duplicate queryName.
+//
+function mergeResources(list) {
+  const register = {};
+  const res = [];
+
+  list.forEach(resources => {
+    resources.forEach(resource => {
+      const name = resource.queryName;
+      if (!register[name]) {
+        register[name] = true;
+        res.push(resource);
+      } else {
+        throw Error(`duplicate resource name '${name}'`);
+      }
+    });
+  });
+
+  return res;
+}
+
+
 function mergeAPIs(list) {
   return {
     comments: mergeComments(list.map(api => api.comments)),
-    resources: list[0].resources,
+    resources: mergeResources(list.map(api => api.resources)),
     types: list[0].types,
   };
 }
