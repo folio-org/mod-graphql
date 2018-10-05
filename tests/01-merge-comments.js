@@ -3,7 +3,7 @@ import { assert } from 'chai';
 import { isEqual } from 'lodash';
 import { _TESTING_mergeComments as mergeComments } from '../src/autogen/convertAPI';
 
-describe('01. RAMLs and JSON schemas can be translated into GraphQL schemas', () => {
+describe('01. Comments from multiple RAMLs can be merged', () => {
   const testCases = [
     {
       name: 'no comments',
