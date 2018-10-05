@@ -24,8 +24,42 @@ function parseAndGather(ramlName, resolveFunction, options) {
 }
 
 
-function mergeAPIs(APIs) {
-  return APIs[0]; // XXX this merging algorithm could use some work
+// Each APIs comments are represented by an ordered list. Each
+// list-member is itself a list of two elements: the first is the
+// comment-name (version, protocols, baseUrl, etc.) and the second is
+// an ordered list of values.
+//
+// The merged list retains the original order as far as possible: the
+// comments that exist in the first entry, in their original order;
+// followed by those comments that exist in the second but not the
+// first, in order; and so on.
+//
+function mergeComments(list) {
+  const register = {};
+  const res = [];
+
+  list.forEach(comments => {
+    comments.forEach(comment => {
+      const [name, values] = comment;
+      if (!register[name]) {
+        register[name] = [name, values];
+        res.push(register[name]);
+      } else {
+        register[name][1].push(... values);
+      }
+    });
+  });
+
+  return res;
+}
+
+
+function mergeAPIs(list) {
+  return {
+    comments: mergeComments(list.map(api => api.comments)),
+    resources: list[0].resources,
+    types: list[0].types,
+  }
 }
 
 
