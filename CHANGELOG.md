@@ -58,4 +58,6 @@
 * Upgrade tests to cope with the RAML 1.0 now used by `mod-inventory-storage` and `raml-util`. Fixes MODGQL-70.
 * Support "weak references" in JSON Schemas, specified as `folio:$ref`. Behaves the same as `$ref` in mod-graphql, but is ignored by RMB, circumventing its problem with cycles (RMB-265). Fixes MODGQL-71.
 * Ability to combine APIs of multiple RAMLs. Fixes MODGQL-30.
+* Add links from top-level README to other documentation. Fixes MODGQL-75.
+* Support [item query that returns holdings and instance](doc/example-queries.md#get-holdings-record-and-instance-for-items). Fixes MODGQL-21.
 

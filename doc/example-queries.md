@@ -17,9 +17,9 @@
 
 ## Setup
 
-Run the server as
+Run the server as follows, enabling it to support queries defined by either the instances or items RAML:
 
-	$ env OKAPI_URL=http://localhost:9130 yarn start ../mod-inventory-storage/ramls/instance-storage.raml
+	$ env OKAPI_URL=http://localhost:9130 yarn start ../mod-inventory-storage/ramls/instance-storage.raml ../mod-inventory-storage/ramls/item-storage.raml
 
 Then start [folio-graphiql](https://github.com/folio-org/folio-graphiql), log in, and try these queries:
 
@@ -179,12 +179,6 @@ There's no reason you'd want to do this in real life, but the fact that you _can
 
 ### Get holdings record for items
 
-For this one, you'll need to have started the GraphQL server on the items RAML instead of the instances RAML:
-
-	$ env OKAPI_URL=http://localhost:9130 yarn start ../mod-inventory-storage/ramls/item-storage.raml
-
-Then you can find the holdings records associated with three items:
-
 	query {
 	  item_storage_items(limit: 3) {
 	    totalRecords
@@ -200,8 +194,6 @@ Then you can find the holdings records associated with three items:
 	    }
 	  }
 	}
-
-(In future it will be possible to have mod-graphql run with a compound GraphQL schema created by compiling and combining _multiple_ RAMLs and their JSON Schemas. See [MODGQL-30](https://issues.folio.org/browse/MODGQL-30).)
 
 ### Get holdings record and instance for items
 

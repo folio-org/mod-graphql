@@ -204,7 +204,18 @@ You can get rid of it by run Node with the with `--no-deprecation` command-line 
 
 ## See also
 
-[`folio-graphiql`](https://github.com/folio-org/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
+Other documentation for mod-graphql:
+
+* [The change-log](CHANGELOG.md) for this module.
+* [Example GraphQL queries](doc/example-queries.md) that this module can run.
+* Documentation of [the schema/resolver auto-generation code](src/autogen/README.md), including [the JSON Schema extensions for link-fields](src/autogen/README.md#option-1-json-schema-extensions).
+* Documentation of [the intermediate in-memory representaton of a compiled API](src/autogen/data-structure.md), only of interest to mod-graphql developers.
+* **INCOMPLETE** [documentation on using GraphQL from Stripes](doc/using-graphql-from-stripes.md)
+* [How to remove running modules](doc/remove-running-modules.md) from a FOLIO installation: useful if you need to substitute your own in-development module. This is an important document, but should be part of core FOLIO documentation, not part of mod-graphql.
+
+Also:
+
+* [`folio-graphiql`](https://github.com/folio-org/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
 
 
 <!-- indir ~/git/folio/other/mod-graphql/ env OKAPI_URL=http://localhost:9130 LOGGING_CATEGORIES=url yarn start ../mod-inventory-storage/ramls/instance-storage.raml ../mod-inventory-storage/ramls/item-storage.raml -->
