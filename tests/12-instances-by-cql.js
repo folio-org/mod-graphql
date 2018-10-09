@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-expressions */
 
 import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
-import app from '../src/app';
+import modGraphql from '../src/app';
+
+const app = modGraphql();
 
 const QUERY = `query multipleInstances($cql: String) {
   instance_storage_instances(query: $cql) {

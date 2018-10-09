@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-expressions */
 
 import { describe, beforeEach, runQuery, it, expect } from './testlib/helper';
-import app from '../src/app';
+import modGraphql from '../src/app';
+
+const app = modGraphql();
 
 const QUERY = `{
   instance_storage_instances_SINGLE(instanceId: "7fbd5d84-62d1-44c6-9c45-6cb173998bbd") {
