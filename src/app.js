@@ -19,9 +19,9 @@ function modGraphql(ramlPaths) {
     const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
     {
       // Temporary logger. XXX should fix convertAPIs API to avoid this
-      const Logger = require('@folio/stripes-logger');
-      const logger = new Logger(process.env.LOGGING_CATEGORIES);
-      logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
+      const Logger = require('@folio/stripes-logger'); // eslint-disable-line global-require
+      const tmp = new Logger(process.env.LOGGING_CATEGORIES);
+      tmp.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
     }
     ({ schema: typeDefs, resolvers, logger } = convertAPIs(ramlArray, resolve));
     logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
