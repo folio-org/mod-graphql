@@ -15,9 +15,8 @@ function modGraphql(ramlPaths) {
     typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
     resolvers = legacyResolvers;
   } else {
-    if (!ramlPaths) {
-      ramlPaths = ['tests/input/mod-inventory-storage/ramls/instance-storage.raml'];
-    }
+    if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
+    if (typeof ramlPaths === 'string') ramlPaths = [ramlPaths];
     console.info(`using RAMLs ${ramlPaths.map(s => `'${s}'`).join(', ')}`);
     ({ schema: typeDefs, resolvers, logger } = convertAPIs(ramlPaths, resolve));
     logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
