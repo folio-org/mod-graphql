@@ -3,7 +3,7 @@
 import { describe, beforeEach, runQuery, it, expect } from './testlib/helper';
 import modGraphql from '../src/app';
 
-const app = modGraphql();
+const app = modGraphql('tests/input/mod-inventory-storage/ramls/instance-storage.raml');
 
 const QUERY = `{
   instance_storage_instances_SINGLE(instanceId: "7fbd5d84-62d1-44c6-9c45-6cb173998bbd") {
