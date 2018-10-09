@@ -139,7 +139,6 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions = {}) {
   return {
     schema: asSchema(gathered, options),
     resolvers: resolveFunction ? asResolvers(gathered, resolveFunction, options) : null,
-    logger: options.logger,
   };
 }
 
