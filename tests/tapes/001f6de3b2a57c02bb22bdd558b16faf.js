@@ -6,7 +6,7 @@ var path = require("path");
  * accept: application/json
  * content-type: application/json
  * x-okapi-tenant: diku
- * x-okapi-token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6IjEzODUxYzU3LThhNmMtNWQ0My05ZWYyLTg4MDgyOGExZWQ3NCIsInRlbmFudCI6ImRpa3UifQ.4ZQNBW_k1HcdDn9bwSIQ8O4Qi-SFbIKZRddwr-GACmNnPnxHSK6LlI47ZORLWJkY82B14MXPInloYPPHXlgOyw
+ * x-okapi-token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6IjEzODUxYzU3LThhNmMtNWQ0My05ZWYyLTg4MDgyOGExZWQ3NCIsInRlbmFudCI6ImRpa3UifQ.qpCtUVZPF_TPanLQNSBMR6Ypi6hlYfHqxhENJohDwAPUn3yS0R2Mj5HLGamznn7kqgq19k0qpt368J60EytJAQ
  * accept-encoding: gzip,deflate
  * user-agent: node-fetch/1.0 (+https://github.com/bitinn/node-fetch)
  * connection: close
@@ -16,7 +16,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 200;
 
-  res.setHeader("x-okapi-trace", "GET mod-authtoken-1.4.1-SNAPSHOT.21 http://10.0.2.15:9131/inventory/items.. : 202 2552us, GET mod-inventory-8.0.0-SNAPSHOT.82 http://10.0.2.15:9140/inventory/items.. : 200 78643us");
+  res.setHeader("x-okapi-trace", "GET mod-authtoken-1.4.1-SNAPSHOT.21 http://10.0.2.15:9131/inventory/items.. : 202 4979us, GET mod-inventory-8.0.0-SNAPSHOT.82 http://10.0.2.15:9140/inventory/items.. : 200 117043us");
   res.setHeader("content-type", "application/json; charset=utf-8");
   res.setHeader("connection", "close");
   res.setHeader("transfer-encoding", "chunked");
