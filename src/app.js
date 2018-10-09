@@ -16,9 +16,14 @@ function modGraphql(ramlPaths) {
     resolvers = legacyResolvers;
   } else {
     if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
-    if (typeof ramlPaths === 'string') ramlPaths = [ramlPaths];
-    console.info(`using RAMLs ${ramlPaths.map(s => `'${s}'`).join(', ')}`);
-    ({ schema: typeDefs, resolvers, logger } = convertAPIs(ramlPaths, resolve));
+    const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
+    {
+      // Temporary logger. XXX should fix convertAPIs API to avoid this
+      const Logger = require('@folio/stripes-logger');
+      const logger = new Logger(process.env.LOGGING_CATEGORIES);
+      logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
+    }
+    ({ schema: typeDefs, resolvers, logger } = convertAPIs(ramlArray, resolve));
     logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
   }
 
