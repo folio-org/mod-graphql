@@ -1,6 +1,6 @@
 import modGraphql from './src/app';
 
-const app = modGraphql();
+const app = modGraphql(process.argv.slice(2));
 
 if (process.env.CONSOLE_TRACE) {
   // The code by Remy Sharp
