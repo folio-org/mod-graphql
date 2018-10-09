@@ -123,8 +123,8 @@ function mergeAPIs(list, options) {
 // The `options` object can control various aspects of RAML and JSON
 // Schema parsing, and GraphQL schema and resolver generation.
 //
-function convertAPIs(ramlNames, resolveFunction, baseOptions) {
-  const logger = new Logger(process.env.LOGGING_CATEGORIES);
+function convertAPIs(ramlNames, resolveFunction, baseOptions = {}) {
+  const logger = baseOptions.logger || new Logger(process.env.LOGGING_CATEGORIES);
   const options = Object.assign({ logger }, baseOptions);
   const optstring = process.env.GRAPHQL_OPTIONS;
   if (optstring) {
