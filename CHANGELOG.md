@@ -63,4 +63,5 @@
 * Change to top-level API: the exported object is no longer a running app, but a function which will start and return such an app. Allows the paths to the to-be-converted. RAML files to be passed in. Fixes MODGQL-79.
 * Add new test-case 14, exercising the items API. Fixes MODGQL-76.
 * Remove default ramlPaths from app. Fixes MODGQL-80.
+* Add, use and document new `ramlpath` logging category. Fixes MODGQL-82.
 
