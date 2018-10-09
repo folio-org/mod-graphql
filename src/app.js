@@ -3,27 +3,24 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import Logger from '@folio/stripes-logger';
 import resolve from './resolve';
 import legacyResolvers from './resolvers';
 import { convertAPIs } from './autogen/convertAPI';
 
 function modGraphql(ramlPaths) {
+  const logger = new Logger(process.env.LOGGING_CATEGORIES);
   let typeDefs;
   let resolvers;
-  let logger;
+
   if (process.env.LEGACY_RESOLVERS) {
     typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
     resolvers = legacyResolvers;
   } else {
     if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
     const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
-    {
-      // Temporary logger. XXX should fix convertAPIs API to avoid this
-      const Logger = require('@folio/stripes-logger'); // eslint-disable-line global-require
-      const tmp = new Logger(process.env.LOGGING_CATEGORIES);
-      tmp.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
-    }
-    ({ schema: typeDefs, resolvers, logger } = convertAPIs(ramlArray, resolve));
+    logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
+    ({ schema: typeDefs, resolvers } = convertAPIs(ramlArray, resolve));
     logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
   }
 
