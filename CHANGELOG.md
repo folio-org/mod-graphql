@@ -60,4 +60,5 @@
 * Ability to combine APIs of multiple RAMLs. Fixes MODGQL-30.
 * Add links from top-level README to other documentation. Fixes MODGQL-75.
 * Support [item query that returns holdings and instance](doc/example-queries.md#get-holdings-record-and-instance-for-items). Fixes MODGQL-21.
+* Change to top-level API: the exported object is no longer a running app, but a function which will start and return such an app. Allows the paths to the to-be-converted. RAML files to be passed in. Fixes MODGQL-79.
 
