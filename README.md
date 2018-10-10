@@ -4,17 +4,16 @@
 
 <!-- md2toc -l 2 README.md -->
 * [Overview](#overview)
-* [Running `mod-graphql`](#running-mod-graphql)
-    * [Installation](#installation)
-    * [Invocation](#invocation)
-    * [Environment](#environment)
-        * [`OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`](#okapi_url-okapi_tenant-okapi_token)
-        * [`PROXY_OKAPI_URL`](#proxy_okapi_url)
-        * [`LEGACY_RESOLVERS`](#legacy_resolvers)
-        * [`GRAPHQL_OPTIONS`](#graphql_options)
-        * [`LOGGING_CATEGORIES`](#logging_categories)
-        * [`CONSOLE_TRACE`](#console_trace)
-        * [`NODE_OPTIONS`](#node_options)
+* [Installation](#installation)
+* [Invocation](#invocation)
+* [Environment](#environment)
+    * [`OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`](#okapi_url-okapi_tenant-okapi_token)
+    * [`PROXY_OKAPI_URL`](#proxy_okapi_url)
+    * [`LEGACY_RESOLVERS`](#legacy_resolvers)
+    * [`GRAPHQL_OPTIONS`](#graphql_options)
+    * [`LOGGING_CATEGORIES`](#logging_categories)
+    * [`CONSOLE_TRACE`](#console_trace)
+    * [`NODE_OPTIONS`](#node_options)
 * [See also](#see-also)
 
 
@@ -39,9 +38,9 @@ query {
 }
 ```
 
-## Running `mod-graphql`
+# Running `mod-graphql`
 
-### Installation
+## Installation
 
 Install dependencies:
 
@@ -55,15 +54,17 @@ Run the tests:
 $ yarn test
 ```
 
-### Invocation
+
+## Invocation
 
 XXX
 
-### Environment
+
+## Environment
 
 The operation of `mod-graphql` is affected by several environment variables:
 
-#### `OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`
+### `OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`
 
 These are used in the standard way, as with for example [the Okapi command-line client](https://github.com/thefrontside/okapi.rb):
 
@@ -73,21 +74,21 @@ These are used in the standard way, as with for example [the Okapi command-line 
 
 See [above](#b-run-mod-graphql-in-the-host-box) for the required use of the `OKAPI_URL` environment variable when running Okapi inside a VM and mod-graphql outside it.
 
-#### `PROXY_OKAPI_URL`
+### `PROXY_OKAPI_URL`
 
 Required _only_ when [regenerating test tapes](doc/recording-tests.md). This is the URL of an Okapi instance which the yakbak library shoud proxy for, providing the Okapi service from which WSAPI tapes are made.
 
-#### `LEGACY_RESOLVERS`
+### `LEGACY_RESOLVERS`
 
 **Deprecated**. When set to a true value (e.g. `1`), causes `mod-graphql` to use a hand-coded GraphQL schema and corresponding hand-coded resolvers, which were created in early development and are no longer used. These are retained for now as they enable us to run more tests than the auto-generated schema and resolvers yet allow, but will be removed in time.
 
-#### `GRAPHQL_OPTIONS`
+### `GRAPHQL_OPTIONS`
 
 A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways:
 
 * `allowSchemaless` -- when set, endpoints that define no schema are simply ignored, rather than throwing an error. This is useful when working with an incompletely specified RAML file, such as one to which the JSON Schemas are being added progressively.
 
-#### `LOGGING_CATEGORIES`
+### `LOGGING_CATEGORIES`
 
 Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported (listed here in the order that that they occur during a run):
 
@@ -106,17 +107,18 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 
 For convenience, the abbreviated environment-variable name `LOGCAT` may be used instead of `LOGGING_CATEGORIES`, with the same effect.
 
-#### `CONSOLE_TRACE`
+### `CONSOLE_TRACE`
 
 When set to a true value (e.g. `1`), causes every output to the console to be accompanied by a full stack-trace. This can be useful when tracking down the cause of a warning.
 
-#### `NODE_OPTIONS`
+### `NODE_OPTIONS`
 
 If you are getting this warning all over your output:
 
 > [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
 
 You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
+
 
 ## See also
 
