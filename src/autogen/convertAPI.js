@@ -1,6 +1,5 @@
 const raml = require('raml-1-parser');
 const { isEqual } = require('lodash');
-const Logger = require('@folio/stripes-logger');
 const { gatherAPI } = require('./gatherAPI');
 const { asSchema } = require('./asSchema');
 const { asResolvers } = require('./asResolvers');
@@ -123,9 +122,8 @@ function mergeAPIs(list, options) {
 // The `options` object can control various aspects of RAML and JSON
 // Schema parsing, and GraphQL schema and resolver generation.
 //
-function convertAPIs(ramlNames, resolveFunction, baseOptions = {}) {
-  const logger = baseOptions.logger || new Logger(process.env.LOGGING_CATEGORIES);
-  const options = Object.assign({ logger }, baseOptions);
+function convertAPIs(ramlNames, resolveFunction, baseOptions) {
+  const options = Object.assign({}, baseOptions);
   const optstring = process.env.GRAPHQL_OPTIONS;
   if (optstring) {
     optstring.split(',').forEach(option => {
