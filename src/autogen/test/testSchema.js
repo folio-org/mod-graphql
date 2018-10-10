@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Logger = require('@folio/stripes-logger');
 const { convertAPIs } = require('../convertAPI');
 
 const Status = {
@@ -19,9 +20,10 @@ const Status = {
 // `errors` array.
 
 function testSchema(dir, file, regen, counts, errors) {
+  const logger = new Logger(process.env.LOGGING_CATEGORIES);
   let schema, hadException = false;
   try {
-    ({ schema } = convertAPIs([`${dir}/input/${file}`]));
+    ({ schema } = convertAPIs([`${dir}/input/${file}`], null, { logger }));
   } catch (err3) {
     hadException = true;
     schema = `*EXCEPTION* ${err3}`;
