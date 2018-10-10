@@ -4,7 +4,6 @@ const Logger = require('@folio/stripes-logger');
 
 module.exports = class {
   constructor(prefix, timestamp) {
-    return new Logger(process.env.LOGGING_CATEGORIES || process.env.LOGCAT,
-                      prefix, timestamp);
+    return new Logger(process.env.LOGGING_CATEGORIES || process.env.LOGCAT, prefix, timestamp);
   }
 };
