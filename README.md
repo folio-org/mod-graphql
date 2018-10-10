@@ -19,7 +19,9 @@
 
 ## Overview
 
-`mod-graphql` is a [FOLIO module](https://github.com/folio-org/okapi/blob/master/doc/guide.md#architecture) that provides a [GraphQL](https://graphql.org/) service. It can be interrogated using any GraphQL client library, such as [Apollo](https://github.com/apollographql/apollo-client/), and the graph it provides is auto-generated from API the description files ([RAML](https://raml.org/) and [JSON Schema](https://json-schema.org/)) of the modules that it's providing the GraphQL API for. Using GraphQL instead of the individual modules' low-level RESTful WSAPIs makes it possible to link between different kinds of API object using rich structured queries such as the following, which finds bibliographic instances of books with "baby" in the title, and returns them along with the associated holdings statements and the barcodes of the individual items in each holding:
+`mod-graphql` is a [FOLIO module](https://github.com/folio-org/okapi/blob/master/doc/guide.md#architecture), written in Node.js, that provides a [GraphQL](https://graphql.org/) service by HTTP POST to `/graphql/`. It can be interrogated using any GraphQL client library, such as [Apollo](https://github.com/apollographql/apollo-client/), and the graph it provides is auto-generated from API the description files ([RAML](https://raml.org/) and [JSON Schema](https://json-schema.org/)) of the modules that it's providing the GraphQL API for.
+
+Using GraphQL instead of the individual modules' low-level RESTful WSAPIs makes it possible to link between different kinds of API object using rich structured queries such as the following, which finds bibliographic instances of books with "baby" in the title, and returns them along with the associated holdings statements and the barcodes of the individual items in each holding:
 
 ```
 query {
@@ -42,13 +44,13 @@ query {
 
 ## Installation
 
-Install dependencies:
+It's the usual drill for an NPM module. First, install dependencies:
 
 ```
 $ yarn install
 ```
 
-Run the tests:
+Then run the tests:
 
 ```
 $ yarn test
@@ -72,6 +74,8 @@ These are used in the standard way, as with for example [the Okapi command-line 
 * `OKAPI_TENANT`: specifies the name of a FOLIO tenant enabled for the specified Okapi service, which is used for all WSAPI operations. Typical value: `diku`.
 * `OKAPI_TOKEN`: used to provide the value of a token from an established Okapi session associated with the specified tenant. Typical value: `eyJhbGciOiJIUzUx...v76BSXSlPh-m9AQA`.
 
+If these are not explicitly set in the environment, their values are taken from a `.env` file in the working directory, if that file exists.
+
 See [**Run mod-graphql in the host box**](doc/developing-with-a-vagrant-box.md#b-run-mod-graphql-in-the-host-box) for the required use of the `OKAPI_URL` environment variable when running Okapi inside a VM and mod-graphql outside it.
 
 ### `PROXY_OKAPI_URL`
@@ -87,6 +91,8 @@ Required _only_ when [regenerating test tapes](doc/recording-tests.md). This is 
 A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways:
 
 * `allowSchemaless` -- when set, endpoints that define no schema are simply ignored, rather than throwing an error. This is useful when working with an incompletely specified RAML file, such as one to which the JSON Schemas are being added progressively.
+
+(This is presently the only supported option.)
 
 ### `LOGGING_CATEGORIES`
 
