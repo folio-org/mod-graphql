@@ -191,6 +191,8 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `url` -- log each WSAPI URL before trying to fetch it.
 * `result` -- log the result of each GET.
 
+For convenience, the abbreviated environment-variable name `LOGCAT` may be used instead of `LOGGING_CATEGORIES`, with the same effect.
+
 ### `CONSOLE_TRACE`
 
 When set to a true value (e.g. `1`), causes every output to the console to be accompanied by a full stack-trace. This can be useful when tracking down the cause of a warning.
