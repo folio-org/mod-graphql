@@ -6,7 +6,6 @@
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Running](#running)
-* [Recording Tests](#recording-tests)
 * [Environment](#environment)
     * [`OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`](#okapi_url-okapi_tenant-okapi_token)
     * [`PROXY_OKAPI_URL`](#proxy_okapi_url)
@@ -15,6 +14,7 @@
     * [`LOGGING_CATEGORIES`](#logging_categories)
     * [`CONSOLE_TRACE`](#console_trace)
     * [`NODE_OPTIONS`](#node_options)
+* [Recording Tests](#recording-tests)
 * [See also](#see-also)
 
 
@@ -56,35 +56,6 @@ $ yarn test
 ## Running
 
 XXX
-
-## Recording Tests
-
-`mod-graphql` uses the [yakbak][1] library to record interactions with
-an okapi cluster. That way, there is no need to have a server up and
-running in order to run the tests.
-
-In order to re-record tests:
-
-1. delete the `/tests/tapes` directory
-2. startup your okapi gateway
-3. log into to obtain a token
-4. Create a file in your project root called `.env` and place the
-values for your running gateway url, your tenant and your token inside
-of it like so:
-
-``` shell
-PROXY_OKAPI_URL=http://localhost:9130
-OKAPI_TENANT=diku
-OKAPI_TOKEN=abc123
-```
-
-5. Execute the tests by running `yarn test`
-
-This will deposit new tapes with the recorded HTTP interactions into
-the `/tests/tapes` directory which you can then check back into version.
-
-[1]: https://github.com/flickr/yakbak
-
 
 ## Environment
 
@@ -144,6 +115,35 @@ If you are getting this warning all over your output:
 > [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
 
 You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
+
+## Recording Tests
+
+`mod-graphql` uses the [yakbak][1] library to record interactions with
+an okapi cluster. That way, there is no need to have a server up and
+running in order to run the tests.
+
+In order to re-record tests:
+
+1. delete the `/tests/tapes` directory
+2. startup your okapi gateway
+3. log into to obtain a token
+4. Create a file in your project root called `.env` and place the
+values for your running gateway url, your tenant and your token inside
+of it like so:
+
+``` shell
+PROXY_OKAPI_URL=http://localhost:9130
+OKAPI_TENANT=diku
+OKAPI_TOKEN=abc123
+```
+
+5. Execute the tests by running `yarn test`
+
+This will deposit new tapes with the recorded HTTP interactions into
+the `/tests/tapes` directory which you can then check back into version.
+
+[1]: https://github.com/flickr/yakbak
+
 
 ## See also
 
