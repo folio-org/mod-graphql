@@ -17,24 +17,6 @@ XXX To be written
 
 When adding support for an additional complex element in an existing type -- a new nested layer -- you need to make changes in several places. Here, we use the example of adding items within the holdings records associated with instances.
 
-### GraphQL schema
-
-XXX mod-graphql commit 75c3d7c502296a8814d6632b0389c165849e9042
-
-In mod-graphql's schema -- currently [../src/schema.js](`../src/schema.js`), add the new element to the type that contains it. You will also need to add the type of the element.
-
-In the present case, it was necessary to add `holdingsItems: [Item]` to the `HoldingsRecord` type; and to add the new `Item` type referenced that that addition.
-
-**Note.** It is _not_ necessary to create a new variant of the containing type (`FullHoldingsRecord`, for example). Simply add the new fields to the existing type (`HoldingsRecord` in this case). The client will request only the elements it wants, so no additional work will be done for existing clients that do not request the new elements.
-
-### GraphQL resolver
-
-XXX mod-graphql commit 48164cf17d640a4449abdd821513ec65abcc110d
-
-Update (and create, if necessary) the resolver for the containing type (here, `HoldingsRecord`), adding an entry for the newly added element (in this case, `holdingsItems`). This must fetch the necessary records from Okapi.
-
-It is not _necessarily_ required to add any resolver code for the new type itself (here, `Item`) -- it may suffice to use the default resolver that directly translates the data from Okapi JSON.
-
 ### Client component
 
 XXX ui-inventory commit a9849790a3d9d66d4e34f078482c1da3e0778fa8
