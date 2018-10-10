@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import { isEqual } from 'lodash';
-import Logger from '@folio/stripes-logger';
+import Logger from '../src/configuredLogger';
 import { _TESTING_mergeTypes as mergeTypes } from '../src/autogen/convertAPI';
 
 describe('03. Types from multiple RAMLs can be merged', () => {
@@ -67,7 +67,7 @@ describe('03. Types from multiple RAMLs can be merged', () => {
     },
   ];
 
-  const logger = new Logger(process.env.LOGGING_CATEGORIES);
+  const logger = new Logger();
   testCases.forEach(testCase => {
     const { name, input, output } = testCase;
     it(name, () => {

@@ -3,13 +3,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
-import Logger from '@folio/stripes-logger';
+import Logger from './configuredLogger';
 import resolve from './resolve';
 import legacyResolvers from './resolvers';
 import { convertAPIs } from './autogen/convertAPI';
 
 function modGraphql(ramlPaths) {
-  const logger = new Logger(process.env.LOGGING_CATEGORIES);
+  const logger = new Logger();
   let typeDefs;
   let resolvers;
 

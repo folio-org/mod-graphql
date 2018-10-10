@@ -7,8 +7,8 @@
 // the "graphql" branch and mod-kb-ebsco to be on the
 // "json-schema-for-mod-kb-providers-endpoint" branch
 
-const Logger = require('@folio/stripes-logger');
 const packageInfo = require('../../package.json');
+const Logger = require('../configuredLogger');
 const { convertAPIs } = require('./convertAPI');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
@@ -30,6 +30,6 @@ if (opt.argv.length === 0) {
   process.exit(1);
 }
 
-const logger = new Logger(process.env.LOGGING_CATEGORIES);
+const logger = new Logger();
 const { schema } = convertAPIs(opt.argv, null, Object.assign({}, opt.options, { logger }));
 console.log(schema);
