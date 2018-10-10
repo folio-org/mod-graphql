@@ -67,4 +67,6 @@
 * Add, use and document new `ramlpath` logging category. Fixes MODGQL-82.
 * Add and use `configuredLogger` utility rather than raw `stripes-logger`. Fixes MODGQL-83.
 * Recognise `LOGCAT` environment variable as well as `LOGGING_CATEGORIES`. Fixes MODGQL-84.
+* Document combining APIs of multiple RAMLs. Fixes MODGQL-74.
+* Rationalize mod-graphql documentation. Fixes MODGQL-77.
 
