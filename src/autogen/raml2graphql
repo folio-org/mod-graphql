@@ -30,7 +30,6 @@ if (opt.argv.length === 0) {
   process.exit(1);
 }
 
-console.log('opt.argv =', opt.argv);
 const logger = new Logger(process.env.LOGGING_CATEGORIES);
 const { schema } = convertAPIs(opt.argv, null, Object.assign({}, opt.options, { logger }));
 console.log(schema);
