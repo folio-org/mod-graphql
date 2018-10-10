@@ -20,7 +20,7 @@ function modGraphql(ramlPaths) {
     if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
     const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
     logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
-    ({ schema: typeDefs, resolvers } = convertAPIs(ramlArray, resolve));
+    ({ schema: typeDefs, resolvers } = convertAPIs(ramlArray, resolve, { logger }));
     logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
   }
 
