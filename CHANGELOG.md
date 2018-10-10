@@ -66,4 +66,5 @@
 * Remove default ramlPaths from app. Fixes MODGQL-80.
 * Add, use and document new `ramlpath` logging category. Fixes MODGQL-82.
 * Add and use `configuredLogger` utility rather than raw `stripes-logger`. Fixes MODGQL-83.
+* Recognise `LOGCAT` environment variable as well as `LOGGING_CATEGORIES`. Fixes MODGQL-84.
 
