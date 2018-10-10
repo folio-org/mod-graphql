@@ -65,4 +65,5 @@
 * Add new test-case 15, exercising multiple RAMLs in a single API. Fixes MODGQL-73.
 * Remove default ramlPaths from app. Fixes MODGQL-80.
 * Add, use and document new `ramlpath` logging category. Fixes MODGQL-82.
+* Add and use `configuredLogger` utility rather than raw `stripes-logger`. Fixes MODGQL-83.
 
