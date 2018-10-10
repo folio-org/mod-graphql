@@ -3,7 +3,9 @@
 [![Build Status](https://travis-ci.org/folio-org/mod-graphql.svg?branch=master)](https://travis-ci.org/folio-org/mod-graphql)
 
 <!-- md2toc -l 2 README.md -->
-* [Development](#development)
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Running](#running)
 * [Developing with the Vagrant box](#developing-with-the-vagrant-box)
     * [A. Run `mod-graphql` inside the Vagrant box](#a-run-mod-graphql-inside-the-vagrant-box)
     * [B. Run `mod-graphql` in the host box](#b-run-mod-graphql-in-the-host-box)
@@ -20,7 +22,28 @@
 * [See also](#see-also)
 
 
-## Development
+## Introduction
+
+`mod-graphql` is a [FOLIO module](https://github.com/folio-org/okapi/blob/master/doc/guide.md#architecture) that provides a [GraphQL](https://graphql.org/) service. It can be interrogated using any GraphQL client library, such as [Apollo](https://github.com/apollographql/apollo-client/), and the graph it provides is auto-generated from API the description files ([RAML](https://raml.org/) and [JSON Schema](https://json-schema.org/)) of the modules that it's providing the GraphQL API for. Using GraphQL instead of the individual modules' low-level RESTful WSAPIs makes it possible to link between different kinds of API object using rich structured queries such as the following, which finds bibliographic instances of books with "baby" in the title, and returns them along with the associated holdings statements and the barcodes of the individual items in each holding:
+
+```
+query {
+  instance_storage_instances(query: "title=baby") {
+    totalRecords
+    instances {
+      title
+      holdingsRecords2 {
+        callNumber
+        holdingsItems {
+          barcode
+        }
+      }
+    }
+  }
+}
+```
+
+## Installation
 
 Install dependencies:
 
@@ -33,6 +56,10 @@ Run the tests:
 ```
 $ yarn test
 ```
+
+## Running
+
+XXX
 
 ## Developing with the Vagrant box
 
