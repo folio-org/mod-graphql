@@ -15,7 +15,6 @@
         * [`LOGGING_CATEGORIES`](#logging_categories)
         * [`CONSOLE_TRACE`](#console_trace)
         * [`NODE_OPTIONS`](#node_options)
-* [Recording Tests](#recording-tests)
 * [See also](#see-also)
 
 
@@ -76,7 +75,7 @@ See [above](#b-run-mod-graphql-in-the-host-box) for the required use of the `OKA
 
 #### `PROXY_OKAPI_URL`
 
-Required _only_ when [regenerating test tapes](#recording-tests). This is the URL of an Okapi instance which the yakbak library shoud proxy for, providing the Okapi service from which WSAPI tapes are made.
+Required _only_ when [regenerating test tapes](doc/recording-tests.md). This is the URL of an Okapi instance which the yakbak library shoud proxy for, providing the Okapi service from which WSAPI tapes are made.
 
 #### `LEGACY_RESOLVERS`
 
@@ -119,35 +118,6 @@ If you are getting this warning all over your output:
 
 You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
 
-## Recording Tests
-
-`mod-graphql` uses the [yakbak][1] library to record interactions with
-an okapi cluster. That way, there is no need to have a server up and
-running in order to run the tests.
-
-In order to re-record tests:
-
-1. delete the `/tests/tapes` directory
-2. startup your okapi gateway
-3. log into to obtain a token
-4. Create a file in your project root called `.env` and place the
-values for your running gateway url, your tenant and your token inside
-of it like so:
-
-``` shell
-PROXY_OKAPI_URL=http://localhost:9130
-OKAPI_TENANT=diku
-OKAPI_TOKEN=abc123
-```
-
-5. Execute the tests by running `yarn test`
-
-This will deposit new tapes with the recorded HTTP interactions into
-the `/tests/tapes` directory which you can then check back into version.
-
-[1]: https://github.com/flickr/yakbak
-
-
 ## See also
 
 Other documentation for mod-graphql:
@@ -155,6 +125,7 @@ Other documentation for mod-graphql:
 * [The change-log](CHANGELOG.md) for this module.
 * [Example GraphQL queries](doc/example-queries.md) that this module can run.
 * [Developing with the Vagrant box](doc/developing-with-a-vagrant-box.md)
+* [Recording tests](doc/recording-tests.md)
 * Documentation of [the schema/resolver auto-generation code](src/autogen/README.md), including [the JSON Schema extensions for link-fields](src/autogen/README.md#option-1-json-schema-extensions).
 * Documentation of [the intermediate in-memory representaton of a compiled API](src/autogen/data-structure.md), only of interest to mod-graphql developers.
 * **INCOMPLETE** [documentation on using GraphQL from Stripes](doc/using-graphql-from-stripes.md)
