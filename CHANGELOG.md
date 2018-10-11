@@ -1,6 +1,7 @@
 # Change history for mod-graphql
 
-## 0.2.0 (IN PROGRESS)
+## [0.2.0](https://github.com/folio-org/mod-graphql/tree/v0.2.0) (2018-10-11)
+First formal release.
 
 * The `instances` query now returns a structure of a `records` array and a `totalCount`. Fixes MODGQL-3.
 * URL-encode the CQL query in instances requests. Fixes MODGQL-8.
