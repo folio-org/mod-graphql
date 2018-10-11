@@ -14,7 +14,7 @@
 * Auto-generate GraphQL schemas from RAMLs and JSON Schemas. Fixes MODGQL-20.
 * Auto-generate GraphQL resolvers from RAMLs and JSON Schemas. Fixes MODGQL-23.
 * General work towards a useful test-suite. Fixes MODGQL-12.
-* Set up test-suite for GraphQL schema generation. Fixes MODGQL-21.
+* Set up test-suite for GraphQL schema generation. Fixes MODGQL-22.
 * Abstract out common parts of tests. Fixes MODGQL-31.
 * Add tests for two-level and three-level fetching. Fixes MODGQL-24.
 * Document [procedure for uninstalling a running module](doc/remove-running-modules.md). Fixes MODGQL-5.
@@ -44,15 +44,13 @@
 * Omit leading baseURL from URLs gathered in API. Fixes MODGQL-57.
 * Propagate all query parameters from GraphQL queries to corresponding back-end queries. Fixes MODGQL-59.
 * Target mod-graphql on the RAML for mod-kb-ebsco. Fixes MODGQL-47.
-* Use `util.inspect` to serialise JSON Schemas, as they may have circular references. Fixes part of MODGQL-61.
 * Support new logging categories `api.comments`, `api.resources`, `api.types`. Fixes MODGQL-63.
 * Share GraphQL-schema types when the same JSON Schema is referenced in multiple places. Fixes MODGQL-64.
 * Omit constant leading path from generated type-names. Fixes MODGQL-66.
 * Repair test-suite failure due to running in higher-level directory. Fixes MODGQL-65.
-* Handle circular references in schemas. Fixes MODGQL-61.
 * Skeleton specified by `folio:includedElement` supports dot-separated paths such as `holdingsRecords.0`. Fixes MODGQL-68.
 * Add new document, [Example queries against mod-inventory-storage](doc/example-queries.md). Fixes MODGQL-67.
-* Handle circular references in schemas. Fixes MODGQL-61.
+* Handle circular references in schemas, including use of `util.inspect` to serialise JSON Schemas. Fixes MODGQL-61.
 * Specify particular SHA1s for checkouts of modules whose RAMLs are used in `yarn test` (`mod-inventory-storage` and `raml-util`). Fixes MODGQL-69.
 * Upgrade tests to cope with the RAML 1.0 now used by `mod-inventory-storage` and `raml-util`. Fixes MODGQL-70.
 * Support "weak references" in JSON Schemas, specified as `folio:$ref`. Behaves the same as `$ref` in mod-graphql, but is ignored by RMB, circumventing its problem with cycles (RMB-265). Fixes MODGQL-71.
