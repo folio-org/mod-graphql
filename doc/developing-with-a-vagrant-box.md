@@ -50,7 +50,7 @@ Whether you use method A or B, you will need to tell Okapi on the Vagrant box wh
 
 This can be done with any tool that can send arbitrary HTTP requests, such as `curl`. However [okapi.rb](https://github.com/thefrontside/okapi.rb) is a handy CLI that makes this a bit less fiddly by understanding Okapi conventions. On most platforms `gem install okapi` should work, provided you have a new enough Ruby. For now the VM doesn't but that's okay as Vagrant forwards port 9130 into it so `localhost:9130` is getting to Okapi from your host machine too.
 
-Before registering your local code you'll need to remove the mod-graphql instance that came with the VM. Currently that's a bit of a process as it doesn't have a fixed name and so is [documented separately](doc/remove-running-modules.md).
+Before registering your local code you'll need to remove the mod-graphql instance that came with the VM. Currently that's a bit of a process as it doesn't have a fixed name and so is [documented separately](remove-running-modules.md).
 
 The commands below do the following:
 
@@ -77,7 +77,7 @@ Or to search the users with CQL:
 ```
 echo '{"query": "query { users(query: \"username=al*\") { id, username } }"}' | okapi create /graphql
 ```
-(See [a transcript of this process](doc/running-mod-graphql.txt).)
+(See [a transcript of this process](developing-with-a-vagrant-box--transcript.txt).)
 
 To reverse the steps and forget the service:
 ```
