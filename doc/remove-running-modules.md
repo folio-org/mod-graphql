@@ -58,5 +58,4 @@ Successfully deleted /_/proxy/modules/mod-graphql-0.1.100020
 $
 ```
 
-Now we are ready to [insert the local copy of our module](https://github.com/folio-org/mod-graphql/blob/master/README.md).
-
+Now we are ready to [insert the local copy of our module](developing-with-a-vagrant-box.md#registering-with-okapi).
