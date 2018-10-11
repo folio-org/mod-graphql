@@ -19,7 +19,9 @@
 * Add tests for two-level and three-level fetching. Fixes MODGQL-24.
 * Document [procedure for uninstalling a running module](doc/remove-running-modules.md). Fixes MODGQL-5.
 * Use `PROXY_OKAPI_URL` environment variable for instructing the yakbak proxy server, rather than re-using `OKAPI_URL` which is used here as in other places such as the various Okapi CLIs. Prevents the yakbak HTTP server from being bypassed in tests, and so fixes MODGQL-35.
-* Get tests running within CI (be generating a good set of tapes). Fixes MODGQL-34.
+* Add ability to use CQL and other variables in GraphQL for tests. Fixes MODGQL-32.
+* Modify `yarn test` code so it sets up necessary mod-inventory-storage RAMLs/JSON Schemas. Fixes MODGQL-33.
+* Get tests running within CI (by generating a good set of tapes). Fixes MODGQL-34.
 * Parameterise which RAML drives mod-graphql. Fixes MODGQL-29.
 * Handle RAML type-names with embedded hyphens. Fixes MODGQL-36.
 * Add `schema` logging-category for dumping the generated GraphQL schema. Fixes MODGQL-37.
@@ -56,6 +58,7 @@
 * Support "weak references" in JSON Schemas, specified as `folio:$ref`. Behaves the same as `$ref` in mod-graphql, but is ignored by RMB, circumventing its problem with cycles (RMB-265). Fixes MODGQL-71.
 * Ability to combine APIs of multiple RAMLs. Fixes MODGQL-30.
 * Add links from top-level README to other documentation. Fixes MODGQL-75.
+* Exercise multiple entry points to graph. Fixes MODGQL-25.
 * Support [item query that returns holdings and instance](doc/example-queries.md#get-holdings-record-and-instance-for-items). Fixes MODGQL-21.
 * Change to top-level API: the exported object is no longer a running app, but a function which will start and return such an app. Allows the paths to the to-be-converted. RAML files to be passed in. Fixes MODGQL-79.
 * Add new test-case 14, exercising the items API. Fixes MODGQL-76.
