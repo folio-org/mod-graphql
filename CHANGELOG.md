@@ -51,8 +51,7 @@
 * Repair test-suite failure due to running in higher-level directory. Fixes MODGQL-65.
 * Handle circular references in schemas. Fixes MODGQL-61.
 * Skeleton specified by `folio:includedElement` supports dot-separated paths such as `holdingsRecords.0`. Fixes MODGQL-68.
-* Add new document, [Example queries against mod-inventory-storage
-](doc/example-queries.md). Fixes MODGQL-67.
+* Add new document, [Example queries against mod-inventory-storage](doc/example-queries.md). Fixes MODGQL-67.
 * Handle circular references in schemas. Fixes MODGQL-61.
 * Specify particular SHA1s for checkouts of modules whose RAMLs are used in `yarn test` (`mod-inventory-storage` and `raml-util`). Fixes MODGQL-69.
 * Upgrade tests to cope with the RAML 1.0 now used by `mod-inventory-storage` and `raml-util`. Fixes MODGQL-70.
