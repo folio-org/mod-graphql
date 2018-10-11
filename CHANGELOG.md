@@ -69,4 +69,5 @@
 * Recognise `LOGCAT` environment variable as well as `LOGGING_CATEGORIES`. Fixes MODGQL-84.
 * Document combining APIs of multiple RAMLs. Fixes MODGQL-74.
 * Rationalize mod-graphql documentation. Fixes MODGQL-77.
+* Add documentation on [how to use GraphQL from Stripes](doc/using-graphql-from-stripes.md). Fixes MODGQL-19.
 
