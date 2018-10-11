@@ -153,8 +153,8 @@ You can get rid of it by run Node with the with `--no-deprecation` command-line 
 Other documentation for users of `mod-graphql`:
 
 * [The change-log](CHANGELOG.md) for this module.
+* Documentation on [using GraphQL from Stripes](doc/using-graphql-from-stripes.md)
 * [Example GraphQL queries](doc/example-queries.md) that this module can run.
-* **INCOMPLETE** [documentation on using GraphQL from Stripes](doc/using-graphql-from-stripes.md)
 
 Documentation for developers of the module:
 
