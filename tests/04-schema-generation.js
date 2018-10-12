@@ -18,6 +18,7 @@ describe('04. RAMLs and JSON schemas can be translated into GraphQL schemas', ()
   });
 
   after(() => {
+    console.info(`      : ${counts.total} tests: ${counts.passed} passed, ${counts.exceptions} expected exceptions, ${counts.failed} failed`);
     if (errors.length) {
       errors.forEach((e) => {
         const [name, expected, got] = e;
