@@ -9,7 +9,6 @@
 * [Environment](#environment)
     * [`OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`](#okapi_url-okapi_tenant-okapi_token)
     * [`PROXY_OKAPI_URL`](#proxy_okapi_url)
-    * [`LEGACY_RESOLVERS`](#legacy_resolvers)
     * [`GRAPHQL_OPTIONS`](#graphql_options)
     * [`LOGGING_CATEGORIES`](#logging_categories)
     * [`CONSOLE_TRACE`](#console_trace)
@@ -103,10 +102,6 @@ See [**Run mod-graphql in the host box**](doc/developing-with-a-vagrant-box.md#b
 ### `PROXY_OKAPI_URL`
 
 Required _only_ when [regenerating test tapes](doc/recording-tests.md). This is the URL of an Okapi instance which the yakbak library shoud proxy for, providing the Okapi service from which WSAPI tapes are made.
-
-### `LEGACY_RESOLVERS`
-
-**Deprecated**. When set to a true value (e.g. `1`), causes `mod-graphql` to use a hand-coded GraphQL schema and corresponding hand-coded resolvers, which were created in early development and are no longer used. These are retained for now as they enable us to run more tests than the auto-generated schema and resolvers yet allow, but will be removed in time.
 
 ### `GRAPHQL_OPTIONS`
 
