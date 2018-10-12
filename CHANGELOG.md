@@ -1,6 +1,7 @@
 # Change history for mod-graphql
 
-## 1.0.0 (IN PROGRESS)
+## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)
 
 * Remove support for `LEGACY_RESOLVERS`. Fixes MODGQL-81.
 * Remove old `yarn test2` code. That command still works, but now uses a mainstream test. Fixes MODGQL-86.
