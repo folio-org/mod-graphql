@@ -1,5 +1,10 @@
 # Change history for mod-graphql
 
+## 1.0.0 (IN PROGRESS)
+
+* Remove support for `LEGACY_RESOLVERS`. Fixes MODGQL-81.
+
+
 ## [0.2.0](https://github.com/folio-org/mod-graphql/tree/v0.2.0) (2018-10-11)
 First formal release.
 
