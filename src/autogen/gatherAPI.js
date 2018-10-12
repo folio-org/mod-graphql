@@ -109,24 +109,23 @@ function gatherFields(basePath, jsonSchema) {
   });
 
   const result = [];
-  if (!jsonSchema.properties) {
-    throw Error('no properties for JSON Schema ' + JSON.stringify(jsonSchema, null, 2));
+  if (jsonSchema.properties) {
+    const keys = Object.keys(jsonSchema.properties);
+    const sorted = keys.sort();
+    sorted.forEach(name => {
+      const t = gatherType(basePath, jsonSchema.properties[name]);
+      if (t) {
+        const [arrayDepth, type, link] = t;
+        result.push({
+          name: name.replace('@', '_'),
+          required: required[name] || false,
+          arrayDepth,
+          type,
+          link
+        });
+      }
+    });
   }
-  const keys = Object.keys(jsonSchema.properties);
-  const sorted = keys.sort();
-  sorted.forEach(name => {
-    const t = gatherType(basePath, jsonSchema.properties[name]);
-    if (t) {
-      const [arrayDepth, type, link] = t;
-      result.push({
-        name: name.replace('@', '_'),
-        required: required[name] || false,
-        arrayDepth,
-        type,
-        link
-      });
-    }
-  });
 
   return result;
 }
