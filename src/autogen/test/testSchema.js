@@ -8,16 +8,12 @@ const Status = {
   EXCEPTION: 3,
 };
 
-// This has a slightly complex API, because it has to provide all the
-// necessary information to two different callers -- ./run-tests.js
-// and ../../../tests/01-schema-generation.js
-//
-// It returns EXCEPTION if an expected exception occurred, otherwise
-// PASS if the generated schema matches the expectation and FAIL if
-// not. It also increments two of the members of the `counts` object:
-// `total` and one of `passed`, `failed`, `exceptions`. When
-// appropriate, it also pushes an error report onto the end of the
-// `errors` array.
+// This has a slightly complex API. It returns EXCEPTION if an
+// exception occurred, otherwise PASS if the generated schema matches
+// the expectation and FAIL if not. It also increments two of the
+// members of the `counts` object: `total` and one of `passed`,
+// `failed`, `exceptions`. When appropriate, it also pushes an error
+// report onto the end of the `errors` array.
 
 function testSchema(dir, file, regen, counts, errors) {
   const logger = new Logger();
