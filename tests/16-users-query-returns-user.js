@@ -4,6 +4,7 @@ import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib
 import app from '../src/app';
 
 describe('16. query returns a user with an ID and username', () => {
+  // At some point, we will provide a users API via RAML translation
   if (!process.env.LEGACY_RESOLVERS) {
     describe('test not supported with auto-generated resolvers', () => {
       it('passes by default', () => true);
