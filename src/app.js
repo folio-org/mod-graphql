@@ -1,28 +1,21 @@
-import fs from 'fs';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import Logger from './configuredLogger';
 import resolve from './resolve';
-import legacyResolvers from './resolvers';
 import { convertAPIs } from './autogen/convertAPI';
 
 function modGraphql(ramlPaths) {
   const logger = new Logger();
-  let typeDefs;
-  let resolvers;
 
-  if (process.env.LEGACY_RESOLVERS) {
-    typeDefs = fs.readFileSync('./src/master.graphql', 'utf-8');
-    resolvers = legacyResolvers;
-  } else {
-    if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
-    const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
-    logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
-    ({ schema: typeDefs, resolvers } = convertAPIs(ramlArray, resolve, { logger }));
-    logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
-  }
+  if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
+  const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
+  logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
+  const res = convertAPIs(ramlArray, resolve, { logger });
+  const typeDefs = res.schema;
+  const resolvers = res.resolvers;
+  logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 
   function badRequest(response, reason) {
     response
