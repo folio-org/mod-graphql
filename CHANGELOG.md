@@ -3,7 +3,7 @@
 ## 1.0.0 (IN PROGRESS)
 
 * Remove support for `LEGACY_RESOLVERS`. Fixes MODGQL-81.
-
+* Remove old `yarn test2` code. That command still works, but now uses a mainstream test. Fixes MODGQL-86.
 
 ## [0.2.0](https://github.com/folio-org/mod-graphql/tree/v0.2.0) (2018-10-11)
 First formal release.
