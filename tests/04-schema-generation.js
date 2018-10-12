@@ -1,4 +1,4 @@
-import { describe, it } from 'mocha';
+import { describe, it, after } from 'mocha';
 import { expect } from 'chai';
 import fs from 'fs';
 import { testSchema, Status } from '../src/autogen/test/testSchema';
