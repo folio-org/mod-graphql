@@ -4,6 +4,8 @@
 
 * In JSON Schemas, treat absence of `properties` the same as an empty set. Fixes MODGQL-89.
 * `mod-graphql` can now read, combine and translate all 22 of the `mod-inventory-storage` RAMLs with their schemas. Fixes MODGQL-88.
+* RAML conversion now fails when referenced trait files are absent. Fixes MODGQL-94.
+* RAML conversion now fails when referenced JSON Schema files are absent. Fixes MODGQL-95.
 
 ## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)
