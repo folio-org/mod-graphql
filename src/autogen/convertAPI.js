@@ -7,8 +7,7 @@ const { asResolvers } = require('./asResolvers');
 
 function reportErrors(ramlName, errors) {
   const actualErrors = errors.filter(e => e.code !== 'CIRCULAR_REFS_IN_JSON_SCHEMA_DETAILS');
-  if (actualErrors.length === 0)
-    return false;
+  if (actualErrors.length === 0) return false;
 
   console.error(`RAML parse for ${ramlName} had ${actualErrors.length} errors:`);
   errors.forEach(e => {
