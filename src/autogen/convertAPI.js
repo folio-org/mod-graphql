@@ -5,14 +5,30 @@ const { asSchema } = require('./asSchema');
 const { asResolvers } = require('./asResolvers');
 
 
+function reportErrors(ramlName, errors) {
+  console.error(`RAML parse for ${ramlName} had ${errors.length} errors:`);
+  errors.forEach(e => {
+    console.error(
+      (e.isWarning ? 'warning:' : 'error:'),
+      `${e.message} at ${e.path}:${e.line || e.range.start.line}:${e.column || e.range.start.column}`
+    );
+  });
+}
+
 function parseAndGather(ramlName, resolveFunction, options) {
   let api;
   try {
     api = raml.loadSync(ramlName);
   } catch (e) {
-    console.error('RAML parse failed:', e);
+    console.error(`RAML parse for ${ramlName} failed`, e);
     process.exit(2);
   }
+  if (api.errors.length) {
+    reportErrors(ramlName, api.errors);
+    process.exit(2);
+  }
+
+
   options.logger.log('raml', JSON.stringify(api, null, 2));
 
   const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
