@@ -131,7 +131,7 @@ function gatherFields(basePath, jsonSchema) {
 }
 
 
-// If the body has no data for type application/jason, return null
+// If the body has no data for type application/json, return null
 // Otherwise, return an object of two keys describing the schema for that response:
 //      schemaName: name of the schema, or undefined if there is none
 //      schemaContent: JSON content of the schema
