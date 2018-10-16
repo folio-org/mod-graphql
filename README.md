@@ -118,6 +118,7 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `ramlpath` -- log the paths of the RAML files to be loaded.
 * `raml` -- log the RAML file as initially loaded, before conversion to a GraphQL schema begins.
 * `nojson` -- log WSAPI endpoints in the RAML for which there is no JSON body specification. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
+* `schema` -- log when a schema is registered, and just before trying to read a schema file.
 * `replace` -- log when a JSON Schema is encountered for the second or subsequent time, as the code declines to replace the first version.
 * `api`: log a JSON rendition of the gathered API specification. Useful for debugging. Or, more specifically:
   * `api.comments`: log a JSON rendition of only the `comments` portion of the gathered API specification.
