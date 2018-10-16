@@ -224,6 +224,7 @@ function insertReferencedSchemas(basePath, currentPath, types, options, obj) {
   keys.forEach(k => {
     if (k === '$ref' || k === 'folio:$ref') {
       const schemaName = `${currentPath}/${obj[k]}`;
+      options.logger.log('schema', `reading schema '${obj[k]}' from path '${currentPath}'`);
       const schemaText = fs.readFileSync(schemaName, 'utf8');
       // eslint-disable-next-line no-use-before-define
       insertSchema(basePath, schemaName.replace(/(.*)\/.*/, '$1'), types, options, schemaName, schemaText);
@@ -265,6 +266,7 @@ function insertSchema(basePath, currentPath, types, options, schemaName, schemaT
 
   const obj = JSON.parse(schemaText);
   types[rtype] = 'temporary marker'; // XXX this is ugly.
+  options.logger.log('schema', `registering schema '${schemaName}'`);
   insertReferencedSchemas(basePath, currentPath, types, options, obj);
   types[rtype] = gatherFields(basePath, obj);
   return rtype;
