@@ -1,0 +1,22 @@
+# title: External JSON Schema in a subdirectory, including a sub-schema
+# raml-version: 0.9
+
+type Query {
+  person: TtopSchema
+}
+
+type T_schemas_metadata {
+  createdByUserId: String!
+  createdByUsername: String
+  createdDate: String!
+  updatedByUserId: String
+  updatedByUsername: String
+  updatedDate: String
+}
+
+type TtopSchema {
+  address: String
+  metadata: T_schemas_metadata
+  name: String!
+}
+
