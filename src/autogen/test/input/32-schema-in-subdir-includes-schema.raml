@@ -1,0 +1,16 @@
+#%RAML 0.8
+
+# Compare with test 11
+
+title: External JSON Schema in a subdirectory, including a sub-schema
+
+schemas:
+  - topSchema: !include top.json
+
+/person:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: topSchema
