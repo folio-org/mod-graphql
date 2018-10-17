@@ -273,7 +273,7 @@ function insertSchema(basePath, currentPath, types, options, schemaName, schemaT
 }
 
 
-function gatherResource(raml10types, resource, basePath, types, options, level = 0) {
+function gatherResource(raml10types, resource, basePath, schemaMap, types, options, level = 0) {
   const result = { level };
   const parentUri = resource.parentUri;
 
@@ -314,7 +314,10 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
     } else {
       const { schemaName, schemaText } = schemaInfo;
       if (schemaName) {
-        result.type = insertSchema(basePath, basePath, types, options, schemaName, schemaText);
+        const schemaDir = schemaMap[schemaName];
+        const currentPath = (schemaDir && schemaDir !== '.') ? `${basePath}/${schemaDir}` : basePath;
+        // console.log(`* schema '${schemaName}' with dir '${schemaDir}': currentPath = '${currentPath}'`);
+        result.type = insertSchema(basePath, currentPath, types, options, schemaName, schemaText);
       } else if (!options.allowSchemaless) {
         throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema for '${result.url}'`);
       }
@@ -323,7 +326,7 @@ function gatherResource(raml10types, resource, basePath, types, options, level =
 
   result.subResources = [];
   (resource.resources || []).forEach((sub) => {
-    result.subResources.push(gatherResource(raml10types, sub, basePath, types, options, level + 1));
+    result.subResources.push(gatherResource(raml10types, sub, basePath, schemaMap, types, options, level + 1));
   });
 
   return result;
@@ -348,10 +351,10 @@ function flattenResources(resources) {
 }
 
 
-function gatherAllResources(api, basePath, types, options) {
+function gatherAllResources(api, basePath, schemaMap, types, options) {
   const ast = api.specification.types;
   const raml10types = !ast ? undefined : _.mapValues(_.keyBy(ast, 'name'), 'type');
-  const resources = api.specification.resources.map(r => gatherResource(raml10types, r, basePath, types, options));
+  const resources = api.specification.resources.map(r => gatherResource(raml10types, r, basePath, schemaMap, types, options));
   return flattenResources(resources);
 }
 
@@ -360,7 +363,7 @@ function gatherAPI(api, basePath, schemaMap, options) {
   const types = {};
   return {
     comments: gatherComments(api, options),
-    resources: gatherAllResources(api, basePath, types, options),
+    resources: gatherAllResources(api, basePath, schemaMap, types, options),
     types
   };
 }
