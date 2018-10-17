@@ -7,6 +7,7 @@
 * RAML conversion now fails when referenced trait files are absent. Fixes MODGQL-94.
 * RAML conversion now fails when referenced JSON Schema files are absent. Fixes MODGQL-95.
 * Reinstate `src/autogen/test/run-tests.js`: we still need this for `yarn regen`, which regenerates regression-test expectations. Undoes part of MODGQL-86.
+* Correctly interpret paths of sub-schemas relative to parents. Fixes MODGQL-96.
 
 ## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)
