@@ -78,7 +78,7 @@ function parseAndGather(ramlName, resolveFunction, options) {
   options.logger.log('raml', JSON.stringify(api, null, 2));
 
   const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
-  const gathered = gatherAPI(api, basePath, options);
+  const gathered = gatherAPI(api, basePath, schemaMap, options);
   options.logger.log('api', 'gathered API:', JSON.stringify(gathered, null, 2));
   ['comments', 'resources', 'types'].forEach(s => options.logger.log(`api.${s}`, JSON.stringify(gathered[s], null, 2)));
 

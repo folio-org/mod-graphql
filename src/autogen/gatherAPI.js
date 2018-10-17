@@ -356,7 +356,7 @@ function gatherAllResources(api, basePath, types, options) {
 }
 
 
-function gatherAPI(api, basePath, options) {
+function gatherAPI(api, basePath, schemaMap, options) {
   const types = {};
   return {
     comments: gatherComments(api, options),
