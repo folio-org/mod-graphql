@@ -1,12 +1,12 @@
 const fs = require('fs');
 const raml = require('raml-1-parser');
-const { isEqual, findIndex } = require('lodash');
+const { isEqual, findIndex, some } = require('lodash');
 const { gatherAPI } = require('./gatherAPI');
 const { asSchema } = require('./asSchema');
 const { asResolvers } = require('./asResolvers');
 
 
-function reportErrors(ramlName, errors) {
+function reportErrors(ramlName, errors, options) {
   const actualErrors = errors.filter(e => e.code !== 'CIRCULAR_REFS_IN_JSON_SCHEMA_DETAILS');
   if (actualErrors.length === 0) return false;
 
@@ -18,7 +18,7 @@ function reportErrors(ramlName, errors) {
     );
   });
 
-  return true;
+  return !options.ignoreRamlWarnings ? true : some(actualErrors, e => !e.isWarning);
 }
 
 
@@ -71,7 +71,7 @@ function parseAndGather(ramlName, resolveFunction, options) {
     console.error(`RAML parse for ${ramlName} failed`, e);
     process.exit(2);
   }
-  if (reportErrors(ramlName, api.errors)) {
+  if (reportErrors(ramlName, api.errors, options)) {
     process.exit(2);
   }
 
