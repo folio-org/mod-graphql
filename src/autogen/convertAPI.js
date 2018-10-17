@@ -1,5 +1,6 @@
+const fs = require('fs');
 const raml = require('raml-1-parser');
-const { isEqual } = require('lodash');
+const { isEqual, findIndex } = require('lodash');
 const { gatherAPI } = require('./gatherAPI');
 const { asSchema } = require('./asSchema');
 const { asResolvers } = require('./asResolvers');
@@ -21,9 +22,42 @@ function reportErrors(ramlName, errors) {
 }
 
 
+// Parse the specified RAML and return a map of schema-names to the
+// directories in which they are found. This is needed to support
+// correct interpretation of relative pathnames when those schemas
+// reference futher schemas.
+//
+// Amazingly, it turns out that neither yaml-ast-parser nor js-yaml
+// can do what we need here: see comments in MODGQL-96. So we will
+// simply pick the RAML text apart by hand to extract the schema map.
+//
+function parseSchemaMap(ramlName, _options) {
+  const text = fs.readFileSync(ramlName, 'utf8');
+  const lines = text.split('\n');
+  const schemasIndex = findIndex(lines, x => (x === 'schemas:'));
+  if (schemasIndex < 0) return null;
+  const map = {};
+
+  for (let i = schemasIndex + 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (line === '') break;
+    const match = line.match(/^[ \t]+- (.*?): !include (.*)\/.*/);
+    if (!match) {
+      console.error('unexpected end to schema map:', line);
+      break;
+    }
+    map[match[1]] = match[2];
+  }
+
+  return map;
+}
+
+
 function parseAndGather(ramlName, resolveFunction, options) {
-  let api;
+  let schemaMap, api;
   try {
+    schemaMap = parseSchemaMap(ramlName, options);
+    options.logger.log('schemaMap', JSON.stringify(schemaMap, null, 2));
     api = raml.loadSync(ramlName);
   } catch (e) {
     console.error(`RAML parse for ${ramlName} failed`, e);
