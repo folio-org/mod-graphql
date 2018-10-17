@@ -41,7 +41,7 @@ function parseSchemaMap(ramlName, options) {
     for (let i = schemasIndex + 1; i < lines.length; i++) {
       const line = lines[i];
       if (line === '') break;
-      if (line.match(/^[ \t]+- (.*?): |/)) {
+      if (line.match(/^[ \t]+- (.*?): \|/)) {
         // An inline schema, which we don't support
         if (options.ignoreSchemaMapsWithInlineSchemas) return map;
         throw Error(`inline schemas are not supported (${ramlName}:${i+1}`);
