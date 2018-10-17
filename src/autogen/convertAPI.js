@@ -31,7 +31,7 @@ function reportErrors(ramlName, errors) {
 // can do what we need here: see comments in MODGQL-96. So we will
 // simply pick the RAML text apart by hand to extract the schema map.
 //
-function parseSchemaMap(ramlName, _options) {
+function parseSchemaMap(ramlName, options) {
   const text = fs.readFileSync(ramlName, 'utf8');
   const lines = text.split('\n');
   const map = {};
@@ -41,6 +41,11 @@ function parseSchemaMap(ramlName, _options) {
     for (let i = schemasIndex + 1; i < lines.length; i++) {
       const line = lines[i];
       if (line === '') break;
+      if (line.match(/^[ \t]+- (.*?): |/)) {
+        // An inline schema, which we don't support
+        if (options.ignoreSchemaMapsWithInlineSchemas) return map;
+        throw Error('inline schemas are not supported');
+      }
       const match = line.match(/^[ \t]+- (.*?): !include (.*)/);
       if (!match) {
         console.error('unexpected end to schema map:', line);
