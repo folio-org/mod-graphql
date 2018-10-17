@@ -40,7 +40,7 @@ function parseSchemaMap(ramlName, options) {
   if (schemasIndex >= 0) {
     for (let i = schemasIndex + 1; i < lines.length; i++) {
       const line = lines[i];
-      if (line === '') break;
+      if (line.match(/^\s*$/)) break;
       if (line.match(/^[ \t]+- (.*?): \|/)) {
         // An inline schema, which we don't support
         if (options.ignoreSchemaMapsWithInlineSchemas) return map;
