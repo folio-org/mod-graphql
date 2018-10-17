@@ -109,7 +109,7 @@ A comma-separated list of options, each of which can affect the operation of `mo
 
 * `allowSchemaless` -- when set, endpoints that define no schema are simply ignored, rather than throwing an error. This is useful when working with an incompletely specified RAML file, such as one to which the JSON Schemas are being added progressively.
 * `ignoreSchemaMapsWithInlineSchemas` -- mod-graphql does not support parsing of schema maps when one or more of the schemas is inclued inline in the RAML rather than pulled in from an external file. Usually the existence of an inline schema is a fatal error, but when this option is set it instead causes the schema-map to be empty. **This should only be used when running the test suite**.
-
+* `ignoreRamlWarnings` -- By default, any error or warning in parsing a RAML file or its associated JSON Schemas results in an immediate exit with exit-value 2. When this option is set, an exit is caused only by errors, not by warnings. Necessary for some non-lint-clean RAMLs.
 
 ### `LOGGING_CATEGORIES`
 
