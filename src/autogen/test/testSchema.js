@@ -19,7 +19,7 @@ function testSchema(dir, file, regen, counts, errors) {
   const logger = new Logger();
   let schema, hadException = false;
   try {
-    ({ schema } = convertAPIs([`${dir}/input/${file}`], null, { logger }));
+    ({ schema } = convertAPIs([`${dir}/input/${file}`], null, { logger, ignoreSchemaMapsWithInlineSchemas: true }));
   } catch (err3) {
     hadException = true;
     schema = `*EXCEPTION* ${err3}`;
