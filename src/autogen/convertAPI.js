@@ -41,12 +41,14 @@ function parseSchemaMap(ramlName, _options) {
     for (let i = schemasIndex + 1; i < lines.length; i++) {
       const line = lines[i];
       if (line === '') break;
-      const match = line.match(/^[ \t]+- (.*?): !include (.*)\/.*/);
+      const match = line.match(/^[ \t]+- (.*?): !include (.*)/);
       if (!match) {
         console.error('unexpected end to schema map:', line);
         break;
       }
-      map[match[1]] = match[2];
+      const path = match[2];
+      const m2 = path.match(/(.*)\/.*/);
+      map[match[1]] = m2 ? m2[1] : '.';
     }
   }
 
