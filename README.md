@@ -108,8 +108,8 @@ Required _only_ when [regenerating test tapes](doc/recording-tests.md). This is 
 A comma-separated list of options, each of which can affect the operation of `mod-graphql` in various ways:
 
 * `allowSchemaless` -- when set, endpoints that define no schema are simply ignored, rather than throwing an error. This is useful when working with an incompletely specified RAML file, such as one to which the JSON Schemas are being added progressively.
+* `ignoreSchemaMapsWithInlineSchemas` -- mod-graphql does not support parsing of schema maps when one or more of the schemas is inclued inline in the RAML rather than pulled in from an external file. Usually the existence of an inline schema is a fatal error, but when this option is set it instead causes the schema-map to be empty. **This should only be used when running the test suite**.
 
-(This is presently the only supported option.)
 
 ### `LOGGING_CATEGORIES`
 
