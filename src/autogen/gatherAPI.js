@@ -45,6 +45,7 @@ function r2gBasicType(type) {
 
   if (type !== undefined) {
     console.warn(`no GraphQL map for JSON-Schema basic type '${type}'`);
+    return 'XXX';
   }
 
   return null;
