@@ -10,7 +10,6 @@ function reportErrors(ramlName, errors, options) {
   const actualErrors = errors.filter(e => e.code !== 'CIRCULAR_REFS_IN_JSON_SCHEMA_DETAILS');
   if (actualErrors.length === 0) return false;
 
-  console.error(`RAML parse for ${ramlName} had ${actualErrors.length} errors:`);
   errors.forEach(e => {
     console.error(
       (e.isWarning ? 'warning:' : 'error:'),
@@ -18,7 +17,8 @@ function reportErrors(ramlName, errors, options) {
     );
   });
 
-  return !options.ignoreRamlWarnings ? true : some(actualErrors, e => !e.isWarning);
+  const good = options.ignoreRamlWarnings && !some(actualErrors, e => !e.isWarning);
+  return good ? false : `RAML parse for ${ramlName} had ${actualErrors.length} errors`;
 }
 
 
@@ -71,9 +71,8 @@ function parseAndGather(ramlName, resolveFunction, options) {
     console.error(`RAML parse for ${ramlName} failed`, e);
     process.exit(2);
   }
-  if (reportErrors(ramlName, api.errors, options)) {
-    process.exit(2);
-  }
+  const errorMessage = reportErrors(ramlName, api.errors, options);
+  if (errorMessage) throw Error(errorMessage);
 
   options.logger.log('raml', JSON.stringify(api, null, 2));
 
