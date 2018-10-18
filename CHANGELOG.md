@@ -10,6 +10,7 @@
 * Correctly interpret paths of sub-schemas relative to parents. Fixes MODGQL-96.
 * Add `ignoreRamlWarnings` option, so translation can continue after a RAML parse with no hard errors. Fixes MODGQL-97.
 * RAML-parsing failures are now reported by throwing and exception, not by exiting the whole process. Fixes MODGQL-99.
+* Support array-typed query parameters in RAML 1.0. Fixes MODGQL-98.
 
 ## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)
