@@ -15,7 +15,7 @@
     "test": "./tests/setup.sh && mocha --exit --require tests/testlib/support tests",
     "clean": "rm -rf tests/input",
     "test2": "./tests/setup.sh && mocha --exit --require tests/testlib/support tests/04-schema-generation.js",
-    "regen": "cd src/autogen && node test/run-tests.js --regenerate test"
+    "regen": "node src/autogen/test/run-tests.js --regenerate ./src/autogen/test"
   },
   "dependencies": {
     "@folio/eslint-config-stripes": "^2.0.0",
