@@ -20,7 +20,14 @@ function gatherComments(api, _options) {
 // These are documented at https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md#scalar-types
 // No attempt at this stage to support union types such as "nil | string".
 //
-function r2gBasicType(type) {
+function r2gBasicType(type, items) {
+  // In RAML 1.0, the 'type' and 'items' are encoded as single-element arrays
+  const xType = (typeof type === 'object') ? type[0] : type;
+  const xItems = (typeof items === 'object') ? items[0] : items;
+
+  const isArray = (xType === 'array');
+  const actualType = isArray ? xItems : xType;
+
   const map = {
     'any': null,
     'string': 'String',
@@ -36,9 +43,9 @@ function r2gBasicType(type) {
     // There is no JSON Schema equivalent of GraphQL's "ID" type
   };
 
-  const res = map[type];
+  const res = map[actualType];
   if (res) {
-    return res;
+    return isArray ? `[${res}]` : res;
   } else if (res === null) {
     throw new Error(`use of unsupported RAML type '${type}'`);
   }
@@ -295,7 +302,7 @@ function gatherResource(raml10types, resource, basePath, schemaMap, types, optio
     (method.queryParameters || []).forEach((qp) => {
       args.push([
         qp.name.replace(/[[\]]/g, '_'),
-        r2gBasicType(qp.type) || 'String',
+        r2gBasicType(qp.type, qp.items) || 'String',
         qp.required || false
       ]);
     });
