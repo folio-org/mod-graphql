@@ -1,0 +1,17 @@
+# title: Users
+# raml-version: 1.0
+
+type Query {
+  users(facets: [String]): TuserdataCollection
+}
+
+type TuserdataCollection {
+  totalRecords: Int!
+  users: [TuserdataCollection_users]!
+}
+
+type TuserdataCollection_users {
+  id: String!
+  username: String
+}
+
