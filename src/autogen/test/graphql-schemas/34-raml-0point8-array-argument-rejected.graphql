@@ -1,1 +1,2 @@
 *EXCEPTION* Error: RAML parse for ./src/autogen/test/input/34-raml-0point8-array-argument-rejected.raml had 1 errors
+error:Type can be either of: string, number, integer, file, date or boolean at 34-raml-0point8-array-argument-rejected.raml:13:8
