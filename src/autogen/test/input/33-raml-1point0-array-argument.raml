@@ -1,0 +1,18 @@
+#%RAML 1.0
+title: Users
+
+types:
+  userdataCollection: !include userdataCollection.json
+
+/users:
+  get:
+    queryParameters:
+      facets:
+        type: string[]
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: userdataCollection
+
