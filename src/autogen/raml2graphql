@@ -37,5 +37,5 @@ try {
   console.log(schema);
 } catch (e) {
   console.error(e.message);
-  process.exit(2);  
+  process.exit(2);
 }
