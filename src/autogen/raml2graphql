@@ -34,9 +34,8 @@ if (opt.argv.length === 0) {
 const logger = new Logger();
 try {
   const { schema } = convertAPIs(opt.argv, null, Object.assign({}, opt.options, { logger }));
+  console.log(schema);
 } catch (e) {
   console.error(e.message);
   process.exit(2);  
 }
-
-console.log(schema);
