@@ -78,7 +78,7 @@ function gatherType(basePath, jsonSchema) {
   }
 
   if (type === undefined && !jsonSchema.$ref) {
-    console.log('undefined type in schema', jsonSchema);
+    console.warn('undefined type in schema', jsonSchema);
   }
 
   if (type === 'array') {
