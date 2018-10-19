@@ -14,6 +14,7 @@
 * `convertAPI` should no longer emits diagnostic output, but throws a richer exception containining diagnostics. Fixes MODGQL-100.
 * Check that RAML/JSON Schema conversion can handle all existing modules. Fixes MODGQL-93.
 * Support array-valued types in JSON Schemas. Fixes MODGQL-102.
+* Support array-typed array types (yes, really!). Fixes MODGQL-103.
 
 ## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)
