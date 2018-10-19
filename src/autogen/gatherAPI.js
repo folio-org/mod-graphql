@@ -121,7 +121,12 @@ function gatherFields(basePath, jsonSchema) {
     const keys = Object.keys(jsonSchema.properties);
     const sorted = keys.sort();
     sorted.forEach(name => {
-      const t = gatherType(basePath, jsonSchema.properties[name]);
+      let t;
+      try {
+        t = gatherType(basePath, jsonSchema.properties[name]);
+      } catch (e) {
+        throw Error(e.message + ' within schema ' + JSON.stringify(jsonSchema, null, 2));
+      }
       if (t) {
         const [arrayDepth, type, link] = t;
         result.push({
