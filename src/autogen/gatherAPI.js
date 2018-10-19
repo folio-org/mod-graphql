@@ -77,6 +77,10 @@ function gatherType(basePath, jsonSchema) {
     type = type[0];
   }
 
+  if (type === undefined && !jsonSchema.$ref) {
+    console.log('undefined type in schema', jsonSchema);
+  }
+
   if (type === 'array') {
     res = gatherType(basePath, jsonSchema.items || {});
     if (!res) return null;
