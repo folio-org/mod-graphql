@@ -18,6 +18,7 @@
 * Extend `raml2graphql` with a new `-a api.yml` option to parse all the RAMLs specified in the API file. Fixes MODGQL-101.
 * Add `-d=DIRECTORY` option to specify the path used, when `-a` is in effect, to find RAMLs named in the YAML API specification. Fixes MODGQL-106.
 * Add `-s` option to skip RAMLs from modules that aren't checked out. Fixes MODGQL-105.
+* Add `-m=REGEXP` option to limit RAMLs to those from matching modules when `-a` is in effect. Fixes MODGQL-104.
 
 ## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)
