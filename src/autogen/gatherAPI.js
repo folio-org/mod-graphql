@@ -71,20 +71,20 @@ function r2gDefinedType(type, removePrefix) {
 
 function gatherType(basePath, jsonSchema) {
   let res;
+  let type = jsonSchema.type;
+  if (typeof type === 'object') {
+    // This seems to be used by the Okapi RAML for union types. Just pick the first
+    type = type[0];
+  }
 
-  if (jsonSchema.type === 'array') {
+  if (type === 'array') {
     res = gatherType(basePath, jsonSchema.items || {});
     if (!res) return null;
     res[0]++; // increment level
-  } else if (jsonSchema.type === 'object') {
+  } else if (type === 'object') {
     // eslint-disable-next-line no-use-before-define
     res = [0, gatherFields(basePath, jsonSchema)];
   } else {
-    let type = jsonSchema.type;
-    if (typeof type === 'object') {
-      // This seems to be used by the Okapi RAML for union types. Just pick the first
-      type = type[0];
-    }
     const inner = r2gBasicType(type);
     if (!inner) return null;
     res = [0, inner];
