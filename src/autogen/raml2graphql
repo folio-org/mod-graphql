@@ -17,7 +17,8 @@ const { convertAPIs } = require('./convertAPI');
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
   ['a', 'api', 'Parse YAML description of APIs and translate them all'],
-  ['d', 'dir=DIRECTORY', 'Fetch RAML mentioned in in YAML API from specified directory'],
+  ['d', 'dir=DIRECTORY', 'Under -a, fetch RAMLs from modules in specified directory'],
+  ['s', 'skip', 'Under -a, skip modules that are not present in the filesystem'],
   ['t', 'trace', 'Include stack-trace in error reports'],
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
@@ -38,7 +39,7 @@ if (opt.argv.length === 0 || (opt.options.api && opt.argv.length > 1)) {
 
 try {
   if (opt.options.api) {
-    translateFromAPIs(opt.argv[0], opt.options.dir);
+    translateFromAPIs(opt.argv[0], opt.options.dir, opt.options.skip);
   } else {
     translateSpecifiedFiles(opt.argv);
   }
@@ -48,7 +49,8 @@ try {
 }
 
 
-function translateFromAPIs(apiFile, dir) {
+function translateFromAPIs(apiFile, dir, skip) {
+  const logger = new Logger();
   const ramlFiles = [];
   const pathPrefix = dir || '.'
   let dfault;
@@ -65,19 +67,23 @@ function translateFromAPIs(apiFile, dir) {
     } else {
       if (!dfault) throw new Error('no initial "default" entry in API YAML');
       const module = modules[name];
-      module.forEach((section, i) => {
-        if (!section.files) {
-          console.warn(`no files for module '${name}' section ${i+1}:`, section);
-        } else {
-          section.files.forEach(ramlName => {
-            ramlFiles.push(`${pathPrefix}/${name}/${section.directory}/${ramlName}.raml`);
-          });
-        }
-      });
+      if (skip && !fs.existsSync(`${pathPrefix}/${name}`)) {
+        logger.log('skip', `absent module ${name}`);
+      } else {
+        module.forEach((section, i) => {
+          if (!section.files) {
+            console.warn(`no files for module '${name}' section ${i+1}:`, section);
+          } else {
+            section.files.forEach(ramlName => {
+              ramlFiles.push(`${pathPrefix}/${name}/${section.directory}/${ramlName}.raml`);
+            });
+          }
+        });
+      }
     }
   });
 
-  console.log(`${ramlFiles.length} RAML files:`, JSON.stringify(ramlFiles, null, 2));
+  logger.log('ramlList', `${ramlFiles.length} RAML files:`, JSON.stringify(ramlFiles, null, 2));
 
   return translateSpecifiedFiles(ramlFiles);
 }
