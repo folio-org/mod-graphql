@@ -38,9 +38,9 @@ if (opt.argv.length === 0 || (opt.options.api && opt.argv.length > 1)) {
 
 try {
   if (opt.options.api) {
-    translateFromAPIs(opt.argv[0], opt.options.dir, new Logger());
+    translateFromAPIs(opt.argv[0], opt.options.dir);
   } else {
-    translateSpecifiedFiles(opt.argv, new Logger());
+    translateSpecifiedFiles(opt.argv);
   }
 } catch (e) {
   console.error(opt.options.trace ? e : e.message);
@@ -48,7 +48,7 @@ try {
 }
 
 
-function translateFromAPIs(apiFile, dir, logger) {
+function translateFromAPIs(apiFile, dir) {
   const ramlFiles = [];
   const pathPrefix = dir || '.'
   let dfault;
@@ -79,11 +79,12 @@ function translateFromAPIs(apiFile, dir, logger) {
 
   console.log(`${ramlFiles.length} RAML files:`, JSON.stringify(ramlFiles, null, 2));
 
-  return translateSpecifiedFiles(ramlFiles, logger);
+  return translateSpecifiedFiles(ramlFiles);
 }
 
 
-function translateSpecifiedFiles(ramlFiles, logger) {
+function translateSpecifiedFiles(ramlFiles) {
+  const logger = new Logger();
   const { schema } = convertAPIs(ramlFiles, null, Object.assign({}, opt.options, { logger }));
   console.log(schema);
 }
