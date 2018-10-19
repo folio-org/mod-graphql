@@ -9,7 +9,7 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "scripts": {
-    "lint": "eslint main.js src src/autogen/raml2graphql src/aggregator/aggregate-ramls tests/*.js tests/testlib/*.js",
+    "lint": "eslint main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
     "start": "babel-node --presets=env,stage-2 main.js",
     "dev": "nodemon --exec babel-node --presets=env,stage-2 main.js",
     "test": "./tests/setup.sh && mocha --exit --require tests/testlib/support tests",
