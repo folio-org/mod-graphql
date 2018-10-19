@@ -80,11 +80,12 @@ function gatherType(basePath, jsonSchema) {
     // eslint-disable-next-line no-use-before-define
     res = [0, gatherFields(basePath, jsonSchema)];
   } else {
-    if (typeof jsonSchema.type === 'object') {
-      // Problem caused by one of the eHoldings schemas
-      throw new Error('type is an object: ' + JSON.stringify(jsonSchema, null, 2));
+    let type = jsonSchema.type;
+    if (typeof type === 'object') {
+      // This seems to be used by the Okapi RAML for union types. Just pick the first
+      type = type[0];
     }
-    const inner = r2gBasicType(jsonSchema.type);
+    const inner = r2gBasicType(type);
     if (!inner) return null;
     res = [0, inner];
   }
