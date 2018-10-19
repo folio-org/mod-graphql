@@ -52,7 +52,7 @@ try {
 function translateFromAPIs(apiFile, dir, skip) {
   const logger = new Logger();
   const ramlFiles = [];
-  const pathPrefix = dir || '.'
+  const pathPrefix = dir || '.';
   let dfault;
 
   const modules = yaml.safeLoad(fs.readFileSync(apiFile, 'utf8'));
@@ -72,7 +72,7 @@ function translateFromAPIs(apiFile, dir, skip) {
       } else {
         module.forEach((section, i) => {
           if (!section.files) {
-            console.warn(`no files for module '${name}' section ${i+1}:`, section);
+            console.warn(`no files for module '${name}' section ${i + 1}:`, section);
           } else {
             section.files.forEach(ramlName => {
               ramlFiles.push(`${pathPrefix}/${name}/${section.directory}/${ramlName}.raml`);
