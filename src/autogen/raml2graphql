@@ -17,6 +17,7 @@ const { convertAPIs } = require('./convertAPI');
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = require('node-getopt').create([
   ['a', 'api', 'Parse YAML description of APIs and translate them all'],
+  ['d', 'dir=DIRECTORY', 'Fetch RAML mentioned in in YAML API from specified directory'],
   ['t', 'trace', 'Include stack-trace in error reports'],
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
@@ -37,7 +38,7 @@ if (opt.argv.length === 0 || (opt.options.api && opt.argv.length > 1)) {
 
 try {
   if (opt.options.api) {
-    translateFromAPIs(opt.argv[0], new Logger());
+    translateFromAPIs(opt.argv[0], opt.options.dir, new Logger());
   } else {
     translateSpecifiedFiles(opt.argv, new Logger());
   }
@@ -47,12 +48,10 @@ try {
 }
 
 
-function translateFromAPIs(apiFile, logger) {
+function translateFromAPIs(apiFile, dir, logger) {
   const ramlFiles = [];
+  const pathPrefix = dir || '.'
   let dfault;
-
-  // Should be parameterisable
-  const pathPrefix = '../../..';
 
   const modules = yaml.safeLoad(fs.readFileSync(apiFile, 'utf8'));
 
