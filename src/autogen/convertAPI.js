@@ -69,8 +69,7 @@ function parseAndGather(ramlName, resolveFunction, options) {
     options.logger.log('schemaMap', JSON.stringify(schemaMap, null, 2));
     api = raml.loadSync(ramlName);
   } catch (e) {
-    console.error(`RAML parse for ${ramlName} failed`, e);
-    process.exit(2);
+    throw new Error(`RAML parse for ${ramlName} failed: ${e.message}`);
   }
   const errors = reportErrors(ramlName, api.errors, options);
   if (errors) throw Error(errors.map(m => `${m}\n`).join(''));
@@ -78,7 +77,13 @@ function parseAndGather(ramlName, resolveFunction, options) {
   options.logger.log('raml', JSON.stringify(api, null, 2));
 
   const basePath = ramlName.match('/') ? ramlName.replace(/(.*)\/.*/, '$1') : '.';
-  const gathered = gatherAPI(api, basePath, schemaMap, options);
+  let gathered;
+  try {
+    gathered = gatherAPI(api, basePath, schemaMap, options);
+  } catch (e) {
+    throw new Error(`gatherAPI for ${ramlName} failed: ${e.message}`);
+  }
+
   options.logger.log('api', 'gathered API:', JSON.stringify(gathered, null, 2));
   ['comments', 'resources', 'types'].forEach(s => options.logger.log(`api.${s}`, JSON.stringify(gathered[s], null, 2)));
 
