@@ -38,20 +38,14 @@ if (opt.argv.length === 0 || (opt.options.api && opt.argv.length > 1)) {
 }
 
 try {
-  if (opt.options.api) {
-    const ramlFiles = listAPIs(opt.argv[0], opt.options.dir, opt.options.skip, opt.options.match);
-    translateSpecifiedFiles(ramlFiles);
-  } else {
-    translateSpecifiedFiles(opt.argv);
-  }
+  const ramlFiles = (
+    opt.options.api ?
+      listAPIs(opt.argv[0], opt.options.dir, opt.options.skip, opt.options.match) :
+      opt.argv
+  );
+  const { schema } = convertAPIs(ramlFiles, null, Object.assign({}, opt.options, { logger: new Logger() }));
+  console.log(schema);
 } catch (e) {
   console.error(opt.options.trace ? e : e.message);
   process.exit(2);
-}
-
-
-function translateSpecifiedFiles(ramlFiles) {
-  const logger = new Logger();
-  const { schema } = convertAPIs(ramlFiles, null, Object.assign({}, opt.options, { logger }));
-  console.log(schema);
 }
