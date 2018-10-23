@@ -40,6 +40,7 @@ function modGraphql(argv) {
   }
 
   const schema = makeExecutableSchema({ typeDefs, resolvers });
+  logger.log('listen', 'listening...');
 
   return express()
     .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
