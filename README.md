@@ -128,6 +128,7 @@ Choose which categories of logging you want to see by running with the `LOGGING_
   * `api.resources`: log a JSON rendition of only the `comments` portion of the gathered API specification.
   * `api.types`: log a JSON rendition of only the `comments` portion of the gathered API specification.
 * `schema` -- log the generated GraphQL schema before starting to execute it.
+* `listen` -- log when the serve is about to start listening.
 * `failsub` -- log a resolver's failure to substitute an argument or field-value into a path.
 * `url` -- log each WSAPI URL before trying to fetch it.
 * `result` -- log the result of each GET.
