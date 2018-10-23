@@ -6,11 +6,15 @@
 * [Overview](#overview)
 * [Installation](#installation)
 * [Invocation](#invocation)
+    * [Driving `mod-graphql` from an API file](#driving-mod-graphql-from-an-api-file)
 * [Environment](#environment)
     * [`OKAPI_URL`, `OKAPI_TENANT`, `OKAPI_TOKEN`](#okapi_url-okapi_tenant-okapi_token)
     * [`PROXY_OKAPI_URL`](#proxy_okapi_url)
     * [`GRAPHQL_OPTIONS`](#graphql_options)
     * [`LOGGING_CATEGORIES`](#logging_categories)
+    * [`RAML_DIR`](#raml_dir)
+    * [`RAML_SKIP`](#raml_skip)
+    * [`RAML_MATCH`](#raml_match)
     * [`CONSOLE_TRACE`](#console_trace)
     * [`NODE_OPTIONS`](#node_options)
 * [See also](#see-also)
@@ -82,6 +86,22 @@ The simplest way to exercise the running module is by using [`folio-graphiql`](h
 
 In addition to the main `mod-graphql` module, a commandline program `raml2graphql` is provided, which translates a set of RAML files, together with their referenced JSON Schemas, into a GraphQL schema which is emitted on standard output. The RAML files to be translated are provided as command-line arguments; further options can be seen by running `raml2graphql` with no arguments.
 
+### Driving `mod-graphql` from an API file
+
+Instead of listing all the RAML files to be handled on the command-line, it's possible to start `mod-graphql` in mode that begins by reading an API file that lists the RAMLs of the modules that are to be included. To do this, use the `-a` command-line options, followed the path to an API file, like this:
+
+```
+env OKAPI_URL=http://localhost:9130 LOGCAT=url RAML_DIR=.. yarn start -a api.yaml
+```
+
+When started in this mode, `mod-graphql` assembles the list of RAMLs from the specified API file, and this assembly process is affected by the values of several evironment variables described below:
+[`RAML_DIR`](#raml_dir),
+[`RAML_SKIP`](#raml_skip)
+and
+[`RAML_MATCH`](#raml_match).
+
+API files are written in YAML, and are described in the FOLIO document [How to configure the generation of API documentation](https://dev.folio.org/faqs/how-to-configure-api-doc-generation/). The FOLIO project maintains [A master API file](https://github.com/folio-org/folio-org.github.io/blob/master/_data/api.yml) describing the RAMLs of all the core FOLIO modules: the simplest way to create an API file for given installation of `mod-graphql` may be to copy that file and remove the part that are not needed.
+
 
 ## Environment
 
@@ -134,6 +154,19 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `result` -- log the result of each GET.
 
 For convenience, the abbreviated environment-variable name `LOGCAT` may be used instead of `LOGGING_CATEGORIES`, with the same effect.
+
+### `RAML_DIR`
+
+When driving `mod-graphql` from an API file, that file will specify the relative locations of the various modules' RAML files. The `RAML_DIR` environment variable specifies what directory they are to be interpreted relative to. For example, if `mod-graphql` is checked out alongside the various modules that it will be providing services for, `RAML_DIR=..` will allow an API-file reference to the `mod-inventory-storage` module's `ramls` directory, containing a file `holdings-storage`, to be interpreted as pertaining to
+`../mod-inventory-storage/ramls/holdings-storage.raml`.
+
+### `RAML_SKIP`
+
+When driving `mod-graphql` from an API file, RAML files that are referenced from the API file but do not exist in the filesystem cause a fatal error. If `RAML_SKIP` is set to a non-zero value, such files are simply skipped (and the fact is logged using the `skip` category).
+
+### `RAML_MATCH`
+
+When driving `mod-graphql` from an API file, the selection of RAML files can be limited to only those that match a regular expression specified by the `RAML_MATCH` environment variable. For example, `RAML_MATCH='^mod-(inventory.*|users)$'` will use only the RAML files from the `mod-inventory`, mod-inventory-storage` and `mod-users` modules.
 
 ### `CONSOLE_TRACE`
 
