@@ -3,13 +3,16 @@ import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import Logger from './configuredLogger';
+const { listAPIs } = require('./autogen/listAPIs');
 import resolve from './resolve';
 import { convertAPIs } from './autogen/convertAPI';
 
-function modGraphql(ramlPaths) {
-  const logger = new Logger();
+function modGraphql(argv) {
+  if (!argv || argv.length === 0) throw Error('modGraphql invoked with no RAMLpaths or API');
 
-  if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
+  // XXX We need to make the listAPIs arguments configurable
+  const ramlPaths = argv[0] === '-a' ? listAPIs(argv[1], '..', true, /^mod-inventory/) : argv;
+  const logger = new Logger();
   const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
   logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
   const res = convertAPIs(ramlArray, resolve, { logger });
