@@ -8,9 +8,8 @@ import resolve from './resolve';
 import { convertAPIs } from './autogen/convertAPI';
 
 function modGraphql(argv) {
-  if (!argv || argv.length === 0) throw Error('modGraphql invoked with no RAMLpaths or API');
-
   const ramlPaths = argv[0] === '-a' ? listAPIs(argv[1]) : argv;
+  if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
   const logger = new Logger();
   const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
   logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
