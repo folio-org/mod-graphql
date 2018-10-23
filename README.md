@@ -115,6 +115,9 @@ A comma-separated list of options, each of which can affect the operation of `mo
 
 Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported (listed here in the order that that they occur during a run):
 
+* `skip` -- log RAML files that are skipped from the API list due to their not being present on the filesystem.
+* `nomatch` -- log RAML files that are omitted from the API list due to their not matching the specified regular expression.
+* `ramllist` -- log the names of the RAML files generated from the API list.
 * `ramlpath` -- log the paths of the RAML files to be loaded.
 * `raml` -- log the RAML file as initially loaded, before conversion to a GraphQL schema begins.
 * `nojson` -- log WSAPI endpoints in the RAML for which there is no JSON body specification. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
