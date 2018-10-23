@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import { graphqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import Logger from './configuredLogger';
-const { listAPIs } = require('./autogen/listAPIs');
+import { listAPIs } from './autogen/listAPIs';
 import resolve from './resolve';
 import { convertAPIs } from './autogen/convertAPI';
 
