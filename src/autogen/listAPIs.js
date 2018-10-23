@@ -39,7 +39,7 @@ function listAPIs(apiFile, dir, skip, match) {
     }
   });
 
-  logger.log('ramlList', `${ramlFiles.length} RAML files:`, JSON.stringify(ramlFiles, null, 2));
+  logger.log('ramllist', `${ramlFiles.length} RAML files:`, JSON.stringify(ramlFiles, null, 2));
 
   return ramlFiles;
 }
