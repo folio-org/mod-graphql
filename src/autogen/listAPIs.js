@@ -24,7 +24,7 @@ function listAPIs(apiFile, dir, skip, match) {
       if (skip && !fs.existsSync(`${pathPrefix}/${name}`)) {
         logger.log('skip', `absent module ${name}`);
       } else if (match && !name.match(match)) {
-        logger.log('match', `omitting non-matching module ${name}`);
+        logger.log('nomatch', `omitting non-matching module ${name}`);
       } else {
         module.forEach((section, i) => {
           if (!section.files) {
