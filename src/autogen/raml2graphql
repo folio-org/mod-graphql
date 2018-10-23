@@ -3,7 +3,7 @@
 /* eslint-disable no-console, no-use-before-define */
 // Run as: ./raml2graphql ../../../mod-inventory-storage/ramls/instance-storage.raml
 //     or: ./raml2graphql ../../../mod-kb-ebsco/ramls/provider.raml
-//     or: LOGCAT=ramlList,skip,nomatch ./raml2graphql -d ../../.. -s -m '^mod-(users|inventory)$' -a ../../api.yml
+//     or: LOGCAT=skip,nomatch,ramllist ./raml2graphql -d ../../.. -s -m '^mod-(users|inventory)$' -a ../../api.yml
 // For the time being, you will need mod-inventory-storage to be on
 // the "graphql" branch and mod-kb-ebsco to be on the
 // "json-schema-for-mod-kb-providers-endpoint" branch
