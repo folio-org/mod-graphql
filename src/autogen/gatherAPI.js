@@ -7,7 +7,9 @@ function gatherComments(api, _options) {
 
   ['title', 'version', 'protocols', 'baseUri'].forEach(tag => {
     const val = api.specification[tag];
-    comments.push([tag, typeof val === 'string' ? [val] : val]);
+    if (val !== undefined) {
+      comments.push([tag, typeof val === 'string' ? [val] : val]);
+    }
   });
 
   comments.push(['raml-version', [api.specification.types ? '1.0' : '0.9']]);
