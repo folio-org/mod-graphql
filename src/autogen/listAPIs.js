@@ -27,10 +27,10 @@ function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch) {
     } else {
       if (!dfault) throw new Error('no initial "default" entry in API YAML');
       const module = modules[name];
-      if (skip && !fs.existsSync(`${pathPrefix}/${name}`)) {
-        logger.log('skip', `absent module ${name}`);
-      } else if (match && !name.match(match)) {
+      if (match && !name.match(match)) {
         logger.log('nomatch', `omitting non-matching module ${name}`);
+      } else if (skip && !fs.existsSync(`${pathPrefix}/${name}`)) {
+        logger.log('skip', `absent module ${name}`);
       } else {
         module.forEach((section, i) => {
           if (!section.files) {
