@@ -6,8 +6,8 @@ const Logger = require('../configuredLogger');
 function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch) {
   const dir = maybeDir || process.env.RAML_DIR || '.';
   const skip = maybeSkip !== undefined ? maybeSkip :
-        process.env.RAML_SKIP !== undefined ? parseInt(process.env.RAML_SKIP, 10) :
-        true;
+    process.env.RAML_SKIP !== undefined ? parseInt(process.env.RAML_SKIP, 10) :
+      true;
   const match = maybeMatch || process.env.RAML_MATCH || undefined;
 
   const logger = new Logger();
