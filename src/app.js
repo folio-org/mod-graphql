@@ -10,8 +10,7 @@ import { convertAPIs } from './autogen/convertAPI';
 function modGraphql(argv) {
   if (!argv || argv.length === 0) throw Error('modGraphql invoked with no RAMLpaths or API');
 
-  // XXX We need to make the listAPIs arguments configurable
-  const ramlPaths = argv[0] === '-a' ? listAPIs(argv[1], '..', true, /^mod-inventory/) : argv;
+  const ramlPaths = argv[0] === '-a' ? listAPIs(argv[1]) : argv;
   const logger = new Logger();
   const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
   logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
