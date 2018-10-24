@@ -91,7 +91,7 @@ In addition to the main `mod-graphql` module, a commandline program `raml2graphq
 Instead of listing all the RAML files to be handled on the command-line, it's possible to start `mod-graphql` in mode that begins by reading an API file that lists the RAMLs of the modules that are to be included. To do this, use the `-a` command-line options, followed the path to an API file, like this:
 
 ```
-env OKAPI_URL=http://localhost:9130 LOGCAT=url RAML_DIR=.. yarn start -a api.yaml
+env OKAPI_URL=http://localhost:9130 LOGCAT=url RAML_DIR=.. yarn start -a api.yml
 ```
 
 When started in this mode, `mod-graphql` assembles the list of RAMLs from the specified API file, and this assembly process is affected by the values of several evironment variables described below:
