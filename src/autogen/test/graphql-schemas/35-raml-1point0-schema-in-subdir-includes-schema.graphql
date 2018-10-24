@@ -1,0 +1,23 @@
+# title: Permissions
+# raml-version: 1.0
+
+type Query {
+  perms_permissions: TpermissionListObject
+}
+
+type T_schemas_permission {
+  description: String
+  displayName: String
+  dummy: Boolean
+  id: String
+  mutable: Boolean
+  permissionName: String
+  tags: [String]
+  visible: Boolean
+}
+
+type TpermissionListObject {
+  permissions: [T_schemas_permission]!
+  totalRecords: Int!
+}
+
