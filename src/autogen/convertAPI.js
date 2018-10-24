@@ -66,7 +66,7 @@ function parseAndGather(ramlName, resolveFunction, options) {
   let schemaMap, api;
   try {
     schemaMap = parseSchemaMap(ramlName, options);
-    options.logger.log('schemaMap', JSON.stringify(schemaMap, null, 2));
+    options.logger.log('schemamap', JSON.stringify(schemaMap, null, 2));
     api = raml.loadSync(ramlName);
   } catch (e) {
     throw new Error(`RAML parse for ${ramlName} failed: ${e.message}`);
