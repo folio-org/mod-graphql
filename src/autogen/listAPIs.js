@@ -34,7 +34,7 @@ function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch) {
       } else {
         module.forEach((section, i) => {
           if (!section.files) {
-            console.warn(`no files for module '${name}' section ${i + 1}:`, section);
+            console.warn(`no files for module '${name}' section ${i + 1} (${section.directory})`);
           } else {
             section.files.forEach(ramlName => {
               ramlFiles.push(`${pathPrefix}/${name}/${section.directory}/${ramlName}.raml`);
