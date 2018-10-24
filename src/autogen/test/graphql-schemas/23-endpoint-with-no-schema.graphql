@@ -1,1 +1,1 @@
-*EXCEPTION* Error: no schema for 'person_in_pure_text': cannot find get/responses/200/body/schema or get/body/schema for 'person/in-pure-text'
+*EXCEPTION* Error: gatherAPI for ./src/autogen/test/input/23-endpoint-with-no-schema.raml failed: no schema for 'person_in_pure_text': cannot find get/responses/200/body/schema or get/body/schema for 'person/in-pure-text'
