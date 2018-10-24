@@ -37,7 +37,13 @@ function parseSchemaMap(ramlName, options) {
   const lines = text.split('\n');
   const map = {};
 
-  const schemasIndex = findIndex(lines, x => (x === 'schemas:'));
+  let schemaRegexp = /^[ \t]+- (.*?): !include (.*)/;
+  let schemasIndex = findIndex(lines, x => (x === 'schemas:'));
+  if (schemasIndex < 0) {
+    schemaRegexp = /^[ \t]+(.*?): !include (.*)/;
+    schemasIndex = findIndex(lines, x => (x === 'types:'));
+  }
+
   if (schemasIndex >= 0) {
     for (let i = schemasIndex + 1; i < lines.length; i++) {
       const line = lines[i];
@@ -47,7 +53,7 @@ function parseSchemaMap(ramlName, options) {
         if (options.ignoreSchemaMapsWithInlineSchemas) return map;
         throw Error(`inline schemas are not supported (${ramlName}:${i + 1}`);
       }
-      const match = line.match(/^[ \t]+- (.*?): !include (.*)/);
+      const match = line.match(schemaRegexp);
       if (!match) {
         console.error('unexpected end to schema map:', line);
         break;
