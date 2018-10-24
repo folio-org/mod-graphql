@@ -1,0 +1,14 @@
+#%RAML 1.0
+title: Permissions
+
+types:
+  permissionListObject: !include schemas/permissionListObject.json
+
+/perms:
+  /permissions:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: permissionListObject
