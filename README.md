@@ -140,6 +140,7 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `nomulti` -- log names of RAML file sections that are omitted from the API list due to their having `multiple: true` in their specification.
 * `ramllist` -- log the names of the RAML files generated from the API list.
 * `ramlpath` -- log the paths of the RAML files to be loaded.
+* `endmap` -- log when the list of schemas parsed from a RAML reaches an unexpected end.
 * `schemamap` -- log the RAML file's implied map from top-level schema identifiers to their directories.
 * `raml` -- log the RAML file as initially loaded, before conversion to a GraphQL schema begins.
 * `nojson` -- log WSAPI endpoints in the RAML for which there is no JSON body specification. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
