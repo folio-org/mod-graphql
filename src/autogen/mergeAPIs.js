@@ -37,8 +37,8 @@ function mergeResources(list) {
   const register = {};
   const res = [];
 
-  list.forEach(tmp => {
-    const { ramlName, resources } = tmp;
+  list.forEach(api => {
+    const { ramlName, resources } = api;
     resources.forEach(resource => {
       const name = resource.queryName;
       if (!register[name]) {
