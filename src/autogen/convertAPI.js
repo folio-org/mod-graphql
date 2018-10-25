@@ -86,6 +86,7 @@ function parseAndGather(ramlName, resolveFunction, options) {
   let gathered;
   try {
     gathered = gatherAPI(api, basePath, schemaMap, options);
+    gathered.ramlName = ramlName;
   } catch (e) {
     throw new Error(`gatherAPI for ${ramlName} failed: ${e.message}`);
   }
@@ -134,14 +135,15 @@ function mergeResources(list) {
   const register = {};
   const res = [];
 
-  list.forEach(resources => {
+  list.forEach(tmp => {
+    const [ramlName, resources] = tmp;
     resources.forEach(resource => {
       const name = resource.queryName;
       if (!register[name]) {
         register[name] = true;
         res.push(resource);
       } else {
-        throw Error(`duplicate resource name '${name}'`);
+        throw Error(`duplicate resource name '${name}' in ${ramlName}`);
       }
     });
   });
@@ -180,7 +182,7 @@ function mergeTypes(list, options) {
 function mergeAPIs(list, options) {
   return {
     comments: mergeComments(list.map(api => api.comments)),
-    resources: mergeResources(list.map(api => api.resources)),
+    resources: mergeResources(list.map(api => [api.ramlName, api.resources])),
     types: mergeTypes(list.map(api => api.types), options),
   };
 }
