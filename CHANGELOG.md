@@ -1,6 +1,7 @@
 # Change history for mod-graphql
 
-## 1.1.0 (IN PROGRESS)
+## [1.1.0](https://github.com/folio-org/mod-graphql/tree/v1.1.0) (2018-10-25)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.0.0...v1.1.0)
 
 * In JSON Schemas, treat absence of `properties` the same as an empty set. Fixes MODGQL-89.
 * `mod-graphql` can now read, combine and translate all 22 of the `mod-inventory-storage` RAMLs with their schemas. Fixes MODGQL-88.
