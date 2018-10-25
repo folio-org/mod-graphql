@@ -23,6 +23,7 @@
 `version` comment if a RAML doesn't specify a version. Fixes MODGQL-108.
 * Add ability to drive `mod-graphql` from an API file, and document this in the [README](README.md). Fixes MODGQL-107.
 * `parseSchemaMap` supports RAML 1.0, enabling sub-schemas to be correctly located from RAML 1.0 files. Fixes MODGQL-109.
+* `listAPIs` now omits module-sections for which `multiple` is set true in the API file. This avoids conflicts with multiple modules having the same API trying to define the same endpoint. Fixes MODGQL-110.
 
 ## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)
