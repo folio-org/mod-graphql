@@ -55,7 +55,7 @@ function parseSchemaMap(ramlName, options) {
       }
       const match = line.match(schemaRegexp);
       if (!match) {
-        console.error(`unexpected end to schema map for ${ramlName}:`, line);
+        options.logger.log('mapend', `unexpected end to schema map for ${ramlName}:`, line);
         break;
       }
       const path = match[2];
