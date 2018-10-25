@@ -15,6 +15,7 @@
     * [`RAML_DIR`](#raml_dir)
     * [`RAML_SKIP`](#raml_skip)
     * [`RAML_MATCH`](#raml_match)
+    * [`RAML_EXCLUDE`](#raml_exclude)
     * [`CONSOLE_TRACE`](#console_trace)
     * [`NODE_OPTIONS`](#node_options)
 * [See also](#see-also)
@@ -137,6 +138,7 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 
 * `skip` -- log names of RAML files that are skipped from the API list due to their not being present on the filesystem.
 * `nomatch` -- log names of RAML files that are omitted from the API list due to their not matching the specified regular expression.
+* `exclude` -- log names of RAML files that are excluded from the API list due to their matching the specified regular expression.
 * `nomulti` -- log names of RAML file sections that are omitted from the API list due to their having `multiple: true` in their specification.
 * `ramllist` -- log the names of the RAML files generated from the API list.
 * `ramlpath` -- log the paths of the RAML files to be loaded.
@@ -169,7 +171,11 @@ When driving `mod-graphql` from an API file, RAML files that are referenced from
 
 ### `RAML_MATCH`
 
-When driving `mod-graphql` from an API file, the selection of RAML files can be limited to only those that match a regular expression specified by the `RAML_MATCH` environment variable. For example, `RAML_MATCH='^mod-(inventory.*|users)$'` will use only the RAML files from the `mod-inventory`, mod-inventory-storage` and `mod-users` modules.
+When driving `mod-graphql` from an API file, the selection of RAML files can be limited to only those that match a regular expression specified by the `RAML_MATCH` environment variable. For example, `RAML_MATCH='^mod-(inventory.*|users)$'` will use only the RAML files from the `mod-inventory`, `mod-inventory-storage` and `mod-users` modules.
+
+### `RAML_EXCLUDE`
+
+When driving `mod-graphql` from an API file, the selection of RAML files can be trimmed by omitting those that match a regular expression specified by the `RAML_EXCLUDE` environment variable. For example, `RAML_EXCLUDE='^raml'` will omit the RAML files from the `raml` and `raml-module-builder` modules.
 
 ### `CONSOLE_TRACE`
 

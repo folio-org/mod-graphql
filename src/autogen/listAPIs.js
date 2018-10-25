@@ -3,12 +3,13 @@ const yaml = require('js-yaml');
 const Logger = require('../configuredLogger');
 
 
-function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch) {
+function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch, maybeExclude) {
   const dir = maybeDir || process.env.RAML_DIR || '.';
   const skip = maybeSkip !== undefined ? maybeSkip :
     process.env.RAML_SKIP !== undefined ? parseInt(process.env.RAML_SKIP, 10) :
       false;
   const match = maybeMatch || process.env.RAML_MATCH || undefined;
+  const exclude = maybeExclude || process.env.RAML_EXCLUDE || undefined;
 
   const logger = new Logger();
   const ramlFiles = [];
@@ -29,6 +30,8 @@ function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch) {
       const module = modules[name];
       if (match && !name.match(match)) {
         logger.log('nomatch', `omitting non-matching module ${name}`);
+      } else if (exclude && name.match(exclude)) {
+        logger.log('exclude', `excluding matching module ${name}`);
       } else if (skip && !fs.existsSync(`${pathPrefix}/${name}`)) {
         logger.log('skip', `absent module ${name}`);
       } else {

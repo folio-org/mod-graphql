@@ -25,6 +25,7 @@
 * `parseSchemaMap` supports RAML 1.0, enabling sub-schemas to be correctly located from RAML 1.0 files. Fixes MODGQL-109.
 * `listAPIs` now omits module-sections for which `multiple` is set true in the API file. This avoids conflicts with multiple modules having the same API trying to define the same endpoint. Fixes MODGQL-110.
 * `mergeResources` now reports the paths to both RAML files when two of them try to define the same resource. Fixes MODGQL-112.
+* Add `RAML_EXCLUDE=regexp` environment variable and `-x regexp` option to exclude from the API list modules that match the specified regexp. Fixes MODGQL-113.
 
 ## [1.0.0](https://github.com/folio-org/mod-graphql/tree/v1.0.0) (2018-10-12)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v0.2.0...v1.0.0)

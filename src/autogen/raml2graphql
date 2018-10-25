@@ -3,7 +3,7 @@
 /* eslint-disable no-console, no-use-before-define */
 // Run as: ./raml2graphql ../../../mod-inventory-storage/ramls/instance-storage.raml
 //     or: ./raml2graphql ../../../mod-kb-ebsco/ramls/provider.raml
-//     or: LOGCAT=skip,nomatch,ramllist ./raml2graphql -d ../../.. -s -m '^mod-(users|inventory)$' -a ../../api.yml
+//     or: LOGCAT=exclude,skip,nomulti,ramllist,endmap ./raml2graphql -d ../../.. -x '^raml$' -s -a ../../api.yml
 // For the time being, you will need mod-inventory-storage to be on
 // the "graphql" branch and mod-kb-ebsco to be on the
 // "json-schema-for-mod-kb-providers-endpoint" branch
@@ -19,6 +19,7 @@ const opt = require('node-getopt').create([
   ['d', 'dir=DIRECTORY', 'Under -a, fetch RAMLs from modules in specified directory'],
   ['s', 'skip', 'Under -a, skip modules that are not present in the filesystem'],
   ['m', 'match=REGEXP', 'Under -a, include RAMLs only from modules that match REGEXP'],
+  ['x', 'exclude=REGEXP', 'Under -a, exclude RAMLs from modules that match REGEXP'],
   ['t', 'trace', 'Include stack-trace in error reports'],
   ['V', 'version', 'Show version and exit'],
   ['h', 'help', 'Display this help'],
@@ -40,7 +41,7 @@ if (opt.argv.length === 0 || (opt.options.api && opt.argv.length > 1)) {
 try {
   const ramlFiles = (
     opt.options.api ?
-      listAPIs(opt.argv[0], opt.options.dir, opt.options.skip, opt.options.match) :
+      listAPIs(opt.argv[0], opt.options.dir, opt.options.skip, opt.options.match, opt.options.exclude) :
       opt.argv
   );
   const { schema } = convertAPIs(ramlFiles, null, Object.assign({}, opt.options, { logger: new Logger() }));
