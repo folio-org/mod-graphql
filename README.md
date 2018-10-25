@@ -135,8 +135,9 @@ A comma-separated list of options, each of which can affect the operation of `mo
 
 Choose which categories of logging you want to see by running with the `LOGGING_CATEGORIES` environment variable set to comma-separated list of categories. The following are supported (listed here in the order that that they occur during a run):
 
-* `skip` -- log RAML files that are skipped from the API list due to their not being present on the filesystem.
-* `nomatch` -- log RAML files that are omitted from the API list due to their not matching the specified regular expression.
+* `skip` -- log names of RAML files that are skipped from the API list due to their not being present on the filesystem.
+* `nomatch` -- log names of RAML files that are omitted from the API list due to their not matching the specified regular expression.
+* `nomulti` -- log names of RAML file sections that are omitted from the API list due to their having `multiple: true` in their specification.
 * `ramllist` -- log the names of the RAML files generated from the API list.
 * `ramlpath` -- log the paths of the RAML files to be loaded.
 * `schemamap` -- log the RAML file's implied map from top-level schema identifiers to their directories.
