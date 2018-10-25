@@ -74,7 +74,7 @@ function r2gDefinedType(type, removePrefix) {
 }
 
 
-function gatherType(basePath, jsonSchema) {
+function gatherType(containerName, basePath, jsonSchema) {
   let res;
   let type = jsonSchema.type;
   if (typeof type === 'object') {
@@ -83,12 +83,12 @@ function gatherType(basePath, jsonSchema) {
   }
 
   if (type === 'array') {
-    res = gatherType(basePath, jsonSchema.items || {});
+    res = gatherType(containerName, basePath, jsonSchema.items || {});
     if (!res) return null;
     res[0]++; // increment level
   } else if (type === 'object') {
     // eslint-disable-next-line no-use-before-define
-    res = [0, gatherFields(basePath, jsonSchema)];
+    res = [0, gatherFields(containerName, basePath, jsonSchema)];
   } else {
     const inner = r2gBasicType(type);
     if (!inner) return null;
@@ -108,7 +108,7 @@ function gatherType(basePath, jsonSchema) {
 }
 
 
-function gatherFields(basePath, jsonSchema) {
+function gatherFields(containerName, basePath, jsonSchema) {
   const $ref = jsonSchema.$ref || jsonSchema['folio:$ref'];
   if ($ref) {
     // It's a reference to another named schema.
@@ -129,7 +129,7 @@ function gatherFields(basePath, jsonSchema) {
     sorted.forEach(name => {
       let t;
       try {
-        t = gatherType(basePath, jsonSchema.properties[name]);
+        t = gatherType(name, basePath, jsonSchema.properties[name]);
       } catch (e) {
         throw Error(e.message + ' within schema ' + JSON.stringify(jsonSchema, null, 2));
       }
@@ -287,7 +287,7 @@ function insertSchema(basePath, currentPath, types, options, schemaName, schemaT
   types[rtype] = 'temporary marker'; // XXX this is ugly.
   options.logger.log('schema', `registering schema '${schemaName}'`);
   insertReferencedSchemas(basePath, currentPath, types, options, obj);
-  types[rtype] = gatherFields(basePath, obj);
+  types[rtype] = gatherFields(rtype, basePath, obj);
   return rtype;
 }
 
