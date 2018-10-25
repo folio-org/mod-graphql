@@ -89,7 +89,7 @@ describe('02. Resources from multiple RAMLs can be merged', () => {
           ],
         ],
       ],
-      output: "duplicate resource name 'first_query' in 2",
+      output: "duplicate resource name 'first_query' in 1 and 2",
     },
   ];
 
