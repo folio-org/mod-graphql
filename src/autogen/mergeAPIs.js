@@ -59,19 +59,22 @@ function mergeResources(list) {
 // identical.
 //
 function mergeTypes(list, options) {
+  const register = {};
   const res = {};
 
-  list.forEach(types => {
+  list.forEach(api => {
+    const { ramlName, types } = api;
     Object.keys(types).forEach(name => {
       const type = types[name];
-      if (!res[name]) {
+      if (!register[name]) {
+        register[name] = ramlName;
         res[name] = type;
       } else {
         const same = isEqual(type, res[name]);
         if (same) {
           options.logger.log('duptype', `duplicate type name '${name}' with same definition`);
         } else {
-          throw Error(`duplicate type name '${name}' with different definition`);
+          throw Error(`duplicate type name '${name}' with different definitions in ${register[name]} and ${ramlName}`);
         }
       }
     });
@@ -85,7 +88,7 @@ function mergeAPIs(list, options) {
   return {
     comments: mergeComments(list.map(api => api.comments)),
     resources: mergeResources(list),
-    types: mergeTypes(list.map(api => api.types), options),
+    types: mergeTypes(list, options),
   };
 }
 
