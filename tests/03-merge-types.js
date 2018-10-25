@@ -15,12 +15,18 @@ describe('03. Types from multiple RAMLs can be merged', () => {
       name: 'non-overlapping types',
       input: [
         {
-          foo: 42,
-          bar: 96,
-          baz: 11,
+          ramlName: '1',
+          types: {
+            foo: 42,
+            bar: 96,
+            baz: 11,
+          }
         },
         {
-          quux: 'some string',
+          ramlName: '2',
+          types: {
+            quux: 'some string',
+          }
         }
       ],
       output: {
@@ -34,13 +40,19 @@ describe('03. Types from multiple RAMLs can be merged', () => {
       name: 'compatible overlapping types',
       input: [
         {
-          foo: 42,
-          bar: 96,
-          baz: 11,
+          ramlName: '1',
+          types: {
+            foo: 42,
+            bar: 96,
+            baz: 11,
+          }
         },
         {
-          bar: 96,
-          quux: 'some string',
+          ramlName: '2',
+          types: {
+            bar: 96,
+            quux: 'some string',
+          }
         }
       ],
       output: {
@@ -48,22 +60,28 @@ describe('03. Types from multiple RAMLs can be merged', () => {
         bar: 96,
         baz: 11,
         quux: 'some string',
-      },
+      }
     },
     {
       name: 'conflicting types',
       input: [
         {
-          foo: 42,
-          bar: 96,
-          baz: 11,
+          ramlName: '1',
+          types: {
+            foo: 42,
+            bar: 96,
+            baz: 11,
+          }
         },
         {
-          bar: 97,
-          quux: 'some string',
+          ramlName: '2',
+          types: {
+            bar: 97,
+            quux: 'some string',
+          }
         }
       ],
-      output: "duplicate type name 'bar' with different definition",
+      output: "duplicate type name 'bar' with different definitions in 1 and 2",
     },
   ];
 
