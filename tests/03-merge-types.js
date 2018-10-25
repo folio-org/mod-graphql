@@ -2,7 +2,7 @@ import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import { isEqual } from 'lodash';
 import Logger from '../src/configuredLogger';
-import { _TESTING_mergeTypes as mergeTypes } from '../src/autogen/convertAPI';
+import { _TESTING_mergeTypes as mergeTypes } from '../src/autogen/mergeAPIs';
 
 describe('03. Types from multiple RAMLs can be merged', () => {
   const testCases = [

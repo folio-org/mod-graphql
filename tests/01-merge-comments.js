@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import { isEqual } from 'lodash';
-import { _TESTING_mergeComments as mergeComments } from '../src/autogen/convertAPI';
+import { _TESTING_mergeComments as mergeComments } from '../src/autogen/mergeAPIs';
 
 describe('01. Comments from multiple RAMLs can be merged', () => {
   const testCases = [
