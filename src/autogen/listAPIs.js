@@ -33,7 +33,9 @@ function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch) {
         logger.log('skip', `absent module ${name}`);
       } else {
         module.forEach((section, i) => {
-          if (!section.files) {
+          if (section.multiple) {
+            logger.log('nomulti', `omitting module '${name}' section ${i + 1} (${section.directory})`);
+          } else if (!section.files) {
             console.warn(`no files for module '${name}' section ${i + 1} (${section.directory})`);
           } else {
             section.files.forEach(ramlName => {
