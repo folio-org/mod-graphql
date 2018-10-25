@@ -38,7 +38,7 @@ function mergeResources(list) {
   const res = [];
 
   list.forEach(tmp => {
-    const [ramlName, resources] = tmp;
+    const { ramlName, resources } = tmp;
     resources.forEach(resource => {
       const name = resource.queryName;
       if (!register[name]) {
@@ -84,7 +84,7 @@ function mergeTypes(list, options) {
 function mergeAPIs(list, options) {
   return {
     comments: mergeComments(list.map(api => api.comments)),
-    resources: mergeResources(list.map(api => [api.ramlName, api.resources])),
+    resources: mergeResources(list),
     types: mergeTypes(list.map(api => api.types), options),
   };
 }

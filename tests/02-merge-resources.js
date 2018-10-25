@@ -13,9 +13,9 @@ describe('02. Resources from multiple RAMLs can be merged', () => {
     {
       name: 'compatible resources',
       input: [
-        [
-          '1',
-          [
+        {
+          ramlName: '1',
+          resources: [
             {
               queryName: 'first_query',
               payload: 'whatever',
@@ -25,10 +25,10 @@ describe('02. Resources from multiple RAMLs can be merged', () => {
               payload: 45,
             },
           ],
-        ],
-        [
-          '2',
-          [
+        },
+        {
+          ramlName: '2',
+          resources: [
             {
               queryName: 'third_query',
               payload: 'herring',
@@ -38,7 +38,7 @@ describe('02. Resources from multiple RAMLs can be merged', () => {
               payload: 3.141,
             },
           ],
-        ],
+        },
       ],
       output: [
         {
@@ -62,9 +62,9 @@ describe('02. Resources from multiple RAMLs can be merged', () => {
     {
       name: 'conflicting resources',
       input: [
-        [
-          '1',
-          [
+        {
+          ramlName: '1',
+          resources: [
             {
               queryName: 'first_query',
               payload: 'whatever',
@@ -74,10 +74,10 @@ describe('02. Resources from multiple RAMLs can be merged', () => {
               payload: 45,
             },
           ]
-        ],
-        [
-          '2',
-          [
+        },
+        {
+          ramlName: '2',
+          resources: [
             {
               queryName: 'first_query',
               payload: 'herring',
@@ -87,7 +87,7 @@ describe('02. Resources from multiple RAMLs can be merged', () => {
               payload: 3.141,
             },
           ],
-        ],
+        },
       ],
       output: "duplicate resource name 'first_query' in 1 and 2",
     },
