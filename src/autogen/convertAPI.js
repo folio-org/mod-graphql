@@ -140,10 +140,10 @@ function mergeResources(list) {
     resources.forEach(resource => {
       const name = resource.queryName;
       if (!register[name]) {
-        register[name] = true;
+        register[name] = ramlName;
         res.push(resource);
       } else {
-        throw Error(`duplicate resource name '${name}' in ${ramlName}`);
+        throw Error(`duplicate resource name '${name}' in ${register[name]} and ${ramlName}`);
       }
     });
   });
