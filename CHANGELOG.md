@@ -9,9 +9,9 @@
 * Reinstate `src/autogen/test/run-tests.js`: we still need this for `yarn regen`, which regenerates regression-test expectations. Undoes part of MODGQL-86.
 * Correctly interpret paths of sub-schemas relative to parents. Fixes MODGQL-96.
 * Add `ignoreRamlWarnings` option, so translation can continue after a RAML parse with no hard errors. Fixes MODGQL-97.
-* RAML-parsing failures are now reported by throwing and exception, not by exiting the whole process. Fixes MODGQL-99.
+* RAML-parsing failures are now reported by throwing an exception, not by exiting the whole process. Fixes MODGQL-99.
 * Support array-typed query parameters in RAML 1.0. Fixes MODGQL-98.
-* `convertAPI` should no longer emits diagnostic output, but throws a richer exception containining diagnostics. Fixes MODGQL-100.
+* `convertAPI` no longer emits diagnostic output, but throws a richer exception containining diagnostics. Fixes MODGQL-100.
 * Check that RAML/JSON Schema conversion can handle all existing modules. Fixes MODGQL-93.
 * Support array-valued types in JSON Schemas. Fixes MODGQL-102.
 * Support array-typed array types (yes, really!). Fixes MODGQL-103.
@@ -19,14 +19,13 @@
 * Add `-d=DIRECTORY` option to specify the path used, when `-a` is in effect, to find RAMLs named in the YAML API specification. Fixes MODGQL-106.
 * Add `-s` option to skip RAMLs from modules that aren't checked out. Fixes MODGQL-105.
 * Add `-m=REGEXP` option to limit RAMLs to those from matching modules when `-a` is in effect. Fixes MODGQL-104.
-* Avoid registering undefined comments. This is necessary because `raml-1-parser` heplfully adds an undefined
-`version` comment if a RAML doesn't specify a version. Fixes MODGQL-108.
+* Avoid registering undefined comments. This is necessary because `raml-1-parser` heplfully adds an undefined `version` comment if a RAML doesn't specify a version. Fixes MODGQL-108.
 * Add ability to drive `mod-graphql` from an API file, and document this in the [README](README.md). Fixes MODGQL-107.
 * `parseSchemaMap` supports RAML 1.0, enabling sub-schemas to be correctly located from RAML 1.0 files. Fixes MODGQL-109.
 * `listAPIs` now omits module-sections for which `multiple` is set true in the API file. This avoids conflicts with multiple modules having the same API trying to define the same endpoint. Fixes MODGQL-110.
 * `mergeResources` now reports the paths to both RAML files when two of them try to define the same resource. Fixes MODGQL-112.
 * Add `RAML_EXCLUDE=regexp` environment variable and `-x regexp` option to exclude from the API list modules that match the specified regexp. Fixes MODGQL-113.
-* No remaining duplicate resource-names once MODGQL-110 and MODGQL-113 are done. Fixes MODGQL-111.
+* No remaining duplicate resource-names now that MODGQL-110 is done, when MODGQL-113 facilities are used. Fixes MODGQL-111.
 * Break the RAML-merging code out of `convertAPI.js` into its own source-file `mergeAPIs.js`. Fixes MODGQL-116.
 * `mergeTypes` now reports which two RAML files are responsible for a type clash if one occurs. Fixes MODGQL-115.
 
