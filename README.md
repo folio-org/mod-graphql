@@ -70,7 +70,7 @@ yarn start ../mod-inventory-storage/ramls/instance-storage.raml
 
 The module's functioning is affected by several environment variables, as detailed [below](#environment), so in practice a more typical invocation might be:
 ```
-env OKAPI_URL=http://localhost:9130 LOGCAT=url yarn start ../mod-inventory-storage/ramls/i*-storage.raml
+env OKAPI_URL=http://localhost:9130 LOGCAT=listen,url yarn start ../mod-inventory-storage/ramls/i*-storage.raml
 ```
 <!--
 Some FOLIO RAMLs that this can work on:
