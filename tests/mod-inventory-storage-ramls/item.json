@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "holdingsRecordId": {
+      "type": "string"
+    },
+    "barcode": {
+      "type": "string"
+    },
+    "enumeration": {
+      "type": "string"
+    },
+    "chronology": {
+      "type": "string"
+    },
+    "pieceIdentifiers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "numberOfPieces": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "materialTypeId": {
+      "type": "string"
+    },
+    "permanentLoanTypeId": {
+      "type": "string"
+    },
+    "temporaryLoanTypeId": {
+      "type": "string"
+    },
+    "permanentLocationId": {
+      "type": "string"
+    },
+    "temporaryLocationId": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "$ref": "raml-util/schemas/metadata.schema",
+      "readonly": true
+    },
+    "holdingsRecord2": {
+      "type": "object",
+      "folio:$ref": "holdingsrecord.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "holdings-storage/holdings",
+      "folio:linkFromField": "holdingsRecordId",
+      "folio:linkToField": "id",
+      "folio:includedElement": "holdingsRecords.0"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "materialTypeId",
+    "permanentLoanTypeId",
+    "holdingsRecordId"
+  ]
+}
