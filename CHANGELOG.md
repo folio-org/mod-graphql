@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## 1.2.0 (IN PROGRESS)
+
+* Add redundant copies of the `mod-inventory-storage` RAMLs, including the `raml-utils` submodule, in `tests/mod-inventory-storage-ramls`. This will make it much easier to run mod-graphql in a useful way from within Docker.
+
 ## [1.1.0](https://github.com/folio-org/mod-graphql/tree/v1.1.0) (2018-10-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.0.0...v1.1.0)
 
