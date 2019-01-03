@@ -7,4 +7,4 @@ COPY yarn.lock .
 RUN yarn install
 COPY . .
 EXPOSE 3000
-CMD yarn start tests/mod-inventory-storage-ramls/*.raml
+CMD yarn start tests/mod-inventory-storage-ramls/i*.raml
