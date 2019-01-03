@@ -30,7 +30,7 @@
       "type": "string"
     },
     "details": {
-      "type": "object"
+      "type": "string"
     },
     "metadata": {
       "type": "object",
