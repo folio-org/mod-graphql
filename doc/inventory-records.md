@@ -21,11 +21,11 @@ We need to establish which ID in the inventory record could usefully be looked u
 | contributorTypeId                     | contributorTypes               | Contributor types
 | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship
 | instanceFormatIds _[2]_               | instanceFormats                | Formats
-|                                       | instanceRelationshipTypes      | _[hardcoded]_
+| _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_
 | instanceTypeId                        | instanceTypes                  | Resource types
-| _[3]_                                 | locations                      | Organization &rarr; Locations
+| _[4]_                                 | locations                      | Organization &rarr; Locations
 |                                       | statisticalCodeTypes           | Statistical code types
-| statisticalCodeIds _[4]_              | statisticalCodes               | Statistical codes
+| statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes
 
 **Notes**
 
@@ -33,7 +33,9 @@ _[1]_ The `electronicAccess.relationshipId` field looks like it _should_ contain
 
 _[2]_ For some reason, `instanceFormatIds` is an array; but I have not seen a record in which it has more than one element.
 
-_[3]_ Perhaps locations are in the holdings and/or item records?
+_[3]_ Instance relationships are managed via a separte endpoint in the instance-storage module, are are not relevant to the present requirements.
 
-_[4]_ For some reason, `statisticalCodeIds` is an array; but I have not seen a record in which it has more than one element.
+_[4]_ Perhaps locations are in the holdings and/or item records?
+
+_[5]_ For some reason, `statisticalCodeIds` is an array; but I have not seen a record in which it has more than one element.
 
