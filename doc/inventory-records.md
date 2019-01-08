@@ -22,14 +22,18 @@ We need to establish which ID in the inventory record could usefully be looked u
 | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship
 | instanceFormatIds _[2]_ | instanceFormats                | Formats
 |                        | instanceRelationshipTypes      |
-|                        | instanceTypes                  | Resource types
-|                        | locations                      |
+| instanceTypeId         | instanceTypes                  | Resource types
+| _[3]_                  | locations                      |
 |                        | statisticalCodeTypes           | Statistical code types
-|                        | statisticalCodes               | Statistical codes
+| statisticalCodeIds _[4]_ | statisticalCodes               | Statistical codes
 
 **Notes**
 
 _[1]_ The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
 
 _[2]_ For some reason, `instanceFormatIds` is an array; but I have not seen a record in which it has more than one element.
+
+_[3]_ Perhaps locations are in the holdings and/or item records?
+
+_[4]_ For some reason, `statisticalCodeIds` is an array; but I have not seen a record in which it has more than one element.
 
