@@ -4,33 +4,22 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 * The second column contains the names of resources defined in the manifest of `ui-inventory/src/Instances.js`, which in many cases correspond directly with ID fields in the records.
 
-| Inventory-record field | ui-instances manifest resource |
-| ---------------------- | ------------------------------ |
-| alternativeTitleTypeId | alternativeTitleTypes          |
+| Inventory-record field | ui-instances manifest resource | Settings page entries
+| ---------------------- | ------------------------------ | ---------------------
+| alternativeTitleTypeId | alternativeTitleTypes          | Alternative title types
 | classificationTypeId   | classificationTypes            |
 | createdByUserId        |                                |
 | identifierTypeId       | identifierTypes                |
 | modeOfIssuanceId       | issuanceModes                  |
-| statusId               | instanceStatuses               |
-| updatedByUserId        |                                |
+| statusId               | instanceStatuses               | 
+| updatedByUserId        |                                | Instance status types
 |                        | contributorNameTypes           |
-|                        | contributorTypes               |
-|                        | electronicAccessRelationships  |
-|                        | instanceFormats                |
+|                        | contributorTypes               | Contributor types
+|                        | electronicAccessRelationships  | URL relationship
+|                        | instanceFormats                | Formats
 |                        | instanceRelationshipTypes      |
-|                        | instanceTypes                  |
+|                        | instanceTypes                  | Resource types
 |                        | locations                      |
-|                        | statisticalCodeTypes           |
-|                        | statisticalCodes               |
+|                        | statisticalCodeTypes           | Statistical code types
+|                        | statisticalCodes               | Statistical codes
 
-
-Settings page entries
-
-    Alternative title types
-    Contributor types
-    Formats
-    Instance status types
-    Resource types
-    Statistical codes
-    Statistical code types
-    URL relationship
