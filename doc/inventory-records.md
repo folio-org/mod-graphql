@@ -8,6 +8,8 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 * The third column shows the names of settings pages that administer relevant linked entites.
 
+* The fourth column indicates which fields are absent from the instance-storage JSON Schema.
+
 | Inventory-record field                | ui-instances manifest resource | Settings page entries   | In schema?
 | ------------------------------------- | ------------------------------ | ----------------------- | ----------
 | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types | absent
