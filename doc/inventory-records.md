@@ -8,24 +8,24 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 * The third column shows the names of settings pages that administer relevant linked entites.
 
-| Inventory-record field | ui-instances manifest resource | Settings page entries
-| ---------------------- | ------------------------------ | ---------------------
-| alternativeTitleTypeId | alternativeTitleTypes          | Alternative title types
-| classificationTypeId   | classificationTypes            | _[hardcoded]_
-| createdByUserId        |                                |
-| identifierTypeId       | identifierTypes                | _[hardcoded]_
-| modeOfIssuanceId       | issuanceModes                  | _[hardcoded]_
-| statusId               | instanceStatuses               | Instance status types
-| updatedByUserId        |                                |
-| contributorNameTypeId  | contributorNameTypes           | _[hardcoded]_
-| contributorTypeId      | contributorTypes               | Contributor types
+| Inventory-record field                | ui-instances manifest resource | Settings page entries
+| ------------------------------------- | ------------------------------ | ---------------------
+| alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types
+| classificationTypeId                  | classificationTypes            | _[hardcoded]_
+| createdByUserId                       |                                |
+| identifierTypeId                      | identifierTypes                | _[hardcoded]_
+| modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_
+| statusId                              | instanceStatuses               | Instance status types
+| updatedByUserId                       |                                |
+| contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_
+| contributorTypeId                     | contributorTypes               | Contributor types
 | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship
-| instanceFormatIds _[2]_ | instanceFormats                | Formats
-|                        | instanceRelationshipTypes      | _[hardcoded]_
-| instanceTypeId         | instanceTypes                  | Resource types
-| _[3]_                  | locations                      | Organization &rarr; Locations
-|                        | statisticalCodeTypes           | Statistical code types
-| statisticalCodeIds _[4]_ | statisticalCodes               | Statistical codes
+| instanceFormatIds _[2]_               | instanceFormats                | Formats
+|                                       | instanceRelationshipTypes      | _[hardcoded]_
+| instanceTypeId                        | instanceTypes                  | Resource types
+| _[3]_                                 | locations                      | Organization &rarr; Locations
+|                                       | statisticalCodeTypes           | Statistical code types
+| statisticalCodeIds _[4]_              | statisticalCodes               | Statistical codes
 
 **Notes**
 
