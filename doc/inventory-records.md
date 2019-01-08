@@ -4,6 +4,8 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 * The second column contains the names of resources defined in the manifest of `ui-inventory/src/Instances.js`, which in many cases correspond directly with ID fields in the records.
 
+* The third column shows the names of settings pages that administer relevant linked entites.
+
 | Inventory-record field | ui-instances manifest resource | Settings page entries
 | ---------------------- | ------------------------------ | ---------------------
 | alternativeTitleTypeId | alternativeTitleTypes          | Alternative title types
