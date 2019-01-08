@@ -23,3 +23,14 @@ We need to establish which ID in the inventory record could usefully be looked u
 |                        | statisticalCodeTypes           |
 |                        | statisticalCodes               |
 
+
+Settings page entries
+
+    Alternative title types
+    Contributor types
+    Formats
+    Instance status types
+    Resource types
+    Statistical codes
+    Statistical code types
+    URL relationship
