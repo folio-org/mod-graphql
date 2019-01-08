@@ -69,13 +69,14 @@ cat ExternalDeploymentDescriptor.json | okapi create --no-tenant /_/discovery/mo
 cat TenantAssociationDescriptor.json| okapi --no-tenant create /_/proxy/tenants/diku/modules
 ```
 
-To verify this worked, you can try a simple query to list a few users:
+To verify this worked, you can try a simple query to list a few inventory instances:
 ```
-echo '{"query": "query { users { id, username } }"}' | okapi create /graphql
+echo '{ "query": "query { instance_storage_instances { totalRecords instances { title } } }" }' | okapi create /graphql
+
 ```
 Or to search the users with CQL:
 ```
-echo '{"query": "query { users(query: \"username=al*\") { id, username } }"}' | okapi create /graphql
+echo '{ "query": "query { instance_storage_instances(query: \"title=ca*\") { totalRecords instances { title } } }" }' | okapi create /graphql
 ```
 (See [a transcript of this process](developing-with-a-vagrant-box--transcript.txt).)
 
