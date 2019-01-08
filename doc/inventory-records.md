@@ -15,13 +15,19 @@ We need to establish which ID in the inventory record could usefully be looked u
 | modeOfIssuanceId       | issuanceModes                  |
 | statusId               | instanceStatuses               | 
 | updatedByUserId        |                                | Instance status types
-|                        | contributorNameTypes           |
-|                        | contributorTypes               | Contributor types
-|                        | electronicAccessRelationships  | URL relationship
-|                        | instanceFormats                | Formats
+| contributorNameTypeId  | contributorNameTypes           |
+| contributorTypeId      | contributorTypes               | Contributor types
+| electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship
+| instanceFormatIds _[2]_ | instanceFormats                | Formats
 |                        | instanceRelationshipTypes      |
 |                        | instanceTypes                  | Resource types
 |                        | locations                      |
 |                        | statisticalCodeTypes           | Statistical code types
 |                        | statisticalCodes               | Statistical codes
+
+**Notes**
+
+_[1]_ The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
+
+_[2]_ For some reason, `instanceFormatIds` is an array; but I have not seen a record in which it has more than one element.
 
