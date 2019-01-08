@@ -8,18 +8,18 @@ We need to establish which ID in the inventory record could usefully be looked u
 | ---------------------- | ------------------------------ |
 | alternativeTitleTypeId | alternativeTitleTypes          |
 | classificationTypeId   | classificationTypes            |
+| createdByUserId        |                                |
+| identifierTypeId       | identifierTypes                |
+| modeOfIssuanceId       | issuanceModes                  |
+| statusId               | instanceStatuses               |
+| updatedByUserId        |                                |
 |                        | contributorNameTypes           |
 |                        | contributorTypes               |
-| createdByUserId        |                                |
 |                        | electronicAccessRelationships  |
-| identifierTypeId       | identifierTypes                |
 |                        | instanceFormats                |
 |                        | instanceRelationshipTypes      |
 |                        | instanceTypes                  |
 |                        | locations                      |
-| modeOfIssuanceId       | issuanceModes                  |
-| statusId               | instanceStatuses               |
 |                        | statisticalCodeTypes           |
 |                        | statisticalCodes               |
-| updatedByUserId        |                                |
 
