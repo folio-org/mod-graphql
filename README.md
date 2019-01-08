@@ -1,5 +1,10 @@
 # mod-graphql
 
+Copyright (C) 2017-2019 The Open Library Foundation
+
+This software is distributed under the terms of the Apache License,
+Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
+
 [![Build Status](https://travis-ci.org/folio-org/mod-graphql.svg?branch=master)](https://travis-ci.org/folio-org/mod-graphql)
 
 <!-- md2toc -l 2 README.md -->
@@ -18,7 +23,7 @@
     * [`RAML_EXCLUDE`](#raml_exclude)
     * [`CONSOLE_TRACE`](#console_trace)
     * [`NODE_OPTIONS`](#node_options)
-* [See also](#see-also)
+* [Additional information](#additional-information)
 
 
 ## Overview
@@ -190,7 +195,7 @@ If you are getting this warning all over your output:
 You can get rid of it by run Node with the with `--no-deprecation` command-line option. The simplest way to do this is to set `NODE_OPTIONS=--no-deprecation`.
 
 
-## See also
+## Additional information
 
 Other documentation for users of `mod-graphql`:
 
@@ -210,4 +215,13 @@ Also:
 
 * [`folio-graphiql`](https://github.com/folio-org/folio-graphiql), a graphical client for exploring the data that can be returned by mod-graphql. Useful for testing and demos.
 
+### Other documentation
+
+Other [modules](https://dev.folio.org/source-code/) are described,
+with further FOLIO Developer documentation at [dev.folio.org](https://dev.folio.org/)
+
+### Issue tracker
+
+See project [MODGQL](https://issues.folio.org/browse/MODGQL)
+at the [FOLIO issue tracker](https://dev.folio.org/guidelines/issue-tracker).
 
