@@ -7,24 +7,24 @@ We need to establish which ID in the inventory record could usefully be looked u
 * The third column shows the names of settings pages that administer relevant linked entites.
 * The fourth column indicates which fields are absent from the instance-storage JSON Schema.
 
-| Inventory-record field                | ui-instances manifest resource | Settings page entries   | In schema?
-| ------------------------------------- | ------------------------------ | ----------------------- | ----------
-| alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types | absent
-| classificationTypeId                  | classificationTypes            | _[hardcoded]_
-| createdByUserId                       |                                | | absent
-| identifierTypeId                      | identifierTypes                | _[hardcoded]_
-| modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_
-| statusId                              | instanceStatuses               | Instance status types
-| updatedByUserId                       |                                | | absent
-| contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_
-| contributorTypeId                     | contributorTypes               | Contributor types
-| electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship
-| instanceFormatIds _[2]_               | instanceFormats                | Formats
-| _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_ | absent
-| instanceTypeId                        | instanceTypes                  | Resource types
+| Inventory-record field                | ui-instances manifest resource | Settings page entries         | In schema?
+| ------------------------------------- | ------------------------------ | ----------------------------- | ----------
+| alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent
+| classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |
+| createdByUserId                       |                                |                               | absent
+| identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |
+| modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 |
+| statusId                              | instanceStatuses               | Instance status types         |
+| updatedByUserId                       |                                |                               | absent
+| contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |
+| contributorTypeId                     | contributorTypes               | Contributor types             |
+| electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              |
+| instanceFormatIds _[2]_               | instanceFormats                | Formats                       |
+| _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_                 | absent
+| instanceTypeId                        | instanceTypes                  | Resource types                |
 | _[4]_                                 | locations                      | Organization &rarr; Locations | absent
-| statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types
-| statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes | absent
+| statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types        |
+| statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes             | absent
 
 **Notes**
 
