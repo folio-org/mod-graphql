@@ -1,5 +1,10 @@
 # mod-graphql
 
+Copyright (C) 2017-2019 The Open Library Foundation
+
+This software is distributed under the terms of the Apache License,
+Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
+
 [![Build Status](https://travis-ci.org/folio-org/mod-graphql.svg?branch=master)](https://travis-ci.org/folio-org/mod-graphql)
 
 <!-- md2toc -l 2 README.md -->
