@@ -11,19 +11,19 @@ We need to establish which ID in the inventory record could usefully be looked u
 | Inventory-record field | ui-instances manifest resource | Settings page entries
 | ---------------------- | ------------------------------ | ---------------------
 | alternativeTitleTypeId | alternativeTitleTypes          | Alternative title types
-| classificationTypeId   | classificationTypes            |
+| classificationTypeId   | classificationTypes            | _[hardcoded]_
 | createdByUserId        |                                |
-| identifierTypeId       | identifierTypes                |
-| modeOfIssuanceId       | issuanceModes                  |
-| statusId               | instanceStatuses               | 
-| updatedByUserId        |                                | Instance status types
-| contributorNameTypeId  | contributorNameTypes           |
+| identifierTypeId       | identifierTypes                | _[hardcoded]_
+| modeOfIssuanceId       | issuanceModes                  | _[hardcoded]_
+| statusId               | instanceStatuses               | Instance status types
+| updatedByUserId        |                                |
+| contributorNameTypeId  | contributorNameTypes           | _[hardcoded]_
 | contributorTypeId      | contributorTypes               | Contributor types
 | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship
 | instanceFormatIds _[2]_ | instanceFormats                | Formats
-|                        | instanceRelationshipTypes      |
+|                        | instanceRelationshipTypes      | _[hardcoded]_
 | instanceTypeId         | instanceTypes                  | Resource types
-| _[3]_                  | locations                      |
+| _[3]_                  | locations                      | Organization &rarr; Locations
 |                        | statisticalCodeTypes           | Statistical code types
 | statisticalCodeIds _[4]_ | statisticalCodes               | Statistical codes
 
