@@ -1,41 +1,32 @@
+const fs = require('fs');
 const mergeJsonSchemas = require('merge-json-schemas');
 
-const consumer1Schema = {
-  type: 'object',
-  required: ['name'],
-  properties: {
-    name: {
-      type: 'string',
-      maxLength: 20,
-    },
-  },
-};
-
-const consumer2Schema = {
-  type: 'object',
-  required: ['gender'],
-  properties: {
-    name: {
-      type: 'string',
-      minLength: 1,
-    },
-    gender: {
-      type: 'string',
-      enum: ['male', 'female'],
-    },
-  },
-};
-
-const m1 = mergeJsonSchemas([consumer1Schema, consumer2Schema]);
-console.log(JSON.stringify(m1, null, 2));
-
-const overlay = {
-  properties: {
-    gender: {
-      minLength: 1,
-    },
-  },
+function parseSchema(schemaName) {
+  const schemaText = fs.readFileSync(schemaName, 'utf8');
+  return JSON.parse(schemaText);
 }
 
-const m2 = mergeJsonSchemas([m1, overlay]);
-console.log(JSON.stringify(m2, null, 2));
+const baseSchema = parseSchema('../../tests/mod-inventory-storage-ramls/instance.json');
+
+const overlaySchema = {
+  type: 'object',
+  properties: {
+    holdingsRecords3: {
+      type: "array",
+      description: "List of holdings records",
+      items: {
+        type: "object",
+        $ref: "holdingsrecord.json"
+      },
+      readonly: true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "holdings-storage/holdings",
+      "folio:linkFromField": "id",
+      "folio:linkToField": "instanceId",
+      "folio:includedElement": "holdingsRecords"
+    },
+  },
+};
+
+const m1 = mergeJsonSchemas([baseSchema, overlaySchema]);
+console.log(JSON.stringify(m1, null, 2));
