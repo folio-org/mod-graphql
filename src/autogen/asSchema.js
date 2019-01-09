@@ -61,6 +61,9 @@ function renderTypes(types, _options) {
       }
       output += '\n';
     });
+    if (t.length === 0) {
+      output += '  _dummy: String\n';
+    }
     output += '}\n';
     output += '\n';
   });

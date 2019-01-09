@@ -1,0 +1,23 @@
+#%RAML 0.8
+
+title: Inline schema that contains an empty field
+
+/person:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "type": "object",
+                "$schema": "http://json-schema.org/draft-03/schema",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "object"
+                  }
+                }
+              }

@@ -1,0 +1,16 @@
+# title: Inline schema that contains an empty field
+# raml-version: 0.9
+
+type Query {
+  person: Tgenerated1
+}
+
+type Tgenerated1 {
+  name: String
+  notes: Tgenerated1_notes
+}
+
+type Tgenerated1_notes {
+  _dummy: String
+}
+
