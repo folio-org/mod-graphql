@@ -12,13 +12,13 @@ We need to establish which ID in the inventory record could usefully be looked u
 |   | Inventory-record field                | ui-instances manifest resource | Settings page entries         | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
 |   | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent     | absent
-|   | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |            | Y
+| T | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |            | Y
 |   | createdByUserId                       |                                |                               | absent     | Y
-|   | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |            | Y
+| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |            | Y
 |   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 |            | absent
 |   | statusId                              | instanceStatuses               | Instance status types         |            | absent
 |   | updatedByUserId                       |                                |                               | absent     | Y
-|   | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |            | Y
+| T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |            | Y
 |   | contributorTypeId                     | contributorTypes               | Contributor types             |            | absent
 |   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              |            | absent
 |   | instanceFormatIds _[2]_               | instanceFormats                | Formats                       |            | absent
