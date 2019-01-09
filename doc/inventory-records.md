@@ -10,22 +10,22 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 | Inventory-record field                | ui-instances manifest resource | Settings page entries         | In schema? | In records?
 | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
-| alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent     |
-| classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |            |
-| createdByUserId                       |                                |                               | absent     |
-| identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |            |
-| modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 |            |
-| statusId                              | instanceStatuses               | Instance status types         |            |
-| updatedByUserId                       |                                |                               | absent     |
-| contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |            |
-| contributorTypeId                     | contributorTypes               | Contributor types             |            |
-| electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              |            |
-| instanceFormatIds _[2]_               | instanceFormats                | Formats                       |            |
-| _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_                 | absent     |
-| instanceTypeId                        | instanceTypes                  | Resource types                |            |
-| _[4]_                                 | locations                      | Organization &rarr; Locations | absent     |
-| statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types        |            |
-| statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes             | absent     |
+| alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent     | absent
+| classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |            | Y
+| createdByUserId                       |                                |                               | absent     | Y
+| identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |            | Y
+| modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 |            | absent
+| statusId                              | instanceStatuses               | Instance status types         |            | absent
+| updatedByUserId                       |                                |                               | absent     | Y
+| contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |            | Y
+| contributorTypeId                     | contributorTypes               | Contributor types             |            | absent
+| electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              |            | absent
+| instanceFormatIds _[2]_               | instanceFormats                | Formats                       |            | absent
+| _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_                 | absent     | N/A
+| instanceTypeId                        | instanceTypes                  | Resource types                |            | Y
+| _[4]_                                 | locations                      | Organization &rarr; Locations | absent     | N/A
+| statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types        |            | XXX
+| statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes             | absent     | absent
 
 **Notes**
 
