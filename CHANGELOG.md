@@ -4,6 +4,7 @@
 
 * Add redundant copies of the `mod-inventory-storage` RAMLs, including the `raml-utils` submodule, in `tests/mod-inventory-storage-ramls`. This will make it much easier to run mod-graphql in a useful way from within Docker.
 * GraphQL schema generation emits a `_dummy` string field as a member of empty objects. Fixes MODGQL-118.
+* Avoid linking to _all_ sub-records when link-field is empty array. Fixes at least part of MODGQL-120.
 
 Fixes MODGQL-118.
 
