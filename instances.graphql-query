@@ -10,6 +10,18 @@ query {
       classifications {
         classificationNumber
         classificationTypeId
+        classificationType {
+        	id
+          name
+          metadata {
+            createdByUserId
+            createdByUsername
+            createdDate
+            updatedByUserId
+            updatedByUsername
+            updatedDate
+          }
+        }
       }
       contributors {
         contributorNameTypeId
