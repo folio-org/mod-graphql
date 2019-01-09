@@ -39,3 +39,19 @@ _[4]_ Perhaps locations are in the holdings and/or item records?
 
 _[5]_ For some reason, `statisticalCodeIds` is an array; but I have not seen a record in which it has more than one element.
 
+
+---
+
+Then within the holdings record:
+
+| Holdings-record field                 | ViewHoldingsRecord.js resource | Settings page entries         | In schema? | In records?
+| ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
+| callNumberTypeId                      | callNumberTypes                |                               |            | absent
+| holdingsTypeId                        | holdingsTypes                  |                               |            | absent
+| illPolicyId                           | illPolicies                    |                               |            | absent
+| createdByUserId                       |                                |                               |            | Y
+| updatedByUserId                       |                                |                               |            | Y
+| holdingsNoteTypeId                    |                                |                               |            | absent
+| permanentLocationId                   |                                |                               |            | Y
+| temporaryLocationId                   |                                |                               |            | absent
+| statisticalCodeIds                    |                                |                               |            | absent
