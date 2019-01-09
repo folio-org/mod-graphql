@@ -1,0 +1,140 @@
+query {
+    instance_storage_instances {
+    totalRecords
+    instances {
+      alternativeTitles {
+        alternativeTitle
+        alternativeTitleTypeId
+      }
+      catalogedDate
+      classifications {
+        classificationNumber
+        classificationTypeId
+      }
+      contributors {
+        contributorNameTypeId
+        contributorTypeId
+        contributorTypeText
+        name
+        primary
+      }
+      discoverySuppress
+      editions
+      electronicAccess {
+        linkText
+        materialsSpecification
+        publicNote
+        relationshipId
+        uri
+      }
+      holdingsRecords2 {
+        acquisitionFormat
+        acquisitionMethod
+        callNumber
+        callNumberPrefix
+        callNumberSuffix
+        callNumberTypeId
+        copyNumber
+        digitizationPolicy
+        discoverySuppress
+        electronicAccess {
+          linkText
+          materialsSpecification
+          publicNote
+          relationshipId
+          uri
+        }
+        formerIds
+        # No need to loop back to holdingsInstance
+        holdingsItems {
+          # XXX fill in
+          id
+          barcode
+        }
+        holdingsStatements {
+          note
+          statement
+        }
+        holdingsStatementsForIndexes {
+          note
+          statement
+        }
+        holdingsStatementsForSupplements {
+          note
+          statement
+        }
+        holdingsTypeId
+        hrid
+        illPolicyId
+        instanceId
+        metadata {
+          createdByUserId
+          createdByUsername
+          createdDate
+          updatedByUserId
+          updatedByUsername
+          updatedDate
+        }
+        notes {
+          holdingsNoteTypeId
+          note
+          staffOnly
+        }
+        numberOfItems
+        permanentLocationId
+        receiptStatus
+        receivingHistory {
+          displayType
+          entries {
+            chronology
+            enumeration
+            publicDisplay
+          }
+        }
+        retentionPolicy
+        shelvingTitle
+        statisticalCodeIds
+        temporaryLocationId
+      }
+      hrid
+      id
+      identifiers {
+        identifierTypeId
+        value
+      }
+      indexTitle
+      instanceFormatIds
+      instanceTypeId
+      languages
+      metadata {
+        createdByUserId
+        createdByUsername
+        createdDate
+        updatedByUserId
+        updatedByUsername
+        updatedDate
+      }
+      modeOfIssuanceId
+      notes
+      physicalDescriptions
+      previouslyHeld
+      publication {
+        dateOfPublication
+        place
+        publisher
+        role
+      }
+      publicationFrequency
+      publicationRange
+      series
+      source
+      sourceRecordFormat
+      staffSuppress
+      statisticalCodeIds
+      statusId
+      statusUpdatedDate
+      subjects
+      title
+    }
+  }
+}
