@@ -28,15 +28,12 @@ We need to establish which ID in the inventory record could usefully be looked u
 |   | statisticalCodeIds                    | statisticalCodes               | Statistical codes         | Y          | absent
 |   | statusId                              | instanceStatuses               | Instance status types     | Y          | absent
 |   | _[2]_                                 | instanceRelationshipTypes      | _[hardcoded]_             | absent     | N/A
-|   | _[3]_                                 | locations                      | Organization -> Locations | absent     | N/A
 
 **Notes**
 
 _[1]_ The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
 
 _[2]_ Instance relationships are managed via a separte endpoint in the instance-storage module, are are not relevant to the present requirements.
-
-_[3]_ Locations are in the holdings and/or item records?
 
 
 ## Holdings record
