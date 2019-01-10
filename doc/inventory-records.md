@@ -39,8 +39,8 @@ We need to establish which ID in the inventory record could usefully be looked u
 | callNumberTypeId                         | callNumberTypes                |                           | absent   |
 | holdingsTypeId                           | holdingsTypes                  |                           | absent   |
 | illPolicyId                              | illPolicies                    |                           | absent   |
-| metadata.createdByUserId                 |                                |                           | Y        |
-| metadata.updatedByUserId                 |                                |                           | Y        |
+| metadata.createdByUserId                 |                                |                           | Y        | No
+| metadata.updatedByUserId                 |                                |                           | Y        | No
 | holdingsNoteTypeId                       |                                |                           | absent   |
 | permanentLocationId                      |                                |                           | Y        |
 | temporaryLocationId                      |                                |                           | absent   |
@@ -54,8 +54,8 @@ We need to establish which ID in the inventory record could usefully be looked u
 | itemDamagedStatusId                      |                                |                           |          |
 | itemLevelCallNumberTypeId                |                                |                           |          |
 | itemNoteTypeId                           |                                |                           |          |
-| metadata.createdByUserId                 |                                |                           | Y        |
-| metadata.updatedByUserId                 |                                |                           | Y        |
+| metadata.createdByUserId                 |                                |                           | Y        | No
+| metadata.updatedByUserId                 |                                |                           | Y        | No
 | permanentLoanTypeId                      |                                |                           |          |
 | permanentLocationId                      |                                |                           |          |
 | statisticalCodeIds                       |                                |                           |          |
