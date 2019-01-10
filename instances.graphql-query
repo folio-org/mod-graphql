@@ -158,6 +158,28 @@ query {
         }
         numberOfItems
         permanentLocationId
+        permanentLocation {
+          campusId
+          code
+          description
+          # Nothing known about the details subrecord
+          discoveryDisplayName
+          id
+          institutionId # XXX resolve
+          isActive
+          libraryId # XXX resolve
+          metadata {
+            createdByUserId
+            createdByUsername
+            createdDate
+            updatedByUserId
+            updatedByUsername
+            updatedDate
+          }
+          name
+          primaryServicePoint
+          servicePointIds # XXX resolve
+        }
         receiptStatus
         receivingHistory {
           displayType
