@@ -28,7 +28,6 @@ We need to establish which ID in the inventory record could usefully be looked u
 |   | _[2]_                                 | instanceRelationshipTypes      | _[hardcoded]_             | absent     | N/A
 | S | instanceTypeId                        | instanceTypes                  | Resource types            | Y          | Y
 |   | _[3]_                                 | locations                      | Organization -> Locations | absent     | N/A
-|   | statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types    | absent     | absent
 |   | statisticalCodeIds                    | statisticalCodes               | Statistical codes         | Y          | absent
 
 **Notes**
