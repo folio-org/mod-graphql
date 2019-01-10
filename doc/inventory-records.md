@@ -14,7 +14,7 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 |   | Inventory-record field                | ui-instances manifest resource | Settings page entries     | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
-|   | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types   | absent     | absent
+|   | alternativeTitles.alternativeTitleTypeId | alternativeTitleTypes       | Alternative title types   | Y     | absent
 | T | classificationTypeId                  | classificationTypes            | _[hardcoded]_             | Y          | Y
 | T | identifierTypeId                      | identifierTypes                | _[hardcoded]_             | Y          | Y
 |   | metadata.createdByUserId              |                                |                           | Y          | Y
