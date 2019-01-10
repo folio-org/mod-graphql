@@ -70,6 +70,6 @@ We need to establish which ID in the inventory record could usefully be looked u
 | campusId                                 |                                |                           | Y        | T
 | institutionId                            |                                |                           | Y        | T
 | libraryId                                |                                |                           | Y        | T
-| servicePointIds                          |                                |                           |          |
+| servicePointIds                          |                                |                           |          | T
 
 
