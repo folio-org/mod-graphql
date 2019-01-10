@@ -18,7 +18,7 @@ We need to establish which ID in the inventory record could usefully be looked u
 | T | classifications.classificationTypeId  | classificationTypes            | _[hardcoded]_             | Y          | Y
 | T | contributors.contributorNameTypeId    | contributorNameTypes           | _[hardcoded]_             | Y          | Y
 |   | contributors.contributorTypeId        | contributorTypes               | Contributor types         | Y          | absent
-|   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship          | Y          | absent
+|   | electronicAccess.relationshipId       | electronicAccessRelationships  | URL relationship          | Y          | absent
 | T | identifiers.identifierTypeId          | identifierTypes                | _[hardcoded]_             | Y          | Y
 |   | instanceFormatIds                     | instanceFormats                | Formats                   | Y          | absent
 | S | instanceTypeId                        | instanceTypes                  | Resource types            | Y          | Y
@@ -28,9 +28,7 @@ We need to establish which ID in the inventory record could usefully be looked u
 |   | statisticalCodeIds                    | statisticalCodes               | Statistical codes         | Y          | absent
 |   | statusId                              | instanceStatuses               | Instance status types     | Y          | absent
 
-**Notes**
-
-_[1]_ The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
+**Note.** The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
 
 
 ## Holdings record
