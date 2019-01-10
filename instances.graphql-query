@@ -1,5 +1,5 @@
 query {
-    instance_storage_instances {
+  instance_storage_instances {
     totalRecords
     instances {
       alternativeTitles {
@@ -10,9 +10,34 @@ query {
       classifications {
         classificationNumber
         classificationTypeId
+        classificationType {
+          id
+          name
+          metadata {
+            createdByUserId
+            createdByUsername
+            createdDate
+            updatedByUserId
+            updatedByUsername
+            updatedDate
+          }
+        }
       }
       contributors {
         contributorNameTypeId
+        contributorNameType {
+          id
+          name
+          ordering
+          metadata {
+            createdByUserId
+            createdByUsername
+            createdDate
+            updatedByUserId
+            updatedByUsername
+            updatedDate
+          }
+        }
         contributorTypeId
         contributorTypeText
         name
@@ -100,6 +125,18 @@ query {
       id
       identifiers {
         identifierTypeId
+        identifierType {
+          id
+          name
+          metadata {
+            createdByUserId
+            createdByUsername
+            createdDate
+            updatedByUserId
+            updatedByUsername
+            updatedDate
+          }
+        }
         value
       }
       indexTitle

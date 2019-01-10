@@ -1,4 +1,4 @@
-# Entites associated with inventory records
+# Entities associated with inventory records
 
 We need to establish which ID in the inventory record could usefully be looked up and dereferenced, so we can provide link information in their JSON Schemas. The following table catalogues these fields.
 
@@ -12,18 +12,18 @@ We need to establish which ID in the inventory record could usefully be looked u
 |   | Inventory-record field                | ui-instances manifest resource | Settings page entries         | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
 |   | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent     | absent
-|   | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |            | Y
+| T | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |            | Y
 |   | createdByUserId                       |                                |                               | absent     | Y
-|   | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |            | Y
+| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |            | Y
 |   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 |            | absent
 |   | statusId                              | instanceStatuses               | Instance status types         |            | absent
 |   | updatedByUserId                       |                                |                               | absent     | Y
-|   | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |            | Y
+| T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |            | Y
 |   | contributorTypeId                     | contributorTypes               | Contributor types             |            | absent
 |   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              |            | absent
 |   | instanceFormatIds _[2]_               | instanceFormats                | Formats                       |            | absent
 |   | _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_                 | absent     | N/A
-|   | instanceTypeId                        | instanceTypes                  | Resource types                |            | Y
+| S | instanceTypeId                        | instanceTypes                  | Resource types                |            | Y
 |   | _[4]_                                 | locations                      | Organization &rarr; Locations | absent     | N/A
 |   | statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types        |            | XXX
 |   | statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes             | absent     | absent

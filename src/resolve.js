@@ -26,7 +26,12 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
   }
 
   // Positional parameters have now been removed from `args`
-  if (linkFromField) args.query = `${linkToField}=="${obj[linkFromField]}"`;
+  if (linkFromField) {
+    const val = obj[linkFromField];
+    if (!val || val.length === 0) return null;
+    console.log(`searching for link-field value "${val}"`);
+    args.query = `${linkToField}=="${val}"`;
+  }
   const search = queryString.stringify(args);
 
   const url = `${okapi.url}/${processedPath}${search ? `?${search}` : ''}`;
