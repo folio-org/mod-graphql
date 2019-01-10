@@ -194,7 +194,16 @@ query {
           }
           name
           primaryServicePoint
-          servicePointIds # XXX resolve
+          servicePointIds
+          servicePoints {
+            code
+            description
+            discoveryDisplayName
+            id
+            name
+            pickupLocation
+            shelvingLagTime
+          }
         }
         receiptStatus
         receivingHistory {
