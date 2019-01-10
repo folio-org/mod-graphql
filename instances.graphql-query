@@ -178,7 +178,12 @@ query {
             name
           }
           isActive
-          libraryId # XXX resolve
+          libraryId
+          library {
+            code
+            id
+            name
+          }
           metadata {
             createdByUserId
             createdByUsername
