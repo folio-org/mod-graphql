@@ -15,11 +15,11 @@ We need to establish which ID in the inventory record could usefully be looked u
 |   | Inventory-record field                | ui-instances manifest resource | Settings page entries     | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
 |   | alternativeTitles.alternativeTitleTypeId | alternativeTitleTypes       | Alternative title types   | Y          | absent
-| T | classificationTypeId                  | classificationTypes            | _[hardcoded]_             | Y          | Y
-| T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_             | Y          | Y
-|   | contributorTypeId                     | contributorTypes               | Contributor types         | Y          | absent
+| T | classifications.classificationTypeId  | classificationTypes            | _[hardcoded]_             | Y          | Y
+| T | contributors.contributorNameTypeId    | contributorNameTypes           | _[hardcoded]_             | Y          | Y
+|   | contributors.contributorTypeId        | contributorTypes               | Contributor types         | Y          | absent
 |   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship          | Y          | absent
-| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_             | Y          | Y
+| T | identifiers.identifierTypeId          | identifierTypes                | _[hardcoded]_             | Y          | Y
 |   | instanceFormatIds                     | instanceFormats                | Formats                   | Y          | absent
 | S | instanceTypeId                        | instanceTypes                  | Resource types            | Y          | Y
 |   | metadata.createdByUserId              |                                |                           | Y          | Y
