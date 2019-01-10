@@ -1,6 +1,6 @@
 # Entities associated with inventory records
 
-We need to establish which ID in the inventory record could usefully be looked up and dereferenced, so we can provide link information in their JSON Schemas. The following table catalogues these fields.
+We need to establish which ID in the inventory record could usefully be looked up and dereferenced, so we can provide link information in their JSON Schemas. The following tables catalogue these fields.
 
 * The first column indicates whether the link-field has been specified in the schemas (`S`), tested in mod-graphql (`T`), or not yet handled (blank).
 * The second column contains field-names identified by looking at [example instance records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json).
@@ -8,6 +8,9 @@ We need to establish which ID in the inventory record could usefully be looked u
 * The fourth column shows the names of settings pages that administer relevant linked entites.
 * The fifth column indicates which fields are present in the instance-storage JSON Schema.
 * The sixth column indicates which fields are present in the backend VM's sample records.
+
+
+## Instance record
 
 |   | Inventory-record field                | ui-instances manifest resource | Settings page entries     | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
@@ -41,9 +44,7 @@ _[4]_ Perhaps locations are in the holdings and/or item records?
 _[5]_ For some reason, `statisticalCodeIds` is an array; but I have not seen a record in which it has more than one element.
 
 
----
-
-Then within the holdings record:
+## Holdings record
 
 |   | Holdings-record field                 | ViewHoldingsRecord.js resource | Settings page entries     | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
@@ -57,9 +58,8 @@ Then within the holdings record:
 |   | temporaryLocationId                   |                                |                           | Y          | absent
 |   | statisticalCodeIds                    |                                |                           | Y          | absent
 
----
 
-Then within the item record:
+## Item record
 
 |   | Item-record field                     | ViewItem.js resource           | Settings page entries     | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
@@ -73,4 +73,5 @@ Then within the item record:
 |   | statisticalCodeIds                    |                                |                           | Y          |
 |   | temporaryLoanTypeId                   |                                |                           | Y          |
 |   | temporaryLocationId                   |                                |                           | Y          |
+
 
