@@ -72,9 +72,60 @@ query {
         formerIds
         # No need to loop back to holdingsInstance
         holdingsItems {
-          # XXX fill in
-          id
+          accessionNumber
           barcode
+          chronology
+          copyNumbers
+          descriptionOfPieces
+          discoverySuppress
+          electronicAccess {
+                linkText
+            materialsSpecification
+            publicNote
+            relationshipId
+            uri
+          }
+          enumeration
+          formerIds
+          # No need to loop back to holdingsRecordId
+          hrid
+          id
+          inTransitDestinationServicePointId
+          itemDamagedStatusDate
+          itemDamagedStatusId
+          itemIdentifier
+          itemLevelCallNumber
+          itemLevelCallNumberPrefix
+          itemLevelCallNumberSuffix
+          itemLevelCallNumberTypeId
+          materialTypeId
+          metadata {
+            createdByUserId
+            createdByUsername
+            createdDate
+            updatedByUserId
+            updatedByUsername
+            updatedDate
+          }
+          missingPieces
+          missingPiecesDate
+          notes {
+            itemNoteTypeId
+            note
+            staffOnly
+          }
+          numberOfMissingPieces
+          numberOfPieces
+          permanentLoanTypeId
+          permanentLocationId
+          statisticalCodeIds
+          status {
+            name
+          }
+          temporaryLoanTypeId
+          temporaryLocationId
+          volume
+          yearCaption
         }
         holdingsStatements {
           note
@@ -141,6 +192,20 @@ query {
       }
       indexTitle
       instanceFormatIds
+      instanceFormats {
+        id
+        name
+        code
+        source
+        metadata {
+          createdByUserId
+          createdByUsername
+          createdDate
+          updatedByUserId
+          updatedByUsername
+          updatedDate
+        }
+      }
       instanceTypeId
       languages
       metadata {
