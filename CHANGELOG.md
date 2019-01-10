@@ -4,7 +4,7 @@
 
 * Add redundant copies of the `mod-inventory-storage` RAMLs, including the `raml-utils` submodule, in `tests/mod-inventory-storage-ramls`. This will make it much easier to run mod-graphql in a useful way from within Docker.
 * GraphQL schema generation emits a `_dummy` string field as a member of empty objects. Fixes MODGQL-118.
-* Avoid linking to _all_ sub-records when link-field is empty array. Fixes at least part of MODGQL-120.
+* Correctly handle linking from array-valued fields (including doing nothing for an empty-array value). Fixes MODGQL-120.
 * Add [`src/merge`](src/merge) area, showing how to merge an overlay JSON Schema to add link-fields to a schema that lacks them. Fixes MODGQL-119.
 
 ## [1.1.0](https://github.com/folio-org/mod-graphql/tree/v1.1.0) (2018-10-25)
