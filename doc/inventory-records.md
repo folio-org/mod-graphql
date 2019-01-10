@@ -42,7 +42,7 @@ We need to establish which ID in the inventory record could usefully be looked u
 | metadata.createdByUserId                 |                                |                           | Y        | No
 | metadata.updatedByUserId                 |                                |                           | Y        | No
 | holdingsNoteTypeId                       |                                |                           | absent   |
-| permanentLocationId                      |                                |                           | Y        |
+| permanentLocationId                      |                                |                           | Y        | T
 | temporaryLocationId                      |                                |                           | absent   |
 | statisticalCodeIds                       |                                |                           | absent   |
 
@@ -61,5 +61,15 @@ We need to establish which ID in the inventory record could usefully be looked u
 | statisticalCodeIds                       |                                |                           |          |
 | temporaryLoanTypeId                      |                                |                           |          |
 | temporaryLocationId                      |                                |                           |          |
+
+
+## Location record
+
+| Location-record field                    | ViewItem.js resource           | Settings page entries     | Present? | Done?
+| ---------------------------------------- | ------------------------------ | ------------------------- | -------- | -
+| campusId                                 |                                |                           | Y        | T
+| institutionId                            |                                |                           | Y        | T
+| libraryId                                |                                |                           | Y        | T
+| servicePointIds                          |                                |                           |          |
 
 
