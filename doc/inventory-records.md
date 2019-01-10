@@ -9,24 +9,24 @@ We need to establish which ID in the inventory record could usefully be looked u
 * The fifth column indicates which fields are present in the instance-storage JSON Schema.
 * The sixth column indicates which fields are present in the backend VM's sample records.
 
-|   | Inventory-record field                | ui-instances manifest resource | Settings page entries         | In schema? | In records?
-| - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
-|   | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent     | absent
-| T | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 | Y          | Y
-| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 | Y          | Y
-|   | metadata.createdByUserId              |                                |                               | Y          | Y
-|   | metadata.updatedByUserId              |                                |                               | Y          | Y
-|   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 | Y          | absent
-|   | statusId                              | instanceStatuses               | Instance status types         | Y          | absent
-| T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 | Y          | Y
-|   | contributorTypeId                     | contributorTypes               | Contributor types             | Y          | absent
-|   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              | Y          | absent
-|   | instanceFormatIds _[2]_               | instanceFormats                | Formats                       | Y          | absent
-|   | _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_                 | absent     | N/A
-| S | instanceTypeId                        | instanceTypes                  | Resource types                | Y          | Y
-|   | _[4]_                                 | locations                      | Organization &rarr; Locations | absent     | N/A
-|   | statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types        | Y          | XXX
-|   | statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes             | absent     | absent
+|   | Inventory-record field                | ui-instances manifest resource | Settings page entries     | In schema? | In records?
+| - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
+|   | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types   | absent     | absent
+| T | classificationTypeId                  | classificationTypes            | _[hardcoded]_             | Y          | Y
+| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_             | Y          | Y
+|   | metadata.createdByUserId              |                                |                           | Y          | Y
+|   | metadata.updatedByUserId              |                                |                           | Y          | Y
+|   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_             | Y          | absent
+|   | statusId                              | instanceStatuses               | Instance status types     | Y          | absent
+| T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_             | Y          | Y
+|   | contributorTypeId                     | contributorTypes               | Contributor types         | Y          | absent
+|   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship          | Y          | absent
+|   | instanceFormatIds _[2]_               | instanceFormats                | Formats                   | Y          | absent
+|   | _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_             | absent     | N/A
+| S | instanceTypeId                        | instanceTypes                  | Resource types            | Y          | Y
+|   | _[4]_                                 | locations                      | Organization -> Locations | absent     | N/A
+|   | statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types    | Y          | XXX
+|   | statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes         | absent     | absent
 
 **Notes**
 
@@ -45,32 +45,32 @@ _[5]_ For some reason, `statisticalCodeIds` is an array; but I have not seen a r
 
 Then within the holdings record:
 
-|   | Holdings-record field                 | ViewHoldingsRecord.js resource | Settings page entries         | In schema? | In records?
-| - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
-|   | callNumberTypeId                      | callNumberTypes                |                               | Y          | absent
-|   | holdingsTypeId                        | holdingsTypes                  |                               | Y          | absent
-|   | illPolicyId                           | illPolicies                    |                               | Y          | absent
-|   | metadata.createdByUserId              |                                |                               | Y          | Y
-|   | metadata.updatedByUserId              |                                |                               | Y          | Y
-|   | holdingsNoteTypeId                    |                                |                               | Y          | absent
-|   | permanentLocationId                   |                                |                               | Y          | Y
-|   | temporaryLocationId                   |                                |                               | Y          | absent
-|   | statisticalCodeIds                    |                                |                               | Y          | absent
+|   | Holdings-record field                 | ViewHoldingsRecord.js resource | Settings page entries     | In schema? | In records?
+| - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
+|   | callNumberTypeId                      | callNumberTypes                |                           | Y          | absent
+|   | holdingsTypeId                        | holdingsTypes                  |                           | Y          | absent
+|   | illPolicyId                           | illPolicies                    |                           | Y          | absent
+|   | metadata.createdByUserId              |                                |                           | Y          | Y
+|   | metadata.updatedByUserId              |                                |                           | Y          | Y
+|   | holdingsNoteTypeId                    |                                |                           | Y          | absent
+|   | permanentLocationId                   |                                |                           | Y          | Y
+|   | temporaryLocationId                   |                                |                           | Y          | absent
+|   | statisticalCodeIds                    |                                |                           | Y          | absent
 
 ---
 
 Then within the item record:
 
-|   | Item-record field                     | ViewItem.js resource           | Settings page entries         | In schema? | In records?
-| - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
-|   | itemDamagedStatusId                   |                                |                               | Y          |
-|   | itemLevelCallNumberTypeId             |                                |                               | Y          |
-|   | itemNoteTypeId                        |                                |                               | Y          |
-|   | metadata.createdByUserId              |                                |                               | Y          | Y
-|   | metadata.updatedByUserId              |                                |                               | Y          | Y
-|   | permanentLoanTypeId                   |                                |                               | Y          |
-|   | permanentLocationId                   |                                |                               | Y          |
-|   | statisticalCodeIds                    |                                |                               | Y          |
-|   | temporaryLoanTypeId                   |                                |                               | Y          |
-|   | temporaryLocationId                   |                                |                               | Y          |
+|   | Item-record field                     | ViewItem.js resource           | Settings page entries     | In schema? | In records?
+| - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
+|   | itemDamagedStatusId                   |                                |                           | Y          |
+|   | itemLevelCallNumberTypeId             |                                |                           | Y          |
+|   | itemNoteTypeId                        |                                |                           | Y          |
+|   | metadata.createdByUserId              |                                |                           | Y          | Y
+|   | metadata.updatedByUserId              |                                |                           | Y          | Y
+|   | permanentLoanTypeId                   |                                |                           | Y          |
+|   | permanentLocationId                   |                                |                           | Y          |
+|   | statisticalCodeIds                    |                                |                           | Y          |
+|   | temporaryLoanTypeId                   |                                |                           | Y          |
+|   | temporaryLocationId                   |                                |                           | Y          |
 
