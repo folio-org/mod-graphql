@@ -47,15 +47,15 @@ Then within the holdings record:
 
 |   | Holdings-record field                 | ViewHoldingsRecord.js resource | Settings page entries         | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
-|   | callNumberTypeId                      | callNumberTypes                |                               |            | absent
-|   | holdingsTypeId                        | holdingsTypes                  |                               |            | absent
-|   | illPolicyId                           | illPolicies                    |                               |            | absent
-|   | createdByUserId                       |                                |                               |            | Y
-|   | updatedByUserId                       |                                |                               |            | Y
-|   | holdingsNoteTypeId                    |                                |                               |            | absent
-|   | permanentLocationId                   |                                |                               |            | Y
-|   | temporaryLocationId                   |                                |                               |            | absent
-|   | statisticalCodeIds                    |                                |                               |            | absent
+|   | callNumberTypeId                      | callNumberTypes                |                               | Y          | absent
+|   | holdingsTypeId                        | holdingsTypes                  |                               | Y          | absent
+|   | illPolicyId                           | illPolicies                    |                               | Y          | absent
+|   | createdByUserId                       |                                |                               | Y          | Y
+|   | updatedByUserId                       |                                |                               | Y          | Y
+|   | holdingsNoteTypeId                    |                                |                               | Y          | absent
+|   | permanentLocationId                   |                                |                               | Y          | Y
+|   | temporaryLocationId                   |                                |                               | Y          | absent
+|   | statisticalCodeIds                    |                                |                               | Y          | absent
 
 ---
 
