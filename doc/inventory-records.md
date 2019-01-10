@@ -29,7 +29,7 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 **Note.** The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
 
-**Note.** We are not going to supporr the users mentioned in metadata, both here and in the holdings and items records described below in GraphQL, for two reasons. First, there are `createdByUserName` and `updatedByUserName` fields what should be populated (though they presently are not); and second, because to do this properly would involve looking up the users in mod-users, and we don't want to introduce a cross-module dependency here.
+**Note.** We are not going to support the users mentioned in metadata, both here and in the holdings and items records described below in GraphQL, for two reasons. First, there are `createdByUserName` and `updatedByUserName` fields what should be populated (though they presently are not); and second, because to do this properly would involve looking up the users in mod-users, and we don't want to introduce a cross-module dependency here.
 
 
 ## Holdings record
