@@ -6,7 +6,7 @@ We need to establish which ID in the inventory record could usefully be looked u
 2. The names of resources defined in the manifests of relevant `ui-inventory` source files, which in many cases correspond directly with ID fields in the records.
 3. Names of settings pages that administer relevant linked entites.
 4. Indicates which fields are present in the backend VM's sample records. Blank indicates that this has not yet been assessed.
-5. Indicates whether the link-field has been specified in the schemas (`S`), tested in mod-graphql (`T`), or not yet handled (blank).
+5. Indicates whether the link-field has been specified in the schemas (`S`), tested in mod-graphql (`T`), or not yet handled (blank). `No` indicates a conscious decision not to implement.
 
 
 ## Instance record
@@ -21,13 +21,15 @@ We need to establish which ID in the inventory record could usefully be looked u
 | identifiers.identifierTypeId             | identifierTypes                | _[hardcoded]_             | Y        | T
 | instanceFormatIds                        | instanceFormats                | Formats                   | absent   |
 | instanceTypeId                           | instanceTypes                  | Resource types            | Y        | S
-| metadata.createdByUserId                 |                                | [Users app]               | Y        |
-| metadata.updatedByUserId                 |                                | [Users app]               | Y        |
+| metadata.createdByUserId                 |                                | [Users app]               | Y        | No
+| metadata.updatedByUserId                 |                                | [Users app]               | Y        | No
 | modeOfIssuanceId                         | issuanceModes                  | _[hardcoded]_             | absent   |
 | statisticalCodeIds                       | statisticalCodes               | Statistical codes         | absent   |
 | statusId                                 | instanceStatuses               | Instance status types     | absent   |
 
 **Note.** The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
+
+**Note.** We are not going to supporr the users mentioned in metadata, both here and in the holdings and items records described below in GraphQL, for two reasons. First, there are `createdByUserName` and `updatedByUserName` fields what should be populated (though they presently are not); and second, because to do this properly would involve looking up the users in mod-users, and we don't want to introduce a cross-module dependency here.
 
 
 ## Holdings record
