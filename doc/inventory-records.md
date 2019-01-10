@@ -1,18 +1,17 @@
 # Entities associated with inventory records
 
-We need to establish which ID in the inventory record could usefully be looked up and dereferenced, so we can provide link information in their JSON Schemas. The following tables catalogue these fields.
+We need to establish which ID in the inventory record could usefully be looked up and dereferenced, so we can provide link information in their JSON Schemas. The following tables catalogue these fields with the following columns:
 
-* The first column indicates whether the link-field has been specified in the schemas (`S`), tested in mod-graphql (`T`), or not yet handled (blank).
-* The second column contains field-names identified by looking at [example instance records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json).
-* The third column contains the names of resources defined in the manifest of `ui-inventory/src/Instances.js`, which in many cases correspond directly with ID fields in the records.
-* The fourth column shows the names of settings pages that administer relevant linked entites.
-* The fifth column indicates which fields are present in the instance-storage JSON Schema.
-* The sixth column indicates which fields are present in the backend VM's sample records.
+1. Indicates whether the link-field has been specified in the schemas (`S`), tested in mod-graphql (`T`), or not yet handled (blank).
+2. Field-names identified by looking at JSON Schemas, their derived GraphQL schemas, and [example instance records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json).
+3. The names of resources defined in the manifests of relevant `ui-inventory` source files, which in many cases correspond directly with ID fields in the records.
+4. Names of settings pages that administer relevant linked entites.
+5. Indicates which fields are present in the backend VM's sample records.
 
 
 ## Instance record
 
-|   | Inventory-record field                   | ui-instances manifest resource | Settings page entries     | In records?
+|   | Inventory-record field                   | Instances.js manifest resource | Settings page entries     | In records?
 | - | ---------------------------------------- | ------------------------------ | ------------------------- | -----------
 |   | alternativeTitles.alternativeTitleTypeId | alternativeTitleTypes          | Alternative title types   | absent
 | T | classifications.classificationTypeId     | classificationTypes            | _[hardcoded]_             | Y
