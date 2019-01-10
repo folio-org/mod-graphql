@@ -22,8 +22,8 @@ We need to establish which ID in the inventory record could usefully be looked u
 | T | identifiers.identifierTypeId          | identifierTypes                | _[hardcoded]_             | Y          | Y
 |   | instanceFormatIds                     | instanceFormats                | Formats                   | Y          | absent
 | S | instanceTypeId                        | instanceTypes                  | Resource types            | Y          | Y
-|   | metadata.createdByUserId              |                                |                           | Y          | Y
-|   | metadata.updatedByUserId              |                                |                           | Y          | Y
+|   | metadata.createdByUserId              |                                | [Users app]               | Y          | Y
+|   | metadata.updatedByUserId              |                                | [Users app]               | Y          | Y
 |   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_             | Y          | absent
 |   | statisticalCodeIds                    | statisticalCodes               | Statistical codes         | Y          | absent
 |   | statusId                              | instanceStatuses               | Instance status types     | Y          | absent
