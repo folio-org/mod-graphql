@@ -79,7 +79,7 @@ query {
           descriptionOfPieces
           discoverySuppress
           electronicAccess {
-                linkText
+            linkText
             materialsSpecification
             publicNote
             relationshipId
