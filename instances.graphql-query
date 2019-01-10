@@ -1,5 +1,5 @@
 query {
-  instance_storage_instances {
+  instance_storage_instances(query: "title=baby") {
     totalRecords
     instances {
       alternativeTitles {
