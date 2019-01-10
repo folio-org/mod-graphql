@@ -12,20 +12,20 @@ We need to establish which ID in the inventory record could usefully be looked u
 |   | Inventory-record field                | ui-instances manifest resource | Settings page entries         | In schema? | In records?
 | - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
 |   | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent     | absent
-| T | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 |            | Y
+| T | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 | Y          | Y
 |   | createdByUserId                       |                                |                               | absent     | Y
-| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 |            | Y
-|   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 |            | absent
-|   | statusId                              | instanceStatuses               | Instance status types         |            | absent
+| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 | Y          | Y
+|   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 | Y          | absent
+|   | statusId                              | instanceStatuses               | Instance status types         | Y          | absent
 |   | updatedByUserId                       |                                |                               | absent     | Y
-| T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 |            | Y
-|   | contributorTypeId                     | contributorTypes               | Contributor types             |            | absent
-|   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              |            | absent
-|   | instanceFormatIds _[2]_               | instanceFormats                | Formats                       |            | absent
+| T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 | Y          | Y
+|   | contributorTypeId                     | contributorTypes               | Contributor types             | Y          | absent
+|   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              | Y          | absent
+|   | instanceFormatIds _[2]_               | instanceFormats                | Formats                       | Y          | absent
 |   | _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_                 | absent     | N/A
-| S | instanceTypeId                        | instanceTypes                  | Resource types                |            | Y
+| S | instanceTypeId                        | instanceTypes                  | Resource types                | Y          | Y
 |   | _[4]_                                 | locations                      | Organization &rarr; Locations | absent     | N/A
-|   | statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types        |            | XXX
+|   | statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types        | Y          | XXX
 |   | statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes             | absent     | absent
 
 **Notes**
