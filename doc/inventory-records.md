@@ -24,24 +24,20 @@ We need to establish which ID in the inventory record could usefully be looked u
 | T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_             | Y          | Y
 |   | contributorTypeId                     | contributorTypes               | Contributor types         | Y          | absent
 |   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship          | Y          | absent
-|   | instanceFormatIds _[2]_               | instanceFormats                | Formats                   | Y          | absent
-|   | _[3]_                                 | instanceRelationshipTypes      | _[hardcoded]_             | absent     | N/A
+|   | instanceFormatIds                     | instanceFormats                | Formats                   | Y          | absent
+|   | _[2]_                                 | instanceRelationshipTypes      | _[hardcoded]_             | absent     | N/A
 | S | instanceTypeId                        | instanceTypes                  | Resource types            | Y          | Y
-|   | _[4]_                                 | locations                      | Organization -> Locations | absent     | N/A
+|   | _[3]_                                 | locations                      | Organization -> Locations | absent     | N/A
 |   | statisticalCodeTypeId                 | statisticalCodeTypes           | Statistical code types    | Y          | XXX
-|   | statisticalCodeIds _[5]_              | statisticalCodes               | Statistical codes         | absent     | absent
+|   | statisticalCodeIds                    | statisticalCodes               | Statistical codes         | absent     | absent
 
 **Notes**
 
 _[1]_ The `electronicAccess.relationshipId` field looks like it _should_ contain a UUID that links into a controlled vocabulary of electronic access relationships; but in [the present set of sample records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json), it has values like "Resource" or "Version of resource".
 
-_[2]_ For some reason, `instanceFormatIds` is an array; but I have not seen a record in which it has more than one element.
+_[2]_ Instance relationships are managed via a separte endpoint in the instance-storage module, are are not relevant to the present requirements.
 
-_[3]_ Instance relationships are managed via a separte endpoint in the instance-storage module, are are not relevant to the present requirements.
-
-_[4]_ Perhaps locations are in the holdings and/or item records?
-
-_[5]_ For some reason, `statisticalCodeIds` is an array; but I have not seen a record in which it has more than one element.
+_[3]_ Locations are in the holdings and/or item records?
 
 
 ## Holdings record
