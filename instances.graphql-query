@@ -159,7 +159,7 @@ query {
         numberOfItems
         permanentLocationId
         permanentLocation {
-          campusId
+          campusId # XXX resolve
           code
           description
           # Nothing known about the details subrecord
