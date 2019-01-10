@@ -13,11 +13,11 @@ We need to establish which ID in the inventory record could usefully be looked u
 | - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
 |   | alternativeTitleTypeId                | alternativeTitleTypes          | Alternative title types       | absent     | absent
 | T | classificationTypeId                  | classificationTypes            | _[hardcoded]_                 | Y          | Y
-|   | createdByUserId                       |                                |                               | absent     | Y
 | T | identifierTypeId                      | identifierTypes                | _[hardcoded]_                 | Y          | Y
+|   | metadata.createdByUserId              |                                |                               | Y          | Y
+|   | metadata.updatedByUserId              |                                |                               | Y          | Y
 |   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_                 | Y          | absent
 |   | statusId                              | instanceStatuses               | Instance status types         | Y          | absent
-|   | updatedByUserId                       |                                |                               | absent     | Y
 | T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_                 | Y          | Y
 |   | contributorTypeId                     | contributorTypes               | Contributor types             | Y          | absent
 |   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship              | Y          | absent
@@ -50,8 +50,8 @@ Then within the holdings record:
 |   | callNumberTypeId                      | callNumberTypes                |                               | Y          | absent
 |   | holdingsTypeId                        | holdingsTypes                  |                               | Y          | absent
 |   | illPolicyId                           | illPolicies                    |                               | Y          | absent
-|   | createdByUserId                       |                                |                               | Y          | Y
-|   | updatedByUserId                       |                                |                               | Y          | Y
+|   | metadata.createdByUserId              |                                |                               | Y          | Y
+|   | metadata.updatedByUserId              |                                |                               | Y          | Y
 |   | holdingsNoteTypeId                    |                                |                               | Y          | absent
 |   | permanentLocationId                   |                                |                               | Y          | Y
 |   | temporaryLocationId                   |                                |                               | Y          | absent
@@ -66,6 +66,8 @@ Then within the item record:
 |   | itemDamagedStatusId                   |                                |                               | Y          |
 |   | itemLevelCallNumberTypeId             |                                |                               | Y          |
 |   | itemNoteTypeId                        |                                |                               | Y          |
+|   | metadata.createdByUserId              |                                |                               | Y          | Y
+|   | metadata.updatedByUserId              |                                |                               | Y          | Y
 |   | permanentLoanTypeId                   |                                |                               | Y          |
 |   | permanentLocationId                   |                                |                               | Y          |
 |   | statisticalCodeIds                    |                                |                               | Y          |
