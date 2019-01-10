@@ -30,10 +30,11 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
     const val = obj[linkFromField];
     if (!val || val.length === 0) return null;
     if (Array.isArray(val)) {
-      args.query = `${linkToField}==(${val.map(v => `"${v}"`).join(' or ')}`;
+      args.query = `${linkToField}==(${val.map(v => `"${v}"`).join(' or ')})`;
     } else {
       args.query = `${linkToField}=="${val}"`;
     }
+    console.log('QUERY', val, '->', args.query);
   }
   const search = queryString.stringify(args);
 
