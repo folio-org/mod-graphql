@@ -56,3 +56,19 @@ Then within the holdings record:
 |   | permanentLocationId                   |                                |                               |            | Y
 |   | temporaryLocationId                   |                                |                               |            | absent
 |   | statisticalCodeIds                    |                                |                               |            | absent
+
+---
+
+Then within the item record:
+
+|   | Item-record field                     | ViewItem.js resource           | Settings page entries         | In schema? | In records?
+| - | ------------------------------------- | ------------------------------ | ----------------------------- | ---------- | -----------
+|   | itemDamagedStatusId
+|   | itemLevelCallNumberTypeId
+|   | itemNoteTypeId
+|   | permanentLoanTypeId
+|   | permanentLocationId
+|   | statisticalCodeIds
+|   | temporaryLoanTypeId
+|   | temporaryLocationId
+
