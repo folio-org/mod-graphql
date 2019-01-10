@@ -16,19 +16,19 @@ We need to establish which ID in the inventory record could usefully be looked u
 | - | ------------------------------------- | ------------------------------ | ------------------------- | ---------- | -----------
 |   | alternativeTitles.alternativeTitleTypeId | alternativeTitleTypes       | Alternative title types   | Y          | absent
 | T | classificationTypeId                  | classificationTypes            | _[hardcoded]_             | Y          | Y
-| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_             | Y          | Y
-|   | metadata.createdByUserId              |                                |                           | Y          | Y
-|   | metadata.updatedByUserId              |                                |                           | Y          | Y
-|   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_             | Y          | absent
-|   | statusId                              | instanceStatuses               | Instance status types     | Y          | absent
 | T | contributorNameTypeId                 | contributorNameTypes           | _[hardcoded]_             | Y          | Y
 |   | contributorTypeId                     | contributorTypes               | Contributor types         | Y          | absent
 |   | electronicAccess.relationshipId _[1]_ | electronicAccessRelationships  | URL relationship          | Y          | absent
+| T | identifierTypeId                      | identifierTypes                | _[hardcoded]_             | Y          | Y
 |   | instanceFormatIds                     | instanceFormats                | Formats                   | Y          | absent
-|   | _[2]_                                 | instanceRelationshipTypes      | _[hardcoded]_             | absent     | N/A
 | S | instanceTypeId                        | instanceTypes                  | Resource types            | Y          | Y
-|   | _[3]_                                 | locations                      | Organization -> Locations | absent     | N/A
+|   | metadata.createdByUserId              |                                |                           | Y          | Y
+|   | metadata.updatedByUserId              |                                |                           | Y          | Y
+|   | modeOfIssuanceId                      | issuanceModes                  | _[hardcoded]_             | Y          | absent
 |   | statisticalCodeIds                    | statisticalCodes               | Statistical codes         | Y          | absent
+|   | statusId                              | instanceStatuses               | Instance status types     | Y          | absent
+|   | _[2]_                                 | instanceRelationshipTypes      | _[hardcoded]_             | absent     | N/A
+|   | _[3]_                                 | locations                      | Organization -> Locations | absent     | N/A
 
 **Notes**
 
