@@ -6,13 +6,13 @@ We need to establish which ID in the inventory record could usefully be looked u
 2. Field-names identified by looking at JSON Schemas, their derived GraphQL schemas, and [example instance records](https://issues.folio.org/secure/attachment/15615/15615_UChicagoInstances_20181218+%282%29.json).
 3. The names of resources defined in the manifests of relevant `ui-inventory` source files, which in many cases correspond directly with ID fields in the records.
 4. Names of settings pages that administer relevant linked entites.
-5. Indicates which fields are present in the backend VM's sample records.
+5. Indicates which fields are present in the backend VM's sample records. Blank indicates that this has not yet been assessed.
 
 
 ## Instance record
 
-|   | Inventory-record field                   | Instances.js manifest resource | Settings page entries     | In records?
-| - | ---------------------------------------- | ------------------------------ | ------------------------- | -----------
+|   | Inventory-record field                   | Instances.js manifest resource | Settings page entries     | Present?
+| - | ---------------------------------------- | ------------------------------ | ------------------------- | --------
 |   | alternativeTitles.alternativeTitleTypeId | alternativeTitleTypes          | Alternative title types   | absent
 | T | classifications.classificationTypeId     | classificationTypes            | _[hardcoded]_             | Y
 | T | contributors.contributorNameTypeId       | contributorNameTypes           | _[hardcoded]_             | Y
@@ -32,8 +32,8 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 ## Holdings record
 
-|   | Holdings-record field                    | ViewHoldingsRecord.js resource | Settings page entries     | In records?
-| - | ---------------------------------------- | ------------------------------ | ------------------------- | -----------
+|   | Holdings-record field                    | ViewHoldingsRecord.js resource | Settings page entries     | Present?
+| - | ---------------------------------------- | ------------------------------ | ------------------------- | --------
 |   | callNumberTypeId                         | callNumberTypes                |                           | absent
 |   | holdingsTypeId                           | holdingsTypes                  |                           | absent
 |   | illPolicyId                              | illPolicies                    |                           | absent
@@ -47,8 +47,8 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 ## Item record
 
-|   | Item-record field                        | ViewItem.js resource           | Settings page entries     | In records?
-| - | ---------------------------------------- | ------------------------------ | ------------------------- | -----------
+|   | Item-record field                        | ViewItem.js resource           | Settings page entries     | Present?
+| - | ---------------------------------------- | ------------------------------ | ------------------------- | --------
 |   | itemDamagedStatusId                      |                                |                           |
 |   | itemLevelCallNumberTypeId                |                                |                           |
 |   | itemNoteTypeId                           |                                |                           |
