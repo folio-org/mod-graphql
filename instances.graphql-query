@@ -111,6 +111,11 @@ query {
           missingPiecesDate
           notes {
             itemNoteTypeId
+            itemNoteType {
+              id
+              name
+              source
+            }
             note
             staffOnly
           }
