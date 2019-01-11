@@ -109,26 +109,51 @@
                   "notes": [
                     {
                       "itemNoteTypeId": "8d0a5eca-25de-4391-81a9-236eeefdd20b",
+                      "itemNoteType": {
+                        "id": "8d0a5eca-25de-4391-81a9-236eeefdd20b",
+                        "name": "Note",
+                        "source": "folio"
+                      },
                       "note": "Missing pages; p 10-13",
                       "staffOnly": false
                     },
                     {
                       "itemNoteTypeId": "0e40884c-3523-4c6d-8187-d578e3d2794e",
+                      "itemNoteType": {
+                        "id": "0e40884c-3523-4c6d-8187-d578e3d2794e",
+                        "name": "Action note",
+                        "source": "folio"
+                      },
                       "note": "My action note",
                       "staffOnly": false
                     },
                     {
                       "itemNoteTypeId": "1dde7141-ec8a-4dae-9825-49ce14c728e7",
+                      "itemNoteType": {
+                        "id": "1dde7141-ec8a-4dae-9825-49ce14c728e7",
+                        "name": "Copy note",
+                        "source": "folio"
+                      },
                       "note": "My copy note",
                       "staffOnly": false
                     },
                     {
                       "itemNoteTypeId": "c3a539b9-9576-4e3a-b6de-d910200b2919",
+                      "itemNoteType": {
+                        "id": "c3a539b9-9576-4e3a-b6de-d910200b2919",
+                        "name": "Provenance",
+                        "source": "folio"
+                      },
                       "note": "My provenance",
                       "staffOnly": false
                     },
                     {
                       "itemNoteTypeId": "acb3a58f-1d72-461d-97c3-0e7119e8d544",
+                      "itemNoteType": {
+                        "id": "acb3a58f-1d72-461d-97c3-0e7119e8d544",
+                        "name": "Reproduction",
+                        "source": "folio"
+                      },
                       "note": "My reproduction",
                       "staffOnly": false
                     }
@@ -182,6 +207,11 @@
                   "notes": [
                     {
                       "itemNoteTypeId": "8d0a5eca-25de-4391-81a9-236eeefdd20b",
+                      "itemNoteType": {
+                        "id": "8d0a5eca-25de-4391-81a9-236eeefdd20b",
+                        "name": "Note",
+                        "source": "folio"
+                      },
                       "note": "Signed by the author",
                       "staffOnly": false
                     }
