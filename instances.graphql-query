@@ -194,6 +194,15 @@ query {
           }
           name
           primaryServicePoint
+          primaryServicePointObject {
+            code
+            description
+            discoveryDisplayName
+            id
+            name
+            pickupLocation
+            shelvingLagTime
+          }
           servicePointIds
           servicePoints {
             code
