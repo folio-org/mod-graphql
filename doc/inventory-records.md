@@ -51,16 +51,16 @@ We need to establish which ID in the inventory record could usefully be looked u
 
 | Item-record field                        | ViewItem.js resource           | Settings page entries     | Present? | Done?
 | ---------------------------------------- | ------------------------------ | ------------------------- | -------- | -
-| itemDamagedStatusId                      |                                |                           |          |
-| itemLevelCallNumberTypeId                |                                |                           |          |
-| itemNoteTypeId                           |                                |                           |          |
+| itemDamagedStatusId                      |                                |                           | absent   |
+| itemLevelCallNumberTypeId                |                                |                           | absent   |
+| itemNoteTypeId                           |                                |                           | Y        | T
 | metadata.createdByUserId                 |                                |                           | Y        | No
 | metadata.updatedByUserId                 |                                |                           | Y        | No
-| permanentLoanTypeId                      |                                |                           |          |
-| permanentLocationId                      |                                |                           |          |
-| statisticalCodeIds                       |                                |                           |          |
-| temporaryLoanTypeId                      |                                |                           |          |
-| temporaryLocationId                      |                                |                           |          |
+| permanentLoanTypeId                      |                                |                           | absent   |
+| permanentLocationId                      |                                |                           | absent   |
+| statisticalCodeIds                       |                                |                           | absent   |
+| temporaryLoanTypeId                      |                                |                           | absent   |
+| temporaryLocationId                      |                                |                           | absent   |
 
 
 ## Location record
