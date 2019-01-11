@@ -70,6 +70,9 @@ We need to establish which ID in the inventory record could usefully be looked u
 | campusId                                 |                                |                           | Y        | T
 | institutionId                            |                                |                           | Y        | T
 | libraryId                                |                                |                           | Y        | T
+| primaryServicePoint                      |                                |                           | Y        | T
 | servicePointIds                          |                                |                           | Y        | T
+
+**Note.** The field `primaryServicePoint` is an ID referencing a service-point object, and so should be named `primaryServicePointId`. Maybe we can get this renamed, but in the mean time the virtual field that contains the dereferenced object can't have that name. So instead it has the clumsy but explicit name `primaryServicePointObject`. See [MODINVSTOR-250](https://issues.folio.org/browse/MODINVSTOR-250)
 
 
