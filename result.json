@@ -1,0 +1,509 @@
+{
+  "data": {
+    "instance_storage_instances": {
+      "totalRecords": 1,
+      "instances": [
+        {
+          "alternativeTitles": [],
+          "catalogedDate": null,
+          "classifications": [
+            {
+              "classificationNumber": "PR6056.I4588",
+              "classificationTypeId": "ce176ace-a53e-4b4d-aa89-725ed7b2edac",
+              "classificationType": {
+                "id": "ce176ace-a53e-4b4d-aa89-725ed7b2edac",
+                "name": "LC",
+                "metadata": {
+                  "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "createdByUsername": null,
+                  "createdDate": "2019-01-05T02:42:11.003+0000",
+                  "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "updatedByUsername": null,
+                  "updatedDate": "2019-01-05T02:42:11.003+0000"
+                }
+              }
+            }
+          ],
+          "contributors": [
+            {
+              "contributorNameTypeId": "2b94c631-fca9-4892-a730-03ee529ffe2a",
+              "contributorNameType": {
+                "id": "2b94c631-fca9-4892-a730-03ee529ffe2a",
+                "name": "Personal name",
+                "ordering": "1",
+                "metadata": {
+                  "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "createdByUsername": null,
+                  "createdDate": "2019-01-05T02:42:13.325+0000",
+                  "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "updatedByUsername": null,
+                  "updatedDate": "2019-01-05T02:42:13.325+0000"
+                }
+              },
+              "contributorTypeId": null,
+              "contributorTypeText": null,
+              "name": "Fielding, Helen",
+              "primary": null
+            }
+          ],
+          "discoverySuppress": true,
+          "editions": [
+            "First American Edition"
+          ],
+          "electronicAccess": [
+            {
+              "linkText": "Electronic resource (audio streaming)",
+              "materialsSpecification": "Novel",
+              "publicNote": "Access to audio file",
+              "relationshipId": null,
+              "uri": "http://www.folio.org/"
+            }
+          ],
+          "holdingsRecords2": [
+            {
+              "acquisitionFormat": null,
+              "acquisitionMethod": null,
+              "callNumber": "PR6056.I4588 B749 2016",
+              "callNumberPrefix": null,
+              "callNumberSuffix": null,
+              "callNumberTypeId": null,
+              "copyNumber": null,
+              "digitizationPolicy": null,
+              "discoverySuppress": null,
+              "electronicAccess": [],
+              "formerIds": [],
+              "holdingsItems": [
+                {
+                  "accessionNumber": null,
+                  "barcode": "4539876054382",
+                  "chronology": null,
+                  "copyNumbers": [
+                    "Copy 2"
+                  ],
+                  "descriptionOfPieces": null,
+                  "discoverySuppress": null,
+                  "electronicAccess": [],
+                  "enumeration": null,
+                  "formerIds": [],
+                  "hrid": "it00000007",
+                  "id": "4428a37c-8bae-4f0d-865d-970d83d5ad55",
+                  "inTransitDestinationServicePointId": null,
+                  "itemDamagedStatusDate": null,
+                  "itemDamagedStatusId": null,
+                  "itemIdentifier": null,
+                  "itemLevelCallNumber": null,
+                  "itemLevelCallNumberPrefix": null,
+                  "itemLevelCallNumberSuffix": null,
+                  "itemLevelCallNumberTypeId": null,
+                  "materialTypeId": null,
+                  "metadata": {
+                    "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                    "createdByUsername": null,
+                    "createdDate": "2019-01-05T02:51:49.833+0000",
+                    "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                    "updatedByUsername": null,
+                    "updatedDate": "2019-01-05T02:51:49.833+0000"
+                  },
+                  "missingPieces": null,
+                  "missingPiecesDate": null,
+                  "notes": [
+                    {
+                      "itemNoteTypeId": "8d0a5eca-25de-4391-81a9-236eeefdd20b",
+                      "note": "Missing pages; p 10-13",
+                      "staffOnly": false
+                    },
+                    {
+                      "itemNoteTypeId": "0e40884c-3523-4c6d-8187-d578e3d2794e",
+                      "note": "My action note",
+                      "staffOnly": false
+                    },
+                    {
+                      "itemNoteTypeId": "1dde7141-ec8a-4dae-9825-49ce14c728e7",
+                      "note": "My copy note",
+                      "staffOnly": false
+                    },
+                    {
+                      "itemNoteTypeId": "c3a539b9-9576-4e3a-b6de-d910200b2919",
+                      "note": "My provenance",
+                      "staffOnly": false
+                    },
+                    {
+                      "itemNoteTypeId": "acb3a58f-1d72-461d-97c3-0e7119e8d544",
+                      "note": "My reproduction",
+                      "staffOnly": false
+                    }
+                  ],
+                  "numberOfMissingPieces": null,
+                  "numberOfPieces": "1",
+                  "permanentLoanTypeId": null,
+                  "permanentLocationId": null,
+                  "statisticalCodeIds": [],
+                  "status": {
+                    "name": "Available"
+                  },
+                  "temporaryLoanTypeId": null,
+                  "temporaryLocationId": null,
+                  "volume": null,
+                  "yearCaption": []
+                },
+                {
+                  "accessionNumber": null,
+                  "barcode": "453987605438",
+                  "chronology": null,
+                  "copyNumbers": [
+                    "Copy 1"
+                  ],
+                  "descriptionOfPieces": null,
+                  "discoverySuppress": null,
+                  "electronicAccess": [],
+                  "enumeration": null,
+                  "formerIds": [],
+                  "hrid": "it00000121",
+                  "id": "1b6d3338-186e-4e35-9e75-1b886b0da53e",
+                  "inTransitDestinationServicePointId": null,
+                  "itemDamagedStatusDate": null,
+                  "itemDamagedStatusId": null,
+                  "itemIdentifier": null,
+                  "itemLevelCallNumber": null,
+                  "itemLevelCallNumberPrefix": null,
+                  "itemLevelCallNumberSuffix": null,
+                  "itemLevelCallNumberTypeId": null,
+                  "materialTypeId": null,
+                  "metadata": {
+                    "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                    "createdByUsername": null,
+                    "createdDate": "2019-01-05T02:51:45.508+0000",
+                    "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                    "updatedByUsername": null,
+                    "updatedDate": "2019-01-05T03:00:00.930+0000"
+                  },
+                  "missingPieces": null,
+                  "missingPiecesDate": null,
+                  "notes": [
+                    {
+                      "itemNoteTypeId": "8d0a5eca-25de-4391-81a9-236eeefdd20b",
+                      "note": "Signed by the author",
+                      "staffOnly": false
+                    }
+                  ],
+                  "numberOfMissingPieces": null,
+                  "numberOfPieces": "1",
+                  "permanentLoanTypeId": null,
+                  "permanentLocationId": null,
+                  "statisticalCodeIds": [],
+                  "status": {
+                    "name": "Checked out"
+                  },
+                  "temporaryLoanTypeId": null,
+                  "temporaryLocationId": null,
+                  "volume": null,
+                  "yearCaption": []
+                }
+              ],
+              "holdingsStatements": [],
+              "holdingsStatementsForIndexes": [],
+              "holdingsStatementsForSupplements": [],
+              "holdingsTypeId": null,
+              "hrid": "ho00000001",
+              "illPolicyId": null,
+              "instanceId": "7fbd5d84-62d1-44c6-9c45-6cb173998bbd",
+              "metadata": {
+                "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                "createdByUsername": null,
+                "createdDate": "2019-01-05T02:51:32.258+0000",
+                "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                "updatedByUsername": null,
+                "updatedDate": "2019-01-05T02:51:32.258+0000"
+              },
+              "notes": [],
+              "numberOfItems": null,
+              "permanentLocationId": "fcd64ce1-6995-48f0-840e-89ffa2288371",
+              "permanentLocation": {
+                "campusId": "62cf76b7-cca5-4d33-9217-edf42ce1a848",
+                "campus": {
+                  "code": "CC",
+                  "id": "62cf76b7-cca5-4d33-9217-edf42ce1a848",
+                  "institutionId": "40ee00ca-a518-4b49-be01-0638d0a4ac57",
+                  "name": "City Campus"
+                },
+                "code": "KU/CC/DI/M",
+                "description": null,
+                "discoveryDisplayName": null,
+                "id": "fcd64ce1-6995-48f0-840e-89ffa2288371",
+                "institutionId": "40ee00ca-a518-4b49-be01-0638d0a4ac57",
+                "institution": {
+                  "code": "KU",
+                  "id": "40ee00ca-a518-4b49-be01-0638d0a4ac57",
+                  "name": "Københavns Universitet"
+                },
+                "isActive": true,
+                "libraryId": "5d78803e-ca04-4b4a-aeae-2c63b924518b",
+                "library": {
+                  "code": "DI",
+                  "id": "5d78803e-ca04-4b4a-aeae-2c63b924518b",
+                  "name": "Datalogisk Institut"
+                },
+                "metadata": {
+                  "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "createdByUsername": null,
+                  "createdDate": "2019-01-05T02:49:51.758+0000",
+                  "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "updatedByUsername": null,
+                  "updatedDate": "2019-01-05T02:49:51.758+0000"
+                },
+                "name": "Main Library",
+                "primaryServicePoint": "3a40852d-49fd-4df2-a1f9-6e2641a6e91f",
+                "primaryServicePointObject": {
+                  "code": "cd1",
+                  "description": null,
+                  "discoveryDisplayName": "Circulation Desk -- Hallway",
+                  "id": "3a40852d-49fd-4df2-a1f9-6e2641a6e91f",
+                  "name": "Circ Desk 1",
+                  "pickupLocation": null,
+                  "shelvingLagTime": null
+                },
+                "servicePointIds": [
+                  "3a40852d-49fd-4df2-a1f9-6e2641a6e91f"
+                ],
+                "servicePoints": [
+                  {
+                    "code": "cd1",
+                    "description": null,
+                    "discoveryDisplayName": "Circulation Desk -- Hallway",
+                    "id": "3a40852d-49fd-4df2-a1f9-6e2641a6e91f",
+                    "name": "Circ Desk 1",
+                    "pickupLocation": null,
+                    "shelvingLagTime": null
+                  }
+                ]
+              },
+              "receiptStatus": null,
+              "receivingHistory": null,
+              "retentionPolicy": null,
+              "shelvingTitle": null,
+              "statisticalCodeIds": [],
+              "temporaryLocationId": null
+            },
+            {
+              "acquisitionFormat": null,
+              "acquisitionMethod": null,
+              "callNumber": "PR6056.I4588 B749 2016",
+              "callNumberPrefix": null,
+              "callNumberSuffix": null,
+              "callNumberTypeId": null,
+              "copyNumber": null,
+              "digitizationPolicy": null,
+              "discoverySuppress": null,
+              "electronicAccess": [],
+              "formerIds": [],
+              "holdingsItems": [
+                {
+                  "accessionNumber": null,
+                  "barcode": "4539876054383",
+                  "chronology": null,
+                  "copyNumbers": [
+                    "Copy 3"
+                  ],
+                  "descriptionOfPieces": null,
+                  "discoverySuppress": null,
+                  "electronicAccess": [],
+                  "enumeration": null,
+                  "formerIds": [],
+                  "hrid": "it00000002",
+                  "id": "d6f7c1ba-a237-465e-94ed-f37e91bc64bd",
+                  "inTransitDestinationServicePointId": null,
+                  "itemDamagedStatusDate": null,
+                  "itemDamagedStatusId": null,
+                  "itemIdentifier": null,
+                  "itemLevelCallNumber": null,
+                  "itemLevelCallNumberPrefix": null,
+                  "itemLevelCallNumberSuffix": null,
+                  "itemLevelCallNumberTypeId": null,
+                  "materialTypeId": null,
+                  "metadata": {
+                    "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                    "createdByUsername": null,
+                    "createdDate": "2019-01-05T02:51:44.390+0000",
+                    "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                    "updatedByUsername": null,
+                    "updatedDate": "2019-01-05T02:51:44.390+0000"
+                  },
+                  "missingPieces": null,
+                  "missingPiecesDate": null,
+                  "notes": [],
+                  "numberOfMissingPieces": null,
+                  "numberOfPieces": "1",
+                  "permanentLoanTypeId": null,
+                  "permanentLocationId": null,
+                  "statisticalCodeIds": [],
+                  "status": {
+                    "name": "Available"
+                  },
+                  "temporaryLoanTypeId": null,
+                  "temporaryLocationId": null,
+                  "volume": null,
+                  "yearCaption": []
+                }
+              ],
+              "holdingsStatements": [],
+              "holdingsStatementsForIndexes": [],
+              "holdingsStatementsForSupplements": [],
+              "holdingsTypeId": null,
+              "hrid": "ho00000004",
+              "illPolicyId": null,
+              "instanceId": "7fbd5d84-62d1-44c6-9c45-6cb173998bbd",
+              "metadata": {
+                "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                "createdByUsername": null,
+                "createdDate": "2019-01-05T02:51:35.587+0000",
+                "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                "updatedByUsername": null,
+                "updatedDate": "2019-01-05T02:51:35.587+0000"
+              },
+              "notes": [],
+              "numberOfItems": null,
+              "permanentLocationId": "53cf956f-c1df-410b-8bea-27f712cca7c0",
+              "permanentLocation": {
+                "campusId": "62cf76b7-cca5-4d33-9217-edf42ce1a848",
+                "campus": {
+                  "code": "CC",
+                  "id": "62cf76b7-cca5-4d33-9217-edf42ce1a848",
+                  "institutionId": "40ee00ca-a518-4b49-be01-0638d0a4ac57",
+                  "name": "City Campus"
+                },
+                "code": "KU/CC/DI/A",
+                "description": null,
+                "discoveryDisplayName": null,
+                "id": "53cf956f-c1df-410b-8bea-27f712cca7c0",
+                "institutionId": "40ee00ca-a518-4b49-be01-0638d0a4ac57",
+                "institution": {
+                  "code": "KU",
+                  "id": "40ee00ca-a518-4b49-be01-0638d0a4ac57",
+                  "name": "Københavns Universitet"
+                },
+                "isActive": true,
+                "libraryId": "5d78803e-ca04-4b4a-aeae-2c63b924518b",
+                "library": {
+                  "code": "DI",
+                  "id": "5d78803e-ca04-4b4a-aeae-2c63b924518b",
+                  "name": "Datalogisk Institut"
+                },
+                "metadata": {
+                  "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "createdByUsername": null,
+                  "createdDate": "2019-01-05T02:49:56.679+0000",
+                  "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "updatedByUsername": null,
+                  "updatedDate": "2019-01-05T02:49:56.679+0000"
+                },
+                "name": "Annex",
+                "primaryServicePoint": "3a40852d-49fd-4df2-a1f9-6e2641a6e91f",
+                "primaryServicePointObject": {
+                  "code": "cd1",
+                  "description": null,
+                  "discoveryDisplayName": "Circulation Desk -- Hallway",
+                  "id": "3a40852d-49fd-4df2-a1f9-6e2641a6e91f",
+                  "name": "Circ Desk 1",
+                  "pickupLocation": null,
+                  "shelvingLagTime": null
+                },
+                "servicePointIds": [
+                  "3a40852d-49fd-4df2-a1f9-6e2641a6e91f"
+                ],
+                "servicePoints": [
+                  {
+                    "code": "cd1",
+                    "description": null,
+                    "discoveryDisplayName": "Circulation Desk -- Hallway",
+                    "id": "3a40852d-49fd-4df2-a1f9-6e2641a6e91f",
+                    "name": "Circ Desk 1",
+                    "pickupLocation": null,
+                    "shelvingLagTime": null
+                  }
+                ]
+              },
+              "receiptStatus": null,
+              "receivingHistory": null,
+              "retentionPolicy": null,
+              "shelvingTitle": null,
+              "statisticalCodeIds": [],
+              "temporaryLocationId": null
+            }
+          ],
+          "hrid": "in00000002",
+          "id": "7fbd5d84-62d1-44c6-9c45-6cb173998bbd",
+          "identifiers": [
+            {
+              "identifierTypeId": "5d164f4b-0b15-4e42-ae75-cfcf85318ad9",
+              "identifierType": {
+                "id": "5d164f4b-0b15-4e42-ae75-cfcf85318ad9",
+                "name": "Control Number",
+                "metadata": {
+                  "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "createdByUsername": null,
+                  "createdDate": "2019-01-05T02:47:39.042+0000",
+                  "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+                  "updatedByUsername": null,
+                  "updatedDate": "2019-01-05T02:47:39.042+0000"
+                }
+              },
+              "value": "ocn956625961"
+            }
+          ],
+          "indexTitle": null,
+          "instanceFormatIds": [],
+          "instanceFormats": null,
+          "instanceTypeId": "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+          "languages": [
+            "eng"
+          ],
+          "metadata": {
+            "createdByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+            "createdByUsername": null,
+            "createdDate": "2019-01-05T02:50:50.984+0000",
+            "updatedByUserId": "af88f36b-0434-5827-9e1e-89922946d487",
+            "updatedByUsername": null,
+            "updatedDate": "2019-01-05T02:50:50.984+0000"
+          },
+          "modeOfIssuanceId": null,
+          "notes": [
+            "Bridget Jones finds herself unexpectedly pregnant at the eleventh hour. However, her joyful pregnancy is dominated by one crucial but awkward question --who is the father? Could it be honorable, decent, notable human rights lawyer, Mark Darcy? Or, is it charming, witty, and totally despicable, Daniel Cleaver?"
+          ],
+          "physicalDescriptions": [
+            "219 pages ; 20 cm."
+          ],
+          "previouslyHeld": true,
+          "publication": [
+            {
+              "dateOfPublication": "2016",
+              "place": "New York",
+              "publisher": "Alfred A. Knopf",
+              "role": null
+            }
+          ],
+          "publicationFrequency": [
+            "A frequency description"
+          ],
+          "publicationRange": [
+            "A publication range"
+          ],
+          "series": [],
+          "source": "MARC",
+          "sourceRecordFormat": null,
+          "staffSuppress": true,
+          "statisticalCodeIds": [],
+          "statusId": null,
+          "statusUpdatedDate": null,
+          "subjects": [
+            "Jones, Bridget",
+            "Pregnant women",
+            "England",
+            "Humorous fiction",
+            "Diary fiction"
+          ],
+          "title": "Bridget Jones's Baby: the diaries"
+        }
+      ]
+    }
+  }
+}
