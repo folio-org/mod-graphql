@@ -99,6 +99,16 @@
           "itemNoteTypeId": {
             "type": "string"
           },
+          "itemNoteType": {
+            "type": "object",
+            "folio:$ref": "itemnotetype.json",
+            "readonly": true,
+            "folio:isVirtual": true,
+            "folio:linkBase": "item-note-types",
+            "folio:linkFromField": "itemNoteTypeId",
+            "folio:linkToField": "id",
+            "folio:includedElement": "itemNoteTypes.0"
+          },
           "note": {
             "type": "string"
           },
@@ -107,6 +117,30 @@
             "default": false
           }
         }
+      }
+    },
+    "circulationNotes": {
+      "type": "array",
+      "description": "Notes to be displayed in circulation processes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "noteType": {
+            "type": "string",
+            "description": "Type of circulation process that the note applies to",
+            "enum": ["Check in", "Check out"]
+          },
+          "note": {
+            "type": "string",
+            "description": "Text to display"
+          },
+          "staffOnly": {
+            "type": "boolean",
+            "default": "Flag to restrict display of this note",
+            "default": false
+          }
+        },
+        "additionalProperties": false
       }
     },
     "status": {

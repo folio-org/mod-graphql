@@ -29,6 +29,16 @@
     "permanentLocationId": {
       "type": "string"
     },
+    "permanentLocation": {
+      "type": "object",
+      "folio:$ref": "location.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "locations",
+      "folio:linkFromField": "permanentLocationId",
+      "folio:linkToField": "id",
+      "folio:includedElement": "locations.0"
+    },
     "temporaryLocationId": {
       "type": "string"
     },

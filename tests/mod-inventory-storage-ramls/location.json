@@ -23,11 +23,41 @@
     "institutionId": {
       "type": "string"
     },
+    "institution": {
+      "type": "object",
+      "folio:$ref": "locinst.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "location-units/institutions",
+      "folio:linkFromField": "institutionId",
+      "folio:linkToField": "id",
+      "folio:includedElement": "locinsts.0"
+    },
     "campusId": {
       "type": "string"
     },
+    "campus": {
+      "type": "object",
+      "folio:$ref": "loccamp.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "location-units/campuses",
+      "folio:linkFromField": "campusId",
+      "folio:linkToField": "id",
+      "folio:includedElement": "loccamps.0"
+    },
     "libraryId": {
       "type": "string"
+    },
+    "library": {
+      "type": "object",
+      "folio:$ref": "locinst.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "location-units/libraries",
+      "folio:linkFromField": "libraryId",
+      "folio:linkToField": "id",
+      "folio:includedElement": "loclibs.0"
     },
     "details": {
       "type": "object"
@@ -35,6 +65,17 @@
     "primaryServicePoint": {
       "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
       "type": "string"
+    },
+    "primaryServicePointObject": {
+      "type": "object",
+      "description": "Dereferenced object for primary service point. This should really just be called 'primaryServicePoint', but the field containing the ID of this object has that name -- it should really be called 'primaryServicePointId' -- so we need something different for this one.",
+      "$ref": "servicepoint.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "service-points",
+      "folio:linkFromField": "primaryServicePoint",
+      "folio:linkToField": "id",
+      "folio:includedElement": "servicepoints.0"
     },
     "servicePointIds": {
       "type": "array",
@@ -45,6 +86,20 @@
           "type": "null"
         }
       }
+    },
+    "servicePoints": {
+      "type": "array",
+      "description": "List of dereferenced service points",
+      "items": {
+        "type": "object",
+        "$ref": "servicepoint.json"
+      },
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "service-points",
+      "folio:linkFromField": "servicePointIds",
+      "folio:linkToField": "id",
+      "folio:includedElement": "servicepoints"
     },
     "metadata": {
       "type": "object",
