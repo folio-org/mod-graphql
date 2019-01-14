@@ -34,7 +34,6 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
     } else {
       args.query = `${linkToField}=="${val}"`;
     }
-    console.log('QUERY', val, '->', args.query);
   }
   const search = queryString.stringify(args);
 
