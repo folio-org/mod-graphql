@@ -1,0 +1,96 @@
+From a Slack chat with Adam Dickmeiss, 9:45 AM on Monday 14 January 2019.
+
+--
+
+This fixes the problem.
+
+	adam@bagel:~/folio/mod-inventory-storage/ramls$ git diff
+	diff --git a/ramls/instance.json b/ramls/instance.json
+	index 7d1f0bbc..bb8a04c6 100644
+	--- a/ramls/instance.json
+	+++ b/ramls/instance.json
+	@@ -162,7 +162,7 @@
+		    "type": "string",
+		    "description": "List of classification schemas (e.g. LC, Canadian Classification, NLM, National Agricultural Library, UDC, and Dewey)"
+		  },
+	-          "classificationType": {
+	+          "classificationType2": {
+		    "type": "object",
+		    "description": "Dereferenced classification schema",
+		    "readonly": true,
+	diff --git a/ramls/item.json b/ramls/item.json
+	index e81fc5cf..a5303ea7 100644
+	--- a/ramls/item.json
+	+++ b/ramls/item.json
+	@@ -99,7 +99,7 @@
+		  "itemNoteTypeId": {
+		    "type": "string"
+		  },
+	-          "itemNoteType": {
+	+          "itemNoteType2": {
+		    "type": "object",
+		    "folio:$ref": "itemnotetype.json",
+		    "readonly": true,
+
+I saw that on Friday but since there were two types you introduced, I didn't see that I partially fixed it.
+
+It makes perfect sense.
+
+Here's a fix that keeps the JSON properties, but fixes it via JavaType:
+
+	adam@bagel:~/folio/mod-inventory-storage$ git diff
+	diff --git a/ramls/instance.json b/ramls/instance.json
+	index 7d1f0bbc..ebfaf866 100644
+	--- a/ramls/instance.json
+	+++ b/ramls/instance.json
+	@@ -164,6 +164,7 @@
+		  },
+		  "classificationType": {
+		    "type": "object",
+	+            "javaType" : "org.folio.rest.jaxrs.model.ClassificationType2",
+		    "description": "Dereferenced classification schema",
+		    "readonly": true,
+		    "folio:$ref": "classificationtype.json",
+	diff --git a/ramls/item.json b/ramls/item.json
+	index e81fc5cf..0f999879 100644
+	--- a/ramls/item.json
+	+++ b/ramls/item.json
+	@@ -101,6 +101,7 @@
+		  },
+		  "itemNoteType": {
+		    "type": "object",
+	+            "javaType" : "org.folio.rest.jaxrs.model.ItemNoteType2",
+		    "folio:$ref": "itemnotetype.json",
+		    "readonly": true,
+		    "folio:isVirtual": true,
+
+And .. Finally, using real ref's of course also fixes things.. But I bet there was a reason NOT to do that:: ie:
+
+	adam@bagel:~/folio/mod-inventory-storage$ git diff
+	diff --git a/ramls/instance.json b/ramls/instance.json
+	index 7d1f0bbc..2c79e6ac 100644
+	--- a/ramls/instance.json
+	+++ b/ramls/instance.json
+	@@ -166,7 +166,7 @@
+		    "type": "object",
+		    "description": "Dereferenced classification schema",
+		    "readonly": true,
+	-            "folio:$ref": "classificationtype.json",
+	+            "$ref": "classificationtype.json",
+		    "readonly": true,
+		    "folio:isVirtual": true,
+		    "folio:linkBase": "classification-types",
+	diff --git a/ramls/item.json b/ramls/item.json
+	index e81fc5cf..7e494ebc 100644
+	--- a/ramls/item.json
+	+++ b/ramls/item.json
+	@@ -101,7 +101,7 @@
+		  },
+		  "itemNoteType": {
+		    "type": "object",
+	-            "folio:$ref": "itemnotetype.json",
+	+            "$ref": "itemnotetype.json",
+		    "readonly": true,
+		    "folio:isVirtual": true,
+		    "folio:linkBase": "item-note-types",
+
