@@ -1,16 +1,17 @@
 
 buildNPM {
   buildNode = 'jenkins-slave-all'
-  npmDeploy = 'no'
-  runLint = 'no'
-  runTest = 'yes'
-  publishAPI = 'no'
-  publishModDescriptor = 'yes'
+  npmDeploy = false
+  runLint = false
+  runTest = true
+  publishAPI = false
+  publishModDescriptor = true
   modDescriptor = 'ModuleDescriptor.json'
 
   doDocker = {
     buildDocker {
       publishMaster = 'yes'
+      dockerDir = 'project'
       healthChk = 'no'
     }
   }
