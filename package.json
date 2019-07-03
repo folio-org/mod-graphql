@@ -37,7 +37,7 @@
     "node-fetch": "^1.7.3",
     "node-getopt": "^0.3.2",
     "query-string": "^5.0.1",
-    "raml-1-parser": "^1.1.42",
+    "raml-1-parser": "1.1.47",
     "strict-uri-encode": "^2.0.0"
   },
   "devDependencies": {
