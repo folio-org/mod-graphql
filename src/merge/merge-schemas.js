@@ -10,4 +10,4 @@ const baseSchema = parseSchema('../../tests/mod-inventory-storage-ramls/instance
 const overlaySchema = parseSchema('overlaySchema.json');
 
 const merged = mergeJsonSchemas([baseSchema, overlaySchema]);
-console.log(JSON.stringify(merged, null, 2));
+console.log(JSON.stringify(merged, null, 2)); // eslint-disable-line no-console
