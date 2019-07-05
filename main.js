@@ -1,5 +1,7 @@
+import Logger from './src/configuredLogger';
 import modGraphql from './src/app';
 
+const logger = new Logger();
 const app = modGraphql(process.argv.slice(2));
 
 if (process.env.CONSOLE_TRACE) {
@@ -20,4 +22,6 @@ if (process.env.CONSOLE_TRACE) {
   });
 }
 
-app.listen(3001, '0.0.0.0');
+const port = 3001; // XXX should provide a way to change this
+logger.log('listen', `listening on port ${port}`);
+app.listen(port, '0.0.0.0');
