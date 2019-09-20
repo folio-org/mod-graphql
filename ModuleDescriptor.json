@@ -15,9 +15,12 @@
   ],
   "launchDescriptor": {
     "dockerImage": "mod-graphql:0.1.0",
+    "dockerPull": false,
     "dockerArgs": {
-      "HostConfig": { "PortBindings": { "3001/tcp":  [{ "HostPort": "%p" }] } }
-    },
-    "dockerPull" : false
+      "HostConfig": {
+        "Memory": 268435456,
+        "PortBindings": { "3001/tcp": [ { "HostPort": "%p" } ] }
+      }
+    }
   }
 }
