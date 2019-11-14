@@ -13,6 +13,7 @@
     * [Get holdings record for items](#get-holdings-record-for-items)
     * [Get holdings record and instance for items](#get-holdings-record-and-instance-for-items)
     * [Fetch the title of a single item's instance](#fetch-the-title-of-a-single-items-instance)
+* [Using `curl` from the command-line](#using-curl-from-the-command-line)
 
 
 ## Setup
@@ -232,3 +233,54 @@ As before, but stepping up a level further.
 	  }
 	}
 
+
+## Using `curl` from the command-line
+
+Here is a brief example of using the command-line to run GraphQL queries on a FOLIO platform. In this example, we will get item information for the first three instances in the ReShare shared index. We will obtain a token by logging in with [the `okapi` command-line client](https://github.com/thefrontside/okapi.rb), then use it directly in `curl`.
+
+```
+ringo:tmp$ okapi login
+username: diku_admin
+password: *****
+Login successful. Token saved to /Users/mike/.okapi
+ringo:tmp$ cat ~/.okapi
+OKAPI_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6IjIwODJlZTMyLTZjNzYtNTBlNS04ZDg5LTdjOGU0MTk1YWIxZSIsImlhdCI6MTU3MzczNTg0NywidGVuYW50IjoiZGlrdSJ9.j9C_t1ICOTwpOymio90BtFPgy2GQpVN-kI_OWP2fJMM
+OKAPI_URL=https://folio-snapshot-okapi.aws.indexdata.com
+OKAPI_TENANT=diku
+ringo:tmp$ cat query.graphql 
+{"query":"query {
+  item_storage_items(limit: 3) {
+    totalRecords
+    items {
+      id
+      barcode
+      enumeration
+      holdingsRecord2 {
+        id
+        callNumber
+        permanentLocationId
+        holdingsInstance {
+          id
+          title
+          contributors {
+            contributorTypeId
+            contributorTypeText
+            primary
+          }
+        }
+      }
+    }
+  }
+}
+","variables":null}
+ringo:tmp$ . ~/.okapi
+ringo:tmp$ curl \
+	-H "X-Okapi-Tenant: $OKAPI_TENANT" \
+	-H "X-Okapi-Token: $OKAPI_TOKEN" \
+	-H "Content-Type: application/json" \
+	-X POST \
+	-d @query.graphql \
+	$OKAPI_URL/graphql
+{"data":{"item_storage_items":{"totalRecords":43,"items":[{"id":"23fdb0bc-ab58-442a-b326-577a96204487","barcode":"653285216743","enumeration":null,"holdingsRecord2":{"id":"e6d7e91a-4dbc-4a70-9b38-e000d2fbdc79","callNumber":"some-callnumber","permanentLocationId":"fcd64ce1-6995-48f0-840e-89ffa2288371","holdingsInstance":{"id":"cf23adf0-61ba-4887-bf82-956c4aae2260","title":"Temeraire","contributors":[{"contributorTypeId":null,"contributorTypeText":null,"primary":null}]}}},{"id":"645549b1-2a73-4251-b8bb-39598f773a93","barcode":"A14813848587","enumeration":"v.71:no.6-2","holdingsRecord2":{"id":"0c45bb50-7c9b-48b0-86eb-178a494e25fe","callNumber":"K1 .M44","permanentLocationId":"fcd64ce1-6995-48f0-840e-89ffa2288371","holdingsInstance":{"id":"69640328-788e-43fc-9c3c-af39e243f3b7","title":"ABA Journal","contributors":[]}}},{"id":"eedd13c4-7d40-4b1e-8f77-b0b9d19a896b","barcode":"A1429864347","enumeration":"v.72:no.6-7,10-12","holdingsRecord2":{"id":"0c45bb50-7c9b-48b0-86eb-178a494e25fe","callNumber":"K1 .M44","permanentLocationId":"fcd64ce1-6995-48f0-840e-89ffa2288371","holdingsInstance":{"id":"69640328-788e-43fc-9c3c-af39e243f3b7","title":"ABA Journal","contributors":[]}}}]}}}ringo:tmp$ cat ~/.okapi
+ringo:tmp$ 
+```
