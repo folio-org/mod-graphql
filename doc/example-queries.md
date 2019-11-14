@@ -3,7 +3,7 @@
 <!-- md2toc -l 2 example-queries.md -->
 * [Setup](#setup)
 * [Queries](#queries)
-* [List all instances](#list-all-instances)
+    * [List all instances](#list-all-instances)
     * [Fetch a single instance](#fetch-a-single-instance)
     * [Specify instance ID as a variable instead of inline](#specify-instance-id-as-a-variable-instead-of-inline)
     * [Search for instances whose titles have words beginning with "z"](#search-for-instances-whose-titles-have-words-beginning-with-z)
@@ -26,7 +26,7 @@ Then start [folio-graphiql](https://github.com/folio-org/folio-graphiql), log in
 
 ## Queries
 
-## List all instances
+### List all instances
 
 	query {
 	  instance_storage_instances {
