@@ -232,6 +232,19 @@
       "folio:linkToField": "holdingsRecordId",
       "folio:includedElement": "items"
     },
+    "bareHoldingsItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "item.json"
+      },
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "item-storage/items",
+      "folio:linkFromField": "id",
+      "folio:linkToField": "holdingsRecordId",
+      "folio:includedElement": "items"
+    },
     "holdingsInstance": {
       "type": "object",
       "folio:$ref": "instance.json",
