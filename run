@@ -1,0 +1,9 @@
+# To run against a remote Okapi
+# * Set OKAPI_URL and OKAPI_TENANT in ~/.okapi
+# * Run `okapi login` and enter username and password
+# * Run this script to start the service with appropriate parameters
+# * In a shell, set environment variables using `. ~/.okapi`
+# * Run a query using `curl -H "X-Okapi-Url: $OKAPI_URL" -H "X-Okapi-Tenant: $OKAPI_TENANT" -H "X-Okapi-Token: $OKAPI_TOKEN" -H "Content-Type: application/json" -X POST -d @query.graphql http://localhost:3001/graphql`
+
+. ~/.okapi
+LOGCAT=listen,url yarn start ../mod-inventory-storage/ramls/i*-storage.raml
