@@ -9,7 +9,6 @@ const QUERY = `{
   instance_storage_instances_SINGLE(instanceId: "7fbd5d84-62d1-44c6-9c45-6cb173998bbd") {
     id
     title
-    alternativeTitles
     subjects
     holdingsRecords2 {
       id
@@ -44,11 +43,9 @@ describe('13. query returns an instance with holdings', () => {
       expect(json.data, 'the sole element should be an object').to.be.instanceOf(Object);
       const record = json.data.instance_storage_instances_SINGLE;
       expect(record, 'response instance should be an object').to.be.instanceOf(Object);
-      expect(Object.keys(record).length, 'exactly five fields should be included').to.equal(5);
+      expect(Object.keys(record).length, 'exactly four fields should be included').to.equal(4);
       expect(record.id, 'fields should include an ID').to.exist;
       expect(record.title, 'fields should include a title').to.exist;
-      expect(record.alternativeTitles, 'fields should include alternativeTitles').to.exist;
-      expect(record.alternativeTitles, 'alternativeTitles should be an array').to.be.instanceOf(Array);
       expect(record.subjects, 'fields should include subjects').to.exist;
       expect(record.subjects, 'subjects should be an array').to.be.instanceOf(Array);
       expect(record.holdingsRecords2, 'fields should include holdings').to.exist;
