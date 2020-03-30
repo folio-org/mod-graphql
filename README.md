@@ -210,6 +210,7 @@ Documentation for developers of the module:
 * Documentation of [the schema/resolver auto-generation code](src/autogen/README.md), including [the JSON Schema extensions for link-fields](src/autogen/README.md#option-1-json-schema-extensions).
 * Documentation of [the intermediate in-memory representaton of a compiled API](src/autogen/data-structure.md), only of interest to mod-graphql developers.
 * [How to remove running modules](doc/remove-running-modules.md) from a FOLIO installation: useful if you need to substitute your own in-development module. This is an important document, but should be part of core FOLIO documentation, not part of mod-graphql.
+* Important [note on inventory RAMLs and JSON Schemas](tests/README.md): there are often two sets of these, and you do _not_ want to get them mixed up.
 
 Also:
 
