@@ -7,6 +7,7 @@
 * Correctly handle linking from array-valued fields (including doing nothing for an empty-array value). Fixes MODGQL-120.
 * Add [`src/merge`](src/merge) area, showing how to merge an overlay JSON Schema to add link-fields to a schema that lacks them. Fixes MODGQL-119.
 * Include mod-users APIs in Docker container.
+* Add link fields for the holdings structure's `illPolicy`. Fixes ReShare issue PR-574.
 
 ## [1.1.0](https://github.com/folio-org/mod-graphql/tree/v1.1.0) (2018-10-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.0.0...v1.1.0)
