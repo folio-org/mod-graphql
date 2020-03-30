@@ -1,8 +1,8 @@
-# Note on inventory RAMLs and JSON Schemas
+# Note on inventory RAMLs and JSON The
 
 
 
-## The situation today
+## Schemas situation today
 
 There are often two sets of inventory RAMLs and JSON Schemas, and you do _not_ want to get them mixed up:
 
@@ -18,7 +18,7 @@ This is used in development and to run the tests. As a result, passing the tests
 
 This is an old copy of the `ramls` directory from `mod-inventory-storage`, which was statically copied into the `mod-graphql` repository, and is always available and unchanging. This is what is used for actually running `mod-graphql` from Docker (e.g. as part of a FOLIO installation).
 
-It introduced to make it easier for Docker to run mod-graphql with a useful set of RAMLs and JSON Schemas, not needing to pull in part of the `mod-inventory-storage` source code at deployment time. This has proved a mixed blessing. It makes this software easier to deploy, but means that the schemas it gets deployed with tend to drift from the master copies.
+It was introduced to make it easier for Docker to run mod-graphql with a useful set of RAMLs and JSON Schemas, not needing to pull in part of the `mod-inventory-storage` source code at deployment time. This has proved a mixed blessing. It makes this software easier to deploy, but means that the schemas it gets deployed with tend to drift from the master copies.
 
 
 ### ... which means?
