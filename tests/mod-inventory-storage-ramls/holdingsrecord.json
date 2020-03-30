@@ -121,6 +121,16 @@
       "type": "string",
       "description": "unique ID for an ILL policy, a UUID"
     },
+    "illPolicy": {
+      "type": "object",
+      "folio:$ref": "illpolicy.json",
+      "readonly": true,
+      "folio:isVirtual": true,
+      "folio:linkBase": "ill-policies",
+      "folio:linkFromField": "illPolicyId",
+      "folio:linkToField": "id",
+      "folio:includedElement": "."
+    },
     "retentionPolicy": {
       "type": "string"
     },

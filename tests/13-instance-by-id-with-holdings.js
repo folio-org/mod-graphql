@@ -12,6 +12,12 @@ const QUERY = `{
     subjects
     holdingsRecords2 {
       id
+      illPolicyId
+      illPolicy {
+        id
+        name
+        source
+      }
       callNumber
       instanceId
       holdingsItems {
@@ -34,6 +40,7 @@ describe('13. query returns an instance with holdings', () => {
       .then(res => { response = res; }));
 
     it('got a successful HTTP response', () => {
+      if (response.status != 200) console.log('*** status =', response.status, response.text);
       expect(response, 'server returns a good response').to.have.status(200);
     });
 
@@ -59,8 +66,9 @@ describe('13. query returns an instance with holdings', () => {
       expect(hr, 'holdings should be an array').to.be.instanceOf(Array);
       expect(hr.length, 'holdings should contain two records').to.equal(2);
       for (let i = 0; i < 2; i++) {
-        expect(Object.keys(hr[i]).length, 'exactly four holdings fields should be included').to.equal(4);
+        expect(Object.keys(hr[i]).length, 'exactly six holdings fields should be included').to.equal(6);
         'id,callNumber,instanceId,holdingsItems'.split(',').forEach(field => {
+          // illPolicy and illPolicyId do exist, but are null, so (wrongly) fail the to.exist test.
           expect(hr[i][field], `holdings field '${field}' should exist`).to.exist;
           expect(hr[i].instanceId, 'holdings instanceId should match instance ID').to.equal(record.id);
         });
