@@ -40,7 +40,8 @@ describe('13. query returns an instance with holdings', () => {
       .then(res => { response = res; }));
 
     it('got a successful HTTP response', () => {
-      if (response.status != 200) console.log('*** status =', response.status, response.text);
+      // eslint-disable-next-line no-console
+      if (response.status !== 200) console.log('*** status =', response.status, response.text);
       expect(response, 'server returns a good response').to.have.status(200);
     });
 

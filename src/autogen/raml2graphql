@@ -8,13 +8,14 @@
 // the "graphql" branch and mod-kb-ebsco to be on the
 // "json-schema-for-mod-kb-providers-endpoint" branch
 
+const optParser = require('node-getopt');
 const packageInfo = require('../../package.json');
 const Logger = require('../configuredLogger');
 const { listAPIs } = require('./listAPIs');
 const { convertAPIs } = require('./convertAPI');
 
 const argv0 = process.argv[1].replace(/.*\//, '');
-const opt = require('node-getopt').create([
+const opt = optParser.create([
   ['a', 'api', 'Parse YAML description of APIs and translate them all'],
   ['d', 'dir=DIRECTORY', 'Under -a, fetch RAMLs from modules in specified directory'],
   ['s', 'skip', 'Under -a, skip modules that are not present in the filesystem'],
