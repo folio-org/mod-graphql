@@ -6,5 +6,6 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 COPY . .
+RUN ./tests/setup.sh --production
 EXPOSE 3001
-CMD yarn start tests/mod-inventory-storage-ramls/*.raml tests/mod-users-ramls/*.raml
+CMD yarn start tests/input/*/ramls/*.raml
