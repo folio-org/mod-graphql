@@ -28,7 +28,7 @@ Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
 
 ## Overview
 
-`mod-graphql` is a [FOLIO module](https://github.com/folio-org/okapi/blob/master/doc/guide.md#architecture), written in Node.js, that provides a [GraphQL](https://graphql.org/) service by HTTP POST to `/graphql/`. It can be interrogated using any GraphQL client library, such as [Apollo](https://github.com/apollographql/apollo-client/), and the graph it provides is auto-generated from API the description files ([RAML](https://raml.org/) and [JSON Schema](https://json-schema.org/)) of the modules that it's providing the GraphQL API for.
+`mod-graphql` is a [FOLIO module](https://github.com/folio-org/okapi/blob/master/doc/guide.md#architecture), written in Node.js, that provides a [GraphQL](https://graphql.org/) service by HTTP POST to `/graphql/`. It can be interrogated using any GraphQL client library, such as [Apollo](https://github.com/apollographql/apollo-client/), and the graph it provides is auto-generated from the API description files ([RAML](https://raml.org/) and [JSON Schema](https://json-schema.org/)) of the modules that it's providing the GraphQL API for.
 
 Using GraphQL instead of the individual modules' low-level RESTful WSAPIs makes it possible to link between different kinds of API object using rich structured queries such as the following, which finds bibliographic instances of books with "baby" in the title, and returns them along with the associated holdings statements and the barcodes of the individual items in each holding:
 
@@ -106,7 +106,7 @@ When started in this mode, `mod-graphql` assembles the list of RAMLs from the sp
 and
 [`RAML_MATCH`](#raml_match).
 
-API files are written in YAML, and are described in the FOLIO document [How to configure the generation of API documentation](https://dev.folio.org/faqs/how-to-configure-api-doc-generation/). The FOLIO project maintains [A master API file](https://github.com/folio-org/folio-org.github.io/blob/master/_data/api.yml) describing the RAMLs of all the core FOLIO modules: the simplest way to create an API file for given installation of `mod-graphql` may be to copy that file and remove the part that are not needed.
+API files are written in YAML, and are described in the FOLIO document [How to configure the generation of API documentation](https://dev.folio.org/faqs/how-to-configure-api-doc-generation/). The FOLIO project maintains [A master API file](https://github.com/folio-org/folio-org.github.io/blob/master/_data/api.yml) describing the RAMLs of all the core FOLIO modules: the simplest way to create an API file for given installation of `mod-graphql` may be to copy that file and remove the parts that are not needed.
 
 
 ## Environment
