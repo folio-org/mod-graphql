@@ -8,8 +8,8 @@
 * Add [`src/merge`](src/merge) area, showing how to merge an overlay JSON Schema to add link-fields to a schema that lacks them. Fixes MODGQL-119.
 * Include mod-users APIs in Docker container.
 * Add link fields for the holdings structure's `illPolicy`. Fixes ReShare issue PR-611.
-* Add new document [_Note on inventory RAMLs and JSON Schemas_](tests/README.md).
 * Add new section to [_Example queries against mod-inventory-storage_](doc/example-queries.md) on [Using `curl` against a local docker-containerised mod-graphql](doc/example-queries.md#using-curl-against-a-local-docker-containerised-mod-graphql)
+* Dockerization now gets RAMLs and JSON Schemas by pulling the required modules from git rather than using a redundant copy from this repository. Included as of v1.2.1.
 
 ## [1.1.0](https://github.com/folio-org/mod-graphql/tree/v1.1.0) (2018-10-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.0.0...v1.1.0)
