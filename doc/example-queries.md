@@ -14,6 +14,7 @@
     * [Get holdings record and instance for items](#get-holdings-record-and-instance-for-items)
     * [Fetch the title of a single item's instance](#fetch-the-title-of-a-single-items-instance)
 * [Using `curl` from the command-line](#using-curl-from-the-command-line)
+* [Using `curl` against a local docker-containerised mod-graphql](#using-curl-against-a-local-docker-containerised-mod-graphql)
 
 
 ## Setup
@@ -310,4 +311,17 @@ ringo:tmp$ curl \
       }
    }
 }
+```
+
+
+## Using `curl` against a local Docker-containerised mod-graphql
+
+Suppose you build and run a Docker container for `mod-graphql`, using (say):
+```
+docker build --tag mod-graphql:1.1.0-2 .
+docker run --publish 8345:3001 --detach --name gql mod-graphql:1.1.0-2
+```
+This happens to expose the containerised module's listener on port 8345. To run GraphQL queries against this and have them forwarded to a running Okapi-mediated FOLIO back-end, you need to pass an explicit `X-Okapi-Url` to the `mod-graphql` on the local port, since it can't generate this from the URL by which it has itself been addressed. So set things up as in the previous section, then:
+```
+curl -H "X-Okapi-Url: $OKAPI_URL" -H "X-Okapi-Tenant: $OKAPI_TENANT" -H "X-Okapi-Token: $OKAPI_TOKEN" -H "Content-Type: application/json" -X POST -d @query.graphql http://localhost:8345/graphql | json_pp
 ```
