@@ -1,0 +1,18 @@
+{
+  "query": "query {
+    instance_storage_instances(query: \"title=baby brother\") {
+      totalRecords
+      instances {
+        id
+        title
+        identifiers {
+          value
+          identifierTypeId
+          identifierTypeObject {
+            id name source
+          }
+        }
+      }
+    }
+  }"
+}
