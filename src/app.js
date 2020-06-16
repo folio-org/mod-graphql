@@ -38,25 +38,27 @@ function modGraphql(argv) {
   }
 
   const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const app = express();
 
-  return express()
-    .post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
-      schema,
-      // debug: false, // if you don't want error objects passed to console.error()
-      context: {
-        query: request.body,
-        okapi: {
-          url: process.env.OKAPI_URL || request.get('X-Okapi-Url'),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-Okapi-Tenant': request.get('X-Okapi-Tenant'),
-            'X-Okapi-Token': request.get('X-Okapi-Token')
-          }
-        },
-        logger,
-      }
-    })));
+  app.post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
+    schema,
+    // debug: false, // if you don't want error objects passed to console.error()
+    context: {
+      query: request.body,
+      okapi: {
+        url: process.env.OKAPI_URL || request.get('X-Okapi-Url'),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-Okapi-Tenant': request.get('X-Okapi-Tenant'),
+          'X-Okapi-Token': request.get('X-Okapi-Token')
+        }
+      },
+      logger,
+    }
+  })));
+
+  return app;
 }
 
 export default modGraphql;
