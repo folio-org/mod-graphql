@@ -5,5 +5,6 @@
     "no-console": ["error", { allow: ["warn", "error", "info"] }],
     "one-var": "off",
     "one-var-declaration-per-line": "off",
+    "prefer-object-spread": "off",
   }
 }
