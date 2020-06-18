@@ -1,7 +1,5 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import { ApolloServer } from 'apollo-server-express';
-import { makeExecutableSchema } from 'graphql-tools';
 import Logger from './configuredLogger';
 import { listAPIs } from './autogen/listAPIs';
 import resolve from './resolve';
@@ -13,9 +11,9 @@ function modGraphql(argv) {
   const logger = new Logger();
   const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
   logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
-  const res = convertAPIs(ramlArray, resolve, { logger });
-  const typeDefs = res.schema;
-  const resolvers = res.resolvers;
+  const converted = convertAPIs(ramlArray, resolve, { logger });
+  const typeDefs = converted.schema;
+  const resolvers = converted.resolvers;
   logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 
   function badRequest(response, reason) {
