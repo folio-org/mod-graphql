@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { graphqlExpress } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server';
 import { makeExecutableSchema } from 'graphql-tools';
 import Logger from './configuredLogger';
 import { listAPIs } from './autogen/listAPIs';
@@ -37,28 +37,30 @@ function modGraphql(argv) {
     }
   }
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers });
-  const app = express();
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: ({ req, res }) => {
+      // Trying to do this by hand, not sure if it will work
+      checkOkapiHeaders(req, res, () => undefined);
 
-  app.post('/graphql', bodyParser.json(), checkOkapiHeaders, graphqlExpress(request => ({
-    schema,
-    // debug: false, // if you don't want error objects passed to console.error()
-    context: {
-      query: request.body,
-      okapi: {
-        url: process.env.OKAPI_URL || request.get('X-Okapi-Url'),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'X-Okapi-Tenant': request.get('X-Okapi-Tenant'),
-          'X-Okapi-Token': request.get('X-Okapi-Token')
-        }
-      },
-      logger,
-    }
-  })));
+      return {
+        query: req.body,
+        okapi: {
+          url: process.env.OKAPI_URL || req.get('X-Okapi-Url'),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-Okapi-Tenant': req.get('X-Okapi-Tenant'),
+            'X-Okapi-Token': req.get('X-Okapi-Token')
+          }
+        },
+        logger,
+      };
+    },
+  });
 
-  return app;
+  return server;
 }
 
 export default modGraphql;
