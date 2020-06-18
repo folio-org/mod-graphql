@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import Logger from './configuredLogger';
 import { listAPIs } from './autogen/listAPIs';
@@ -60,7 +60,9 @@ function modGraphql(argv) {
     },
   });
 
-  return server;
+  const app = express();
+  server.applyMiddleware({ app });
+  return app;
 }
 
 export default modGraphql;

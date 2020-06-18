@@ -21,11 +21,11 @@
   },
   "dependencies": {
     "@folio/stripes-logger": "^0.0.2",
-    "apollo-server": "^2.14.5",
+    "apollo-server-express": "^2.15.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "express": "^4.16.2",
+    "express": "^4.17.1",
     "query-string": "^5.0.1",
     "raml-1-parser": "1.1.47"
   },
