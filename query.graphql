@@ -1,6 +1,6 @@
 {
   "query": "query {
-    instance_storage_instances(query: \"title=baby brother\") {
+    instance_storage_instances(query: \"title=baby\") {
       totalRecords
       instances {
         id
