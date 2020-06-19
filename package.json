@@ -33,12 +33,6 @@
     "query-string": "^5.0.1",
     "raml-1-parser": "1.1.47"
   },
-  "non-dependencies": {
-    "body-parser": "^1.18.2",
-    "graphql-tools": "^2.7.0",
-    "node-getopt": "^0.3.2",
-    "strict-uri-encode": "^2.0.0"
-  },
   "devDependencies": {
     "@folio/eslint-config-stripes": "^5.2.100061",
     "babel-eslint": "^10.1.0",
