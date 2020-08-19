@@ -20,12 +20,12 @@ query {
 HTTP headers must be expressed as JSON object:
 ```
 {
-  "X-Okapi-URL":"https://folio-snapshot-okapi.aws.indexdata.com",
+  "X-Okapi-URL":"https://folio-snapshot-okapi.dev.folio.org",
   "X-Okapi-Tenant":"diku",
   "X-Okapi-Token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6Ijk1NDFkNTQ2LTkxOTItNWVmNS05ZmMzLWE5MTg4YmM1OWJjMSIsImlhdCI6MTU5MjQ3NTQ4NywidGVuYW50IjoiZGlrdSJ9.AlH6f1RXswUHJFWtse-_tMLHT6ZmAuyD_Qh5H6zx-QI"
 }
 ```
-And of course fill in the token using one obtained from a real FOLIO session. One easy way is to login at https://folio-snapshot.aws.indexdata.com/ then go to **Settings** &rarr; **Developer** &rarr; **Set token** and copy the token out of the textbox.
+And of course fill in the token using one obtained from a real FOLIO session. One easy way is to login at https://folio-snapshot.dev.folio.org/ then go to **Settings** &rarr; **Developer** &rarr; **Set token** and copy the token out of the textbox.
 
 Alternatively, assuming that the environment has been seeded by `okapi login; . ~/.okapi`, the same informtion can be encoded in a `curl` command:
 ```
