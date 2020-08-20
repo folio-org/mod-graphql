@@ -10,6 +10,7 @@
 * Add link fields for the holdings structure's `illPolicy`. Fixes ReShare issue PR-611.
 * Add new section to [_Example queries against mod-inventory-storage_](doc/example-queries.md) on [Using `curl` against a local docker-containerised mod-graphql](doc/example-queries.md#using-curl-against-a-local-docker-containerised-mod-graphql)
 * Dockerization now gets RAMLs and JSON Schemas by pulling the required modules from git rather than using a redundant copy from this repository. Included as of v1.2.1.
+* The `listen` invocation no longer specifies a second argument of `0.0.0.0`. For reasons I don't begin to understand, running in this way meant that, while Firefox, Telnet and `curl` could all access the service just fine, the FOLIO Z39.50 server (which is written in Perl using the LWP library for HTTP access) could not, mysteriously claiming the connection was refused. Removing the second argument fixes this: I have no idea why, I just stumbled over it after a fruitless day of random debugging.
 
 ## [1.1.0](https://github.com/folio-org/mod-graphql/tree/v1.1.0) (2018-10-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.0.0...v1.1.0)

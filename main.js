@@ -24,4 +24,4 @@ if (process.env.CONSOLE_TRACE) {
 
 const port = 3001; // XXX should provide a way to change this
 logger.log('listen', `listening on port ${port}`);
-app.listen(port, '0.0.0.0');
+app.listen(port);
