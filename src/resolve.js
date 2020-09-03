@@ -45,18 +45,20 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
       logger.log('result', url, '->', text);
       if (res.status >= 400) throw new GraphQLError(text);
       const json = JSON.parse(text);
+      let val;
       if (!skeleton) {
-        return json;
+        val = json;
       } else if (typeof skeleton === 'string') {
-        return get(json, skeleton.split('.'));
+        val = get(json, skeleton.split('.'));
       } else {
         // Skeleton is an object whose keys tell us what to return
-        const val = {};
+        val = {};
         Object.keys(skeleton).forEach(key => {
           val[key] = json[skeleton[key]];
         });
-        return val;
       }
+      logger.log('skeleton', skeleton, '->', JSON.stringify(val));
+      return val;
     }));
 }
 
