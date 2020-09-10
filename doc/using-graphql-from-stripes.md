@@ -147,3 +147,4 @@ In the GraphQL query sent by the client -- typically declared using a `gql` tag 
 
 Including the sub-elements is easy to overlook -- and very difficult to diagnose, because in this case `mod-graphql` simply does not return the newly added elements, and issues no diagnostics. It's quite right to behave this way: it's doing exactly what the client code is requesting. (If you think you detect here the kind of wisdom that comes only by experience, you are quite correct.)
 
+
