@@ -29,7 +29,7 @@
     "graphql": "^15.1.0",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.19",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "query-string": "^5.0.1",
     "raml-1-parser": "1.1.47"
   },
