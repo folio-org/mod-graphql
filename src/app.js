@@ -49,8 +49,8 @@ function modGraphql(argv) {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-Okapi-Tenant': req.get('X-Okapi-Tenant'),
-            'X-Okapi-Token': req.get('X-Okapi-Token')
+            'X-Okapi-Tenant':  process.env.OKAPI_TENANT || req.get('X-Okapi-Tenant'),
+            'X-Okapi-Token': process.env.OKAPI_TOKEN || req.get('X-Okapi-Token')
           }
         },
         logger,
@@ -59,7 +59,7 @@ function modGraphql(argv) {
   });
 
   const app = express();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: true });
   return app;
 }
 
