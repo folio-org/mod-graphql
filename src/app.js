@@ -59,7 +59,7 @@ function modGraphql(argv) {
   });
 
   const app = express();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false }); 
   return app;
 }
 
