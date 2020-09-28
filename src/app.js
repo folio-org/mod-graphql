@@ -42,15 +42,17 @@ function modGraphql(argv) {
       // Trying to do this by hand, not sure if it will work
       checkOkapiHeaders(req, res, () => undefined);
 
+      const { OKAPI_URL, OKAPI_TENANT, OKAPI_TOKEN } = process.env;
+
       return {
         query: req.body,
         okapi: {
-          url: process.env.OKAPI_URL || req.get('X-Okapi-Url'),
+          url: OKAPI_URL || req.get('X-Okapi-Url'),
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-Okapi-Tenant': req.get('X-Okapi-Tenant'),
-            'X-Okapi-Token': req.get('X-Okapi-Token')
+            'X-Okapi-Tenant': OKAPI_TENANT || req.get('X-Okapi-Tenant'),
+            'X-Okapi-Token': OKAPI_TOKEN || req.get('X-Okapi-Token')
           }
         },
         logger,
@@ -59,7 +61,7 @@ function modGraphql(argv) {
   });
 
   const app = express();
-  server.applyMiddleware({ app, cors: false }); 
+  server.applyMiddleware({ app, cors: false });
   return app;
 }
 
