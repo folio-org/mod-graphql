@@ -1,6 +1,7 @@
 # Change history for mod-graphql
 
-## 1.2.0 (IN PROGRESS)
+## [1.3.0](https://github.com/folio-org/mod-graphql/tree/v1.3.0) (2020-10-19)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.1.0...v1.3.0)
 
 * Add redundant copies of the `mod-inventory-storage` RAMLs, including the `raml-utils` submodule, in `tests/mod-inventory-storage-ramls`. This will make it much easier to run mod-graphql in a useful way from within Docker.
 * GraphQL schema generation emits a `_dummy` string field as a member of empty objects. Fixes MODGQL-118.
@@ -12,6 +13,10 @@
 * Dockerization now gets RAMLs and JSON Schemas by pulling the required modules from git rather than using a redundant copy from this repository. Included as of v1.2.1.
 * The `listen` invocation no longer specifies a second argument of `0.0.0.0`. For reasons I don't begin to understand, running in this way meant that, while Firefox, Telnet and `curl` could all access the service just fine, the FOLIO Z39.50 server (which is written in Perl using the LWP library for HTTP access) could not, mysteriously claiming the connection was refused. Removing the second argument fixes this: I have no idea why, I just stumbled over it after a fruitless day of random debugging.
 * Ensure that the server does _not_ do cross-origin resource sharing (CORS), since doing so can in some circumstances collide with Okapi's handing of this. Thanks to Michal Kuklis for finding the solution. Fixes MODGQL-127.
+
+## 1.2.0 (NOT RELEASED)
+
+* There was no 1.2.0 release as the version number was inadvertently advanced to v1.2.1 before that could be done.
 
 ## [1.1.0](https://github.com/folio-org/mod-graphql/tree/v1.1.0) (2018-10-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.0.0...v1.1.0)
