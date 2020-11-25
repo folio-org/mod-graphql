@@ -1,5 +1,10 @@
 # Change history for mod-graphql
 
+## [1.3.1](https://github.com/folio-org/mod-graphql/tree/v1.3.1) (2020-11-25)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.3.0...v1.3.1)
+
+* No changes to the software. The `item.json` JSON Schema in `mod-inventory-storage` has been augmented with a definition of a `materialType` virtual field, which will be included in the Docker build for this release.
+
 ## [1.3.0](https://github.com/folio-org/mod-graphql/tree/v1.3.0) (2020-10-19)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.1.0...v1.3.0)
 
