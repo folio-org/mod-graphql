@@ -25,7 +25,9 @@ function createSchemas(config) {
 function createModuleSchemas(moduleConfig) {
   const { module, release, overlays } = moduleConfig;
 
-  obtainSchemas(module, release);
+  if (!fs.existsSync(module)) {
+    obtainSchemas(module, release);
+  }
 
   if (overlays) {
     Object.keys(overlays).sort().forEach(schemaName => {

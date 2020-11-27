@@ -1,4 +1,4 @@
-mod-inventory-storage: ./create-schemas.js schemaconf.json
+**make-default**: ./create-schemas.js schemaconf.json
 	./create-schemas.js schemaconf.json
 
 clean:
