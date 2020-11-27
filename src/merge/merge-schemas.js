@@ -6,7 +6,7 @@ function parseSchema(schemaName) {
   return JSON.parse(schemaText);
 }
 
-const baseSchema = parseSchema('../../tests/mod-inventory-storage-ramls/instance.json');
+const baseSchema = parseSchema('../../tests/input/mod-inventory-storage/ramls/instance.json');
 const overlaySchema = parseSchema('overlaySchema.json');
 
 const merged = mergeJsonSchemas([baseSchema, overlaySchema]);

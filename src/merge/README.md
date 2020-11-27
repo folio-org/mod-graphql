@@ -11,7 +11,7 @@ To keep both options open, we investigated whether it's possible to maintain the
 
 To see the process in action, use:
 
-    node ./merge-schemas.js | diff ../../tests/mod-inventory-storage-ramls/instance.json -
+    node ./merge-schemas.js | diff ../../tests/input/mod-inventory-storage/ramls/instance.json -
 
 See also:
 [MODGQL-119](https://issues.folio.org/browse/MODGQL-119).
