@@ -68,7 +68,7 @@ function handleOverlaysForSchema(module, schemaName, schemaOverlays) {
 }
 
 
-function handleOverlay(jsonPath, overlay) {
+function handleOverlay(schema, jsonPath, overlay) {
   console.log(`  Handling overlay at ${jsonPath}`);
 
   if (typeof overlay === 'string') {
