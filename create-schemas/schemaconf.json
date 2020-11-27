@@ -1,0 +1,46 @@
+[
+  {
+    "module": "mod-inventory-storage",
+    "release": "19.4.0",
+    "overlays": {
+      "instance.json": {
+        "instanceTypeObject": {
+          "type": "object",
+          "description": "Information about instance type",
+          "folio:$ref": "instancetype.json",
+          "readonly": true,
+          "folio:isVirtual": true,
+          "folio:linkBase": "instance-types",
+          "folio:linkFromField": "instanceTypeId",
+          "folio:linkToField": "id",
+          "folio:includedElement": "instanceTypes.0"
+        },
+        "alternativeTitles.items.properties.alternativeTitleTypeObject": {
+          "type": "object",
+          "description": "Information about alternative-title type",
+          "folio:$ref": "alternativetitletype.json",
+          "readonly": true,
+          "folio:isVirtual": true,
+          "folio:linkBase": "alternative-title-types",
+          "folio:linkFromField": "alternativeTitleTypeId",
+          "folio:linkToField": "id",
+          "folio:includedElement": "alternativeTitleTypes.0"
+        }
+      },
+      "item.json": {
+        "itemLevelCallNumberTypeObject": {
+          "type": "object",
+          "description": "Information about item-level call-number type",
+          "folio:$ref": "callnumbertype.json",
+          "readonly": true,
+          "folio:isVirtual": true,
+          "folio:linkBase": "call-number-types",
+          "folio:linkFromField": "itemLevelCallNumberTypeId",
+          "folio:linkToField": "id",
+          "folio:includedElement": "callNumberTypes.0"
+        },
+        "itemLevelCallNumberTypeObject2": "callnumbertype.json call-number-types?id=itemLevelCallNumberTypeId callNumberTypes.0"
+      }
+    }
+  }
+]
