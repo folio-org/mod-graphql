@@ -9,9 +9,12 @@ There is some disagreement over whether this is the right approach. Some people 
 
 To keep both options open, we investigated whether it's possible to maintain the link fields in a separate JSON-Schema files, and merge them at run-time with the core schemas. It turns out that this works well, and so it gives us a path to split the link fields out from the core schemas down the line if we decide that's what we want.
 
-To see the process is action, use:
+To see the process in action, use:
 
     node ./merge-schemas.js | diff ../../tests/mod-inventory-storage-ramls/instance.json -
 
-See also: [MODGQL-119](https://issues.folio.org/browse/MODGQL-119).
+See also:
+[MODGQL-119](https://issues.folio.org/browse/MODGQL-119).
+and
+[MODGQL-122](https://issues.folio.org/browse/MODGQL-122).
 
