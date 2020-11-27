@@ -112,7 +112,7 @@ function parseSchema(fileName) {
 
 function writeSchema(fileName, schemaObj) {
   const schemaText = JSON.stringify(schemaObj, null, 2);
-  fs.writeFileSyc(fileName, schemaText, 'utf8');
+  fs.writeFileSync(fileName, schemaText, 'utf8');
 }
 
 
