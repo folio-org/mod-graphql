@@ -2,7 +2,7 @@ const fs = require('fs');
 const mergeJsonSchemas = require('merge-json-schemas');
 
 if (process.argv.length !== 4) {
-  console.error(`Usage: ${process.argv0} baseSchema.json overlaySchema.json`);
+  console.error(`Usage: ${process.argv[1]} baseSchema.json overlaySchema.json`);
   process.exit(1);
 }
 
