@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const execSync = require('child_process').execSync;
-const mergeJsonSchemas = require('merge-json-schemas');
+const jp = require('jsonpath');
 
 if (process.argv.length !== 3) {
   console.error(`Usage: ${process.argv[1]} schemaconf.json`);
@@ -77,8 +77,23 @@ function handleOverlay(schema, jsonPath, overlay) {
     overlay = expandOverlaySummary(overlay);
   }
 
-  console.log(`   -- jsonPath='${jsonPath}'`);
-  // XXX insert
+  const res = jsonPath.match(/(.*)\.(.*)/);
+  let basePath, insertAs;
+  if (res) {
+    basePath = `$.properties.${res[1]}`;
+    insertAs = res[2];
+  } else {
+    basePath = '$.properties';
+    insertAs = jsonPath;
+  }
+
+  const target = jp.query(schema, basePath);
+  if (target.length === 0) {
+    console.warn(`*** could not find basePath ${basePath}`);
+  } else {
+    console.log(`   -- jsonPath='${jsonPath}' -> (${basePath}, ${insertAs})`);
+    target[0][insertAs] = overlay;
+  }
 }
 
 
@@ -90,7 +105,7 @@ function expandOverlaySummary(summary) {
     throw(Error(`bad overlay summary: '${summary}'`));
   }
 
-  const [ undefined, schemaRef, linkBase, linkFromField, linkToField, includedElement ] = res;
+  const [ undefined, schemaRef, linkBase, linkToField, linkFromField, includedElement ] = res;
   return {
     'type': 'object',
     'folio:$ref': schemaRef,
