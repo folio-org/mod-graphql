@@ -72,6 +72,7 @@ We therefore use our own convention for extension keywords, giving them names pr
 
 Keyword | Example | Description
 --- | --- | ---
+`folio:isVirtual` | true | If this is true, then the RAML Module Builder tool knows not to include the field in its physical schemas. Must be set true for all link-fields.
 `folio:linkFromField` | "id" | If this is defined, then the field is a link field, and all the three following keywords must also be included. When the GraphQL resolver encounters this field, the value of the specified field in the main record is used as the query key in a search for linked records to be included.
 `folio:linkBase` | "holdings-storage/holdings" | The base path at which searches that discover linked records are found. Should not include the leading `http:/` or hostname.
 `folio:linkToField` | "instanceId" | The field within linked records that is searched for a value identical to that of the master record's link-from field.
