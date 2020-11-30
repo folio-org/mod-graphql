@@ -1,35 +1,50 @@
 #!/usr/bin/env node
 
+const getopts = require("getopts")
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const jp = require('jsonpath');
 
-if (process.argv.length !== 3) {
-  console.error(`Usage: ${process.argv[1]} schemaconf.json`);
-  process.exit(1);
+const options = getopts(process.argv.slice(2), {
+  boolean: ['help', 'fetch', 'overlay'],
+  alias: {
+    h: "help",
+  },
+  default: {
+    fetch: false,
+    overlay: true
+  }
+})
+
+if (options.help || options._.length !== 1) {
+  console.error(`Usage: ${process.argv[1]} [--(no-)fetch] [--(no-)overlay] schemaconf.json`);
+  process.exit(1)
 }
 
-const configName = process.argv[2];
+const configName = options._[0];
 const config = parseSchema(configName);
-createSchemas(config);
+createSchemas(config, options);
 process.exit(0);
 
 
 
 
-function createSchemas(config) {
-  config.forEach(moduleConfig => createModuleSchemas(moduleConfig));
+function createSchemas(config, options) {
+  config.forEach(moduleConfig => createModuleSchemas(moduleConfig, options));
 }
 
 
-function createModuleSchemas(moduleConfig) {
+function createModuleSchemas(moduleConfig, options) {
   const { module, release, overlays } = moduleConfig;
 
+  if (options.fetch) {
+    system(`rm -rf ${module}`);
+  }
   if (!fs.existsSync(module)) {
     obtainSchemas(module, release);
   }
 
-  if (overlays) {
+  if (options.overlay && overlays) {
     Object.keys(overlays).sort().forEach(schemaName => {
       const schemaOverlays = overlays[schemaName];
       handleOverlaysForSchema(module, schemaName, schemaOverlays);

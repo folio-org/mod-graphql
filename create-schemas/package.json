@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "getopts": "^2.2.5",
     "jsonpath": "^1.0.2"
   }
 }

@@ -42,6 +42,13 @@ The script is run specifying the name of the configuration file as the only comm
 
 As a result, each module whose name is specified in the configuration file appears as a directory of that name within the current working directory, each such module containing only a `ramls` directory, and that directory containing its contents as of the specified release as modified by the specified overlays.
 
+Two command-line options are recognised, together with their negations:
+
+* `--fetch`/`--no-fetch` (off by default): if true, force a re-fetch of the modules' RAML and JSON Schema files; otherwise, these files are fetched only if not already present.
+
+* `--overlay`/`--no-overlay` (on by default): if true, then the overlays specified in the configuration file are applied; otherwise they are not. This can be useful in combination with `--fetch` to obtain a virgin set of RAMLs and JSON Schemas.
+
+
 ## Using the resulting RAMLs and JSON Schemas
 
 As usual, `mod-graphql` itself is configured by listing on its command-line the RAML files that should be supported in its GraphQL Schema (and so, implicitly, the JSON Schemas that those RAMLs reference). So if `create-schemas` is run in, say, a `schemas` subdirectory of `mod-graphql`, you might start the service using:
