@@ -13,7 +13,7 @@ const options = getopts(process.argv.slice(2), {
   default: {
     fetch: false,
     rewrite: false,
-    overlay: true,
+    overlay: false,
   }
 })
 
@@ -47,8 +47,11 @@ function createModuleSchemas(moduleConfig, options) {
 
   if ((options.rewrite || options.overlay) && overlays) {
     Object.keys(overlays).sort().forEach(schemaName => {
-      const schemaOverlays = options.rewrite ? {} : overlays[schemaName];
-      handleOverlaysForSchema(module, schemaName, schemaOverlays);
+      if (options.overlay) {
+        handleOverlaysForSchema(module, schemaName, overlays[schemaName]);
+      } else {
+        console.log(` Skipping overlays for schema ${schemaName}`);
+      }
     });
   }
 }

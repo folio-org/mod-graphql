@@ -48,7 +48,7 @@ Three command-line options are recognised, together with their negations:
 
 * `--rewrite`/`--no-rewrite` (off by default): if true, then the JSON Schemas will be rewritten but the overlays not applied. This results in JSON Schemas that are semantically equivalent to those in the released modules, but with the format canonicalised.
 
-* `--overlay`/`--no-overlay` (on by default): if true, then the overlays specified in the configuration file are applied; otherwise they are not. `--no-overlay` can be useful in combination with `--fetch` to obtain a virgin set of RAMLs and JSON Schemas.
+* `--overlay`/`--no-overlay` (off by default): if true, then the overlays specified in the configuration file are applied; otherwise they are not.
 
 
 ## Using the resulting RAMLs and JSON Schemas

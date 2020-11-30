@@ -4,7 +4,7 @@
 all: mod-inventory-storage-virgin mod-inventory-storage-rewritten mod-inventory-storage-overlaid
 
 mod-inventory-storage-virgin:
-	./create-schemas.js --fetch --no-overlay schemaconf.json
+	./create-schemas.js --fetch schemaconf.json
 	rm -rf $@
 	mv mod-inventory-storage $@
 
@@ -14,7 +14,7 @@ mod-inventory-storage-rewritten:
 	mv mod-inventory-storage $@
 
 mod-inventory-storage-overlaid:
-	./create-schemas.js --fetch schemaconf.json
+	./create-schemas.js --fetch --overlay schemaconf.json
 	rm -rf $@
 	mv mod-inventory-storage $@
 
