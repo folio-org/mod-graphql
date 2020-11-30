@@ -5,7 +5,7 @@ This area contains a stand-alone utility that downloads the RAMLs and JSON Schem
 
 ## Overview
 
-In short, you write [a JSON configuration file](schemaconf.json) specifying which back-end modules are to be supported, which releases of those modules to use, and what overlays to add to the canonical versions of the release's JSON Schemas. Then you run [the `create-schemas.js` script](create-schemas.js). It will download the RAMLS and JSON schemas of the specified releases of the specified modules, then apply the overlays specified in the configuration. `mod-graphql` can then be run against the resulting overlaid schemas which can include whatever new links we need. (As a bonus, this also implements a much more terse way of specifying link-fields in a single line -- see below.)
+In short, you write [a JSON configuration file](schemaconf.json) specifying which back-end modules are to be supported, which releases of those modules to use, and what overlays to add to the canonical versions of the release's JSON Schemas. Then you run [the `create-schemas.js` script](create-schemas.js) with the `--overlay` option. It will download the RAMLS and JSON schemas of the specified releases of the specified modules, then apply the overlays specified in the configuration. `mod-graphql` can then be run against the resulting overlaid schemas which can include whatever new links we need. (As a bonus, this also implements a much more terse way of specifying link-fields in a single line -- see below.)
 
 
 ## Configuration file format
@@ -40,7 +40,7 @@ The script is run specifying the name of the configuration file as the only comm
 
 	create-schemas.js schemaconf.json
 
-As a result, each module whose name is specified in the configuration file appears as a directory of that name within the current working directory, each such module containing only a `ramls` directory, and that directory containing its contents as of the specified release as modified by the specified overlays.
+As a result, each module whose name is specified in the configuration file appears as a directory of that name within the current working directory, each such module containing only a `ramls` directory, and that directory containing its contents as of the specified release, as modified by the specified overlays if `--overlay` is specified.
 
 Three command-line options are recognised, together with their negations:
 
@@ -49,6 +49,22 @@ Three command-line options are recognised, together with their negations:
 * `--rewrite`/`--no-rewrite` (off by default): if true, then the JSON Schemas will be rewritten but the overlays not applied. This results in JSON Schemas that are semantically equivalent to those in the released modules, but with the format canonicalised.
 
 * `--overlay`/`--no-overlay` (off by default): if true, then the overlays specified in the configuration file are applied; otherwise they are not.
+
+It is therefore possible to do:
+
+	./create-schemas.js --fetch schemaconf.json
+	mv mod-inventory-storage mod-inventory-storage-virgin
+	./create-schemas.js --fetch --rewrite schemaconf.json
+	mv mod-inventory-storage mod-inventory-storage-rewritten
+	./create-schemas.js --fetch --overlay schemaconf.json
+	mv mod-inventory-storage mod-inventory-storage-overlaid
+
+To create three copies of the RAMLs and JSON Schemas from `mod-inventory-storage`: the first exactly as released, the second semantically identical but with the JSON rewritten and canonicalised, and the third with the overlays also added. It is then possible to look at the differences between these:
+
+	diff -r mod-inventory-storage-virgin mod-inventory-storage-rewritten
+	diff -r mod-inventory-storage-rewritten mod-inventory-storage-overlaid
+
+To see, respectively, the changes made by the canonicalization process (which should arguably be merged back into the master copies), and the changed made by applying the overlays.
 
 
 ## Using the resulting RAMLs and JSON Schemas
