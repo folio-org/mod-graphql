@@ -64,7 +64,7 @@ function obtainSchemas(module, release) {
   // a well-known GitHub organization, checking out the relevant
   // release tag, and removing all but the `raml` directory will
   // suffice for now. It's fragile, though.
-  system(`git clone --recurse-submodules git@github.com:folio-org/${module}`);
+  system(`git clone --recurse-submodules https://github.com/folio-org/${module}`);
   process.chdir(module);
   system(`git checkout --quiet v${release}`);
   process.chdir('..');
