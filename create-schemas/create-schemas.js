@@ -6,18 +6,19 @@ const execSync = require('child_process').execSync;
 const jp = require('jsonpath');
 
 const options = getopts(process.argv.slice(2), {
-  boolean: ['help', 'fetch', 'overlay'],
+  boolean: ['help', 'fetch', 'rewrite', 'overlay'],
   alias: {
     h: "help",
   },
   default: {
     fetch: false,
-    overlay: true
+    rewrite: false,
+    overlay: true,
   }
 })
 
 if (options.help || options._.length !== 1) {
-  console.error(`Usage: ${process.argv[1]} [--(no-)fetch] [--(no-)overlay] schemaconf.json`);
+  console.error(`Usage: ${process.argv[1]} [--(no-)fetch] [--(no-)rewrite] [--(no-)overlay] schemaconf.json`);
   process.exit(1)
 }
 
@@ -44,9 +45,9 @@ function createModuleSchemas(moduleConfig, options) {
     obtainSchemas(module, release);
   }
 
-  if (options.overlay && overlays) {
+  if ((options.rewrite || options.overlay) && overlays) {
     Object.keys(overlays).sort().forEach(schemaName => {
-      const schemaOverlays = overlays[schemaName];
+      const schemaOverlays = options.rewrite ? {} : overlays[schemaName];
       handleOverlaysForSchema(module, schemaName, schemaOverlays);
     });
   }

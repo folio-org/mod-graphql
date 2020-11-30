@@ -42,11 +42,13 @@ The script is run specifying the name of the configuration file as the only comm
 
 As a result, each module whose name is specified in the configuration file appears as a directory of that name within the current working directory, each such module containing only a `ramls` directory, and that directory containing its contents as of the specified release as modified by the specified overlays.
 
-Two command-line options are recognised, together with their negations:
+Three command-line options are recognised, together with their negations:
 
 * `--fetch`/`--no-fetch` (off by default): if true, force a re-fetch of the modules' RAML and JSON Schema files; otherwise, these files are fetched only if not already present.
 
-* `--overlay`/`--no-overlay` (on by default): if true, then the overlays specified in the configuration file are applied; otherwise they are not. This can be useful in combination with `--fetch` to obtain a virgin set of RAMLs and JSON Schemas.
+* `--rewrite`/`--no-rewrite` (off by default): if true, then the JSON Schemas will be rewritten but the overlays not applied. This results in JSON Schemas that are semantically equivalent to those in the released modules, but with the format canonicalised.
+
+* `--overlay`/`--no-overlay` (on by default): if true, then the overlays specified in the configuration file are applied; otherwise they are not. `--no-overlay` can be useful in combination with `--fetch` to obtain a virgin set of RAMLs and JSON Schemas.
 
 
 ## Using the resulting RAMLs and JSON Schemas
