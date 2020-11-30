@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Usage: tests/setup.sh [-f] [--production]
+# Usage: tests/setup.sh [-f]
 
 if [ ! -f package.json ]; then
     echo "$0: must be run from root of package" >&2
@@ -20,28 +20,9 @@ fi
 
 echo "Setting up API data ..."
 set -ex
+(cd create-schemas; yarn install)
 
 mkdir $DIR
 cd $DIR
-
-# List of all modules whose APIs we want to support GraphQL queries on
-for repo in mod-inventory-storage mod-users; do
-    git clone --recurse-submodules https://github.com/folio-org/$repo
-    # Stupidly, git clone yields zero exit-status even if the clone fails
-    test -d $repo || exit 1
-
-    # Change to the graphql branch if it exists; if not, then assume master is up to date
-    cd $repo
-    git checkout graphql || echo "No 'graphql' brach for $repo, staying on 'master'"
-    cd ..
-
-    if [ "x$1" = "x--production" ]; then
-	mv $repo/ramls .
-	rm -rf $repo
-	mkdir $repo
-	mv ramls $repo
-    fi
-done;
-
-{ set +x; } 2>/dev/null
+../../create-schemas/create-schemas.js --overlay ../schemaconf.json 
 echo "... all done"

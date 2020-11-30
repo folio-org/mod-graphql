@@ -6,6 +6,6 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 COPY . .
-RUN ./tests/setup.sh --production
+RUN ./tests/setup.sh
 EXPOSE 3001
 CMD yarn start tests/input/*/ramls/*.raml
