@@ -71,5 +71,5 @@ To see, respectively, the changes made by the canonicalization process (which sh
 
 As usual, `mod-graphql` itself is configured by listing on its command-line the RAML files that should be supported in its GraphQL Schema (and so, implicitly, the JSON Schemas that those RAMLs reference). So if `create-schemas` is run in, say, a `schemas` subdirectory of `mod-graphql`, you might start the service using:
 
-	LOGCAT=listen,url yarn start schemas/mod-*/ramls/*.raml
+	LOGCAT=listen,url yarn start schemas/mod-*/ramls/i*-storage.raml
 
