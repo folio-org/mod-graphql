@@ -1,5 +1,5 @@
 **make-default**: ./create-schemas.js schemaconf.json
-	./create-schemas.js schemaconf.json
+	./create-schemas.js --overlay schemaconf.json
 
 all: mod-inventory-storage-virgin mod-inventory-storage-rewritten mod-inventory-storage-overlaid
 
