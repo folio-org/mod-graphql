@@ -1,9 +1,9 @@
 # Change history for mod-graphql
 
-## [1.4.0](https://github.com/folio-org/mod-graphql/tree/v1.4.0) (IN PROGRESS)
+## [1.4.0](https://github.com/folio-org/mod-graphql/tree/v1.4.0) (2020-02-01)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.3.1...v1.4.0)
 
-* Add [`create-schemas`] script, sample configuration file, and [documentation](create-schemas/README.md). Fixes MODGQL-122.
+* Add [`create-schemas`](create-schemas/create-schemas.js) script, sample configuration file, and [documentation](create-schemas/README.md). Fixes MODGQL-122 and MODGQL-131.
 
 ## [1.3.1](https://github.com/folio-org/mod-graphql/tree/v1.3.1) (2020-11-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.3.0...v1.3.1)
