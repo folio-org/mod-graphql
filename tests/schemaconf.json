@@ -1,7 +1,7 @@
 [
   {
     "module": "mod-inventory-storage",
-    "release": "19.4.0",
+    "release": "v19.4.0",
     "overlays": {
       "instance.json": {
         "instanceTypeObject": "instancetype.json instance-types?id=instanceTypeId instanceTypes.0"
@@ -10,6 +10,6 @@
   },
   {
     "module": "mod-users",
-    "release": "17.2.0"
+    "release": "v17.2.0"
   }
 ]

@@ -58,7 +58,7 @@ function createModuleSchemas(moduleConfig, options) {
 
 
 function obtainSchemas(module, release) {
-  console.log(`Obtaining schemas for ${module} v${release}`);
+  console.log(`Obtaining schemas for ${module} ${release}`);
 
   // There may be a better way to do this, but cloning the source from
   // a well-known GitHub organization, checking out the relevant
@@ -66,7 +66,7 @@ function obtainSchemas(module, release) {
   // suffice for now. It's fragile, though.
   system(`git clone --recurse-submodules https://github.com/folio-org/${module}`);
   process.chdir(module);
-  system(`git checkout --quiet v${release}`);
+  system(`git checkout --quiet ${release}`);
   process.chdir('..');
   system(`mv ${module}/ramls .`);
   system(`rm -rf ${module}`);
