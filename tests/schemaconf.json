@@ -7,9 +7,5 @@
         "instanceTypeObject": "instancetype.json instance-types?id=instanceTypeId instanceTypes.0"
       }
     }
-  },
-  {
-    "module": "mod-users",
-    "release": "v17.2.0"
   }
 ]

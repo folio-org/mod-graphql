@@ -1,5 +1,10 @@
 # Change history for mod-graphql
 
+## [1.5.0](https://github.com/folio-org/mod-graphql/tree/v1.5.0) (2021-02-22)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.4.0...v1.5.0)
+
+* Remove ui-users RAMLs from the schema configuration used by the Docker build process ([`tests/schemaconf.json`](tests/schemaconf.json)) to work around the problem described in MODGQL-132. This is safe, since current applications of mod-graphql -- notably the FOLIO Z39.50 server -- use only inventory-storage.
+
 ## [1.4.0](https://github.com/folio-org/mod-graphql/tree/v1.4.0) (2020-02-01)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.3.1...v1.4.0)
 
