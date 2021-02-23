@@ -61,6 +61,10 @@ function modGraphql(argv) {
   });
 
   const app = express();
+  app.get('/admin/health', (req, res) => {
+    res.send('Behold! I live!!');
+  });
+
   server.applyMiddleware({ app, cors: false });
   return app;
 }
