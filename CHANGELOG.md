@@ -1,5 +1,10 @@
 # Change history for mod-graphql
 
+## [1.6.0](https://github.com/folio-org/mod-graphql/tree/v1.6.0) (2021-02-23)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.5.0...v1.6.0)
+
+* Support the `/admin/health` endpoint. Fixes MODGQL-133.
+
 ## [1.5.0](https://github.com/folio-org/mod-graphql/tree/v1.5.0) (2021-02-22)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.4.0...v1.5.0)
 
