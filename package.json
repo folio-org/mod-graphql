@@ -47,5 +47,8 @@
     "path": "^0.12.7",
     "url": "^0.11.0",
     "yakbak": "^4.0.0"
+  },
+  "resolutions": {
+    "date-and-time": "^0.14.2"
   }
 }
