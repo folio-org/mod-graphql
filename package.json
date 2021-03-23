@@ -49,6 +49,6 @@
     "yakbak": "^4.0.0"
   },
   "resolutions": {
-    "date-and-time": "0.14.2"
+    "date-and-time": "^0.14.2"
   }
 }
