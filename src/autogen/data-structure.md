@@ -17,7 +17,7 @@ We therefore compile all of this to a much simpler "Abstract Representation Obje
 
 This document describes that structure. The ARO for a given RAML-with-JSON-Schemas can be seen by running `raml2graphql` with the `-v` command-line option, as in:
 
-	./raml2graphql -v test/input/12-array-of-scalars.raml
+	LOGCAT=api ./raml2graphql test/input/12-array-of-scalars.raml
 
 
 
@@ -26,8 +26,9 @@ This document describes that structure. The ARO for a given RAML-with-JSON-Schem
 
 ### Top level
 
-The ARO is represented as a JavaScript object with three keys:
+The ARO is represented as a JavaScript object with four keys:
 
+* `ramlName` -- the filename, including the full path, from which the RAML was loaded.
 * `comments` -- information that is of interest, which which in a GraphQL schema can only be represented as a comment: for example, the title and version of the RAML API. See [**Comments** below](#comments).
 * `resources` -- See [**Resources** below](#resources).
 * `types` -- See [**Types** below](#types).
@@ -46,12 +47,15 @@ The set of comments is represented by a JavaScript array. Each element is itself
 The set of resources is represented by a JavaScript array. Each element is a JavaScript object with the following keys:
 
 * `level` (integer) -- an indication of how far down the hierarchy of RAML resources this was found: 0 for a top-level resource such as `/instance-storage`, 1 for a contained resource such as `/instance-storage/instances`, 2 for `/instance-storage/instances/{instanceId}`, etc. (Not presently used by the GraphQL generators.)
-* `queryName` (string) -- a human-readable name for the resource, generated from the RAML path but suitable for use as a GraphQL query.
+* `queryName` (string) -- a more-or-less human-readable name for the resource, generated from the RAML path but suitable for use as a GraphQL query.
 * `args` (array) -- a list of the arguments that may be provided when querying the resource. Each is a three-element array with the following elements:
   0 (string) -- the name of the parameter.
   1 (string) -- the type of the parameter, which is either a simple GraphQL type such as `'Integer'` or the name of one of the types defined in the `types` array (see [below](#types)).
   2 (boolean) -- an indication of whether the argument is required when querying the resource.
 * `type` (string) -- the type of the returned document when performing an HTTP GET on the resource. This is the name of one of the types that are the keys of the `types` array (see [below](#types)).
+* `url` (string) -- the URL, relative to the web-service root, of the entry point described by the RAML, made by concatenating path components.
+"instance-storage/instances/{instanceId}/source-record/marc-json",
+* `displayName` -- The `displayName` from the RAML, when present: a short human-readable string describing the resource.
 
 
 ### Types
@@ -64,6 +68,8 @@ A type is represented by an ordered array of zero or more fields. Each field is 
 * `required` (boolean) -- if true, indicates that the present field is mandatory within the type; otherwise false.
 * `arrayDepth` (integer) -- the number of levels of array nesting containing the object. This is usually 0, for simple objects, and occasionally 1, for arrays. It can be 2 for arrays of arrays, etc.
 * `type` -- maybe either a string containing the name of a simple GraphQL type such as `'String'` or `'Int'`; or it may be another high-level type, which is itself represented by an array like that of the containing type.
+
+Generated type names begin with a capital T. Those generated to represent the top-level result structure of request do not follow the T with an underscore: for example, `TinstanceRelationships`; those that represent structures included within such types (and structures included in those, and so on) do follow the T with an underscore: for example, `T_classificationtype`.
 
 
 
