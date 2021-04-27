@@ -80,6 +80,17 @@ but we use instead the modified copies of these files, and others, that are on [
 
 ### Option 2: JSON Hyper-Schema
 
+<div style="border: 3px solid red; padding: 0.5em 1em; background: #fee">
+
+**NOTE.** As of 27 April 2021, the specification document has been removed and https://json-schema.org/ says:
+> JSON Hyper-Schema is on hiatus / not currently maintained as of 2021.  
+> [...]  
+> We may revisit JSON Hyper-Schema at a later date.
+
+So this seems to be a non-starter.
+
+</div>
+
 At first glance, [the JSON Hyper-Schema specification](http://json-schema.org/latest/json-schema-hypermedia.html) seems to give us exactly what we need. The specification explains that:
 
 > The primary mechanism introduced for specifying links is the Link Description Object (LDO), which is a serialization of the abstract link model defined in [RFC 8288, section 2](https://tools.ietf.org/html/rfc8288#section-2).
