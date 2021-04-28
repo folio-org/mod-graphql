@@ -6,7 +6,7 @@
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
   },
-  "main": "index.js",
+  "main": "main.js",
   "license": "Apache-2.0",
   "scripts": {
     "lint": "eslint main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
