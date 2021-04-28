@@ -127,7 +127,7 @@ See [**Run mod-graphql in the host box**](doc/developing-with-a-vagrant-box.md#b
 
 ### `PROXY_OKAPI_URL`
 
-Required _only_ when [regenerating test tapes](doc/recording-tests.md). This is the URL of an Okapi instance which the yakbak library shoud proxy for, providing the Okapi service from which WSAPI tapes are made.
+Required _only_ when [regenerating test tapes](doc/recording-tests.md). This is the URL of an Okapi instance which the yakbak library should proxy for, providing the Okapi service from which WSAPI tapes are made.
 
 ### `GRAPHQL_OPTIONS`
 
