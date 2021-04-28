@@ -45,6 +45,7 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
       logger.log('result', url, '->', text);
       if (res.status >= 400) throw new GraphQLError(text);
       const json = JSON.parse(text);
+      logger.log('resultcount', url, '->', json.totalRecords);
       let val;
       if (!skeleton) {
         val = json;

@@ -4,6 +4,8 @@
 
 * Bump date-and-time from 0.5.0 to 0.14.2 fixing a regular expression denial of service (ReDoS) vulnerability. Fixes [CVE-2020-26289](https://nvd.nist.gov/vuln/detail/CVE-2020-26289), [MODGQL-130](https://issues.folio.org/browse/MODGQL-130).
 * Bump elliptic from 6.5.3 to 6.5.4 fixing a ECDH secp256k1 cryptographic vulnerability. Fixes [CVE-2020-28498](https://nvd.nist.gov/vuln/detail/CVE-2020-28498).
+* Add and document the `resultcount` logging category.
+* Various updates to documentation, including fixing links to standards documents that have gone away, documenting missing logging-categories, updating descriptions of internal structures, and updating sample invocations.
 
 ## [1.6.0](https://github.com/folio-org/mod-graphql/tree/v1.6.0) (2021-02-23)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.5.0...v1.6.0)

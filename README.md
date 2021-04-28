@@ -163,6 +163,7 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `failsub` -- log a resolver's failure to substitute an argument or field-value into a path.
 * `url` -- log each WSAPI URL before trying to fetch it.
 * `result` -- log the result of each GET.
+* `resultcount` -- log only the count (`totalRecords`) in the result of each GET.
 * `skeleton` -- log the "skeleton" used to extract the relevant part of each result, and the part thus extracted.
 
 For convenience, the abbreviated environment-variable name `LOGCAT` may be used instead of `LOGGING_CATEGORIES`, with the same effect.
