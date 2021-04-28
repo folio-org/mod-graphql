@@ -23,7 +23,7 @@ const QUERY = `query multipleItems($cql: String) {
 describe('14. query returns items with barcodes matching "1*"', () => {
   describe('query for matching items', () => {
     let response;
-    beforeEach(() => runQuery(app, QUERY, 'barcode=(1501666275552 or 1472383039757)')
+    beforeEach(() => runQuery(app, QUERY, 'barcode=(4539876054383 or 765475420716)')
       .then(res => { response = res; }));
 
     it('contains a payload with items that have matching barcodes', () => {
@@ -43,7 +43,7 @@ describe('14. query returns items with barcodes matching "1*"', () => {
         expect(Object.keys(record).length, 'exactly two fields should be included').to.equal(2);
         // See https://github.com/chaijs/chai/issues/56 for explanation of lint-disable
         expect(record.barcode, 'fields should include a barcode').to.exist;
-        expect(record.barcode, 'barcode field should be one of those we sought').to.match(/^1..........5.$/);
+        expect(record.barcode, 'barcode field should be one of those we sought').to.match(/^[47]5?..........[36]$/);
         expect(record.holdingsRecord2, 'fields should include a holdings record').to.exist;
       }
     });

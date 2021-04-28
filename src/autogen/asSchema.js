@@ -54,7 +54,11 @@ function renderTypes(types, _options) {
         fieldType = `${typeName}_${name}`;
         subTypes[fieldType] = type;
       }
-      output += `  ${name}: ${'['.repeat(arrayDepth)}${fieldType}${']'.repeat(arrayDepth)}${required ? '!' : ''}`;
+      output += `  ${name}`
+      if (field.link) {
+        output += '(limit: Int = 10)'
+      }
+      output += `: ${'['.repeat(arrayDepth)}${fieldType}${']'.repeat(arrayDepth)}${required ? '!' : ''}`;
       if (field.link) {
         const l = field.link;
         output += ` # link: /${l.base} (${l.toField}=$${l.fromField}) -> ${l.include}`;//

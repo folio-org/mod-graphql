@@ -7,19 +7,19 @@ type Query {
 
 type T_aliasWithLoop {
   alias: String
-  aliasForPerson: T_personWithLinkAndLoop # link: /people (id=$personId) -> records
+  aliasForPerson(limit: Int = 10): T_personWithLinkAndLoop # link: /people (id=$personId) -> records
   inUseSinceYear: Int
 }
 
 type T_personWithLinkAndLoop {
   address: String
-  aliases: [T_aliasWithLoop] # link: /aliases (personId=$id) -> records
+  aliases(limit: Int = 10): [T_aliasWithLoop] # link: /aliases (personId=$id) -> records
   name: String!
 }
 
 type TpersonSchema {
   address: String
-  aliases: [T_aliasWithLoop] # link: /aliases (personId=$id) -> records
+  aliases(limit: Int = 10): [T_aliasWithLoop] # link: /aliases (personId=$id) -> records
   name: String!
 }
 

@@ -24,6 +24,8 @@ Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
     * [`CONSOLE_TRACE`](#console_trace)
     * [`NODE_OPTIONS`](#node_options)
 * [Additional information](#additional-information)
+    * [Other documentation](#other-documentation)
+    * [Issue tracker](#issue-tracker)
 
 
 ## Overview
@@ -40,7 +42,7 @@ query {
       title
       holdingsRecords2 {
         callNumber
-        holdingsItems {
+        holdingsItems(limit: 20) {
           barcode
         }
       }
@@ -49,7 +51,8 @@ query {
 }
 ```
 
-# Running `mod-graphql`
+Each link-field generated in the schema is implemented by the resolver as a sub-query to a FOLIO service, and can accept an optional `limit` argument specifying the largest number of records the subquery should fetch (default: 10), as in the `holdingsItems` sub-query above.
+
 
 ## Installation
 

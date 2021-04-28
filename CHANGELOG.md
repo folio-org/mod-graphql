@@ -6,6 +6,7 @@
 * Bump elliptic from 6.5.3 to 6.5.4 fixing a ECDH secp256k1 cryptographic vulnerability. Fixes [CVE-2020-28498](https://nvd.nist.gov/vuln/detail/CVE-2020-28498).
 * Add and document the `resultcount` logging category.
 * Various updates to documentation, including fixing links to standards documents that have gone away, documenting missing logging-categories, updating descriptions of internal structures, and updating sample invocations.
+* Support queries specifying how many records to fetch for subqueries: all link-fields mentioned in queries may optionally take a `limit` parameter, which defaults to 10 when not specified. Documentation and updates to tests. Fixes MODGQL-134.
 
 ## [1.6.0](https://github.com/folio-org/mod-graphql/tree/v1.6.0) (2021-02-23)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.5.0...v1.6.0)

@@ -76,15 +76,15 @@ describe('13. query returns an instance with holdings', () => {
       }
     });
 
-    it('has two items in first holdings record', () => {
+    it('has one item in first holdings record', () => {
       const json = JSON.parse(response.text);
       const record = json.data.instance_storage_instances_SINGLE;
       const hr = record.holdingsRecords2;
       const hi = hr[0].holdingsItems;
       expect(hi, 'holdings items should be an array').to.be.instanceOf(Array);
-      expect(hi.length, 'two holdings items should be present').to.equal(2);
-      for (let i = 0; i < 2; i++) {
-        expect(Object.keys(hi[i]).length, 'exactly three holdings-tiem fields should be included').to.equal(3);
+      expect(hi.length, 'one holdings item should be present').to.equal(1);
+      for (let i = 0; i < 1; i++) { // Retain loop in case the data changes back to multiple items
+        expect(Object.keys(hi[i]).length, 'exactly three holdings-item fields should be included').to.equal(3);
         'id,barcode,status'.split(',').forEach(field => {
           expect(hi[i][field], `holdings field '${field}' should exist`).to.exist;
         });

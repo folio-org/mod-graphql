@@ -13,7 +13,7 @@ type T_alias {
 
 type T_personWithLink {
   address: String
-  aliases: [T_alias] # link: /aliases (personId=$id) -> records
+  aliases(limit: Int = 10): [T_alias] # link: /aliases (personId=$id) -> records
   name: String!
 }
 
@@ -24,7 +24,7 @@ type TpeopleSchema {
 
 type TpersonSchema {
   address: String
-  aliases: [T_alias] # link: /aliases (personId=$id) -> records
+  aliases(limit: Int = 10): [T_alias] # link: /aliases (personId=$id) -> records
   name: String!
 }
 
