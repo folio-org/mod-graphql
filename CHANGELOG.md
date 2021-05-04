@@ -1,6 +1,7 @@
 # Change history for mod-graphql
 
-## not yet released
+## [1.7.0](https://github.com/folio-org/mod-graphql/tree/v1.7.0) (2021-05-04)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.6.0...v1.7.0)
 
 * Bump date-and-time from 0.5.0 to 0.14.2 fixing a regular expression denial of service (ReDoS) vulnerability. Fixes [CVE-2020-26289](https://nvd.nist.gov/vuln/detail/CVE-2020-26289), [MODGQL-130](https://issues.folio.org/browse/MODGQL-130).
 * Bump elliptic from 6.5.3 to 6.5.4 fixing a ECDH secp256k1 cryptographic vulnerability. Fixes [CVE-2020-28498](https://nvd.nist.gov/vuln/detail/CVE-2020-28498).
