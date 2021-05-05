@@ -5,6 +5,9 @@
     "overlays": {
       "instance.json": {
         "instanceTypeObject": "instancetype.json instance-types?id=instanceTypeId instanceTypes.0"
+      },
+      "holdingsrecord.json": {
+        "temporaryLocation": "location.json locations?id=temporaryLocationId locations.0"
       }
     }
   }

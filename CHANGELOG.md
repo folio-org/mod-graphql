@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## (IN PROGRESS)
+
+* Enhance [the default schema configuration](tests/schemaconf.json) to include a new virtual field `temporaryLocation` in mod-inventory-storage's `holdingsrecord.json`. (Needed to resolve ZF-43 for the Z39.50 server.)
+
 ## [1.7.0](https://github.com/folio-org/mod-graphql/tree/v1.7.0) (2021-05-04)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.6.0...v1.7.0)
 
