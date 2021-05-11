@@ -39,7 +39,7 @@ function r2gBasicType(type, items) {
     'date-only': null,
     'time-only': null,
     'datetime-only': null,
-    'datetime': null,
+    'datetime': 'String', // Not ideal, but see MODGQL-136
     'file': null,
     'nil': null,
     // There is no JSON Schema equivalent of GraphQL's "ID" type
