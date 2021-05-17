@@ -50,6 +50,9 @@
     "yakbak": "^4.0.0"
   },
   "resolutions": {
-    "date-and-time": "^0.14.2"
+    "date-and-time": "^0.14.2",
+    "json-ptr": "^2.2.0",
+    "underscore": "^1.13.1",
+    "xmldom": "^0.6.0"
   }
 }
