@@ -1,6 +1,6 @@
 {
   "name": "@folio/mod-graphql",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "GraphQL services for Okapi",
   "repository": "folio-org/mod-graphql",
   "publishConfig": {
