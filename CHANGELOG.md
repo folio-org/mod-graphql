@@ -1,5 +1,10 @@
 # Change history for mod-graphql
 
+## [1.9.0](https://github.com/folio-org/mod-graphql/tree/v1.9.0) (2021-06-03)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.8.0...v1.9.0)
+
+* Dependency updates: json-ptr, underscore, xmldom; yarn.lock. Fixes MODGQL-138.
+
 ## [1.8.0](https://github.com/folio-org/mod-graphql/tree/v1.8.0) (2021-05-11)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.7.0...v1.8.0)
 
