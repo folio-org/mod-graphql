@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:14
 WORKDIR /usr/src/app
 # Copying these separately prevents node_modules
 # being reinstalled on other changes
