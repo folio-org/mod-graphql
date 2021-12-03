@@ -55,6 +55,7 @@
     "date-and-time": "^0.14.2",
     "glob-parent": "^5.1.2",
     "json-ptr": "^3.0.0",
+    "minimist": "^1.2.5",
     "underscore": "^1.13.1",
     "validator": "^13.7.0",
     "xmldom": "^0.6.0"
