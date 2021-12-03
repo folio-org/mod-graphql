@@ -52,6 +52,7 @@
   },
   "resolutions": {
     "date-and-time": "^0.14.2",
+    "glob-parent": "^5.1.2",
     "json-ptr": "^3.0.0",
     "underscore": "^1.13.1",
     "validator": "^13.7.0",
