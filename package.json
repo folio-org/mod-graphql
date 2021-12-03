@@ -51,6 +51,7 @@
     "yakbak": "^4.0.0"
   },
   "resolutions": {
+    "ansi-regex": "^5.0.1",
     "date-and-time": "^0.14.2",
     "glob-parent": "^5.1.2",
     "json-ptr": "^3.0.0",
