@@ -1,11 +1,10 @@
-FROM node:14
+FROM node:16-alpine
 WORKDIR /usr/src/app
-# Copying these separately prevents node_modules
-# being reinstalled on other changes
-COPY package.json .
-COPY yarn.lock .
-RUN yarn install
 COPY . .
-RUN ./tests/setup.sh
+RUN yarn install \
+ && ./tests/setup.sh \
+ && rm -rf node_modules/ \
+ && yarn install --production \
+ && yarn cache clean
 EXPOSE 3001
 CMD yarn start tests/input/*/ramls/*.raml
