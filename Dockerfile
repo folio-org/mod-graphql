@@ -1,4 +1,4 @@
-FROM node:14 AS base
+FROM node:16-alpine AS base
 WORKDIR /usr/src/app
 
 # Create a Docker build stage cache layer with node_modules only
@@ -12,6 +12,7 @@ RUN yarn install --production
 
 FROM production AS test
 RUN yarn install
+
 COPY . .
 RUN ./tests/setup.sh
 
