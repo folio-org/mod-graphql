@@ -1,10 +1,13 @@
-FROM node:14
+FROM node:16-alpine
 WORKDIR /usr/src/app
-# Copying these separately prevents node_modules
-# being reinstalled on other changes
+
+# Create a Docker build stage cache layer with node_modules only
+# to skip yarn install when package.json doesn't change
+# https://stackoverflow.com/questions/35774714
 COPY package.json .
 COPY yarn.lock .
 RUN yarn install
+
 COPY . .
 RUN ./tests/setup.sh
 EXPOSE 3001
