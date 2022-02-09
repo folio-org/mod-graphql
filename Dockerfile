@@ -10,14 +10,9 @@ COPY yarn.lock .
 FROM base AS production
 RUN yarn install --production
 
-FROM production AS test
-RUN yarn install
-
-COPY . .
-RUN ./tests/setup.sh
-
 FROM base AS release
 COPY --from=production /usr/src/app/node_modules/ /usr/src/app/node_modules/
 COPY . .
+RUN ./tests/setup.sh
 EXPOSE 3001
 CMD yarn start tests/input/*/ramls/*.raml
