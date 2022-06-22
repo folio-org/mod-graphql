@@ -29,7 +29,7 @@
     "graphql": "^15.1.0",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.21",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "node-getopt": "^0.3.2",
     "query-string": "^5.0.1",
     "raml-1-parser": "1.1.47"
@@ -54,6 +54,7 @@
     "ansi-regex": "^5.0.1",
     "braces": "^3.0.2",
     "date-and-time": "^0.14.2",
+    "ejs": "^3.1.7",
     "glob-parent": "^5.1.2",
     "json-ptr": "^3.0.0",
     "minimist": "^1.2.5",
