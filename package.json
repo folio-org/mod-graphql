@@ -54,6 +54,7 @@
     "ansi-regex": "^5.0.1",
     "braces": "^3.0.2",
     "date-and-time": "^0.14.2",
+    "ejs": "^3.1.7",
     "glob-parent": "^5.1.2",
     "json-ptr": "^3.0.0",
     "minimist": "^1.2.5",
