@@ -1,30 +1,32 @@
 #!/usr/bin/env node
 
-const getopts = require("getopts")
+/* eslint-disable no-console, no-use-before-define, no-param-reassign */
+
+const getopts = require('getopts');
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const jp = require('jsonpath');
 
-const options = getopts(process.argv.slice(2), {
+const globalOptions = getopts(process.argv.slice(2), {
   boolean: ['help', 'fetch', 'rewrite', 'overlay'],
   alias: {
-    h: "help",
+    h: 'help',
   },
   default: {
     fetch: false,
     rewrite: false,
     overlay: false,
   }
-})
+});
 
-if (options.help || options._.length !== 1) {
+if (globalOptions.help || globalOptions._.length !== 1) {
   console.error(`Usage: ${process.argv[1]} [--(no-)fetch] [--(no-)rewrite] [--(no-)overlay] schemaconf.json`);
-  process.exit(1)
+  process.exit(1);
 }
 
-const configName = options._[0];
-const config = parseSchema(configName);
-createSchemas(config, options);
+const configName = globalOptions._[0];
+const globalConfig = parseSchema(configName);
+createSchemas(globalConfig, globalOptions);
 process.exit(0);
 
 
@@ -121,10 +123,11 @@ function expandOverlaySummary(summary) {
   const regexp = /^(.*?) (.*?)\?(.*?)=(.*?) (.*)$/;
   const res = summary.match(regexp);
   if (!res) {
-    throw(Error(`bad overlay summary: '${summary}'`));
+    throw Error(`bad overlay summary: '${summary}'`);
   }
 
-  const [ undefined, schemaRef, linkBase, linkToField, linkFromField, includedElement ] = res;
+  // eslint-disable-next-line no-unused-vars
+  const [__UNUSED, schemaRef, linkBase, linkToField, linkFromField, includedElement] = res;
   return {
     'type': 'object',
     'folio:$ref': schemaRef,
@@ -134,7 +137,7 @@ function expandOverlaySummary(summary) {
     'folio:linkFromField': linkFromField,
     'folio:linkToField': linkToField,
     'folio:includedElement': includedElement,
-  }
+  };
 }
 
 
