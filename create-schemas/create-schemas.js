@@ -38,7 +38,7 @@ function createSchemas(config, options) {
 
 
 function createModuleSchemas(moduleConfig, options) {
-  const { module, release, ramlPath, overlays } = moduleConfig;
+  const { module, release, ramlPath, copyFiles, overlays } = moduleConfig;
 
   if (options.fetch) {
     system(`rm -rf ${module}`);
@@ -47,14 +47,22 @@ function createModuleSchemas(moduleConfig, options) {
     obtainSchemas(module, release, ramlPath);
   }
 
-  if ((options.rewrite || options.overlay) && overlays) {
-    Object.keys(overlays).sort().forEach(schemaName => {
-      if (options.overlay) {
-        handleOverlaysForSchema(module, schemaName, overlays[schemaName]);
-      } else {
-        console.log(` Skipping overlays for schema ${schemaName}`);
-      }
-    });
+  if (options.rewrite || options.overlay) {
+    if (copyFiles) {
+      copyFiles.forEach(entry => {
+        system(`cp ${entry} ${module}/`);
+      });
+    }
+
+    if (overlays) {
+      Object.keys(overlays).sort().forEach(schemaName => {
+        if (options.overlay) {
+          handleOverlaysForSchema(module, schemaName, overlays[schemaName]);
+        } else {
+          console.log(` Skipping overlays for schema ${schemaName}`);
+        }
+      });
+    }
   }
 }
 

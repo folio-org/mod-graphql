@@ -47,6 +47,9 @@
     "module": "mod-search",
     "release": "v1.6.4",
     "ramlPath": "src/main/resources/swagger.api",
+    "copyFiles": [
+      "etc/mod-search-instances.raml"
+    ],
     "overlays": {}
   }
 ]

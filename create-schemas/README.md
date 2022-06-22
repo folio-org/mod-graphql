@@ -17,8 +17,9 @@ At the top level is an array containing one entry for each FOLIO back-end module
 Each entry is an object with three keys:
 * `module` -- the name of the module: specifically, the name of the GitHub repository in which its source-code is found, which is almost always the same thing. Example: `mod-inventory-storage`
 * `release` -- the three-part (_major_._minor_._patch_) version-number of the release to be used. Example: `19.4.0`
-* `ramlPath` -- if specified, the path within the module where the RAMLs are found, which is renamed to be the `ramls` directory in the local copy that is downloaded. If omitted, the default top-level `ramls` directory is used as-is.
-* `overlays` (optional): an array of overlays to be applied to the JSON Schemas of the module. See below. If omitted, then the RAMLs and JSON Schemas of the module are used as they appear in the specified release.
+* `ramlPath` (optional) -- the path within the module where the RAMLs are found, which is renamed to be the `ramls` directory in the local copy that is downloaded. If omitted, the default top-level `ramls` directory is used as-is.
+* `copyFiles` (optional) -- an array of names of files which are copied into the locally copied `ramls` directory. Useful for supplying a locally-provided RAML file if the module uses OpenAPI.
+* `overlays` (optional) -- an array of overlays to be applied to the JSON Schemas of the module. See below. If omitted, then the RAMLs and JSON Schemas of the module are used as they appear in the specified release.
 
 The `overlays` value is an object whose keys are the names of JSON Schema files in the module's `ramls` directory. Example: `instance.json`.
 
