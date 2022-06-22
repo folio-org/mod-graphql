@@ -36,13 +36,13 @@ function createSchemas(config, options) {
 
 
 function createModuleSchemas(moduleConfig, options) {
-  const { module, release, overlays } = moduleConfig;
+  const { module, release, ramlPath, overlays } = moduleConfig;
 
   if (options.fetch) {
     system(`rm -rf ${module}`);
   }
   if (!fs.existsSync(module)) {
-    obtainSchemas(module, release);
+    obtainSchemas(module, release, ramlPath);
   }
 
   if ((options.rewrite || options.overlay) && overlays) {
@@ -57,7 +57,7 @@ function createModuleSchemas(moduleConfig, options) {
 }
 
 
-function obtainSchemas(module, release) {
+function obtainSchemas(module, release, ramlPath) {
   console.log(`Obtaining schemas for ${module} ${release}`);
 
   // There may be a better way to do this, but cloning the source from
@@ -68,7 +68,7 @@ function obtainSchemas(module, release) {
   process.chdir(module);
   system(`git checkout --quiet ${release}`);
   process.chdir('..');
-  system(`mv ${module}/ramls .`);
+  system(`mv ${module}/${ramlPath || 'ramls'} ramls`);
   system(`rm -rf ${module}`);
   system(`mkdir ${module}`);
   system(`mv ramls ${module}`);

@@ -5,7 +5,7 @@ This area contains a stand-alone utility that downloads the RAMLs and JSON Schem
 
 ## Overview
 
-In short, you write [a JSON configuration file](schemaconf.json) specifying which back-end modules are to be supported, which releases of those modules to use, and what overlays to add to the canonical versions of the release's JSON Schemas. Then you run [the `create-schemas.js` script](create-schemas.js) with the `--overlay` option. It will download the RAMLS and JSON schemas of the specified releases of the specified modules, then apply the overlays specified in the configuration. `mod-graphql` can then be run against the resulting overlaid schemas which can include whatever new links we need. (As a bonus, this also implements a much more terse way of specifying link-fields in a single line -- see below.)
+In short, you write [a JSON configuration file](schemaconf.json) specifying which back-end modules are to be supported, which releases of those modules to use, and what overlays to add to the canonical versions of the release's JSON Schemas. Then you run [the `create-schemas.js` script](create-schemas.js) with the `--overlay` option. It will download the RAMLs and JSON schemas of the specified releases of the specified modules, then apply the overlays specified in the configuration. `mod-graphql` can then be run against the resulting overlaid schemas which can include whatever new links we need. (As a bonus, this also implements a much more terse way of specifying link-fields in a single line -- see below.)
 
 
 ## Configuration file format
@@ -17,6 +17,7 @@ At the top level is an array containing one entry for each FOLIO back-end module
 Each entry is an object with three keys:
 * `module` -- the name of the module: specifically, the name of the GitHub repository in which its source-code is found, which is almost always the same thing. Example: `mod-inventory-storage`
 * `release` -- the three-part (_major_._minor_._patch_) version-number of the release to be used. Example: `19.4.0`
+* `ramlPath` -- if specified, the path within the module where the RAMLs are found, which is renamed to be the `ramls` directory in the local copy that is downloaded. If omitted, the default top-level `ramls` directory is used as-is.
 * `overlays` (optional): an array of overlays to be applied to the JSON Schemas of the module. See below. If omitted, then the RAMLs and JSON Schemas of the module are used as they appear in the specified release.
 
 The `overlays` value is an object whose keys are the names of JSON Schema files in the module's `ramls` directory. Example: `instance.json`.
