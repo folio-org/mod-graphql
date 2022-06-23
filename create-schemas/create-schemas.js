@@ -50,7 +50,7 @@ function createModuleSchemas(moduleConfig, options) {
   if (options.rewrite || options.overlay) {
     if (copyFiles) {
       copyFiles.forEach(entry => {
-        system(`cp ${entry} ${module}/`);
+        system(`cp ${entry} ${module}/ramls/`);
       });
     }
 
