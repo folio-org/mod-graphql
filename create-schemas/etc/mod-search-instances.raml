@@ -9,32 +9,29 @@ documentation:
     content: <b>Storage for instances in the inventory</b>
 
 types:
-  instance: !include instance.json
-  instances: !include instances.json
-  marcJson: !include marc.json
-  instanceRelationship: !include instancerelationship.json
-  instanceRelationships: !include instancerelationships.json
+  instance: !include ../../mod-inventory-storage/ramls/instance.json
+  instances: !include ../../mod-inventory-storage/ramls/instances.json
 
 traits:
-  language: !include raml-util/traits/language.raml
-  pageable: !include raml-util/traits/pageable.raml
-  searchable: !include raml-util/traits/searchable.raml
+  language: !include ../../mod-inventory-storage/ramls/raml-util/traits/language.raml
+  pageable: !include ../../mod-inventory-storage/ramls/raml-util/traits/pageable.raml
+  searchable: !include ../../mod-inventory-storage/ramls/raml-util/traits/searchable.raml
 
 resourceTypes:
-  collection: !include raml-util/rtypes/collection.raml
-  collection-item: !include raml-util/rtypes/item-collection.raml
+  collection: !include ../../mod-inventory-storage/ramls/raml-util/rtypes/collection.raml
+  collection-item: !include ../../mod-inventory-storage/ramls/raml-util/rtypes/item-collection.raml
 
 /instances:
   displayName: Get a list of instances for CQL query
   type:
     collection:
-      exampleCollection: !include  examples/instances_get.json
+      exampleCollection: !include  ../../mod-inventory-storage/ramls/examples/instances_get.json
       schemaCollection: instances
       schemaItem: instance
-      exampleItem: !include  examples/instance_get.json
+      exampleItem: !include ../../mod-inventory-storage/ramls/examples/instance_get.json
   get:
     is: [pageable,
-	searchable: {description: "by title (using CQL)",
-		      example: "title=\"*uproot*\""},
-	]
+        searchable: {description: "by title (using CQL)",
+                      example: "title=\"*uproot*\""},
+        ]
 
