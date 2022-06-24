@@ -1,11 +1,13 @@
 # Change history for mod-graphql
 
-## [1.10.0](https://github.com/folio-org/mod-graphql/tree/v1.10.0) (IN PROGRESS)
+## [1.10.0](https://github.com/folio-org/mod-graphql/tree/v1.10.0) (2022-06-24)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.9.0...v1.10.0)
 
 * Update node.js version from 10 to 14. Fixes MODGQL-142.
 * Extensions to `create-schema.js` to help with handling OpenAPI-based modules. Fixes MODGQL-153.
 * Support searching in mod-search. Fixes MODGQL-152.
+* Numerous additions and improvements to documentation.
+* Upgrade many dependencies.
 
 ## [1.9.0](https://github.com/folio-org/mod-graphql/tree/v1.9.0) (2021-06-03)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.8.0...v1.9.0)
