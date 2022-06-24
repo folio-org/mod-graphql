@@ -32,7 +32,7 @@ As an alternative, you may find it simpler to work on `mod-graphql` in your own 
 
 ```
 Host 127.0.0.1
-RemoteForward 3001 127.0.0.1:3001
+RemoteForward 3000 127.0.0.1:3001
 ```
 
 Now when you ssh into the Vagrant box -- for example, using `vagrant ssh` -- as a side-effect, a tunnel will be established connecting port 3001 on the guest box to port 3001 on the host box.
