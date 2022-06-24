@@ -1,30 +1,32 @@
 #!/usr/bin/env node
 
-const getopts = require("getopts")
+/* eslint-disable no-console, no-use-before-define, no-param-reassign */
+
+const getopts = require('getopts');
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const jp = require('jsonpath');
 
-const options = getopts(process.argv.slice(2), {
+const globalOptions = getopts(process.argv.slice(2), {
   boolean: ['help', 'fetch', 'rewrite', 'overlay'],
   alias: {
-    h: "help",
+    h: 'help',
   },
   default: {
     fetch: false,
     rewrite: false,
     overlay: false,
   }
-})
+});
 
-if (options.help || options._.length !== 1) {
+if (globalOptions.help || globalOptions._.length !== 1) {
   console.error(`Usage: ${process.argv[1]} [--(no-)fetch] [--(no-)rewrite] [--(no-)overlay] schemaconf.json`);
-  process.exit(1)
+  process.exit(1);
 }
 
-const configName = options._[0];
-const config = parseSchema(configName);
-createSchemas(config, options);
+const configName = globalOptions._[0];
+const globalConfig = parseSchema(configName);
+createSchemas(globalConfig, globalOptions);
 process.exit(0);
 
 
@@ -36,28 +38,36 @@ function createSchemas(config, options) {
 
 
 function createModuleSchemas(moduleConfig, options) {
-  const { module, release, overlays } = moduleConfig;
+  const { module, release, ramlPath, copyFiles, overlays } = moduleConfig;
 
   if (options.fetch) {
     system(`rm -rf ${module}`);
   }
   if (!fs.existsSync(module)) {
-    obtainSchemas(module, release);
+    obtainSchemas(module, release, ramlPath);
   }
 
-  if ((options.rewrite || options.overlay) && overlays) {
-    Object.keys(overlays).sort().forEach(schemaName => {
-      if (options.overlay) {
-        handleOverlaysForSchema(module, schemaName, overlays[schemaName]);
-      } else {
-        console.log(` Skipping overlays for schema ${schemaName}`);
-      }
-    });
+  if (options.rewrite || options.overlay) {
+    if (copyFiles) {
+      copyFiles.forEach(entry => {
+        system(`cp ${entry} ${module}/ramls/`);
+      });
+    }
+
+    if (overlays) {
+      Object.keys(overlays).sort().forEach(schemaName => {
+        if (options.overlay) {
+          handleOverlaysForSchema(module, schemaName, overlays[schemaName]);
+        } else {
+          console.log(` Skipping overlays for schema ${schemaName}`);
+        }
+      });
+    }
   }
 }
 
 
-function obtainSchemas(module, release) {
+function obtainSchemas(module, release, ramlPath) {
   console.log(`Obtaining schemas for ${module} ${release}`);
 
   // There may be a better way to do this, but cloning the source from
@@ -68,7 +78,7 @@ function obtainSchemas(module, release) {
   process.chdir(module);
   system(`git checkout --quiet ${release}`);
   process.chdir('..');
-  system(`mv ${module}/ramls .`);
+  system(`mv ${module}/${ramlPath || 'ramls'} ramls`);
   system(`rm -rf ${module}`);
   system(`mkdir ${module}`);
   system(`mv ramls ${module}`);
@@ -121,10 +131,11 @@ function expandOverlaySummary(summary) {
   const regexp = /^(.*?) (.*?)\?(.*?)=(.*?) (.*)$/;
   const res = summary.match(regexp);
   if (!res) {
-    throw(Error(`bad overlay summary: '${summary}'`));
+    throw Error(`bad overlay summary: '${summary}'`);
   }
 
-  const [ undefined, schemaRef, linkBase, linkToField, linkFromField, includedElement ] = res;
+  // eslint-disable-next-line no-unused-vars
+  const [__UNUSED, schemaRef, linkBase, linkToField, linkFromField, includedElement] = res;
   return {
     'type': 'object',
     'folio:$ref': schemaRef,
@@ -134,7 +145,7 @@ function expandOverlaySummary(summary) {
     'folio:linkFromField': linkFromField,
     'folio:linkToField': linkToField,
     'folio:includedElement': includedElement,
-  }
+  };
 }
 
 

@@ -1,0 +1,40 @@
+#%RAML 1.0
+title: Instance searching in mod-search
+version: v0.8
+protocols: [ HTTP, HTTPS ]
+baseUri: http://localhost
+
+documentation:
+  - title: Instance Storage API
+    content: <b>Storage for instances in the inventory</b>
+
+types:
+  instance: !include instance.json
+  instances: !include instances.json
+  marcJson: !include marc.json
+  instanceRelationship: !include instancerelationship.json
+  instanceRelationships: !include instancerelationships.json
+
+traits:
+  language: !include raml-util/traits/language.raml
+  pageable: !include raml-util/traits/pageable.raml
+  searchable: !include raml-util/traits/searchable.raml
+
+resourceTypes:
+  collection: !include raml-util/rtypes/collection.raml
+  collection-item: !include raml-util/rtypes/item-collection.raml
+
+/instances:
+  displayName: Get a list of instances for CQL query
+  type:
+    collection:
+      exampleCollection: !include  examples/instances_get.json
+      schemaCollection: instances
+      schemaItem: instance
+      exampleItem: !include  examples/instance_get.json
+  get:
+    is: [pageable,
+        searchable: {description: "by title (using CQL)",
+                      example: "title=\"*uproot*\""},
+        ]
+

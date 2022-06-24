@@ -19,7 +19,7 @@ mod-inventory-storage-overlaid:
 	mv mod-inventory-storage $@
 
 clean:
-	rm -rf mod-inventory-storage*
+	rm -rf mod-inventory-storage* mod-search
 
 distclean: clean
 	rm -rf node_modules yarn.lock
