@@ -121,8 +121,8 @@ The operation of `mod-graphql` is affected by several environment variables:
 These are used in the standard way, as with for example [the Okapi command-line client](https://github.com/thefrontside/okapi.rb):
 
 * `OKAPI_URL`: specifies the URL of the Okapi service which is contacted in order to perform the underlying WSAPI operations needed to respond to GraphQL queries. When not specified, the Okapi URL is determined from the `X-Okapi-URL` header in the requests that are sent to `mod-graphql`, i.e. low-level WSAPI requests are sent to the same Okapi that sent the high-level GraphQL request. Typical value: `http://localhost:9130`.
-* `OKAPI_TENANT`: specifies the name of a FOLIO tenant enabled for the specified Okapi service, which is used for all WSAPI operations. Typical value: `diku`.
-* `OKAPI_TOKEN`: used to provide the value of a token from an established Okapi session associated with the specified tenant. Typical value: `eyJhbGciOiJIUzUx...v76BSXSlPh-m9AQA`.
+* `OKAPI_TENANT`: specifies the name of a FOLIO tenant enabled for the specified Okapi service, which is used for all WSAPI operations. When not specified, each outgoing request uses the tenant specified by the incoming request that caused it. Typical value: `diku`.
+* `OKAPI_TOKEN`: used to provide the value of a token from an established Okapi session associated with the specified tenant. When not specified, each outgoing request uses the token specified by the incoming request that caused it. Typical value: `eyJhbGciOiJIUzUx...v76BSXSlPh-m9AQA`.
 
 If these are not explicitly set in the environment, their values are taken from a `.env` file in the working directory, if that file exists.
 
