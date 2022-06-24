@@ -87,3 +87,12 @@ okapi destroy --no-tenant /_/discovery/modules/127.0.0.1-3000
 okapi destroy --no-tenant /_/proxy/modules/mod-graphql-0.1.0
 ```
 
+## Registering with Okapi using curl
+
+A lower-level approach, which works even now the Okapi Ruby Gem has broken:
+```
+curl -s localhost:9130/_/proxy/modules -d @ModuleDescriptor.json 
+curl -s localhost:9130/_/discovery/modules -d @ExternalDeploymentDescriptor.json
+curl -s localhost:9130/_/proxy/tenants/diku/modules -d @TenantAssociationDescriptor.json
+```
+
