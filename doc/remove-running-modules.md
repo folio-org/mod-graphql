@@ -64,15 +64,18 @@ Now we are ready to [insert the local copy of our module](developing-with-a-vagr
 
 # Without the `okapi` CLI utility
 
-ironman:okapi$ curl -s localhost:9130/_/proxy/tenants/diku/modules | grep mod-graphql
+```
+$ curl -s localhost:9130/_/proxy/tenants/diku/modules | grep mod-graphql
   "id" : "mod-graphql-1.9.1000293"
-ironman:okapi$ curl -X DELETE localhost:9130/_/proxy/tenants/diku/modules/mod-graphql-1.9.1000293
-ironman:okapi$ curl -s localhost:9130/_/proxy/tenants/diku/modules | grep mod-graphql
-ironman:okapi$ curl -s localhost:9130/_/discovery/modules | grep --context=2 mod-graphql-
+$ curl -X DELETE localhost:9130/_/proxy/tenants/diku/modules/mod-graphql-1.9.1000293
+$ curl -s localhost:9130/_/proxy/tenants/diku/modules | grep mod-graphql
+$ curl -s localhost:9130/_/discovery/modules | grep --context=2 mod-graphql-
 }, {
   "instId" : "0568ce50-3477-43ab-8c95-83969a9a1cab",
   "srvcId" : "mod-graphql-1.9.1000293",
   "nodeId" : "10.0.2.15",
   "url" : "http://10.0.2.15:9179",
-ironman:okapi$ curl -s -X DELETE localhost:9130/_/discovery/modules/mod-graphql-1.9.1000293/0568ce50-3477-43ab-8c95-83969a9a1cab
-ironman:okapi$ curl -s -X DELETE localhost:9130/_/proxy/modules/mod-graphql-1.9.1000293
+$ curl -s -X DELETE localhost:9130/_/discovery/modules/mod-graphql-1.9.1000293/0568ce50-3477-43ab-8c95-83969a9a1cab
+$ curl -s -X DELETE localhost:9130/_/proxy/modules/mod-graphql-1.9.1000293
+```
+
