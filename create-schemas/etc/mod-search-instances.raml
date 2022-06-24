@@ -21,17 +21,17 @@ resourceTypes:
   collection: !include ../../mod-inventory-storage/ramls/raml-util/rtypes/collection.raml
   collection-item: !include ../../mod-inventory-storage/ramls/raml-util/rtypes/item-collection.raml
 
-/instances:
-  displayName: Get a list of instances for CQL query
-  type:
-    collection:
-      exampleCollection: !include  ../../mod-inventory-storage/ramls/examples/instances_get.json
-      schemaCollection: instances
-      schemaItem: instance
-      exampleItem: !include ../../mod-inventory-storage/ramls/examples/instance_get.json
-  get:
-    is: [pageable,
-        searchable: {description: "by title (using CQL)",
-                      example: "title=\"*uproot*\""},
-        ]
-
+/search:
+  /instances:
+    displayName: Get a list of instances for CQL query
+    type:
+      collection:
+        exampleCollection: !include  ../../mod-inventory-storage/ramls/examples/instances_get.json
+        schemaCollection: instances
+        schemaItem: instance
+        exampleItem: !include ../../mod-inventory-storage/ramls/examples/instance_get.json
+    get:
+      is: [pageable,
+          searchable: {description: "by title (using CQL)",
+                        example: "title=\"*uproot*\""},
+          ]
