@@ -10,5 +10,14 @@
         "temporaryLocation": "location.json locations?id=temporaryLocationId locations.0"
       }
     }
+  },
+  {
+    "module": "mod-search",
+    "release": "v1.6.4",
+    "ramlPath": "src/main/resources/swagger.api",
+    "copyFiles": [
+      "../../create-schemas/etc/mod-search-instances.raml"
+    ],
+    "overlays": {}
   }
 ]
