@@ -4,6 +4,7 @@
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.9.0...v1.10.0)
 
 * Extensions to `create-schema.js` to help with handling OpenAPI-based modules. Fixes MODGQL-153.
+* Support searching in mod-search. Fixes MODGQL-152.
 
 ## [1.9.0](https://github.com/folio-org/mod-graphql/tree/v1.9.0) (2021-06-03)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.8.0...v1.9.0)
