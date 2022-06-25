@@ -1,5 +1,10 @@
 # Change history for mod-graphql
 
+## [1.10.1](https://github.com/folio-org/mod-graphql/tree/v1.10.1) (2022-06-25)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.10.0...v1.10.1)
+
+* Update version in `ModuleDescriptor.json` to match what's in `package.json`. (The problem arose because, unlike Stripes modules, the former is not generated from the latter, and I am in the habit of only changing the package for Stripes-module releases.) Thanks to David Crossley for finding this.
+
 ## [1.10.0](https://github.com/folio-org/mod-graphql/tree/v1.10.0) (2022-06-24)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.9.0...v1.10.0)
 
