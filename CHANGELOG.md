@@ -1,6 +1,6 @@
 # Change history for mod-graphql
 
-## [1.10.2](https://github.com/folio-org/mod-graphql/tree/v1.10.2) (IN PROGRESS)
+## [1.10.2](https://github.com/folio-org/mod-graphql/tree/v1.10.2) (2022-06-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.10.1...v1.10.2)
 
 * Copy mod-inventory-storage JSON schemas for mod-search, instead of having mod-search's RAML link out to the adjacent mod-inventory-storage area. Avoids error "duplicate type name 'Tinstances' with different definitions" when starting up mod-graphql on both modules simultaneously. Fixes MODGQL-156.
