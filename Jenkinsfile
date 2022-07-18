@@ -4,7 +4,6 @@ buildNPM {
   npmDeploy = false
   runLint = false
   runTest = true
-  publishAPI = false
   publishModDescriptor = true
   modDescriptor = 'ModuleDescriptor.json'
 
