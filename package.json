@@ -31,7 +31,7 @@
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.7",
     "node-getopt": "^0.3.2",
-    "query-string": "^5.0.1",
+    "query-string": "^7.1.2",
     "raml-1-parser": "1.1.47"
   },
   "devDependencies": {
