@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## IN PROGRESS
+
+* Upgrade to `query-string` ^7.1.2, mitigating DoS CVE-2022-38900. Fixes MODGQL-161.
+
 ## [1.10.2](https://github.com/folio-org/mod-graphql/tree/v1.10.2) (2022-06-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.10.1...v1.10.2)
 
