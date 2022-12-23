@@ -49,7 +49,6 @@
     "ramlPath": "src/main/resources/swagger.api",
     "copyFiles": [
       "etc/mod-search-instances.raml",
-      "mod-inventory-storage/ramls/*.json",
       "mod-inventory-storage/ramls/raml-util",
       "mod-inventory-storage/ramls/examples"
     ],
