@@ -24,3 +24,8 @@ clean:
 distclean: clean
 	rm -rf node_modules yarn.lock
 
+regenerate:
+	rm -rf mod-inventory-storage mod-search
+	./create-schemas.js --rewrite schemaconf.json
+	(cd ../src/autogen && ./raml2graphql ../../create-schemas/mod-search/ramls/mod-search-instances.raml)
+
