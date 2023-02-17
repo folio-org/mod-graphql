@@ -82,6 +82,13 @@ function gatherType(containerName, basePath, jsonSchema) {
     type = type[0];
   }
 
+  if (type === undefined && jsonSchema.$ref !== undefined) {
+    // Some FOLIO modules describe array elements using a $ref but without explicitly giving type: "object"
+    // See MODGQL-164 for details.
+    console.log('XXX no type defined, using "object" for', jsonSchema);
+    type = 'object';
+  }
+
   if (type === 'array') {
     res = gatherType(containerName, basePath, jsonSchema.items || {});
     if (!res) return null;
@@ -91,7 +98,10 @@ function gatherType(containerName, basePath, jsonSchema) {
     res = [0, gatherFields(containerName, basePath, jsonSchema)];
   } else {
     const inner = r2gBasicType(type);
-    if (!inner) return null;
+    if (!inner) {
+      console.log(`  could not find basic type '${type}' in gatherType for ${containerName}`);
+      return null;
+    }
     res = [0, inner];
   }
 
