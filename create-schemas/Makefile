@@ -26,6 +26,6 @@ distclean: clean
 
 regenerate:
 	rm -rf mod-inventory-storage mod-search
-	./create-schemas.js --rewrite schemaconf.json
+	./create-schemas.js --rewrite --overlay schemaconf.json
 	(cd ../src/autogen && ./raml2graphql ../../create-schemas/mod-search/ramls/mod-search-instances.raml)
 

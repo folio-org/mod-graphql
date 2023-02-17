@@ -154,6 +154,8 @@ Choose which categories of logging you want to see by running with the `LOGGING_
 * `schemamap` -- log the RAML file's implied map from top-level schema identifiers to their directories.
 * `raml` -- log the RAML file as initially loaded, before conversion to a GraphQL schema begins.
 * `nojson` -- log WSAPI endpoints in the RAML for which there is no JSON body specification. Such endpoints are not necessarily errors, and are skipped in translating the RAML, but may indicate an incomplete specification.
+* `notype` -- log names of fields that have no specified JSON type but are inferred by the presence of a `$ref` to be objects.
+* `unknowntype` -- log uses of unknown basic types.
 * `schema` -- log when a schema is registered, and just before trying to read a schema file.
 * `replace` -- log when a JSON Schema is encountered for the second or subsequent time, as the code declines to replace the first version.
 * `duptype` -- log when merging schemas results in a duplicate defintion of a type, but the definition is the same in both cases. (It is a hard error if two different definitions are given for the same type.)

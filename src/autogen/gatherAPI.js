@@ -54,7 +54,7 @@ function r2gBasicType(type, items) {
 
   if (type !== undefined) {
     console.warn(`no GraphQL map for JSON-Schema basic type '${type}'`);
-    return 'XXX';
+    return 'XXX'; // XXX I think this should be `return undefined` so the `unknowntype` logging category can fire
   }
 
   return null;
@@ -74,7 +74,7 @@ function r2gDefinedType(type, removePrefix) {
 }
 
 
-function gatherType(containerName, basePath, jsonSchema) {
+function gatherType(logger, containerName, basePath, jsonSchema) {
   let res;
   let type = jsonSchema.type;
   if (typeof type === 'object') {
@@ -82,16 +82,26 @@ function gatherType(containerName, basePath, jsonSchema) {
     type = type[0];
   }
 
+  if (type === undefined && jsonSchema.$ref !== undefined) {
+    // Some FOLIO modules describe array elements using a $ref but without explicitly giving type: "object"
+    // See MODGQL-164 for details.
+    logger.log('notype', 'inferring type "object" for', containerName);
+    type = 'object';
+  }
+
   if (type === 'array') {
-    res = gatherType(containerName, basePath, jsonSchema.items || {});
+    res = gatherType(logger, containerName, basePath, jsonSchema.items || {});
     if (!res) return null;
     res[0]++; // increment level
   } else if (type === 'object') {
     // eslint-disable-next-line no-use-before-define
-    res = [0, gatherFields(containerName, basePath, jsonSchema)];
+    res = [0, gatherFields(logger, containerName, basePath, jsonSchema)];
   } else {
     const inner = r2gBasicType(type);
-    if (!inner) return null;
+    if (!inner) {
+      logger.log('unknowntype', `basic type '${type}' in ${containerName}`);
+      return null;
+    }
     res = [0, inner];
   }
 
@@ -108,7 +118,7 @@ function gatherType(containerName, basePath, jsonSchema) {
 }
 
 
-function gatherFields(containerName, basePath, jsonSchema) {
+function gatherFields(logger, containerName, basePath, jsonSchema) {
   const $ref = jsonSchema.$ref || jsonSchema['folio:$ref'];
   if ($ref) {
     // It's a reference to another named schema.
@@ -129,7 +139,7 @@ function gatherFields(containerName, basePath, jsonSchema) {
     sorted.forEach(name => {
       let t;
       try {
-        t = gatherType(name, basePath, jsonSchema.properties[name]);
+        t = gatherType(logger, name, basePath, jsonSchema.properties[name]);
       } catch (e) {
         throw Error(e.message + ' within schema ' + JSON.stringify(jsonSchema, null, 2));
       }
@@ -287,7 +297,7 @@ function insertSchema(basePath, currentPath, types, options, schemaName, schemaT
   types[rtype] = 'temporary marker'; // XXX this is ugly.
   options.logger.log('schema', `registering schema '${schemaName}'`);
   insertReferencedSchemas(basePath, currentPath, types, options, obj);
-  types[rtype] = gatherFields(rtype, basePath, obj);
+  types[rtype] = gatherFields(options.logger, rtype, basePath, obj);
   return rtype;
 }
 
