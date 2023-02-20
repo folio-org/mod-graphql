@@ -6,4 +6,4 @@
 # * Run a query using `curl -H "X-Okapi-Url: $OKAPI_URL" -H "X-Okapi-Tenant: $OKAPI_TENANT" -H "X-Okapi-Token: $OKAPI_TOKEN" -H "Content-Type: application/json" -X POST -d @query.graphql http://localhost:3001/graphql`
 
 . ~/.okapi
-LOGCAT=listen,url yarn start tests/input/mod-inventory-storage/ramls/i*-storage.raml
+LOGCAT=listen,url yarn start tests/schemas-for-tests/mod-inventory-storage/ramls/i*-storage.raml

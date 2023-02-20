@@ -1,6 +1,6 @@
 Start mod-graphql:
 ```
-LOGCAT=listen,url yarn start tests/input/mod-inventory-storage/ramls/instance-storage.raml
+LOGCAT=listen,url yarn start tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml
 ```
 Then use the playground UI that is served at http://localhost:3001/graphql alongside the WSAPI:
 

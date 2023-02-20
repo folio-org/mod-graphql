@@ -3,7 +3,7 @@
 import { describe, beforeEach, runQuery, it, expect } from './testlib/helper';
 import modGraphql from '../src/app';
 
-const app = modGraphql(['tests/input/mod-inventory-storage/ramls/item-storage.raml']);
+const app = modGraphql(['tests/schemas-for-tests/mod-inventory-storage/ramls/item-storage.raml']);
 
 const QUERY = `query multipleItems($cql: String) {
   item_storage_items(query: $cql) {

@@ -16,7 +16,7 @@
     "release": "v1.6.4",
     "ramlPath": "src/main/resources/swagger.api",
     "copyFiles": [
-      "../../create-schemas/etc/mod-search-instances.raml",
+      "../mod-search-instances-for-build.raml",
       "mod-inventory-storage/ramls/*.json",
       "mod-inventory-storage/ramls/raml-util",
       "mod-inventory-storage/ramls/examples"

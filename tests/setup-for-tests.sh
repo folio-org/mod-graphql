@@ -1,18 +1,18 @@
 #!/bin/sh
 
-# Usage: tests/setup.sh [-f]
+# Usage: tests/setup-for-tests.sh [-f]
 
 if [ ! -f package.json ]; then
     echo "$0: must be run from root of package" >&2
     exit 1
 fi
 
+DIR=tests/schemas-for-tests
 if [ "x$1" = "x-f" ]; then
     shift
-    rm -rf tests/input
+    rm -rf $DIR
 fi
 
-DIR=tests/input
 if [ -d $DIR ]; then
     echo "API data already set up"
     exit 0
@@ -24,5 +24,5 @@ set -ex
 
 mkdir $DIR
 cd $DIR
-../../create-schemas/create-schemas.js --overlay ../schemaconf.json 
+../../create-schemas/create-schemas.js --overlay ../schemaconf-for-tests.json 
 echo "... all done"

@@ -1,0 +1,14 @@
+[
+  {
+    "module": "mod-inventory-storage",
+    "release": "e8b516d4b6026b6fad68cef31be137b48519583f",
+    "overlays": {
+      "instance.json": {
+        "instanceTypeObject": "instancetype.json instance-types?id=instanceTypeId instanceTypes.0"
+      },
+      "holdingsrecord.json": {
+        "temporaryLocation": "location.json locations?id=temporaryLocationId locations.0"
+      }
+    }
+  }
+]
