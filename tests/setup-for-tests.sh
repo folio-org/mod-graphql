@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Usage: tests/setup.sh [-f]
+# Usage: tests/setup-for-tests.sh [-f]
 
 if [ ! -f package.json ]; then
     echo "$0: must be run from root of package" >&2
