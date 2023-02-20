@@ -1,4 +1,5 @@
 FROM node:16-alpine AS base
+RUN apk add --no-cache git
 WORKDIR /usr/src/app
 
 # Create a Docker build stage cache layer with node_modules only
