@@ -13,6 +13,6 @@ RUN yarn install --production
 FROM base AS release
 COPY --from=production /usr/src/app/node_modules/ /usr/src/app/node_modules/
 COPY . .
-RUN ./tests/setup.sh
+RUN ./build/setup-for-build.sh
 EXPOSE 3001
-CMD yarn start tests/input/*/ramls/*.raml
+CMD yarn start ./build/schemas-for-build/*/ramls/*.raml

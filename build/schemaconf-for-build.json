@@ -1,0 +1,25 @@
+[
+  {
+    "module": "mod-inventory-storage",
+    "release": "e8b516d4b6026b6fad68cef31be137b48519583f",
+    "overlays": {
+      "instance.json": {
+        "instanceTypeObject": "instancetype.json instance-types?id=instanceTypeId instanceTypes.0"
+      },
+      "holdingsrecord.json": {
+        "temporaryLocation": "location.json locations?id=temporaryLocationId locations.0"
+      }
+    }
+  },
+  {
+    "module": "mod-search",
+    "release": "v1.6.4",
+    "ramlPath": "src/main/resources/swagger.api",
+    "copyFiles": [
+      "../mod-search-instances-for-build.raml",
+      "mod-inventory-storage/ramls/*.json",
+      "mod-inventory-storage/ramls/raml-util",
+      "mod-inventory-storage/ramls/examples"
+    ]
+  }
+]
