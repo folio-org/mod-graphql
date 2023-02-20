@@ -7,12 +7,12 @@ if [ ! -f package.json ]; then
     exit 1
 fi
 
+DIR=tests/input
 if [ "x$1" = "x-f" ]; then
     shift
-    rm -rf tests/input
+    rm -rf $DIR
 fi
 
-DIR=tests/input
 if [ -d $DIR ]; then
     echo "API data already set up"
     exit 0
