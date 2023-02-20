@@ -7,7 +7,7 @@ if [ ! -f package.json ]; then
     exit 1
 fi
 
-DIR=tests/input
+DIR=tests/schemas-for-tests
 if [ "x$1" = "x-f" ]; then
     shift
     rm -rf $DIR

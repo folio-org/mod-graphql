@@ -78,7 +78,7 @@ yarn start ../mod-inventory-storage/ramls/instance-storage.raml
 
 The module's functioning is affected by several environment variables, as detailed [below](#environment), so in practice a more typical invocation might be:
 ```
-env OKAPI_URL=https://folio-snapshot-okapi.dev.folio.org LOGCAT=listen,url yarn start tests/input/mod-inventory-storage/ramls/instance-storage.raml 
+env OKAPI_URL=https://folio-snapshot-okapi.dev.folio.org LOGCAT=listen,url yarn start tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml 
 ```
 <!--
 Some FOLIO RAMLs that this can work on:

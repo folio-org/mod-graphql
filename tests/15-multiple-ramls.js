@@ -4,8 +4,8 @@ import { describe, beforeEach, runQuery, it, expect } from './testlib/helper';
 import modGraphql from '../src/app';
 
 const app = modGraphql([
-  'tests/input/mod-inventory-storage/ramls/instance-storage.raml',
-  'tests/input/mod-inventory-storage/ramls/item-storage.raml'
+  'tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml',
+  'tests/schemas-for-tests/mod-inventory-storage/ramls/item-storage.raml'
 ]);
 
 const QUERY1 = `query multipleInstances($cql: String) {

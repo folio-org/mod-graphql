@@ -3,7 +3,7 @@
 import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
 import modGraphql from '../src/app';
 
-const app = modGraphql('tests/input/mod-inventory-storage/ramls/instance-storage.raml');
+const app = modGraphql('tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml');
 
 const QUERY = `query multipleInstances($cql: String) {
   instance_storage_instances(query: $cql) {

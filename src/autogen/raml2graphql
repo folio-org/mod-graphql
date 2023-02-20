@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* eslint-disable no-console, no-use-before-define */
-// Run as: ./raml2graphql ../../tests/input/mod-inventory-storage/ramls/instance-storage.raml
+// Run as: ./raml2graphql ../../tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml
 //     or: LOGCAT=exclude,skip,nomulti,ramllist,endmap ./raml2graphql -d ../../.. -x '^raml$' -s -a ../../api.yml
 
 const optParser = require('node-getopt');
