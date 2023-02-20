@@ -12,10 +12,10 @@
     "lint": "eslint -f unix create-schemas/create-schemas.js main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
     "start": "babel-node --presets=env,stage-2 main.js",
     "dev": "nodemon --exec babel-node --presets=env,stage-2 main.js",
-    "test": "./tests/setup.sh && mocha --exit --require tests/testlib/support tests",
-    "test1": "./tests/setup.sh && mocha --exit --require tests/testlib/support",
+    "test": "./tests/setup-for-tests.sh && mocha --exit --require tests/testlib/support tests",
+    "test1": "./tests/setup-for-tests.sh && mocha --exit --require tests/testlib/support",
     "clean": "rm -rf api.yml tests/input",
-    "test2": "./tests/setup.sh && mocha --exit --require tests/testlib/support tests/13-instance-by-id-with-holdings.js",
+    "test2": "./tests/setup-for-tests.sh && mocha --exit --require tests/testlib/support tests/13-instance-by-id-with-holdings.js",
     "regen": "node src/autogen/test/run-tests.js --regenerate ./src/autogen/test",
     "api": "rm -f api.yml; wget https://raw.githubusercontent.com/folio-org/folio-org.github.io/master/_data/api.yml"
   },

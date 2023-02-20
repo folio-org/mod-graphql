@@ -24,5 +24,5 @@ set -ex
 
 mkdir $DIR
 cd $DIR
-../../create-schemas/create-schemas.js --overlay ../schemaconf.json 
+../../create-schemas/create-schemas.js --overlay ../schemaconf-for-tests.json 
 echo "... all done"
