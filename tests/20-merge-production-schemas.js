@@ -5,12 +5,12 @@ import { assert } from 'chai';
 
 const execSync = require('child_process').execSync;
 
-describe('01. merge production schemas', function () {
+describe('20. merge production schemas', function () {
   it('compile and merge', function (done) {
     this.timeout(10000);
 
     // XXX this must run against the same schemas listed on the CMD line of ../Dockerfile
-    const command = './src/autogen/raml2graphql ./build/schemas-for-build/*/ramls/*.raml';
+    const command = './src/autogen/raml2graphql ./build/schemas-for-build/mod-search/ramls/*.raml';
     let output;
     try {
       output = execSync(command);
