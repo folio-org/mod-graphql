@@ -14,7 +14,7 @@ if [ "x$1" = "x-f" ]; then
 fi
 
 if [ -d $DIR ]; then
-    echo "API data already set up"
+    echo "API data for tests already set up"
     exit 0
 fi
 
