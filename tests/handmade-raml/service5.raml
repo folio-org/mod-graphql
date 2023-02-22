@@ -1,0 +1,21 @@
+#%RAML 1.0
+title: Fourth of several RAMLs that use a person schema
+
+# Uses a different schema (detailed-person.json) from service1, named
+# with the same RAML type name ("person"). The two services are
+# incompatible (until we fix MODGQL-114) because the two different
+# definitions are both trying to use the same type name.
+
+types:
+  person: !include advanced-person.json
+
+/ws2:
+  /person:
+    /{id}:
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                type: person
+                example: !include advanced-person-example.json

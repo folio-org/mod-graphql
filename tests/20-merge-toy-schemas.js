@@ -33,6 +33,16 @@ const testCases = [
       [ true, /^type TadvancedPerson /m ],
     ],
   },
+  {
+    name: 'same schema name, different definition',
+    services: ['service1', 'service5'],
+    matches: [
+      [ true, /^# title: First/m ],
+      [ true, /^# title: .*Fifth/m ],
+      [ true, /^type Tperson /m ],
+      [ true, /^type TadvancedPerson /m ],
+    ],
+  },
 ];
 
 describe('20. merge toy schemas', () => {
