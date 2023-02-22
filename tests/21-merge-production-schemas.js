@@ -2,10 +2,9 @@
 
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
+import { execSync } from 'child_process';
 
-const execSync = require('child_process').execSync;
-
-describe('20. merge production schemas', function () {
+describe('21. merge production schemas', function () {
   it('compile and merge', function (done) {
     this.timeout(10000);
 

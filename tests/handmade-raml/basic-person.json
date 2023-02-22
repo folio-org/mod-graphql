@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "A simple representation of a person",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "name of the person"
+    }
+  },
+  "required": ["id"],
+  "additionalProperties": false
+}
