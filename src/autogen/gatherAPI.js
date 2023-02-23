@@ -346,7 +346,7 @@ function gatherResource(raml10types, resource, basePath, schemaMap, types, optio
         const schemaDir = schemaMap[schemaName];
         const currentPath = (schemaDir && schemaDir !== '.') ? `${basePath}/${schemaDir}` : basePath;
         // console.log(`* schema '${schemaName}' with dir '${schemaDir}': currentPath = '${currentPath}'`);
-        result.type = insertSchema(basePath, currentPath, types, options, schemaName, schemaText);
+        result.type = insertSchema(basePath, currentPath, types, options, result.queryName + '__' + schemaName, schemaText);
       } else if (!options.allowSchemaless) {
         throw new Error(`no schema for '${result.queryName}': cannot find get/responses/200/body/schema or get/body/schema for '${result.url}'`);
       }
