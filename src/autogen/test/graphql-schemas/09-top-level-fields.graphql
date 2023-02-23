@@ -5,10 +5,10 @@
 # raml-version: 0.9
 
 type Query {
-  person(name: String, maxCount: Float, queryString: String): TpersonSchema
+  person(name: String, maxCount: Float, queryString: String): Tperson__personSchema
 }
 
-type TpersonSchema {
+type Tperson__personSchema {
   address: String
   name: String!
 }

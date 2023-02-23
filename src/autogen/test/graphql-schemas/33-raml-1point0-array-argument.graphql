@@ -2,15 +2,15 @@
 # raml-version: 1.0
 
 type Query {
-  users(facets: [String]): TuserdataCollection
+  users(facets: [String]): Tusers__userdataCollection
 }
 
-type TuserdataCollection {
+type Tusers__userdataCollection {
   totalRecords: Int!
-  users: [TuserdataCollection_users]!
+  users: [Tusers__userdataCollection_users]!
 }
 
-type TuserdataCollection_users {
+type Tusers__userdataCollection_users {
   id: String!
   username: String
 }

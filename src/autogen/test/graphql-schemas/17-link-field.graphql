@@ -2,7 +2,7 @@
 # raml-version: 0.9
 
 type Query {
-  person(name: String, maxCount: Float, queryString: String): TpersonSchema
+  person(name: String, maxCount: Float, queryString: String): Tperson__personSchema
 }
 
 type T_alias {
@@ -10,7 +10,7 @@ type T_alias {
   inUseSinceYear: Int
 }
 
-type TpersonSchema {
+type Tperson__personSchema {
   address: String
   aliases(limit: Int = 10): [T_alias] # link: /aliases (personId=$id) -> records
   name: String!

@@ -2,15 +2,15 @@
 # raml-version: 0.9
 
 type Query {
-  person: Tgenerated1
+  person: Tperson__generated1
 }
 
-type Tgenerated1 {
+type Tperson__generated1 {
   name: String
-  notes: Tgenerated1_notes
+  notes: Tperson__generated1_notes
 }
 
-type Tgenerated1_notes {
+type Tperson__generated1_notes {
   _dummy: String
 }
 

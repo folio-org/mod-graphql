@@ -2,10 +2,10 @@
 # raml-version: 0.9
 
 type Query {
-  person(name: String, maxCount: Float, queryString: String): Tgenerated1
+  person(name: String, maxCount: Float, queryString: String): Tperson__generated1
 }
 
-type Tgenerated1 {
+type Tperson__generated1 {
   address: String
   name: String!
 }

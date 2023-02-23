@@ -1,0 +1,8 @@
+{
+  "id": "123",
+  "name": "Mike Taylor",
+  "manager": {
+    "id": "456",
+    "name": "Fiona Taylor"
+  }
+}

@@ -2,7 +2,7 @@
 # raml-version: 1.0
 
 type Query {
-  perms_permissions: TpermissionListObject
+  perms_permissions: Tperms_permissions__permissionListObject
 }
 
 type T_schemas_permission {
@@ -16,7 +16,7 @@ type T_schemas_permission {
   visible: Boolean
 }
 
-type TpermissionListObject {
+type Tperms_permissions__permissionListObject {
   permissions: [T_schemas_permission]!
   totalRecords: Int!
 }

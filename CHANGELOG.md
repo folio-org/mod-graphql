@@ -5,6 +5,8 @@
 * Upgrade to `query-string` ^7.1.2, mitigating DoS CVE-2022-38900. Fixes MODGQL-161.
 * When parsing JSON schemas, infer that arrays whose elements specify no type are of type `object`, so long as a `$ref` field is provided. This allows us to correctly handle the `mod-search` JSON schemas, which routinely omit array-element types. This functionality is provided by `graphql` interface 1.3. Fixes MODGQL-164.
 * A new, self-contained [`build` directory](build) is used for building the Docker container. This is now distinct from the [`tests`](tests) directory used for running tests (as it always should have been) and from the schema-configuration file and hand-crafted `mod-search` RAML that are used in development of the [`create-schemas`](create-schemas) part of the software. Fixes MODGQL-158.
+* Generated type names now include a prefix representing the WSAPI path, disambiguating otherwise same-named types from different modules. This prevents same-named schemas with different contents from colliding. Fixes MODGQL-114.
+* The fix to type names enables `mod-inventory-storage` and `mod-search` to run together. Fixes MODGQL-165.
 
 ## [1.10.2](https://github.com/folio-org/mod-graphql/tree/v1.10.2) (2022-06-25)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.10.1...v1.10.2)

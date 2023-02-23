@@ -2,10 +2,10 @@
 # raml-version: 0.9
 
 type Query {
-  person(name: String, maxCount: Float, queryString: String): TgroupSchema
+  person(name: String, maxCount: Float, queryString: String): Tperson__groupSchema
 }
 
-type TgroupSchema {
+type Tperson__groupSchema {
   name: String
   purpose: String!
 }
