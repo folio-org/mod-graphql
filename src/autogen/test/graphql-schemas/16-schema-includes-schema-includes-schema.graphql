@@ -5,7 +5,7 @@
 # raml-version: 0.9
 
 type Query {
-  person(name: String, maxCount: Float, queryString: String): TtopSchema
+  person(name: String, maxCount: Float, queryString: String): Tperson__topSchema
 }
 
 type T_schemas_contained {
@@ -17,7 +17,7 @@ type T_schemas_subcontained {
   innerField: String
 }
 
-type TtopSchema {
+type Tperson__topSchema {
   metadata: T_schemas_contained
   topLevelField: String
 }

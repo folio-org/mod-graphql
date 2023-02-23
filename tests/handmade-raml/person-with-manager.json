@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "A person who has a manager (who is also a person)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "name of the person"
+    },
+    "manager": {
+      "type": "object",
+      "$ref": "basic-person.json"
+    }
+  },
+  "required": ["id", "manager"],
+  "additionalProperties": false
+}

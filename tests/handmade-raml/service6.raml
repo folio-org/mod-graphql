@@ -1,0 +1,21 @@
+#%RAML 1.0
+title: Sixth of several RAMLs that use a person schema
+
+# Uses a different schema (detailed-person.json) from service1, named
+# with a different RAML type name ("advancedPerson"). The two services
+# are compatible because the two different definitions do not use the
+# same type name.
+
+types:
+  person: !include person-with-manager.json
+
+/ws6:
+  /person:
+    /{id}:
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                type: person
+                example: !include person-with-manager-example.json

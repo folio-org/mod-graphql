@@ -9,8 +9,8 @@ const testCases = [
     matches: [
       [ true, /^# title: First/m ],
       [ true, /^# title: .*Second/m ],
-      [ true, /^type Tperson /m ],
-      [ true, /^type TbasicPerson /m ],
+      [ true, /^type Tws1_person_SINGLE__person /m ],
+      [ true, /^type Tws2_person_SINGLE__basicPerson /m ],
     ],
   },
   {
@@ -19,8 +19,8 @@ const testCases = [
     matches: [
       [ true, /^# title: First/m ],
       [ true, /^# title: .*Third/m ],
-      [ true, /^type Tperson /m ],
-      [ false, /basicPerson/ ],
+      [ true, /^type Tws1_person_SINGLE__person /m ],
+      [ false, /type Tws3_person_SINGLE__basicPerson/ ],
     ],
   },
   {
@@ -29,8 +29,8 @@ const testCases = [
     matches: [
       [ true, /^# title: First/m ],
       [ true, /^# title: .*Fourth/m ],
-      [ true, /^type Tperson /m ],
-      [ true, /^type TadvancedPerson /m ],
+      [ true, /^type Tws1_person_SINGLE__person /m ],
+      [ true, /^type Tws4_person_SINGLE__advancedPerson /m ],
     ],
   },
   {
@@ -39,8 +39,19 @@ const testCases = [
     matches: [
       [ true, /^# title: First/m ],
       [ true, /^# title: .*Fifth/m ],
-      [ true, /^type Tperson /m ],
-      [ true, /^type TadvancedPerson /m ],
+      [ true, /^type Tws1_person_SINGLE__person /m ],
+      [ true, /^type Tws5_person_SINGLE__person /m ],
+    ],
+  },
+  {
+    name: 'schema included at multiple levels by different resources',
+    services: ['service1', 'service6'],
+    matches: [
+      [ true, /^# title: First/m ],
+      [ true, /^# title: .*Sixth/m ],
+      [ true, /^type T_basic_person /m ],
+      [ true, /^type Tws1_person_SINGLE__person /m ],
+      [ true, /^type Tws6_person_SINGLE__person /m ],
     ],
   },
 ];

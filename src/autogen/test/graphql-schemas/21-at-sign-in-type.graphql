@@ -2,7 +2,7 @@
 # raml-version: 0.9
 
 type Query {
-  person(name: String, maxCount: Float, queryString: String): Tgenerated1
+  person(name: String, maxCount: Float, queryString: String): Tperson__generated1
 }
 
 type T_schemas_metadata {
@@ -14,7 +14,7 @@ type T_schemas_metadata {
   updatedDate: String
 }
 
-type Tgenerated1 {
+type Tperson__generated1 {
   _metadata: T_schemas_metadata
   name: String
 }
