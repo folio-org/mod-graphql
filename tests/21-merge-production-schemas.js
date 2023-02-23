@@ -9,7 +9,7 @@ describe('21. merge production schemas', function () {
     this.timeout(10000);
 
     // XXX this must run against the same schemas listed on the CMD line of ../Dockerfile
-    const command = './src/autogen/raml2graphql ./build/schemas-for-build/mod-search/ramls/*.raml';
+    const command = './src/autogen/raml2graphql ./build/schemas-for-build/*/ramls/*.raml';
     let output;
     try {
       output = execSync(command);
