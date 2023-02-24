@@ -1,6 +1,7 @@
 # Change history for mod-graphql
 
-## 1.11.0 (IN PROGRESS)
+## [1.11.0](https://github.com/folio-org/mod-graphql/tree/v1.11.0) (2023-02-24)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.10.2...v1.11.0)
 
 * Upgrade to `query-string` ^7.1.2, mitigating DoS CVE-2022-38900. Fixes MODGQL-161.
 * When parsing JSON schemas, infer that arrays whose elements specify no type are of type `object`, so long as a `$ref` field is provided. This allows us to correctly handle the `mod-search` JSON schemas, which routinely omit array-element types. This functionality is provided by `graphql` interface 1.3. Fixes MODGQL-164.
