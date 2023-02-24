@@ -8,6 +8,7 @@
 * A new, self-contained [`build` directory](build) is used for building the Docker container. This is now distinct from the [`tests`](tests) directory used for running tests (as it always should have been) and from the schema-configuration file and hand-crafted `mod-search` RAML that are used in development of the [`create-schemas`](create-schemas) part of the software. Fixes MODGQL-158.
 * Generated type names now include a prefix representing the WSAPI path, disambiguating otherwise same-named types from different modules. This prevents same-named schemas with different contents from colliding. Fixes MODGQL-114.
 * The fix to type names enables `mod-inventory-storage` and `mod-search` to run together. Fixes MODGQL-165.
+* Extend tests to check that production schemas compile and merge (to avoid another MODGQL-165). Fixes MODGQL-166.
 * Allow create-schema overrides to specify array-typed virtual fields. Fixes MODGQL-168.
 * Rewrite Docker-build schema-configuration to properly support mod-search using its own instance schema. Fixes MODGQL-169.
 
