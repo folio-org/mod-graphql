@@ -86,7 +86,7 @@ function gatherType(logger, containerName, basePath, jsonSchema) {
     // Some FOLIO modules describe array elements using a $ref but without explicitly giving type: "object"
     // See MODGQL-164 for details.
     logger.log('notype', 'inferring type "object" for', containerName);
-    // type = 'object'; XXX not yet: see https://issues.folio.org/browse/MODGQL-165
+    type = 'object';
   }
 
   if (type === 'array') {
