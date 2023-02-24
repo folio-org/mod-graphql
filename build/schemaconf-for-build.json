@@ -20,6 +20,11 @@
       "mod-inventory-storage/ramls/*.json",
       "mod-inventory-storage/ramls/raml-util",
       "mod-inventory-storage/ramls/examples"
-    ]
+    ],
+    "overlays": {
+      "schemas/instance.json": {
+        "holdingsRecords2": "../holdingsrecord.json[] holdings-storage/holdings?instanceId=id holdingsRecords"
+      }
+    }
   }
 ]
