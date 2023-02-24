@@ -4,4 +4,3 @@ mod-inventory-storage-rewritten
 mod-inventory-storage-virgin
 mod-search
 node_modules
-yarn.lock
