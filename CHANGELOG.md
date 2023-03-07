@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## 1.12.0 (IN PROGRESS)
+
+* Fix some ESLint errors (mostly just whitespace). Fixes MODGQL-171.
+
 ## [1.11.0](https://github.com/folio-org/mod-graphql/tree/v1.11.0) (2023-02-24)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.10.2...v1.11.0)
 

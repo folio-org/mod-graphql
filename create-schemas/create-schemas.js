@@ -150,7 +150,7 @@ function expandOverlaySummary(summary) {
       'type': 'array',
       'items': {
         'type': 'object',
-        '$ref': schemaRef.substring(0, schemaRef.length-2)
+        '$ref': schemaRef.substring(0, schemaRef.length - 2)
       },
       ...virtualFields
     };
