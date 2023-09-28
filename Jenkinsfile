@@ -1,6 +1,6 @@
 
 buildNPM {
-  buildNode = 'jenkins-slave-all'
+  buildNode = 'jenkins-agent-java17'
   npmDeploy = false
   runLint = false
   runTest = true
