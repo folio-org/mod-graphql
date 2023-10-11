@@ -1,6 +1,7 @@
 # Change history for mod-graphql
 
-## 1.12.0 (IN PROGRESS)
+## [1.12.0](https://github.com/folio-org/mod-graphql/tree/v1.12.0) (2023-10-11)
+[Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.11.0...v1.12.0)
 
 * Fix some ESLint errors (mostly just whitespace). Fixes MODGQL-171.
 * Dockerfile specifies to run on Node v18. Fixes MODGQL-172.
