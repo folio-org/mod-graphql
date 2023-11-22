@@ -1,5 +1,10 @@
 FROM node:18-alpine AS base
-RUN apk add --no-cache git
+
+# Install latest patch versions of packages: https://pythonspeed.com/articles/security-updates-in-docker/
+RUN apk upgrade \
+ && apk add git \
+ && rm -rf /var/cache/apk/*
+
 WORKDIR /usr/src/app
 
 # Create a Docker build stage cache layer with node_modules only
