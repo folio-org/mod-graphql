@@ -11,7 +11,8 @@ buildNPM {
     buildDocker {
       publishMaster = 'yes'
       dockerDir = 'project'
-      healthChk = 'no'
+      healthChk = 'yes'
+      healthChkCmd = 'wget --no-verbose --tries=1 --spider http://localhost:3001/admin/health || exit 1'
     }
   }
 }
