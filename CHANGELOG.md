@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## 1.13.0 (IN PROGRESS)
+
+* `create-schemas.js` allows for the possibility of RAML-and-schema repos having removed submodules since the version that was marked for us. Thanks to Michelle Suranofsky (@mis306lu) for spotting this and providing the fix. Fixes MODGQL-179.
+
 ## [1.12.0](https://github.com/folio-org/mod-graphql/tree/v1.12.0) (2023-10-11)
 [Full Changelog](https://github.com/folio-org/mod-graphql/compare/v1.11.0...v1.12.0)
 
