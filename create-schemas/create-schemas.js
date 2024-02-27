@@ -77,7 +77,7 @@ function obtainSchemas(module, release, ramlPath) {
   system(`git clone --recurse-submodules https://github.com/folio-org/${module}`);
   process.chdir(module);
   system(`git checkout --quiet ${release}`);
-  system(`git submodule update --init --recursive`);
+  system('git submodule update --init --recursive');
   process.chdir('..');
   system(`mv ${module}/${ramlPath || 'ramls'} ramls`);
   system(`rm -rf ${module}`);
