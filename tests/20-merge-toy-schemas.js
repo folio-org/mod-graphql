@@ -56,12 +56,12 @@ const testCases = [
   },
 ];
 
-describe('20. merge toy schemas', () => {
+describe('20. merge toy schemas', function () => {
   testCases.forEach(testCase => {
     const { name, services, matches } = testCase;
     const command = './src/autogen/raml2graphql ' + services.map(x => `tests/handmade-raml/${x}.raml`).join(' ');
 
-    it(name, (done) => {
+    it(name, function (done) => {
       this.timeout(50000);
       let output;
       try {
