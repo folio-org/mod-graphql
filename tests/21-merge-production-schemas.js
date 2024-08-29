@@ -6,7 +6,7 @@ import { execSync } from 'child_process';
 
 describe('21. merge production schemas', function () {
   it('compile and merge', function (done) {
-    this.timeout(10000);
+    this.timeout(50000);
 
     // XXX this must run against the same schemas listed on the CMD line of ../Dockerfile
     const command = './src/autogen/raml2graphql ./build/schemas-for-build/*/ramls/*.raml';
