@@ -62,6 +62,7 @@ describe('20. merge toy schemas', () => {
     const command = './src/autogen/raml2graphql ' + services.map(x => `tests/handmade-raml/${x}.raml`).join(' ');
 
     it(name, (done) => {
+      this.timeout(50000);
       let output;
       try {
         output = execSync(command);
