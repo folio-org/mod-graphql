@@ -5,7 +5,7 @@
 //     or: LOGCAT=exclude,skip,nomulti,ramllist,endmap ./raml2graphql -d ../../.. -x '^raml$' -s -a ../../api.yml
 
 const optParser = require('node-getopt');
-const packageInfo = require('../../package.json');
+const packageInfo = require('../../package.json'); // eslint-disable-line import/extensions
 const Logger = require('../configuredLogger');
 const { listAPIs } = require('./listAPIs');
 const { convertAPIs } = require('./convertAPI');
