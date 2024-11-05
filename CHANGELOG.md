@@ -1,5 +1,11 @@
 # Change history for mod-graphql
 
+## [1.13.0](https://github.com/folio-org/mod-graphql/tree/v1.13.0) (IN PROGRESS)
+
+* Dockerized version runs under Node 20. Fixes MODGQL-182.
+* Upgrade `eslint-config-stripes` dependency so avoid an ESLint version clash when building under NPM instead of Yarn.
+* Fix minor linting issues which become apparent under updated `eslint-config-stripes`.
+
 ## [1.12.2](https://github.com/folio-org/mod-graphql/tree/v1.12.2) (2024-10-16)
 
 * Upgrade `express` dependency for security.

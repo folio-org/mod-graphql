@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # Install latest patch versions of packages: https://pythonspeed.com/articles/security-updates-in-docker/
 RUN apk upgrade \
