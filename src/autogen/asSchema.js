@@ -80,7 +80,7 @@ function renderTypes(types, _options) {
 }
 
 
-function render(api, _options) {
+function asSchema(api, _options) {
   return (renderComments(api.comments, _options) +
           '\n' +
           renderResources(api.resources, _options) +
@@ -89,4 +89,4 @@ function render(api, _options) {
 }
 
 
-exports.asSchema = render;
+export { asSchema };

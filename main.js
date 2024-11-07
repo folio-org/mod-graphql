@@ -1,5 +1,5 @@
-import Logger from './src/configuredLogger';
-import modGraphql from './src/app';
+import Logger from './src/configuredLogger.js';
+import modGraphql from './src/app.js';
 
 const logger = new Logger();
 const app = modGraphql(process.argv.slice(2));

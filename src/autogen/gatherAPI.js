@@ -1,5 +1,5 @@
-const fs = require('fs');
-const _ = require('lodash');
+import fs from 'fs';
+import _ from 'lodash';
 
 
 function gatherComments(api, _options) {
@@ -398,4 +398,4 @@ function gatherAPI(api, basePath, schemaMap, options) {
 }
 
 
-exports.gatherAPI = gatherAPI;
+export { gatherAPI };

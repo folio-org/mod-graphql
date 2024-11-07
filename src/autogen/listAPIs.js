@@ -1,6 +1,6 @@
-const fs = require('fs');
-const yaml = require('js-yaml');
-const Logger = require('../configuredLogger');
+import fs from 'fs';
+import yaml from 'js-yaml';
+import Logger from '../configuredLogger.js';
 
 
 function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch, maybeExclude) {
@@ -56,4 +56,4 @@ function listAPIs(apiFile, maybeDir, maybeSkip, maybeMatch, maybeExclude) {
 }
 
 
-exports.listAPIs = listAPIs;
+export { listAPIs };

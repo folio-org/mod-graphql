@@ -1,10 +1,10 @@
-const fs = require('fs');
-const raml = require('raml-1-parser');
-const { findIndex, some } = require('lodash');
-const { gatherAPI } = require('./gatherAPI');
-const { mergeAPIs } = require('./mergeAPIs');
-const { asSchema } = require('./asSchema');
-const { asResolvers } = require('./asResolvers');
+import fs from 'fs';
+import raml from 'raml-1-parser';
+import _ from 'lodash';
+import { gatherAPI } from './gatherAPI.js';
+import { mergeAPIs } from './mergeAPIs.js';
+import { asSchema } from './asSchema.js';
+import { asResolvers } from './asResolvers.js';
 
 
 function reportErrors(ramlName, errors, options) {
@@ -19,7 +19,7 @@ function reportErrors(ramlName, errors, options) {
     );
   });
 
-  const good = options.ignoreRamlWarnings && !some(actualErrors, e => !e.isWarning);
+  const good = options.ignoreRamlWarnings && !_.some(actualErrors, e => !e.isWarning);
   return good ? null : messages;
 }
 
@@ -39,10 +39,10 @@ function parseSchemaMap(ramlName, options) {
   const map = {};
 
   let schemaRegexp = /^[ \t]+- (.*?): !include (.*)/;
-  let schemasIndex = findIndex(lines, x => (x === 'schemas:'));
+  let schemasIndex = _.findIndex(lines, x => (x === 'schemas:'));
   if (schemasIndex < 0) {
     schemaRegexp = /^[ \t]+(.*?): !include (.*)/;
-    schemasIndex = findIndex(lines, x => (x === 'types:'));
+    schemasIndex = _.findIndex(lines, x => (x === 'types:'));
   }
 
   if (schemasIndex >= 0) {
@@ -127,4 +127,4 @@ function convertAPIs(ramlNames, resolveFunction, baseOptions) {
 }
 
 
-exports.convertAPIs = convertAPIs;
+export { convertAPIs };

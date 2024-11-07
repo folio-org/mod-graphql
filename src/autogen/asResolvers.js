@@ -62,4 +62,4 @@ function asResolvers(api, resolve, options) {
 }
 
 
-exports.asResolvers = asResolvers;
+export { asResolvers };
