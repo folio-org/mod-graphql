@@ -11,8 +11,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "lint": "eslint -f unix create-schemas/create-schemas.js main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
-    "start": "babel-node --presets=env,stage-2 main.js",
-    "dev": "nodemon --exec babel-node --presets=env,stage-2 main.js",
+    "start": "node main.js",
+    "dev": "nodemon main.js",
     "test": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && mocha --exit --require tests/testlib/support tests",
     "test1": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && mocha --exit --require tests/testlib/support tests/20-merge-toy-schemas.js",
     "clean": "rm -rf api.yml tests/schemas-for-tests build/schemas-for-build",
