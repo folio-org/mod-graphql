@@ -6,6 +6,6 @@ class ConfiguredLogger {
   constructor(prefix, timestamp) {
     return new Logger(process.env.LOGGING_CATEGORIES || process.env.LOGCAT, prefix, timestamp);
   }
-};
+}
 
 export default ConfiguredLogger;
