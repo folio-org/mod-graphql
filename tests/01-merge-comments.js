@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
-import { isEqual } from 'lodash';
-import { _TESTING_mergeComments as mergeComments } from '../src/autogen/mergeAPIs';
+import _ from 'lodash';
+import { _TESTING_mergeComments as mergeComments } from '../src/autogen/mergeAPIs.js';
 
 describe('01. Comments from multiple RAMLs can be merged', () => {
   const testCases = [
@@ -72,7 +72,7 @@ describe('01. Comments from multiple RAMLs can be merged', () => {
     const { name, input, output } = testCase;
     it(name, () => {
       const res = mergeComments(input);
-      const outcome = isEqual(res, output);
+      const outcome = _.isEqual(res, output);
       if (!outcome) {
         console.info('res =', JSON.stringify(res, null, 2), '\noutput =', JSON.stringify(output, null, 2));
       }

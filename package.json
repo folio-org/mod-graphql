@@ -13,8 +13,9 @@
     "lint": "eslint -f unix create-schemas/create-schemas.js main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
     "start": "node main.js",
     "dev": "nodemon main.js",
-    "test": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && mocha --exit --require tests/testlib/support tests",
-    "test1": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && mocha --exit --require tests/testlib/support tests/20-merge-toy-schemas.js",
+    "test": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && env NODE_OPTIONS=--no-warnings mocha --exit tests/[02]*",
+    "testall": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && env NODE_OPTIONS=--no-warnings mocha --exit tests",
+    "test1": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && env NODE_OPTIONS=--no-warnings mocha --exit tests/20*",
     "clean": "rm -rf api.yml tests/schemas-for-tests build/schemas-for-build",
     "regen": "node src/autogen/test/run-tests.js --regenerate ./src/autogen/test",
     "api": "rm -f api.yml; wget https://raw.githubusercontent.com/folio-org/folio-org.github.io/master/_data/api.yml"

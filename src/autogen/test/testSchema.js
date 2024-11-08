@@ -1,6 +1,6 @@
-const fs = require('fs');
-const Logger = require('../../configuredLogger');
-const { convertAPIs } = require('../convertAPI');
+import fs from 'fs';
+import Logger from '../../configuredLogger.js';
+import { convertAPIs } from '../convertAPI.js';
 
 const Status = {
   PASS: 1,
@@ -48,5 +48,5 @@ function testSchema(dir, file, regen, counts, errors) {
   }
 }
 
-exports.testSchema = testSchema;
-exports.Status = Status;
+export { testSchema };
+export { Status };

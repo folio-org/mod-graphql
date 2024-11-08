@@ -1,7 +1,7 @@
 import { describe, it, after } from 'mocha';
 import { expect } from 'chai';
 import fs from 'fs';
-import { testSchema, Status } from '../src/autogen/test/testSchema';
+import { testSchema, Status } from '../src/autogen/test/testSchema.js';
 
 describe('04. RAMLs and JSON schemas can be translated into GraphQL schemas', () => {
   const dir = './src/autogen/test';
