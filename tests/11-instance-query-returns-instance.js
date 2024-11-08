@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
-import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper';
-import modGraphql from '../src/app';
+import { describe, beforeEach, runQuery, it, expect, UUIDregex } from './testlib/helper.js';
+import modGraphql from '../src/app.js';
 
 const app = modGraphql('tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml');
 
@@ -16,7 +16,10 @@ describe('11. query returns an instance with an ID and title', () => {
   describe('query for all instances', () => {
     let response;
     beforeEach(() => runQuery(app, QUERY, 'title=a*')
-      .then(res => { response = res; }));
+      .then(res => {
+        response = res;
+        // console.log('beforeEach: res =', res);
+      }));
 
     it('contains a payload with instances that have IDs', () => {
       expect(response, 'server returns a good response').to.have.status(200);
