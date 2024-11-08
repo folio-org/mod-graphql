@@ -1,5 +1,8 @@
-import { request } from 'chai';
-import { OKAPI_TENANT, OKAPI_TOKEN } from './env';
+import { use } from 'chai';
+import chaiHttp from 'chai-http';
+import { OKAPI_TENANT, OKAPI_TOKEN } from './env.js';
+
+const chai = use(chaiHttp);
 
 function runQuery(app, graphQLQuery, cqlQuery) {
   const params = {
@@ -11,7 +14,7 @@ function runQuery(app, graphQLQuery, cqlQuery) {
     };
   }
 
-  return request(app)
+  return chai.request.execute(app)
     .post('/graphql')
     .set('X-Okapi-Url', 'http://localhost:9131') // Uses the faked yakbak server
     .set('X-Okapi-Tenant', OKAPI_TENANT)
