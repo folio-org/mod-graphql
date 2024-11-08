@@ -5,7 +5,7 @@
 //     or: LOGCAT=exclude,skip,nomulti,ramllist,endmap ./raml2graphql -d ../../.. -x '^raml$' -s -a ../../api.yml
 
 import optParser from 'node-getopt';
-import packageInfo from '../../package.json' assert {type: 'json'};
+import packageInfo from '../../package.json' with { type: 'json' };
 import Logger from '../configuredLogger.js';
 import { listAPIs } from './listAPIs.js';
 import { convertAPIs } from './convertAPI.js';
