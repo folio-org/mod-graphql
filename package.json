@@ -11,6 +11,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "lint": "eslint -f unix create-schemas/create-schemas.js main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
+    "qlint": "eslint -f unix --rule '{\"import/extensions\":\"off\"}' --rule '{\"import/prefer-default-export\":\"off\"}' --rule '{\"camelcase\":\"off\"}' create-schemas/create-schemas.js main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
     "start": "node main.js",
     "dev": "nodemon main.js",
     "test": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && env NODE_OPTIONS=--no-warnings mocha --exit tests/[02]*",
