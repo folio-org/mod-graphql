@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import queryString from 'query-string';
 import { GraphQLError } from 'graphql';
-import { get } from 'lodash';
+import _ from 'lodash';
 
 
 function resolve(obj, originalArgs, context, caption, path, linkFromField, linkToField, skeleton) {
@@ -50,7 +50,7 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
       if (!skeleton) {
         val = json;
       } else if (typeof skeleton === 'string') {
-        val = get(json, skeleton.split('.'));
+        val = _.get(json, skeleton.split('.'));
       } else {
         // Skeleton is an object whose keys tell us what to return
         val = {};

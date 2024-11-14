@@ -1,9 +1,11 @@
 // Simple wrapper for stripes-logger that configures from environment
 
-const Logger = require('@folio/stripes-logger');
+import Logger from '@folio/stripes-logger';
 
-module.exports = class {
+class ConfiguredLogger {
   constructor(prefix, timestamp) {
     return new Logger(process.env.LOGGING_CATEGORIES || process.env.LOGCAT, prefix, timestamp);
   }
-};
+}
+
+export default ConfiguredLogger;
