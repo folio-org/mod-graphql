@@ -1,9 +1,9 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import Logger from './configuredLogger';
-import { listAPIs } from './autogen/listAPIs';
-import resolve from './resolve';
-import { convertAPIs } from './autogen/convertAPI';
+import Logger from './configuredLogger.js';
+import { listAPIs } from './autogen/listAPIs.js';
+import resolve from './resolve.js';
+import { convertAPIs } from './autogen/convertAPI.js';
 
 function modGraphql(argv) {
   const ramlPaths = argv[0] === '-a' ? listAPIs(argv[1]) : argv;

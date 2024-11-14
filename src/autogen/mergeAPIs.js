@@ -1,4 +1,4 @@
-const { isEqual } = require('lodash');
+import _ from 'lodash';
 
 // Each APIs comments are represented by an ordered list. Each
 // list-member is itself a list of two elements: the first is the
@@ -70,7 +70,7 @@ function mergeTypes(list, options) {
         register[name] = ramlName;
         res[name] = type;
       } else {
-        const same = isEqual(type, res[name]);
+        const same = _.isEqual(type, res[name]);
         if (same) {
           options.logger.log('duptype', `duplicate type name '${name}' with same definition`);
         } else {
@@ -93,7 +93,7 @@ function mergeAPIs(list, options) {
 }
 
 
-exports.mergeAPIs = mergeAPIs;
-exports._TESTING_mergeComments = mergeComments;
-exports._TESTING_mergeResources = mergeResources;
-exports._TESTING_mergeTypes = mergeTypes;
+export { mergeAPIs };
+export { mergeComments as _TESTING_mergeComments };
+export { mergeResources as _TESTING_mergeResources };
+export { mergeTypes as _TESTING_mergeTypes };

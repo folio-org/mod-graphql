@@ -1,8 +1,8 @@
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
-import { isEqual } from 'lodash';
-import Logger from '../src/configuredLogger';
-import { _TESTING_mergeTypes as mergeTypes } from '../src/autogen/mergeAPIs';
+import _ from 'lodash';
+import Logger from '../src/configuredLogger.js';
+import { _TESTING_mergeTypes as mergeTypes } from '../src/autogen/mergeAPIs.js';
 
 describe('03. Types from multiple RAMLs can be merged', () => {
   const testCases = [
@@ -95,7 +95,7 @@ describe('03. Types from multiple RAMLs can be merged', () => {
       } catch (e) {
         res = e.message;
       }
-      const outcome = isEqual(res, output);
+      const outcome = _.isEqual(res, output);
       if (!outcome) {
         console.info('res =', JSON.stringify(res, null, 2), '\noutput =', JSON.stringify(output, null, 2));
       }

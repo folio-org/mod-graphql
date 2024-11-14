@@ -4,11 +4,11 @@
 // Run as: ./raml2graphql ../../tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml
 //     or: LOGCAT=exclude,skip,nomulti,ramllist,endmap ./raml2graphql -d ../../.. -x '^raml$' -s -a ../../api.yml
 
-const optParser = require('node-getopt');
-const packageInfo = require('../../package.json'); // eslint-disable-line import/extensions
-const Logger = require('../configuredLogger');
-const { listAPIs } = require('./listAPIs');
-const { convertAPIs } = require('./convertAPI');
+import optParser from 'node-getopt';
+import packageInfo from '../../package.json' with { type: 'json' };
+import Logger from '../configuredLogger.js';
+import { listAPIs } from './listAPIs.js';
+import { convertAPIs } from './convertAPI.js';
 
 const argv0 = process.argv[1].replace(/.*\//, '');
 const opt = optParser.create([

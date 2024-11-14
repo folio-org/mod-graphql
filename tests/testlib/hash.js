@@ -2,8 +2,8 @@
 // Copyright 2016 Yahoo Inc.
 // Licensed under the terms of the MIT license. Please see LICENSE file in the project root for terms.
 
-const crypto = require('crypto');
-const url = require('url');
+import crypto from 'crypto';
+import url from 'url';
 
 function sort(obj) {
   const ret = {};
@@ -52,4 +52,4 @@ createStream.sync = (req, body, algorithm, encoding) => {
   return hash.digest(encoding || 'hex');
 };
 
-module.exports = createStream;
+export default createStream;
