@@ -20,25 +20,6 @@ async function modGraphql(argv) {
   const resolvers = converted.resolvers;
   logger.log('schema', `generated GraphQL schema:\n===\n${typeDefs}\n===`);
 
-  function badRequest(response, reason) {
-    response
-      .status(400)
-      .send(reason);
-  }
-
-  function checkOkapiHeaders(request, response, next) {
-    // console.info('GraphQL query:', JSON.stringify(request.body, null, 2));
-    if (!request.get('X-Okapi-Url')) {
-      // XXX badRequest(response, 'Missing Header: X-Okapi-Url');
-    } else if (!request.get('X-Okapi-Tenant')) {
-      // XXX badRequest(response, 'Missing Header: X-Okapi-Tenant');
-    } else if (!request.get('X-Okapi-Token')) {
-      // XXX badRequest(response, 'Missing Header: X-Okapi-Token');
-    } else {
-      next();
-    }
-  }
-
   const app = express();
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
@@ -48,7 +29,6 @@ async function modGraphql(argv) {
   });
 
   await server.start();
-  console.log('server started');
 
   app.get('/admin/health', (req, res) => {
     res.send('Behold! I live!!');
@@ -58,12 +38,8 @@ async function modGraphql(argv) {
     cors(),
     express.json({ limit: '50mb' }),
     expressMiddleware(server, {
-      context: ({ req, res }) => {
-        // Trying to do this by hand, not sure if it will work
-        checkOkapiHeaders(req, res, () => undefined);
-
+      context: ({ req }) => {
         const { OKAPI_URL, OKAPI_TENANT, OKAPI_TOKEN } = process.env;
-
         return {
           query: req.body,
           okapi: {
@@ -81,7 +57,7 @@ async function modGraphql(argv) {
     }));
 
   await new Promise(resolve2 => httpServer.listen({ port: 3001 /* XXX */ }, resolve2));
-  console.log('🚀 Server ready 1');
+  logger.log('listen', `listening on port ${3001}`);
   return httpServer;
 }
 
