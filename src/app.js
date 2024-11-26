@@ -4,15 +4,13 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-import Logger from './configuredLogger.js';
 import { listAPIs } from './autogen/listAPIs.js';
 import resolve from './resolve.js';
 import { convertAPIs } from './autogen/convertAPI.js';
 
-async function modGraphql(argv) {
+async function modGraphql(logger, argv) {
   const ramlPaths = argv[0] === '-a' ? listAPIs(argv[1]) : argv;
   if (!ramlPaths || ramlPaths.length === 0) throw Error('modGraphql invoked with no RAMLpaths');
-  const logger = new Logger();
   const ramlArray = (typeof ramlPaths === 'string') ? [ramlPaths] : ramlPaths;
   logger.log('ramlpath', `using RAMLs ${ramlArray.map(s => `'${s}'`).join(', ')}`);
   const converted = convertAPIs(ramlArray, resolve, { logger });

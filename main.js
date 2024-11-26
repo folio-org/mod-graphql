@@ -20,7 +20,7 @@ if (process.env.CONSOLE_TRACE) {
 }
 
 const logger = new Logger();
-const httpServer = modGraphql(process.argv.slice(2));
+const httpServer = modGraphql(logger, process.argv.slice(2));
 /*
 const port = 3001; // XXX should provide a way to change this
 logger.log('listen', `listening on port ${port}`);
