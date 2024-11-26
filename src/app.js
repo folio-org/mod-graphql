@@ -54,8 +54,6 @@ async function modGraphql(logger, argv) {
       },
     }));
 
-  await new Promise(resolve2 => httpServer.listen({ port: 3001 /* XXX */ }, resolve2));
-  logger.log('listen', `listening on port ${3001}`);
   return httpServer;
 }
 

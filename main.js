@@ -20,10 +20,7 @@ if (process.env.CONSOLE_TRACE) {
 }
 
 const logger = new Logger();
-const httpServer = modGraphql(logger, process.argv.slice(2));
-/*
+const httpServer = await modGraphql(logger, process.argv.slice(2));
 const port = 3001; // XXX should provide a way to change this
+await new Promise(resolve2 => httpServer.listen({ port }, resolve2));
 logger.log('listen', `listening on port ${port}`);
-await new Promise(resolve => httpServer.listen({ port }, resolve));
-console.log('🚀 Server ready 2');
-*/
