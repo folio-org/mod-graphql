@@ -2,7 +2,7 @@ import Logger from './src/configuredLogger.js';
 import modGraphql from './src/app.js';
 
 const logger = new Logger();
-const app = modGraphql(process.argv.slice(2));
+const httpServer = await modGraphql(logger, process.argv.slice(2));
 
 if (process.env.CONSOLE_TRACE) {
   // The code by Remy Sharp
@@ -23,5 +23,5 @@ if (process.env.CONSOLE_TRACE) {
 }
 
 const port = 3001; // XXX should provide a way to change this
+await new Promise(resolve2 => httpServer.listen({ port }, resolve2));
 logger.log('listen', `listening on port ${port}`);
-app.listen(port);

@@ -4,8 +4,21 @@ import { GraphQLError } from 'graphql';
 import _ from 'lodash';
 
 
+function checkOkapiHeaders(okapi) {
+  if (!okapi.url) {
+    throw new GraphQLError('Missing Header: X-Okapi-Url');
+  } else if (!okapi.headers['X-Okapi-Tenant']) {
+    throw new GraphQLError('Missing Header: X-Okapi-Tenant');
+  } else if (!okapi.headers['X-Okapi-Token']) {
+    throw new GraphQLError('Missing Header: X-Okapi-Token');
+  }
+}
+
+
 function resolve(obj, originalArgs, context, caption, path, linkFromField, linkToField, skeleton) {
   const { okapi, logger } = context;
+
+  checkOkapiHeaders(okapi);
 
   const args = Object.assign({}, originalArgs);
   const failedSubstitutions = [];
