@@ -94,6 +94,6 @@ function mergeAPIs(list, options) {
 
 
 export { mergeAPIs };
-export { mergeComments as _TESTING_mergeComments };
-export { mergeResources as _TESTING_mergeResources };
-export { mergeTypes as _TESTING_mergeTypes };
+export { mergeComments as _TESTING_mergeComments }; // eslint-disable-line camelcase
+export { mergeResources as _TESTING_mergeResources }; // eslint-disable-line camelcase
+export { mergeTypes as _TESTING_mergeTypes }; // eslint-disable-line camelcase

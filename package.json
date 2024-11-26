@@ -11,7 +11,6 @@
   "license": "Apache-2.0",
   "scripts": {
     "lint": "eslint -f unix create-schemas/create-schemas.js main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
-    "qlint": "eslint -f unix --rule '{\"import/extensions\":\"off\"}' --rule '{\"import/prefer-default-export\":\"off\"}' --rule '{\"camelcase\":\"off\"}' create-schemas/create-schemas.js main.js src src/autogen/raml2graphql tests/*.js tests/testlib/*.js",
     "start": "node main.js",
     "dev": "nodemon main.js",
     "test": "./tests/setup-for-tests.sh && ./build/setup-for-build.sh && env NODE_OPTIONS=--no-warnings mocha --exit tests/[02]*",
@@ -22,13 +21,14 @@
     "api": "rm -f api.yml; wget https://raw.githubusercontent.com/folio-org/folio-org.github.io/master/_data/api.yml"
   },
   "dependencies": {
+    "@apollo/server": "^4.11.2",
     "@folio/stripes-logger": "^0.0.2",
-    "apollo-server-express": "^2.15.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "express": "^4.20.0",
-    "graphql": "^15.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "graphql": "^16.9.0",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.7",
