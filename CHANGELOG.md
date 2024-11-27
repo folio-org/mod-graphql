@@ -6,6 +6,7 @@
 * Upgrade `eslint-config-stripes` dependency so avoid an ESLint version clash when building under NPM instead of Yarn.
 * Fix minor linting issues which become apparent under updated `eslint-config-stripes`.
 * Run directly under Node, no longer using Babel. Fixes MODGQL-144 and makes MODGQL-175 moot.
+* Replace `apollo-server-express` (^2.15.0) with `@apollo/server` (^4.11.2) and upgrade `graphql`. Fixes MODGQL-160.
 
 ## [1.12.2](https://github.com/folio-org/mod-graphql/tree/v1.12.2) (2024-10-16)
 
