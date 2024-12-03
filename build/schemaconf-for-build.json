@@ -8,6 +8,9 @@
       },
       "holdingsrecord.json": {
         "temporaryLocation": "location.json locations?id=temporaryLocationId locations.0"
+      },
+      "item.json": {
+        "loans": "loan.json circulation/loans?itemId=id&status.name==Open loans.0"
       }
     }
   },
