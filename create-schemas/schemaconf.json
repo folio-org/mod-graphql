@@ -39,7 +39,8 @@
           "folio:linkToField": "id",
           "folio:includedElement": "callNumberTypes.0"
         },
-        "itemLevelCallNumberTypeObject2": "callnumbertype.json call-number-types?id=itemLevelCallNumberTypeId callNumberTypes.0"
+        "itemLevelCallNumberTypeObject2": "callnumbertype.json call-number-types?id=itemLevelCallNumberTypeId callNumberTypes.0",
+        "loans": "bespoke-loan.json circulation/loans?itemId=id&status.name==Open loans[0]"
       }
     }
   },
