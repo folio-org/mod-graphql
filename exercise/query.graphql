@@ -1,0 +1,34 @@
+{"query":"query ($id:String!) {
+  instance_storage_instances_SINGLE(instanceId: $id) {
+    id
+    title
+    holdingsRecords2 {
+      id
+      instanceId
+      callNumber
+      permanentLocationId
+      temporaryLocationId
+      holdingsStatements {
+        note
+        statement
+      }
+      holdingsItems {
+        id
+        barcode
+        enumeration
+        status {
+          name
+          date
+        }
+        loans {
+          dueDate
+          borrower { barcode firstName lastName }
+          status { name }
+        }
+      }
+    }
+  }
+}
+","variables": {
+  "id":"7fbd5d84-62d1-44c6-9c45-6cb173998bbd"
+}}
