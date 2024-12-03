@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## [1.13.1](https://github.com/folio-org/mod-graphql/tree/v1.13.1) (IN PROGRESS)
+
+* Schema-configuratation file format support additional query parameters in subqueries. Fixes MODGQL-189.
+
 ## [1.13.0](https://github.com/folio-org/mod-graphql/tree/v1.13.0) (2024-11-27)
 
 * Dockerized version runs under Node 20. Fixes MODGQL-182.
