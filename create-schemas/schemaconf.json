@@ -27,6 +27,9 @@
           "folio:includedElement": "alternativeTitleTypes.0"
         }
       },
+      "holdingsrecord.json": {
+        "temporaryLocation": "location.json locations?id=temporaryLocationId locations.0"
+      },
       "item.json": {
         "itemLevelCallNumberTypeObject": {
           "type": "object",
@@ -40,9 +43,12 @@
           "folio:includedElement": "callNumberTypes.0"
         },
         "itemLevelCallNumberTypeObject2": "callnumbertype.json call-number-types?id=itemLevelCallNumberTypeId callNumberTypes.0",
-        "loans": "bespoke-loan.json circulation/loans?itemId=id&status.name==Open loans[0]"
+        "loans": "loan.json circulation/loans?itemId=id&status.name==Open loans.0"
       }
-    }
+    },
+    "copyFiles": [
+      "etc/loan.json"
+    ]
   },
   {
     "module": "mod-search",

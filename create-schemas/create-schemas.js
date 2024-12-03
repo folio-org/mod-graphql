@@ -157,7 +157,7 @@ function expandOverlaySummary(summary) {
   };
 
   if (extraArgs !== undefined) {
-    virtualFields['folio:linkExtraArgs'] = extraArgs;
+    virtualFields['folio:extraArgs'] = extraArgs;
   }
 
   if (schemaRef.endsWith('[]')) {
