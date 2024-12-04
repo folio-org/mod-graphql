@@ -12,7 +12,10 @@
       "item.json": {
         "loans": "loan.json circulation/loans?itemId=id&status.name==Open loans.0"
       }
-    }
+    },
+    "copyFiles": [
+      "../loan.json"
+    ]
   },
   {
     "module": "mod-search",
