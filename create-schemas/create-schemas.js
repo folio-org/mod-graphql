@@ -136,7 +136,17 @@ function expandOverlaySummary(summary) {
   }
 
   // eslint-disable-next-line no-unused-vars
-  const [__UNUSED, schemaRef, linkBase, linkToField, linkFromField, includedElement] = res;
+  const [__UNUSED, schemaRef, linkBase, linkToField, linkFromFieldAndArgs, includedElement] = res;
+
+  let linkFromField, extraArgs;
+  const res2 = linkFromFieldAndArgs.match(/^(.*)?&(.*)/);
+  if (res2) {
+    linkFromField = res2[1];
+    extraArgs = res2[2];
+  } else {
+    linkFromField = linkFromFieldAndArgs;
+  }
+
   const virtualFields = {
     'readonly': true,
     'folio:isVirtual': true,
@@ -145,6 +155,10 @@ function expandOverlaySummary(summary) {
     'folio:linkToField': linkToField,
     'folio:includedElement': includedElement,
   };
+
+  if (extraArgs !== undefined) {
+    virtualFields['folio:extraArgs'] = extraArgs;
+  }
 
   if (schemaRef.endsWith('[]')) {
     return {

@@ -33,6 +33,8 @@ Finally, the values associated with these JSONPaths are the overrides themselves
 
 Overlay strings must be of the form "_schemaRef_ _linkBase_?_linkToField_=_linkFromField_ _includedElement_". This indicates a link yielding an object of the type specified by _schemaRef_, obtained by searching the Okapi service at _linkBase_ by the field called _linkToField_, using the value of the _linkFromField_ in the linked-from record and extracting the _includedElement_ part of the resulting response.
 
+if the _linkFromField_ ends with `&anyString`, then the specified `anyString` is added to the query generated to resolve the link: for example, in a recipe such as `circulation/loans?itemId=id&status.name==Open` the _linkFromField_ value `id&status.name==Open` specifies that the constant query `status.name==Open` should be ANDed with the generated query on the `id` field, yielding searches such as `/circulation/loans?query=(itemId=="123") and (status.name==Open)`.
+
 If the _schemaRef_ ends with the literal `[]` -- for example, `holdingsrecord.json[]` -- this indicates that the virtual field is an array, and that it will will yield a list of matching records rather than a single one.
 
 For example, the overlay string `callnumbertype.json call-number-types?id=itemLevelCallNumberTypeId callNumberTypes.0` specifies a link-field of the type specified by `callnumbertype.json`, obtained by searching `/call-number-types` by `id`, using the value of the linked-from record's `itemLevelCallNumberTypeId` field, and extracting `callNumberTypes.0` (i.e. the first element of the `callNumberTypes` array) from the response.

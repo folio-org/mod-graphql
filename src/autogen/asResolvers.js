@@ -16,7 +16,7 @@ function registerTypeResolvers(typeResolvers, typeName, fields, resolve, options
   fields.forEach(field => {
     if (field.link) {
       const l = field.link;
-      resolvers[field.name] = (o, a, c) => resolve(o, a, c, `${field.name}-link`, l.base, l.fromField, l.toField, l.include);
+      resolvers[field.name] = (o, a, c) => resolve(o, a, c, `${field.name}-link`, l.base, l.fromField, l.toField, l.include, l.extraArgs);
     }
     if (Array.isArray(field.type)) {
       subTypes[`${typeName}_${field.name}`] = field.type;

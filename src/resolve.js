@@ -15,7 +15,7 @@ function checkOkapiHeaders(okapi) {
 }
 
 
-function resolve(obj, originalArgs, context, caption, path, linkFromField, linkToField, skeleton) {
+function resolve(obj, originalArgs, context, caption, path, linkFromField, linkToField, skeleton, extraArgs) {
   const { okapi, logger } = context;
 
   checkOkapiHeaders(okapi);
@@ -46,6 +46,10 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
       args.query = `${linkToField}==(${val.map(v => `"${v}"`).join(' or ')})`;
     } else {
       args.query = `${linkToField}=="${val}"`;
+    }
+
+    if (extraArgs) {
+      args.query = `(${args.query}) and (${extraArgs})`;
     }
   }
   const search = queryString.stringify(args);
