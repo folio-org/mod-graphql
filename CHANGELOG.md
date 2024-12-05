@@ -1,6 +1,6 @@
 # Change history for mod-graphql
 
-## [1.13.1](https://github.com/folio-org/mod-graphql/tree/v1.13.1) (IN PROGRESS)
+## [1.13.1](https://github.com/folio-org/mod-graphql/tree/v1.13.1) (2024-12-05)
 
 * Schema-configuration file format now correctly supports additional query parameters in subqueries. Fixes MODGQL-189.
 * Build-time schema configuration now correctly includes access to loan due-date. Fixes MODGQL-188.
