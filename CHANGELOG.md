@@ -2,6 +2,8 @@
 
 ## [1.13.1](https://github.com/folio-org/mod-graphql/tree/v1.13.1) (IN PROGRESS)
 
+* Schema-configuration file format now correctly supports additional query parameters in subqueries. Fixes MODGQL-189.
+* Build-time schema configuration now correctly includes access to loan due-date. Fixes MODGQL-188.
 * Bump provided version of `graphql` interface to 1.4, representing the use of a configuration that can supply information about the loans associated with items. This allows new versions of the Z39.50 server configuration, which need this information, to depend on it.
 
 ## [1.13.0](https://github.com/folio-org/mod-graphql/tree/v1.13.0) (2024-11-27)
@@ -10,6 +12,7 @@
 * Upgrade `eslint-config-stripes` dependency so avoid an ESLint version clash when building under NPM instead of Yarn.
 * Fix minor linting issues which become apparent under updated `eslint-config-stripes`.
 * Run directly under Node, no longer using Babel. Fixes MODGQL-144 and makes MODGQL-175 moot.
+* Replace `apollo-server-express` (^2.15.0) with `@apollo/server` (^4.11.2) and upgrade `graphql`. Fixes MODGQL-160.
 
 ## [1.12.2](https://github.com/folio-org/mod-graphql/tree/v1.12.2) (2024-10-16)
 

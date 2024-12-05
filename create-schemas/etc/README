@@ -1,0 +1,7 @@
+loan.json is copied from
+https://github.com/folio-org/mod-circulation/blob/f3cdb320053e7dbff09f7356e58d93f7ec906701/ramls/loan.json
+but with the following fields removed because the reference schemas we have not copied:
+
+callNumberComponents (schema/call-number-components.json)
+checkoutServicePoint (service-point.json)
+checkinServicePoint (service-point.json)

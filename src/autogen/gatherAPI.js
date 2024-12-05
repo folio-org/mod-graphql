@@ -111,6 +111,7 @@ function gatherType(logger, containerName, basePath, jsonSchema) {
       fromField: jsonSchema['folio:linkFromField'],
       toField:   jsonSchema['folio:linkToField'],
       include:   jsonSchema['folio:includedElement'],
+      extraArgs: jsonSchema['folio:extraArgs'],
     });
   }
 

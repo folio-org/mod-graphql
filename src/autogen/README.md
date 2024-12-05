@@ -71,6 +71,7 @@ Keyword | Example | Description
 `folio:linkBase` | "holdings-storage/holdings" | The base path at which searches that discover linked records are found. Should not include the leading `http:/` or hostname.
 `folio:linkToField` | "instanceId" | The field within linked records that is searched for a value identical to that of the master record's link-from field.
 `folio:includedElement` | "holdingsRecords" | The field within linked records which is extracted and included as the linked content within the constructed master record. May be a dot-separated path of multiple indexes to be navigated, working down from the top: for example, `"holdingsRecords.0"` yields only the first element (element 0) of the holdings-records array.
+`folio:extraArgs` | "status.name==Open" | If present, this string is ANDed with the queries generated from the link fields.
 
 As an example, a field with the specified keywords and values in the table above, and having `id` equal to `123`, would result in fetching subrecords from `/holdings-storage/holdings?query=instanceId=="123"`, and the top-level `holdingsRecord` element of each returned record being included in the main record.
 
