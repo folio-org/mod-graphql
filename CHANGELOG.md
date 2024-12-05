@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## [1.13.1](https://github.com/folio-org/mod-graphql/tree/v1.13.1) (IN PROGRESS)
+
+* Bump provided version of `graphql` interface to 1.4, representing the use of a configuration that can supply information about the loans associated with items. This allows new versions of the Z39.50 server configuration, which need this information, to depend on it.
+
 ## [1.13.0](https://github.com/folio-org/mod-graphql/tree/v1.13.0) (2024-11-27)
 
 * Dockerized version runs under Node 20. Fixes MODGQL-182.
