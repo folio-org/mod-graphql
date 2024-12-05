@@ -4,6 +4,7 @@
 
 * Schema-configuration file format now correctly supports additional query parameters in subqueries. Fixes MODGQL-189.
 * Build-time schema configuration now correctly includes access to loan due-date. Fixes MODGQL-188.
+* Bump provided version of `graphql` interface to 1.4, representing the use of a configuration that can supply information about the loans associated with items. This allows new versions of the Z39.50 server configuration, which need this information, to depend on it.
 
 ## [1.13.0](https://github.com/folio-org/mod-graphql/tree/v1.13.0) (2024-11-27)
 

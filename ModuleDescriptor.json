@@ -4,7 +4,7 @@
   "provides": [
     {
       "id": "graphql",
-      "version": "1.3",
+      "version": "1.4",
       "handlers" : [
         {
           "methods" : [ "POST" ],
