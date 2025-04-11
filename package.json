@@ -23,9 +23,6 @@
   "dependencies": {
     "@apollo/server": "^4.11.2",
     "@folio/stripes-logger": "^0.0.2",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-2": "^6.24.1",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "graphql": "^16.9.0",
