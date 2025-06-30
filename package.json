@@ -34,7 +34,7 @@
     "raml-1-parser": "1.1.47"
   },
   "devDependencies": {
-    "@folio/eslint-config-stripes": "^6.4.0",
+    "@folio/eslint-config-stripes": "^8.0.1",
     "babel-eslint": "^10.1.0",
     "babel-register": "^6.26.0",
     "chai": "^5.0.0",
