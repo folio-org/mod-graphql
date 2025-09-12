@@ -23,6 +23,12 @@ set -ex
 (cd create-schemas; yarn install)
 
 mkdir $DIR
+
+# This stanza is just to create the JSON Schema for mod-search
 cd $DIR
+git clone git@github.com:folio-org/mod-search
+(cd ../../create-schemas; yarn --silent json-schema-bundler ../$DIR/mod-search/src/main/resources/swagger.api/schemas/entity/instance.yaml > ../$DIR/mod-search-instance-schema.json)
+rm -rf mod-search
+
 ../../create-schemas/create-schemas.js --overlay ../schemaconf-for-build.json 
 echo "... all done"

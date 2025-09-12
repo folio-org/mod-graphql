@@ -28,7 +28,7 @@
       "mod-inventory-storage/ramls/examples"
     ],
     "overlays": {
-      "schemas/instance.json": {
+      "../../mod-search-instance-schema.json": {
         "holdingsRecords2": "../holdingsrecord.json[] holdings-storage/holdings?instanceId=id holdingsRecords"
       }
     }
