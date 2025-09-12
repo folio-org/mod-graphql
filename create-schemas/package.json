@@ -1,6 +1,7 @@
 {
   "license": "Apache-2.0",
   "dependencies": {
+    "@skriptfabrik/json-schema-bundler": "^0.6.5",
     "getopts": "^2.2.5",
     "jsonpath": "^1.0.2"
   }
