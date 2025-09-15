@@ -3,6 +3,7 @@
 /* eslint-disable no-console, no-use-before-define */
 // Run as: ./raml2graphql ../../tests/schemas-for-tests/mod-inventory-storage/ramls/instance-storage.raml
 //     or: LOGCAT=exclude,skip,nomulti,ramllist,endmap ./raml2graphql -d ../../.. -x '^raml$' -s -a ../../api.yml
+//     or: NODE_OPTIONS=--disable-warning=ExperimentalWarning LOGCAT=exclude,skip,nomulti,ramllist,endmap ./raml2graphql ../../build/schemas-for-build/mod-search/ramls/mod-search-instances-for-build.raml
 
 import optParser from 'node-getopt';
 import packageInfo from '../../package.json' with { type: 'json' };
