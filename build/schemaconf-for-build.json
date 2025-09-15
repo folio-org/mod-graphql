@@ -29,7 +29,7 @@
     ],
     "overlays": {
       "../../mod-search-instance-schema.json": {
-        "holdingsRecords2": "../holdingsrecord.json[] holdings-storage/holdings?instanceId=id holdingsRecords"
+        "holdingsRecords2": "mod-search/ramls/holdingsrecord.json[] holdings-storage/holdings?instanceId=id holdingsRecords"
       }
     }
   }
