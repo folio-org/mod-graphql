@@ -26,7 +26,7 @@ mkdir $DIR
 
 # This stanza is just to create the JSON Schema for mod-search
 cd $DIR
-git clone git@github.com:folio-org/mod-search
+git clone https://github.com/folio-org/mod-search
 (cd ../../create-schemas; yarn --silent json-schema-bundler -d ../$DIR/mod-search/src/main/resources/swagger.api/schemas/entity/instance.yaml > ../$DIR/mod-search-instance-schema.json)
 rm -rf mod-search
 
