@@ -4,5 +4,8 @@
     "@skriptfabrik/json-schema-bundler": "^0.6.5",
     "getopts": "^2.2.5",
     "jsonpath": "^1.0.2"
+  },
+  "resolutions": {
+    "@apidevtools/json-schema-ref-parser": "14.0.2"
   }
 }

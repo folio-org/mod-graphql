@@ -2,11 +2,12 @@
 # yarn lockfile v1
 
 
-"@apidevtools/json-schema-ref-parser@^14.0.2":
-  version "14.2.1"
-  resolved "https://registry.yarnpkg.com/@apidevtools/json-schema-ref-parser/-/json-schema-ref-parser-14.2.1.tgz#40040f6a9a250b92055723a76e48dde0efb9688b"
-  integrity sha512-HmdFw9CDYqM6B25pqGBpNeLCKvGPlIx1EbLrVL0zPvj50CJQUHyBNBw45Muk0kEIkogo1VZvOKHajdMuAzSxRg==
+"@apidevtools/json-schema-ref-parser@14.0.2", "@apidevtools/json-schema-ref-parser@^14.0.2":
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/@apidevtools/json-schema-ref-parser/-/json-schema-ref-parser-14.0.2.tgz#bd8f85db1ca7ac49d465567cb7108998d4240944"
+  integrity sha512-5NSrCKPoD+zY/kDmYijF86ehSLD1S7/HX0TOU5WRYCX93JgkfC1hWDVOkvf+qgDVvrzVGZWYtS6lb5vhoio9RA==
   dependencies:
+    "@types/json-schema" "^7.0.15"
     js-yaml "^4.1.0"
 
 "@skriptfabrik/json-schema-bundler@^0.6.5":
@@ -18,6 +19,11 @@
     chalk "^5.2.0"
     minimist "^1.2.8"
     yaml "^2.8.0"
+
+"@types/json-schema@^7.0.15":
+  version "7.0.15"
+  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
+  integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
 argparse@^2.0.1:
   version "2.0.1"
