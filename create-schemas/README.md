@@ -79,3 +79,9 @@ As usual, `mod-graphql` itself is configured by listing on its command-line the 
 
 	LOGCAT=listen,url yarn start schemas/mod-*/ramls/i*-storage.raml
 
+
+## Bonus content!
+
+The package file in this directory also installs `@skriptfabrik/json-schema-bundler`, which can convert YAML schemas into JSON schemas, including pulling in `$ref`s to further schemas files (whether JSON or YAML) to make a single schema file. This is needed by `build/setup-for-build.sh` to create the schema for `mod-search`.
+
+

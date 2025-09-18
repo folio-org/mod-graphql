@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## IN PROGRESS (might be 1.14 or 2.0.0 depending on whether schema-change is backwards-compatible)
+
+* Modify `build/setup-for-build.sh` script to use instance JSON Schema from `mod-search` (generated from RAML schemas) instead of from `mod-inventory-storage`. Fixes MODGQL-195. No changes to code, only to canonical configuration.
+
 ## [1.13.1](https://github.com/folio-org/mod-graphql/tree/v1.13.1) (2024-12-05)
 
 * Schema-configuration file format now correctly supports additional query parameters in subqueries. Fixes MODGQL-189.
