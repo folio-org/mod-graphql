@@ -1,6 +1,6 @@
 # Change history for mod-graphql
 
-## IN PROGRESS (might be 1.14 or 2.0.0 depending on whether schema-change is backwards-compatible)
+[1.14.0](https://github.com/folio-org/mod-graphql/tree/v1.14.0) (2025-09-18)
 
 * Modify `build/setup-for-build.sh` script to use instance JSON Schema from `mod-search` (generated from RAML schemas) instead of from `mod-inventory-storage`. Fixes MODGQL-195. No changes to code, only to canonical configuration.
 * Searches against `/search/instances` have the query parameter `expandAll=true` added. Fixes MODGQL-196.
