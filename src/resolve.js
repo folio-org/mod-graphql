@@ -52,6 +52,18 @@ function resolve(obj, originalArgs, context, caption, path, linkFromField, linkT
       args.query = `(${args.query}) and (${extraArgs})`;
     }
   }
+
+  // This is a special-case hack. We would prefer to introduce a
+  // general-purpose mechanism for configuring the injection of
+  // additional parameters into fetch requests. But since mod-graphql
+  // is borderline unmaintained anyway, and in the process of being
+  // EOLed, that would be a waste of effort.
+  //
+  // See MODGQL-196 and associated issues for background.
+  if (processedPath === 'search/instances') {
+    args.expandAll = true;
+  }
+
   const search = queryString.stringify(args);
 
   const url = `${okapi.url}/${processedPath}${search ? `?${search}` : ''}`;
