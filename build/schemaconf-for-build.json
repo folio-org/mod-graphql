@@ -28,8 +28,17 @@
       "mod-inventory-storage/ramls/examples"
     ],
     "overlays": {
-      "schemas/instance.json": {
-        "holdingsRecords2": "../holdingsrecord.json[] holdings-storage/holdings?instanceId=id holdingsRecords"
+      "schemas/response/instanceSearchResult.json": {
+	"instances": {
+	  "type": "array",
+	  "description": "List of instances found",
+	  "items": {
+	    "$ref": "../../../../mod-search-instance-schema.json"
+	  }
+	}
+      },
+      "../../mod-search-instance-schema.json": {
+        "holdingsRecords2": "mod-search/ramls/holdingsrecord.json[] holdings-storage/holdings?instanceId=id holdingsRecords"
       }
     }
   }
