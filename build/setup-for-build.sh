@@ -29,6 +29,8 @@ cd $DIR
 git clone https://github.com/folio-org/mod-search
 (cd ../../create-schemas; yarn --silent json-schema-bundler -d ../$DIR/mod-search/src/main/resources/swagger.api/schemas/entity/instance.yaml > ../$DIR/mod-search-instance-schema.json)
 rm -rf mod-search
+jq '.required |= map(select(. != "electronicAccess" and . != "notes"))' mod-search-instance-schema.json > TMP.json
+mv TMP.json mod-search-instance-schema.json
 
 ../../create-schemas/create-schemas.js --overlay ../schemaconf-for-build.json 
 echo "... all done"

@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+[1.15.0](https://github.com/folio-org/mod-graphql/tree/v1.15.0) (IN PROGRESS)
+
+* Make "electronicAccess" and "notes" fields optional in GraphQL schema. Fixes MODGQL-198.
+
 [1.14.0](https://github.com/folio-org/mod-graphql/tree/v1.14.0) (2025-09-18)
 
 * Modify `build/setup-for-build.sh` script to use instance JSON Schema from `mod-search` (generated from RAML schemas) instead of from `mod-inventory-storage`. Fixes MODGQL-195. No changes to code, only to canonical configuration.
