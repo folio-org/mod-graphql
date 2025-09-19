@@ -1,8 +1,9 @@
 # Change history for mod-graphql
 
-[1.15.0](https://github.com/folio-org/mod-graphql/tree/v1.15.0) (IN PROGRESS)
+[1.15.0](https://github.com/folio-org/mod-graphql/tree/v1.15.0) (2025-09-19)
 
 * Make "electronicAccess" and "notes" fields optional in GraphQL schema. Fixes MODGQL-198.
+* Increment provided `graphql` interface version to v1.15. Part of MODGQL-199.
 
 [1.14.0](https://github.com/folio-org/mod-graphql/tree/v1.14.0) (2025-09-18)
 
