@@ -1,11 +1,15 @@
 # Change history for mod-graphql
 
-[1.15.0](https://github.com/folio-org/mod-graphql/tree/v1.15.0) (2025-09-19)
+## [1.16.0](https://github.com/folio-org/mod-graphql/tree/v1.16.0) (IN PROGRESS)
+
+* Bump validator from 13.15.15 to 13.15.23 fixing CVE-2025-12758. Fixes MODGQL-201.
+
+## [1.15.0](https://github.com/folio-org/mod-graphql/tree/v1.15.0) (2025-09-19)
 
 * Make "electronicAccess" and "notes" fields optional in GraphQL schema. Fixes MODGQL-198.
 * Increment provided `graphql` interface version to v1.15. Part of MODGQL-199.
 
-[1.14.0](https://github.com/folio-org/mod-graphql/tree/v1.14.0) (2025-09-18)
+## [1.14.0](https://github.com/folio-org/mod-graphql/tree/v1.14.0) (2025-09-18)
 
 * Modify `build/setup-for-build.sh` script to use instance JSON Schema from `mod-search` (generated from RAML schemas) instead of from `mod-inventory-storage`. Fixes MODGQL-195. No changes to code, only to canonical configuration.
 * Searches against `/search/instances` have the query parameter `expandAll=true` added. Fixes MODGQL-196.
