@@ -21,7 +21,7 @@
     "api": "rm -f api.yml; wget https://raw.githubusercontent.com/folio-org/folio-org.github.io/master/_data/api.yml"
   },
   "dependencies": {
-    "@apollo/server": "^4.11.2",
+    "@apollo/server": "^5.4.0",
     "@folio/stripes-logger": "^0.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.1",
