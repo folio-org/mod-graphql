@@ -1,8 +1,9 @@
 # Change history for mod-graphql
 
-## [1.16.0](https://github.com/folio-org/mod-graphql/tree/v1.16.0) (IN PROGRESS)
+## [1.15.1](https://github.com/folio-org/mod-graphql/tree/v1.15.1) (2026-04-15)
 
 * Bump validator from 13.15.15 to 13.15.23 fixing CVE-2025-12758. Fixes MODGQL-201.
+* Other dependency bumps for security reasons: `jsonpath`, `underscore`, `yaml`, `js-yaml`, `lodash`, `@xmldom/xmldom`, `flatted`, `handlebars`, `picomatch`, `svgo`.
 
 ## [1.15.0](https://github.com/folio-org/mod-graphql/tree/v1.15.0) (2025-09-19)
 
