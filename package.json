@@ -57,7 +57,7 @@
     "glob-parent": "^5.1.2",
     "json-ptr": "^3.0.0",
     "minimist": "^1.2.5",
-    "underscore": "^1.13.1",
+    "underscore": "^1.13.8",
     "validator": "^13.15.22",
     "@xmldom/xmldom": "^0.8.1"
   }
