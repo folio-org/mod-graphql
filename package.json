@@ -59,6 +59,7 @@
     "minimist": "^1.2.5",
     "underscore": "^1.13.8",
     "validator": "^13.15.22",
+    "xmldom": "^0.6.0",
     "@xmldom/xmldom": "^0.8.1"
   }
 }
