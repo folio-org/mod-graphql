@@ -116,9 +116,9 @@ jobs:
         if: ${{ needs.set-shared-variables.outputs.is-release == 'false' }}
         name: Calculate version number, if not a release tag
         run: |
-          base_number=0000
-          build_number=$(( base_number + GITHUB_RUN_NUMBER ))
-          echo version="${{ steps.get-version.outputs.project-version }}${build_number}" | tee -a "$GITHUB_OUTPUT"
+          pad_number=0000
+          build_number=$(( GITHUB_RUN_NUMBER ))
+          echo version="${{ steps.get-version.outputs.project-version }}${pad_number}${build_number}" | tee -a "$GITHUB_OUTPUT"
 
       - id: tag-version
         if: ${{ needs.set-shared-variables.outputs.is-release == 'true' }}
