@@ -102,29 +102,23 @@ jobs:
       - name: Fetch git tags
         run: git fetch --prune --prune-tags --force --depth=1
 
-      # NOTE: this runs on the bare runner, not inside the perl:5.38-slim
-      # container used by build-and-test. Fine as long as this script only
-      # uses core Perl modules; otherwise it needs its own dependency install.
-      - name: Create Module Descriptor
-        run: ./descriptors/transform-descriptor.pl descriptors/ModuleDescriptor-template.json > ModuleDescriptor-tmp.json
-
-      - name: Get project artifact-id
+      - name: Get project id/name
         id: get-artifact-id
         run: |
-          echo artifact-id="$(jq -r .id ModuleDescriptor-tmp.json | cut -d '-' -f -2 | xargs)" | tee -a "$GITHUB_OUTPUT"
+          echo artifact-id="$(jq -r '.name' package.json | awk -F '/' '{ print $2 }')" | tee -a "$GITHUB_OUTPUT"
 
       - name: Get project version
         id: get-version
         run: |
-          echo project-version="$(jq -r .id ModuleDescriptor-tmp.json | cut -d '-' -f 3- | xargs)" | tee -a "$GITHUB_OUTPUT"
+          echo project-version="$(jq -r '.version' package.json)" | tee -a "$GITHUB_OUTPUT"
 
       - id: calculate
         if: ${{ needs.set-shared-variables.outputs.is-release == 'false' }}
         name: Calculate version number, if not a release tag
         run: |
-          base_number=2000
+          base_number=0000
           build_number=$(( base_number + GITHUB_RUN_NUMBER ))
-          echo version="${{ steps.get-version.outputs.project-version }}-SNAPSHOT.${build_number}" | tee -a "$GITHUB_OUTPUT"
+          echo version="${{ steps.get-version.outputs.project-version }}${build_number}" | tee -a "$GITHUB_OUTPUT"
 
       - id: tag-version
         if: ${{ needs.set-shared-variables.outputs.is-release == 'true' }}
