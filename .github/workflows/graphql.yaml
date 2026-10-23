@@ -17,6 +17,7 @@ jobs:
       docker-registry: ${{ steps.logic.outputs.docker-registry }}
       repo-name: ${{ steps.vars1.outputs.repo-name }}
       repo-description: ${{ steps.vars1.outputs.repo-description }}
+      
 
     steps:
       - id: logic
@@ -116,9 +117,9 @@ jobs:
         if: ${{ needs.set-shared-variables.outputs.is-release == 'false' }}
         name: Calculate version number, if not a release tag
         run: |
-          pad_number=0000
-          build_number=$(( GITHUB_RUN_NUMBER ))
-          echo version="${{ steps.get-version.outputs.project-version }}${pad_number}${build_number}" | tee -a "$GITHUB_OUTPUT"
+          pad_number=500
+          build_number=$(( pad_number + GITHUB_RUN_NUMBER ))
+          echo version="${{ steps.get-version.outputs.project-version }}000${build_number}" | tee -a "$GITHUB_OUTPUT"
 
       - id: tag-version
         if: ${{ needs.set-shared-variables.outputs.is-release == 'true' }}
