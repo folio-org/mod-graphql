@@ -1,8 +1,8 @@
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 
 # Install latest patch versions of packages: https://pythonspeed.com/articles/security-updates-in-docker/
 RUN apk upgrade \
- && apk add git \
+ && apk add git jq \
  && rm -rf /var/cache/apk/*
 
 WORKDIR /usr/src/app
