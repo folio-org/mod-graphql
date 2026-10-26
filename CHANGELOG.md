@@ -1,5 +1,9 @@
 # Change history for mod-graphql
 
+## (IN PROGRESS)
+
+* Add `DeployConfig.json` file. Fixes MODGQL-206.
+
 ## [1.15.1](https://github.com/folio-org/mod-graphql/tree/v1.15.1) (2026-04-15)
 
 * Bump validator from 13.15.15 to 13.15.23 fixing CVE-2025-12758. Fixes MODGQL-201.
