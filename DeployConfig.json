@@ -1,0 +1,135 @@
+{
+  "description": "mod-graphql deployment configuration template. Default values are calibrated against the reference bugfest environment (3 standalone tenants, 11 consortia tenants) as recorded in 'Trillium (R1 2026) - Modules configuration details'; the CPU value comes from the most recent page that records CPU for this module ('Sunflower CSP#7 (R1 2025) - Modules configuration details'). mod-graphql is a Node.js module, so the JVM heap/metaspace values listed for it on those pages do not apply and the java section is empty. See ADR-0013 (Module configuration management).",
+  "moduleDefaults": {
+    "resources": [
+      {
+        "name": "cpu",
+        "value": "128",
+        "description": "CPU units for the mod-graphql container (1024 = 1 vCPU), matching the bugfest baseline"
+      },
+      {
+        "name": "memory",
+        "value": "1024",
+        "description": "Memory hard limit for the mod-graphql container in MiB, matching the bugfest baseline"
+      },
+      {
+        "name": "memoryReservation",
+        "value": "896",
+        "description": "Memory reservation (soft limit) for the mod-graphql container in MiB, matching the bugfest baseline"
+      }
+    ],
+    "java": [],
+    "deployment": {
+      "isHaSupported": true,
+      "replicasRecommendedCount": 2,
+      "description": "mod-graphql is stateless: each request is translated into WSAPI calls to other modules and nothing is stored between requests, so any number of replicas can run concurrently. Two replicas match the bugfest baseline."
+    },
+    "kong": {
+      "timeouts": {
+        "connect": "60s",
+        "send": "60s",
+        "read": "60s"
+      },
+      "description": "Default Kong proxy timeouts. A GraphQL query fans out to several synchronous WSAPI requests, so raise the read timeout if deeply nested queries over large result sets are expected."
+    },
+    "EnvVars": [
+      {
+        "name": "OKAPI_URL",
+        "value": null,
+        "description": "URL of the gateway used for the underlying WSAPI requests; when unset, the URL from the X-Okapi-Url header of each incoming request is used. Leave unset in production deployments.",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "OKAPI_TENANT",
+        "value": null,
+        "description": "Fixed tenant used for all underlying WSAPI requests; when unset, the tenant from the X-Okapi-Tenant header of each incoming request is used. Leave unset in multi-tenant deployments.",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "OKAPI_TOKEN",
+        "value": null,
+        "description": "Fixed token used for all underlying WSAPI requests; when unset, the token from the X-Okapi-Token header of each incoming request is used. Leave unset in production deployments.",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "GRAPHQL_OPTIONS",
+        "value": null,
+        "description": "Comma-separated list of schema-generation options (allowSchemaless, ignoreRamlWarnings, ignoreSchemaMapsWithInlineSchemas); the last is for the test suite only.",
+        "type": "FUNCTIONAL",
+        "essential": false
+      },
+      {
+        "name": "LOGGING_CATEGORIES",
+        "value": null,
+        "description": "Comma-separated list of logging categories to enable (e.g. listen,url); when unset, no category logging is emitted.",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "LOGCAT",
+        "value": null,
+        "description": "Abbreviated alias for LOGGING_CATEGORIES, used only when LOGGING_CATEGORIES is unset.",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "RAML_DIR",
+        "value": ".",
+        "description": "Directory against which RAML paths in an API file are resolved; only used when the module is started with an API file (-a).",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "RAML_SKIP",
+        "value": null,
+        "description": "When set to a non-zero integer, RAML files listed in the API file but missing from the filesystem are skipped instead of causing a fatal error; only used with an API file (-a).",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "RAML_MATCH",
+        "value": null,
+        "description": "Regular expression limiting which modules' RAML files from the API file are loaded; only used with an API file (-a).",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "RAML_EXCLUDE",
+        "value": null,
+        "description": "Regular expression for modules whose RAML files from the API file are omitted; only used with an API file (-a).",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "CONSOLE_TRACE",
+        "value": null,
+        "description": "When set to any non-empty value, every console log or warning is accompanied by a stack trace; for debugging only.",
+        "type": "CONFIG",
+        "essential": false
+      },
+      {
+        "name": "NODE_OPTIONS",
+        "value": null,
+        "description": "Options passed to the Node.js runtime, e.g. --no-deprecation to suppress deprecation warnings or --max-old-space-size to cap the heap.",
+        "type": "CONFIG",
+        "essential": false
+      }
+    ]
+  },
+  "sidecarDefaults": {
+    "resources": [],
+    "java": [],
+    "EnvVars": [
+      {
+        "name": "MODULE_URL",
+        "value": "http://localhost:3001",
+        "description": "Base URL of the co-located mod-graphql container, which always listens on port 3001; this replaces the sidecar's own default of port 8081, which does not reach mod-graphql. Override only if the module is not reachable via localhost from the sidecar.",
+        "type": "CONFIG",
+        "essential": false
+      }
+    ]
+  }
+}
