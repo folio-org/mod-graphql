@@ -1,8 +1,9 @@
 # Change history for mod-graphql
 
-## (IN PROGRESS)
+## [1.15.2](https://github.com/folio-org/mod-graphql/tree/v1.15.2) (2026-11-03)
 
 * Add `DeployConfig.json` file. Fixes MODGQL-206.
+* Update various dependencies.
 
 ## [1.15.1](https://github.com/folio-org/mod-graphql/tree/v1.15.1) (2026-04-15)
 
